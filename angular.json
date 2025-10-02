@@ -93,6 +93,66 @@
           }
         }
       }
+    },
+    "theme": {
+      "projectType": "library",
+      "root": "projects/theme",
+      "sourceRoot": "projects/theme/src",
+      "prefix": "th",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/theme/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/theme/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/theme/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
+    "snippets": {
+      "projectType": "library",
+      "root": "projects/snippets",
+      "sourceRoot": "projects/snippets/src",
+      "prefix": "sn",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/snippets/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/snippets/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/snippets/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
     }
   }
 }
