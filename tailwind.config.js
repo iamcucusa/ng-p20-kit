@@ -1,9 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./projects/**/*.{html,ts}",     // all apps + libs under /projects
-    "./**/*.stories.ts",             // Storybook stories (if you style in stories)
-    "./.storybook/**/*.{ts,js,mdx}"  // Storybook config UI
+    './projects/**/*.{html,ts,mdx}',     // Angular templates + stories
+    './**/*.stories.@(ts|mdx)'           // extra guard for SB stories
   ],
   theme: { extend: {} },
   plugins: []

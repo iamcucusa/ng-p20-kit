@@ -6,7 +6,14 @@
     "start": "ng serve showcase",
     "build-showcase": "ng build showcase",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "docs:json:snippets": "compodoc -p projects/snippets/tsconfig.lib.json -d ./.compodoc -e json --silent",
+    "docs:serve": "compodoc -p projects/snippets/tsconfig.lib.json -s -w --port 8080",
+    "docs:build": "compodoc -p projects/snippets/tsconfig.lib.json -d ./docs --theme material",
+    "docs:json": "compodoc -p projects/snippets/tsconfig.lib.json -d ./.compodoc -e json --silent",
+    "docs:serve:showcase": "compodoc -p projects/showcase/tsconfig.app.json -s -w --port 8081",
+    "docs:build:showcase": "compodoc -p projects/showcase/tsconfig.app.json -d ./docs-showcase --theme material",
+    "docs:json:showcase": "compodoc -p projects/showcase/tsconfig.app.json -d ./.compodoc-showcase -e json --silent"
   },
   "prettier": {
     "printWidth": 100,
@@ -36,11 +43,15 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "^20.3.3",
     "@angular/build": "^20.3.3",
     "@angular/cli": "^20.3.3",
     "@angular/compiler-cli": "^20.3.3",
+    "@compodoc/compodoc": "^1.1.30",
     "@tailwindcss/postcss": "^4.1.14",
     "@types/jasmine": "~5.1.0",
+    "autoprefixer": "^10.4.21",
+    "cross-env": "^10.1.0",
     "jasmine-core": "~5.9.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -48,6 +59,8 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^20.3.0",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
     "tailwindcss": "^4.1.14",
     "typescript": "~5.9.2"
   }

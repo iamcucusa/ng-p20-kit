@@ -1,0 +1,5 @@
+/* styles/tailwind.css */
+@import "tailwindcss";
+
+/* Load Prime Icons once for stories & the app */
+@import "primeicons/primeicons.css";

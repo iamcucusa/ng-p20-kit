@@ -3,6 +3,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": ".",
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
@@ -15,12 +16,11 @@
     "target": "ES2022",
     "module": "preserve",
     "paths": {
-      "snippets": [
-        "./dist/snippets"
-      ],
-      "theme": [
-        "./dist/theme"
-      ]
+      "@ng-p20-kit/theme": ["./projects/theme/src/public-api.ts"],
+      "@ng-p20-kit/theme/*": ["./projects/theme/src/*"],
+      "@ng-p20-kit/snippets": ["./projects/snippets/src/public-api.ts"],
+      "@ng-p20-kit/snippets/*": ["./projects/snippets/src/*"],
+      "@ng-p20-kit/showcase/*": ["./projects/showcase/src/*"]
     }
   },
   "angularCompilerOptions": {

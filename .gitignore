@@ -55,3 +55,25 @@ Thumbs.db
 .idea/usage.statistics.xml
 .idea/shelf/
 .idea/httpRequests/
+
+*storybook.log
+storybook-static
+
+# Documentation generation
+.compodoc/
+documentation/
+docs-showcase/
+.compodoc-showcase/
+
+# Generated files
+migration-guide.html
+
+# Project-specific node_modules
+projects/snippets/node_modules/
+projects/snippets/package-lock.json
+
+# Generated documentation JSON
+projects/snippets/documentation.json
+
+# AI Assistant context (project-specific)
+.aiassistant/
