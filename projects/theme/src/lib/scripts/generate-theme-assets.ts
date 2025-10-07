@@ -4,8 +4,8 @@
  */
 
 import { sagaBlueColors, generateCSSVariables, generateTailwindColors } from '../colors/saga-blue-colors';
-import { writeFileSync } from 'fs';
-import { join } from 'path';
+import * as fs from 'fs';
+import * as path from 'path';
 
 /**
  * Generate CSS variables file
@@ -162,8 +162,8 @@ function generateCSSVariablesFile() {
   }
 }`;
 
-  const outputPath = join(__dirname, '../styles/saga-blue-layers.css');
-  writeFileSync(outputPath, cssContent);
+  const outputPath = path.join(__dirname, '../styles/saga-blue-layers.css');
+  fs.writeFileSync(outputPath, cssContent);
   console.log('✅ Generated CSS variables file');
 }
 
@@ -187,8 +187,8 @@ module.exports = {
   plugins: [require('tailwindcss-primeui')]
 };`;
 
-  const outputPath = join(__dirname, '../../../tailwind.config.js');
-  writeFileSync(outputPath, config);
+  const outputPath = path.join(__dirname, '../../../tailwind.config.js');
+  fs.writeFileSync(outputPath, config);
   console.log('✅ Generated Tailwind config');
 }
 

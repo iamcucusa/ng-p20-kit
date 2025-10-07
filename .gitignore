@@ -71,6 +71,8 @@ migration-guide.html
 # Project-specific node_modules
 projects/snippets/node_modules/
 projects/snippets/package-lock.json
+projects/theme/node_modules/
+projects/theme/package-lock.json
 
 # Generated documentation JSON
 projects/snippets/documentation.json
