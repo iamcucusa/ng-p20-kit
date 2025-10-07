@@ -1,1 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Import Tailwind CSS */
+@import 'tailwindcss';
+
+/* Import saga-blue theme layers */
+@import '../../theme/src/lib/styles/saga-blue-layers.css';

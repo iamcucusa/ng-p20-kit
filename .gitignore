@@ -75,5 +75,5 @@ projects/snippets/package-lock.json
 # Generated documentation JSON
 projects/snippets/documentation.json
 
-# AI Assistant context (project-specific)
-.aiassistant/
+# pegadl-angular-repo files for AI Assistant context (project-specific)
+/projects/theme/src/pegadl-angular-repo/

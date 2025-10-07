@@ -1,15 +1,14 @@
-import { Component } from '@angular/core';
+/**
+ * Theme Library for ng-p20-kit
+ * Provides PrimeNG 20 token-based theming with saga-blue preset
+ */
 
-@Component({
-  selector: 'th-theme',
-  imports: [],
-  template: `
-    <p>
-      theme works!
-    </p>
-  `,
-  styles: ``
-})
-export class Theme {
+// Export the saga-blue preset
+export { default as SagaBluePreset } from './presets/saga-blue-preset';
 
-}
+// Export theme utilities
+export * from './presets/saga-blue-preset';
+
+// Re-export PrimeNG theming utilities
+export { providePrimeNG } from 'primeng/config';
+export { definePreset } from '@primeuix/themes';
