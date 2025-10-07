@@ -167,7 +167,9 @@ module.exports = {
           'primary': '#495057',
           'secondary': '#6c757d',
           'disabled': '#adb5bd'
-        }
+        },
+        // PrimeNG surface colors for Tailwind utilities
+        'surface-section': '#ffffff'
       }
     }
   },

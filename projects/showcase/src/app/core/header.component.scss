@@ -1,0 +1,441 @@
+// Header Component Styles using Saga-Blue Theme
+// Reusable Sass classes with proper architecture
+
+// Base header container
+.header-container {
+  background-color: var(--p-indigo-500);
+  padding: 0 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  display: flex;
+  position: relative;
+  min-height: 75px;
+
+  @media (min-width: 1024px) {
+    position: static;
+  }
+}
+
+// User profile section
+.user-profile {
+  @extend .header-interactive;
+  
+  &__avatar {
+    background-color: var(--p-indigo-500) !important;
+    color: var(--p-white) !important;
+    margin-right: 0;
+    
+    @media (min-width: 1024px) {
+      margin-right: 0.75rem;
+    }
+  }
+
+  &__info {
+    display: none;
+    
+    @media (min-width: 1024px) {
+      display: block;
+    }
+  }
+
+  &__name {
+    @extend .header-text-primary;
+    display: block;
+    margin-bottom: 0.25rem;
+    white-space: nowrap;
+  }
+
+  &__role {
+    @extend .header-text-secondary;
+    margin: 0;
+  }
+}
+
+// Navigation section
+.navigation {
+  flex: 1 1 auto;
+  display: flex;
+  padding-left: 1.25rem;
+  overflow: auto;
+
+  &__list {
+    @extend .header-list;
+    display: flex;
+  }
+
+  &__item {
+    height: 100%;
+  }
+
+  &__link {
+    @extend .header-link;
+    
+    &--active {
+      @extend .header-link-active;
+    }
+  }
+}
+
+// Mobile menu section
+.mobile-menu {
+  display: flex;
+  margin-left: 1.25rem;
+
+  &__toggle {
+    @extend .header-interactive;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--p-white);
+    
+    @media (min-width: 1024px) {
+      display: none;
+    }
+  }
+
+  &__dropdown {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    z-index: 1;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    width: 100%;
+    background-color: var(--p-indigo-500);
+    
+    @media (min-width: 1024px) {
+      display: block;
+      position: static;
+      box-shadow: none;
+      width: auto;
+    }
+  }
+
+  &__list {
+    @extend .header-list;
+    height: 100%;
+    flex-direction: column;
+    
+    @media (min-width: 1024px) {
+      flex-direction: row;
+    }
+  }
+
+  &__item {
+    // Inherits from parent
+  }
+
+  &__link {
+    @extend .header-link;
+    height: 100%;
+    display: flex;
+    padding: 0.75rem 1.5rem;
+    
+    @media (min-width: 1024px) {
+      padding: 0 0.75rem;
+    }
+  }
+}
+
+// Reusable base classes
+.header-interactive {
+  cursor: pointer;
+  display: flex;
+  padding: 0.75rem;
+  align-items: center;
+  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  user-select: none;
+
+  &:hover {
+    background-color: var(--p-indigo-600);
+  }
+}
+
+.header-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  user-select: none;
+}
+
+.header-link {
+  text-decoration: none;
+  cursor: pointer;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1.25rem;
+  color: var(--p-indigo-100);
+  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    color: var(--p-indigo-50);
+    background-color: var(--p-indigo-600);
+  }
+
+  &-active {
+    color: var(--p-indigo-50);
+    background-color: var(--p-indigo-600);
+  }
+}
+
+.header-text-primary {
+  color: var(--p-indigo-100);
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 500;
+}
+
+.header-text-secondary {
+  color: var(--p-indigo-200);
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+// Icon styles
+.header-icon {
+  &--large {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+
+  &--medium {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  &--small {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+}
+
+// Responsive utilities
+.hidden {
+  display: none;
+}
+
+.block {
+  display: block;
+}
+
+.flex {
+  display: flex;
+}
+
+.inline-flex {
+  display: inline-flex;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.static {
+  position: static;
+}
+
+.z-1 {
+  z-index: 1;
+}
+
+.top-100 {
+  top: 100%;
+}
+
+.left-0 {
+  left: 0;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.w-auto {
+  width: auto;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.flex-auto {
+  flex: 1 1 auto;
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.p-0 {
+  padding: 0;
+}
+
+.m-0 {
+  margin: 0;
+}
+
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
+.mr-0 {
+  margin-right: 0;
+}
+
+.ml-5 {
+  margin-left: 1.25rem;
+}
+
+.pl-5 {
+  padding-left: 1.25rem;
+}
+
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.py-0 {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.p-3 {
+  padding: 0.75rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.transition-colors {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.transition-duration-150 {
+  transition-duration: 150ms;
+}
+
+.white-space-nowrap {
+  white-space: nowrap;
+}
+
+.no-underline {
+  text-decoration: none;
+}
+
+.select-none {
+  user-select: none;
+}
+
+.list-none {
+  list-style: none;
+}
+
+// Responsive utilities
+@media (min-width: 1024px) {
+  .lg\:static {
+    position: static;
+  }
+
+  .lg\:block {
+    display: block;
+  }
+
+  .lg\:hidden {
+    display: none;
+  }
+
+  .lg\:mr-3 {
+    margin-right: 0.75rem;
+  }
+
+  .lg\:mr-0 {
+    margin-right: 0;
+  }
+
+  .lg\:text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .lg\:flex-row {
+    flex-direction: row;
+  }
+
+  .lg\:px-3 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .lg\:py-0 {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .lg\:shadow-none {
+    box-shadow: none;
+  }
+
+  .lg\:w-auto {
+    width: auto;
+  }
+}
