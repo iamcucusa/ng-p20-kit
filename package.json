@@ -13,7 +13,8 @@
     "docs:json": "compodoc -p projects/snippets/tsconfig.lib.json -d ./.compodoc -e json --silent",
     "docs:serve:showcase": "compodoc -p projects/showcase/tsconfig.app.json -s -w --port 8081",
     "docs:build:showcase": "compodoc -p projects/showcase/tsconfig.app.json -d ./docs-showcase --theme material",
-    "docs:json:showcase": "compodoc -p projects/showcase/tsconfig.app.json -d ./.compodoc-showcase -e json --silent"
+    "docs:json:showcase": "compodoc -p projects/showcase/tsconfig.app.json -d ./.compodoc-showcase -e json --silent",
+    "theme:generate": "tsx projects/theme/src/lib/scripts/generate-theme-assets.ts"
   },
   "prettier": {
     "printWidth": 100,
@@ -64,6 +65,7 @@
     "postcss": "^8.5.6",
     "postcss-cli": "^11.0.1",
     "tailwindcss": "^4.1.14",
+    "tsx": "^4.20.6",
     "typescript": "~5.9.2"
   }
 }

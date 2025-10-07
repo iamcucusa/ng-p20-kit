@@ -86,11 +86,28 @@ The theme includes all color palettes from the original PrimeNG 17 saga-blue the
 
 ## 🏗️ **Architecture**
 
+### Centralized Color System
+- ✅ **Single source of truth** - All colors defined in `saga-blue-colors.ts`
+- ✅ **Auto-generated assets** - CSS variables and Tailwind config generated from centralized colors
+- ✅ **No duplication** - Colors defined once, used everywhere
+- ✅ **Type safety** - Full TypeScript support with `as const`
+- ✅ **Complete consistency** - Even utility colors (white, black) and component-specific colors use centralized values
+
 ### Token-Based Design System
 - ✅ **Semantic tokens** for colors, spacing, typography
 - ✅ **CSS layers** for proper cascade
 - ✅ **Tailwind integration** for utility classes
 - ✅ **Accessibility compliance** (WCAG 2.1 AA)
+
+### Scalable Development Workflow
+```bash
+# 1. Edit colors in saga-blue-colors.ts
+# 2. Generate all theme assets
+npm run theme:generate
+
+# 3. Build and test
+npm run build-showcase
+```
 
 ### CSS Layers Structure
 ```css
