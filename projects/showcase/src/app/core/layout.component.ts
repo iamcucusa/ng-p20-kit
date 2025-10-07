@@ -10,20 +10,20 @@ import { TooltipModule } from 'primeng/tooltip';
   imports: [CommonModule, RouterOutlet, HeaderComponent, TooltipModule],
   template: `
     <header>
-      <pg-header 
-        [userRole]="'Administrator'"
+      <pg-header
+        [userRole]="'ADMIN'"
         [userEmail]="'john.doe@pegasus.com'"
         [givenName]="'John'"
         [userLastName]="'Doe'">
       </pg-header>
     </header>
-    
+
     <main>
       <div class="main-content" role="main">
         <router-outlet></router-outlet>
       </div>
     </main>
-    
+
     <footer>
       <div class="bg-surface-section px-4 md:px-6 lg:px-6">
         <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between">

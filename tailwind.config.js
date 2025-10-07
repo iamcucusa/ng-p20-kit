@@ -6,6 +6,18 @@ module.exports = {
   ],
   theme: { 
     extend: {
+      // PrimeFlex-compatible spacing scale
+      spacing: {
+        '0': '0rem',     // 0px
+        '1': '0.25rem',  // 4px
+        '2': '0.5rem',   // 8px (--inline-spacing)
+        '3': '1rem',     // 16px (--content-padding + PrimeFlex p-3)
+        '4': '1.5rem',   // 24px (PrimeFlex p-4)
+        '5': '2rem',     // 32px (PrimeFlex p-5)
+        '6': '3rem',     // 48px (PrimeFlex p-6)
+        '7': '4rem',     // 64px (PrimeFlex p-7)
+        '8': '5rem',     // 80px (PrimeFlex p-8)
+      },
       colors: {
         // Saga-blue color palette (primary)
         'saga-blue': {

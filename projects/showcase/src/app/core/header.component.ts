@@ -10,26 +10,26 @@ import { BadgeModule } from 'primeng/badge';
   standalone: true,
   imports: [CommonModule, RouterModule, AvatarModule, RippleModule, BadgeModule],
   template: `
-    <div class="pg-header-container">
+    <div class="pg-header-container px-3">
       <a
         pRipple
-        class="pg-user-profile"
+        class="pg-user-profile p-3"
       >
         <p-avatar
           label="{{ email.charAt(0).toUpperCase() }}"
-          class="pg-user-profile__avatar"
+          class="pg-user-profile__avatar mr-0 lg:mr-2"
           size="large"
           shape="circle"
         ></p-avatar>
         <div class="pg-user-profile__info">
-          <span class="pg-user-profile__name"
+          <span class="pg-user-profile__name mb-1"
             >{{ name | titlecase }} {{ lastName | titlecase }}</span
           >
           <p class="pg-user-profile__role">{{ role }}</p>
         </div>
       </a>
 
-      <div class="pg-navigation">
+      <div class="pg-navigation pl-8">
         <ul class="pg-navigation__list">
           <li class="pg-navigation__item">
             <a
@@ -40,7 +40,7 @@ import { BadgeModule } from 'primeng/badge';
               pRipple
               class="pg-navigation__link"
             >
-              <i class="pi pi-file"></i>
+              <i class="pi pi-file mr-2"></i>
               <span>Trials</span>
             </a>
           </li>
@@ -53,7 +53,7 @@ import { BadgeModule } from 'primeng/badge';
               pRipple
               class="pg-navigation__link"
             >
-              <i class="pi pi-file"></i>
+              <i class="pi pi-file mr-2"></i>
               <span>Reports</span>
             </a>
           </li>
@@ -66,20 +66,20 @@ import { BadgeModule } from 'primeng/badge';
               [routerLinkActiveOptions]="{ exact: false }"
               class="pg-navigation__link"
             >
-              <i class="pi pi-question-circle"></i>
+              <i class="pi pi-question-circle mr-2"></i>
               <span>User Guide</span>
             </a>
           </li>
         </ul>
       </div>
-      
-      <div class="pg-sign-out-section">
+
+      <div class="pg-sign-out-section ml-3">
         <a
           pRipple
           (click)="signOut()"
-          class="pg-sign-out-link"
+          class="pg-sign-out-link p-3 lg:px-3"
         >
-          <i class="pi pi-sign-out"></i>
+          <i class="pi pi-sign-out mr-2"></i>
           <span>Sign Out</span>
         </a>
       </div>
@@ -90,7 +90,7 @@ import { BadgeModule } from 'primeng/badge';
 })
 export class HeaderComponent implements OnInit {
   // Dummy data for styling validation
-  role: string = 'SUPER ADMIN';
+  role: string = 'ADMIN';
   email: string = 'john.doe@pegasus.com';
   name: string = 'John';
   lastName: string = 'Doe';
@@ -98,7 +98,7 @@ export class HeaderComponent implements OnInit {
   constructor() {}
 
   @Input() set userRole(role: string | undefined | null) {
-    this.role = role || 'SUPER ADMIN';
+    this.role = role || 'ADMIN';
   }
 
   @Input() set userEmail(email: string | undefined | null) {

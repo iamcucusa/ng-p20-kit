@@ -6,6 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { BadgeModule } from 'primeng/badge';
 import { DividerModule } from 'primeng/divider';
 import { TagModule } from 'primeng/tag';
+import { SpacingTestComponent } from './spacing-test.component';
 
 interface DashboardItem {
   id: number;
@@ -27,7 +28,8 @@ interface DashboardItem {
     ButtonModule,
     BadgeModule,
     DividerModule,
-    TagModule
+    TagModule,
+    SpacingTestComponent
   ],
   template: `
     <div class="dashboard-container">
@@ -147,6 +149,11 @@ interface DashboardItem {
             </p-listbox>
           </p-card>
         </div>
+      </div>
+      
+      <!-- Spacing Test Section -->
+      <div class="spacing-test-section">
+        <app-spacing-test></app-spacing-test>
       </div>
     </div>
   `,
@@ -273,6 +280,14 @@ interface DashboardItem {
     .item-date {
       display: flex;
       align-items: center;
+    }
+
+    .spacing-test-section {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: var(--p-surface-card);
+      border-radius: 8px;
+      border: 1px solid var(--p-surface-border);
     }
 
     @media (max-width: 768px) {

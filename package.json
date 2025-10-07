@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve showcase",
     "build-showcase": "ng build showcase",
-    "watch": "ng build --watch --configuration development",
+    "watch-showcase": "ng build showcase --watch --configuration development",
     "test": "ng test",
     "docs:json:snippets": "compodoc -p projects/snippets/tsconfig.lib.json -d ./.compodoc -e json --silent",
     "docs:serve": "compodoc -p projects/snippets/tsconfig.lib.json -s -w --port 8080",
@@ -14,7 +14,8 @@
     "docs:serve:showcase": "compodoc -p projects/showcase/tsconfig.app.json -s -w --port 8081",
     "docs:build:showcase": "compodoc -p projects/showcase/tsconfig.app.json -d ./docs-showcase --theme material",
     "docs:json:showcase": "compodoc -p projects/showcase/tsconfig.app.json -d ./.compodoc-showcase -e json --silent",
-    "theme:generate": "tsx projects/theme/src/lib/scripts/generate-theme-assets.ts"
+    "theme:generate": "tsx projects/theme/src/lib/scripts/generate-theme-assets.ts",
+    "generate-spacing": "node scripts/generate-spacing-scss.js"
   },
   "prettier": {
     "printWidth": 100,

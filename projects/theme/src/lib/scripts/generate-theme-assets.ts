@@ -181,7 +181,36 @@ module.exports = {
   ],
   theme: { 
     extend: {
-      colors: ${JSON.stringify(tailwindColors, null, 6)}
+      // PrimeFlex-compatible spacing scale
+      spacing: {
+        '0': '0rem',     // 0px
+        '1': '0.25rem',  // 4px
+        '2': '0.5rem',   // 8px (--inline-spacing)
+        '3': '1rem',     // 16px (--content-padding + PrimeFlex p-3)
+        '4': '1.5rem',   // 24px (PrimeFlex p-4)
+        '5': '2rem',     // 32px (PrimeFlex p-5)
+        '6': '3rem',     // 48px (PrimeFlex p-6)
+        '7': '4rem',     // 64px (PrimeFlex p-7)
+        '8': '5rem',     // 80px (PrimeFlex p-8)
+      },
+      colors: ${JSON.stringify(tailwindColors, null, 6)},
+      // Surface colors
+      'surface': {
+        'ground': '#f8f9fa',
+        'section': '#ffffff',
+        'card': '#ffffff',
+        'overlay': '#ffffff',
+        'border': '#dee2e6',
+        'hover': '#e9ecef'
+      },
+      // Text colors
+      'text': {
+        'primary': '#495057',
+        'secondary': '#6c757d',
+        'disabled': '#adb5bd'
+      },
+      // PrimeNG surface colors for Tailwind utilities
+      'surface-section': '#ffffff'
     }
   },
   plugins: [require('tailwindcss-primeui')]
