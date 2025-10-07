@@ -1,10 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Import Tailwind CSS */
-@import 'tailwindcss';
+@use 'tailwindcss';
 
 /* Import saga-blue theme layers */
-@import '../../theme/src/lib/styles/saga-blue-layers.css';
+@use '../../theme/src/lib/styles/saga-blue-layers.css';
 
 /* Import Tailwind spacing variables */
-@import '../../theme/src/lib/styles/tailwind-spacing.scss';
+@use '../../theme/src/lib/styles/tailwind-spacing.scss';
