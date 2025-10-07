@@ -41,9 +41,9 @@ export const appConfig: ApplicationConfig = {
 @import '@ng-p20-kit/theme/styles/saga-blue-layers.css';
 ```
 
-## 🎨 **Color Palette**
+## 🎨 **Complete Color Palette**
 
-### Primary Colors
+### Primary Colors (Saga-Blue)
 - **50**: `#f4fafe` - Lightest blue
 - **100**: `#cae6fc` - Very light blue  
 - **200**: `#a0d2fa` - Light blue
@@ -54,6 +54,22 @@ export const appConfig: ApplicationConfig = {
 - **700**: `#1769aa` - Darker blue
 - **800**: `#125386` - Very dark blue
 - **900**: `#0d3c61` - Darkest blue
+
+### Complete Color Palettes
+The theme includes all color palettes from the original PrimeNG 17 saga-blue theme:
+
+- **Blue**: `#f4fafe` to `#0d3c61` (9 shades)
+- **Green**: `#f6fbf6` to `#1e4620` (9 shades)
+- **Yellow**: `#fffcf5` to `#644d12` (9 shades)
+- **Cyan**: `#f2fcfd` to `#004b55` (9 shades)
+- **Pink**: `#fef4f7` to `#5d0c28` (9 shades)
+- **Indigo**: `#f5f6fb` to `#192048` (9 shades)
+- **Teal**: `#f2faf9` to `#003c36` (9 shades)
+- **Orange**: `#fff8f2` to `#623200` (9 shades)
+- **Blue Gray**: `#f7f9f9` to `#263238` (9 shades)
+- **Purple**: `#faf4fb` to `#3e1046` (9 shades)
+- **Red**: `#fff5f5` to `#661a14` (9 shades)
+- **Gray**: `#fafafa` to `#212121` (9 shades)
 
 ### Surface Colors
 - **Ground**: `#f8f9fa` - Background
