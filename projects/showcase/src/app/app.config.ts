@@ -18,6 +18,8 @@ export const appConfig: ApplicationConfig = {
       theme: {
         preset: SagaBluePreset,
         options: {
+          prefix: 'p',
+          darkModeSelector: '.app-dark',
           cssLayer: {
             name: 'primeng',
             order: 'base,components,utilities,primeng'
