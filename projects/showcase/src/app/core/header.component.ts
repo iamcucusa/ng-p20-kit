@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AvatarModule } from 'primeng/avatar';
@@ -8,6 +8,7 @@ import { BadgeModule } from 'primeng/badge';
 @Component({
   selector: 'pg-header',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, RouterModule, AvatarModule, RippleModule, BadgeModule],
   template: `
     <div class="pg-header-container">
