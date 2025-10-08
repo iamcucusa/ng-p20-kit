@@ -1,6 +1,8 @@
 // Pegasus Header Component Styles using Saga-Blue Theme
 // Namespaced with 'pg-' prefix to avoid conflicts
 
+@use '../../../../theme/src/lib/styles/breakpoints.scss' as bp;
+
 // CSS variables are imported globally in styles.scss
 
 // Base header container
@@ -13,7 +15,7 @@
   padding-left: var(--spacing-3); // 16px - matches px-3
   padding-right: var(--spacing-3); // 16px - matches px-3
 
-  @media (min-width: 1024px) {
+  @include bp.desktop-up {
     position: static;
   }
 }
@@ -32,7 +34,7 @@
   &__info {
     display: none;
 
-    @media (min-width: 1024px) {
+    @include bp.desktop-up {
       display: block;
     }
   }
@@ -96,7 +98,7 @@
   align-items: center;
   padding: var(--spacing-3); // 16px - matches p-3
 
-  @media (min-width: 1024px) {
+  @include bp.desktop-up {
     padding-left: var(--spacing-3); // 16px - matches lg:px-3
     padding-right: var(--spacing-3); // 16px - matches lg:px-3
   }

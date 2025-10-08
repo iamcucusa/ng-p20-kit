@@ -19,7 +19,7 @@ import { SpacingTestComponent } from './spacing-test.component';
   ],
   template: `
     <div class="min-h-screen bg-gray-50 py-8">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Header Section -->
         <div class="text-center mb-12">
           <div class="flex items-center justify-center mb-4">

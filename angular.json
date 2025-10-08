@@ -30,7 +30,6 @@
               }
             ],
             "styles": [
-              "projects/showcase/src/tailwind.css",
               "projects/showcase/src/styles.scss",
               "node_modules/primeicons/primeicons.css"
             ]

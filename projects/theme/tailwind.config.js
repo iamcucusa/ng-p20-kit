@@ -4,7 +4,17 @@ module.exports = {
     './projects/**/*.{html,ts,mdx}',     // Angular templates + stories
     './**/*.stories.@(ts|mdx)'           // extra guard for SB stories
   ],
-  theme: { 
+  theme: {
+    // Comprehensive breakpoints system
+    screens: {
+      'xs': '0px',        // Extra small devices
+      'sm': '576px',     // Small devices (PrimeFlex compatibility)
+      'md': '768px',     // Medium devices
+      'lg': '992px',     // Large devices (PrimeFlex compatibility)
+      'xl': '1200px',    // Extra large devices (PrimeFlex compatibility)
+      '2xl': '1536px',   // 2X large devices
+      '3xl': '1920px'    // 3X large devices (4K displays)
+    },
     extend: {
       // PrimeFlex-compatible spacing scale
       spacing: {
