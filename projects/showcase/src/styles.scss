@@ -8,3 +8,6 @@
 
 /* Import Tailwind spacing variables */
 @use '../../theme/src/lib/styles/tailwind-spacing.scss';
+
+/* Import typography system */
+@use '../../theme/src/lib/styles/typography.scss';
