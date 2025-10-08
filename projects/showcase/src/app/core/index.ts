@@ -4,4 +4,3 @@
 export { DashboardComponent } from './dashboard.component';
 export { HeaderComponent } from './header.component';
 export { LayoutComponent } from './layout.component';
-export { SpacingTestComponent } from './spacing-test.component';

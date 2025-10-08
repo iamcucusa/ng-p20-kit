@@ -19,7 +19,8 @@
       "@ng-p20-kit/theme": ["./projects/theme/src/public-api.ts"],
       "@ng-p20-kit/theme/*": ["./projects/theme/src/*"],
       "@ng-p20-kit/showcase/*": ["./projects/showcase/src/*"],
-      "@core/*": ["./projects/showcase/src/app/core/*"]
+      "@core/*": ["./projects/showcase/src/app/core/*"],
+      "@theme-demo/*": ["./projects/showcase/src/app/theme-demo/*"]
     }
   },
   "angularCompilerOptions": {

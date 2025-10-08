@@ -47,5 +47,3 @@ const outputPath = path.join(__dirname, '../styles/tailwind-spacing.scss');
 fs.writeFileSync(outputPath, scssContent);
 
 console.log('✅ Generated tailwind-spacing.scss from tailwind.config.js');
-console.log(`📁 Output: ${outputPath}`);
-console.log(`📊 Variables: ${Object.keys(spacing).length} spacing values`);

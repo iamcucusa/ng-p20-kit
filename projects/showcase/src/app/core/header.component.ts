@@ -60,8 +60,21 @@ import { BadgeModule } from 'primeng/badge';
           <li class="pg-navigation__item">
             <a
               pRipple
-              [routerLink]="['/help']"
+              [routerLink]="['/theme']"
               tabindex="2"
+              [routerLinkActive]="'pg-navigation__link--active'"
+              [routerLinkActiveOptions]="{ exact: false }"
+              class="pg-navigation__link"
+            >
+              <i class="pi pi-palette"></i>
+              <span>Theme</span>
+            </a>
+          </li>
+          <li class="pg-navigation__item">
+            <a
+              pRipple
+              [routerLink]="['/help']"
+              tabindex="3"
               [routerLinkActive]="'pg-navigation__link--active'"
               [routerLinkActiveOptions]="{ exact: false }"
               class="pg-navigation__link"
@@ -124,11 +137,9 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('Header component loaded with role:', this.role);
   }
 
   signOut() {
     // Dummy sign out - just log for validation
-    console.log('Sign out clicked - dummy implementation');
   }
 }

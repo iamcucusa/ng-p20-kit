@@ -55,7 +55,7 @@ import { TooltipModule } from 'primeng/tooltip';
     .main-content {
       min-height: calc(100vh - 200px);
       padding: 2rem;
-      max-width: 1200px;
+      // max-width: 1200px;
       margin: 0 auto;
       width: 100%;
     }

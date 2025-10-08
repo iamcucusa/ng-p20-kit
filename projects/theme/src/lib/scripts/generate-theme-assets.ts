@@ -164,7 +164,6 @@ function generateCSSVariablesFile() {
 
   const outputPath = path.join(__dirname, '../styles/saga-blue-layers.css');
   fs.writeFileSync(outputPath, cssContent);
-  console.log('✅ Generated CSS variables file');
 }
 
 /**
@@ -218,15 +217,12 @@ module.exports = {
 
   const outputPath = path.join(__dirname, '../../../tailwind.config.js');
   fs.writeFileSync(outputPath, config);
-  console.log('✅ Generated Tailwind config');
 }
 
 /**
  * Main execution
  */
 if (require.main === module) {
-  console.log('🎨 Generating theme assets from centralized colors...');
   generateCSSVariablesFile();
   generateTailwindConfig();
-  console.log('✅ All theme assets generated successfully!');
 }

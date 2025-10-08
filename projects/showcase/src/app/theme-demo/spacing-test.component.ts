@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="spacing-test-container">
+    <div class="spacing-test-container w-full">
       <h2 class="text-2xl font-bold mb-4">Spacing Test - PrimeFlex Compatible Values</h2>
       
       <!-- Padding Tests -->
@@ -87,9 +87,8 @@ import { CommonModule } from '@angular/common';
   `,
   styles: [`
     .spacing-test-container {
-      padding: 2rem;
-      max-width: 800px;
-      margin: 0 auto;
+      padding: 1rem;
+      width: 100%;
     }
     
     .test-section {

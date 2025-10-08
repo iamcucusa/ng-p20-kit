@@ -155,7 +155,6 @@ $line-heights: (
   const outputPath = path.join(__dirname, '../styles/typography.scss');
   fs.writeFileSync(outputPath, scssContent);
   console.log('✅ Generated typography.scss');
-  console.log(`📁 Output: ${outputPath}`);
 }
 
 function updateTailwindConfig() {
@@ -171,7 +170,6 @@ function updateTailwindConfig() {
   
   // Check if typography is already configured
   if (currentConfig.includes('fontSize:') && currentConfig.includes('fontWeight:')) {
-    console.log('ℹ️ Typography already configured in tailwind.config.js');
     return;
   }
 
@@ -252,7 +250,6 @@ ${Object.entries(typographyTokens.lineHeight)
 
   const outputPath = path.join(__dirname, '../styles/typography-usage.md');
   fs.writeFileSync(outputPath, docContent);
-  console.log('✅ Generated typography documentation');
 }
 
 // Main execution
@@ -265,10 +262,6 @@ function main() {
     generateTypographyDocumentation();
     
     console.log('✅ Typography system generated successfully!');
-    console.log('📊 Generated:');
-    console.log(`   - ${Object.keys(typographyTokens.fontSize).length} font sizes`);
-    console.log(`   - ${Object.keys(typographyTokens.fontWeight).length} font weights`);
-    console.log(`   - ${Object.keys(typographyTokens.lineHeight).length} line heights`);
     
   } catch (error) {
     console.error('❌ Error generating typography system:', error.message);

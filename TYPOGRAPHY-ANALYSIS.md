@@ -263,7 +263,6 @@ function generateTypographyConfig() {
 };`;
 
   fs.writeFileSync('tailwind.config.js', config);
-  console.log('✅ Generated typography config');
 }
 ```
 
