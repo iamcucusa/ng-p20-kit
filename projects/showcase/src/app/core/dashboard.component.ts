@@ -6,7 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { BadgeModule } from 'primeng/badge';
 import { DividerModule } from 'primeng/divider';
 import { TagModule } from 'primeng/tag';
-import { SpacingTestComponent } from './spacing-test.component';
+import { SpacingTestComponent } from '@core/spacing-test.component';
 
 interface DashboardItem {
   id: number;

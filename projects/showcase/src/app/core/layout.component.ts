@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './header.component';
+import { HeaderComponent } from '@core/header.component';
 import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
