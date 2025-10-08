@@ -18,8 +18,6 @@
     "paths": {
       "@ng-p20-kit/theme": ["./projects/theme/src/public-api.ts"],
       "@ng-p20-kit/theme/*": ["./projects/theme/src/*"],
-      "@ng-p20-kit/snippets": ["./projects/snippets/src/public-api.ts"],
-      "@ng-p20-kit/snippets/*": ["./projects/snippets/src/*"],
       "@ng-p20-kit/showcase/*": ["./projects/showcase/src/*"]
     }
   },
@@ -43,12 +41,6 @@
     },
     {
       "path": "./projects/theme/tsconfig.spec.json"
-    },
-    {
-      "path": "./projects/snippets/tsconfig.lib.json"
-    },
-    {
-      "path": "./projects/snippets/tsconfig.spec.json"
     }
   ]
 }
