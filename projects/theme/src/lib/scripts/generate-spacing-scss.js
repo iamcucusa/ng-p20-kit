@@ -11,7 +11,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Read Tailwind config
-const configPath = path.join(__dirname, '../tailwind.config.js');
+const configPath = path.join(__dirname, '../../../../../tailwind.config.js');
 const config = require(configPath);
 
 // Extract spacing values from Tailwind config
@@ -42,7 +42,7 @@ ${cssVariables}
 
 // Generate and write SCSS file
 const scssContent = generateScssContent(spacing);
-const outputPath = path.join(__dirname, '../projects/theme/src/lib/styles/tailwind-spacing.scss');
+const outputPath = path.join(__dirname, '../styles/tailwind-spacing.scss');
 
 fs.writeFileSync(outputPath, scssContent);
 

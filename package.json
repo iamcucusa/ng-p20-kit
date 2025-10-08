@@ -15,7 +15,7 @@
     "docs:build:showcase": "compodoc -p projects/showcase/tsconfig.app.json -d ./docs-showcase --theme material",
     "docs:json:showcase": "compodoc -p projects/showcase/tsconfig.app.json -d ./.compodoc-showcase -e json --silent",
     "theme:generate": "tsx projects/theme/src/lib/scripts/generate-theme-assets.ts",
-    "generate-spacing": "node scripts/generate-spacing-scss.js"
+    "generate-spacing": "node projects/theme/src/lib/scripts/generate-spacing-scss.js"
   },
   "prettier": {
     "printWidth": 100,
