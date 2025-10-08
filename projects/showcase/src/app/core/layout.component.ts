@@ -1,94 +1,111 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from '@core/header.component';
-import { TooltipModule } from 'primeng/tooltip';
+import { FooterComponent } from '@core/footer.component';
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HeaderComponent, TooltipModule],
+  imports: [CommonModule, RouterOutlet, HeaderComponent, FooterComponent],
   template: `
-    <header>
-      <pg-header
-        [userRole]="'ADMIN'"
-        [userEmail]="'john.doe@pegasus.com'"
-        [givenName]="'John'"
-        [userLastName]="'Doe'">
-      </pg-header>
-    </header>
+    <div class="pg-layout">
+      <header class="pg-layout-header">
+        <pg-header
+          [userRole]="'ADMIN'"
+          [userEmail]="'john.doe@pegasus.com'"
+          [givenName]="'John'"
+          [userLastName]="'Doe'">
+        </pg-header>
+      </header>
 
-    <main>
-      <div class="main-content" role="main">
-        <router-outlet></router-outlet>
-      </div>
-    </main>
-
-    <footer>
-      <div class="bg-surface-section px-4 md:px-6 lg:px-6">
-        <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between">
-          <div>
-            <div class="layout-footer-logo">
-              <i class="pi pi-prime" style="font-size: 2rem; color: var(--p-primary-color);"></i>
-              <span class="layout-footer-title">Pegasus Showcase</span>
-            </div>
-            <div class="leading-3">&copy; {{ year }} Pegasus Migration Project. All rights reserved.</div>
-          </div>
-          <div class="mt-3 sm:mt-0">
-            <a
-              pTooltip="Send us an email"
-              tooltipPosition="top"
-              placeholder="Top"
-              href="mailto:support@pegasus-migration.com"
-              target="_blank"
-              class="cursor-pointer text-gray-500 ml-3 transition-colors duration-150 hover:text-gray-700"
-            >
-              <i class="pi pi-envelope text-xl"></i>
-            </a>
-          </div>
+      <main class="pg-layout-main">
+        <div class="pg-layout-content" role="main">
+          <router-outlet></router-outlet>
         </div>
-      </div>
-    </footer>
+      </main>
+
+      <footer class="pg-layout-footer">
+        <pg-footer></pg-footer>
+      </footer>
+    </div>
   `,
   styles: [`
-
-    .main-content {
-      min-height: calc(100vh - 200px);
-      padding: 2rem;
-      // max-width: 1200px;
-      margin: 0 auto;
+    .pg-layout {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
       width: 100%;
     }
 
-    .layout-footer-logo {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 0.5rem;
+    .pg-layout-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: var(--p-surface-section);
+      border-bottom: 1px solid var(--p-surface-border);
     }
 
-    .layout-footer-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--p-text-color);
+    .pg-layout-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background-color: var(--p-surface-ground);
+    }
+
+    .pg-layout-content {
+      flex: 1;
+      padding: var(--spacing-7) var(--spacing-6) var(--spacing-7);
+      width: 100%;
+      max-width: 100%;
+      min-height: calc(100vh - 12.5rem); // 200px converted to rem
+    }
+
+    .pg-layout-footer {
+      background-color: var(--p-surface-section);
+      border-top: 1px solid var(--p-surface-border);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .pg-layout-content {
+        padding: var(--spacing-6) var(--spacing-5) var(--spacing-6);
+        min-height: calc(100vh - 11.25rem); // 180px converted to rem
+      }
     }
 
     @media (max-width: 768px) {
-      .pg-content {
-        padding: 1rem;
+      .pg-layout-content {
+        padding: var(--spacing-5) var(--spacing-4) var(--spacing-5);
+        min-height: calc(100vh - 10rem); // 160px converted to rem
+      }
+    }
+
+    @media (max-width: 640px) {
+      .pg-layout-content {
+        padding: var(--spacing-4) var(--spacing-3) var(--spacing-4);
+        min-height: calc(100vh - 8.75rem); // 140px converted to rem
+      }
+    }
+
+    /* Print Styles */
+    @media print {
+      .pg-layout-header,
+      .pg-layout-footer {
+        display: none;
+      }
+      
+      .pg-layout-main {
+        background-color: transparent;
+      }
+      
+      .pg-layout-content {
+        padding: 0;
+        min-height: auto;
       }
     }
   `]
 })
-export class LayoutComponent implements OnInit {
-  today = new Date();
-  year: string | null = null;
-  pipe = new DatePipe('en-US');
-
-
+export class LayoutComponent {
   constructor() {}
-
-  ngOnInit() {
-    this.year = this.pipe.transform(this.today, 'YYYY');
-  }
 }
