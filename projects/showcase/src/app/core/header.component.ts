@@ -10,26 +10,26 @@ import { BadgeModule } from 'primeng/badge';
   standalone: true,
   imports: [CommonModule, RouterModule, AvatarModule, RippleModule, BadgeModule],
   template: `
-    <div class="pg-header-container px-3">
+    <div class="pg-header-container">
       <a
         pRipple
-        class="pg-user-profile p-3"
+        class="pg-user-profile"
       >
         <p-avatar
           label="{{ email.charAt(0).toUpperCase() }}"
-          class="pg-user-profile__avatar mr-0 lg:mr-2"
+          class="pg-user-profile__avatar"
           size="large"
           shape="circle"
         ></p-avatar>
         <div class="pg-user-profile__info">
-          <span class="pg-user-profile__name mb-1"
+          <span class="pg-user-profile__name"
             >{{ name | titlecase }} {{ lastName | titlecase }}</span
           >
           <p class="pg-user-profile__role">{{ role }}</p>
         </div>
       </a>
 
-      <div class="pg-navigation pl-8">
+      <div class="pg-navigation">
         <ul class="pg-navigation__list">
           <li class="pg-navigation__item">
             <a
@@ -40,7 +40,7 @@ import { BadgeModule } from 'primeng/badge';
               pRipple
               class="pg-navigation__link"
             >
-              <i class="pi pi-file mr-2"></i>
+              <i class="pi pi-file"></i>
               <span>Trials</span>
             </a>
           </li>
@@ -53,7 +53,7 @@ import { BadgeModule } from 'primeng/badge';
               pRipple
               class="pg-navigation__link"
             >
-              <i class="pi pi-file mr-2"></i>
+              <i class="pi pi-file"></i>
               <span>Reports</span>
             </a>
           </li>
@@ -66,20 +66,20 @@ import { BadgeModule } from 'primeng/badge';
               [routerLinkActiveOptions]="{ exact: false }"
               class="pg-navigation__link"
             >
-              <i class="pi pi-question-circle mr-2"></i>
+              <i class="pi pi-question-circle"></i>
               <span>User Guide</span>
             </a>
           </li>
         </ul>
       </div>
 
-      <div class="pg-sign-out-section ml-3">
+      <div class="pg-sign-out-section">
         <a
           pRipple
           (click)="signOut()"
-          class="pg-sign-out-link p-3 lg:px-3"
+          class="pg-sign-out-link"
         >
-          <i class="pi pi-sign-out mr-2"></i>
+          <i class="pi pi-sign-out"></i>
           <span>Sign Out</span>
         </a>
       </div>

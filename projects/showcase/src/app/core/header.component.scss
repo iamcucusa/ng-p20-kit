@@ -10,6 +10,8 @@
   display: flex;
   position: relative;
   min-height: 75px;
+  padding-left: var(--spacing-3); // 16px - matches px-3
+  padding-right: var(--spacing-3); // 16px - matches px-3
 
   @media (min-width: 1024px) {
     position: static;
@@ -19,15 +21,17 @@
 // User profile section
 .pg-user-profile {
   @extend .pg-header-interactive;
-  
+  padding: var(--spacing-3); // 16px - matches p-3
+
   &__avatar {
-    background-color: var(--p-indigo-500) !important;
-    color: var(--p-white) !important;
+    background-color: var(--p-indigo-500);
+    color: var(--p-white);
+    margin-right: var(--spacing-4); // 24px - matches mr-4
   }
 
   &__info {
     display: none;
-    
+
     @media (min-width: 1024px) {
       display: block;
     }
@@ -50,6 +54,7 @@
   flex: 1 1 auto;
   display: flex;
   overflow: auto;
+  padding-left: var(--spacing-4); // matches pl-4
 
   &__list {
     @extend .pg-header-list;
@@ -61,16 +66,17 @@
 
   &__link {
     @extend .pg-header-link;
-    
+
     &--active {
       @extend .pg-header-link-active;
     }
-    
+
     i {
       font-size: 1.125rem;
       line-height: 1.75rem;
+      margin-right: var(--spacing-2); // 8px - matches mr-2
     }
-    
+
     span {
       font-size: 1.125rem;
       line-height: 1.75rem;
@@ -81,19 +87,26 @@
 
 // Sign out section
 .pg-sign-out-section {
-  // margin-left handled by Tailwind ml-3.5 class
+  margin-left: var(--spacing-3); // 16px - matches ml-3
 }
 
 .pg-sign-out-link {
   @extend .pg-header-link;
   display: flex;
   align-items: center;
-  
+  padding: var(--spacing-3); // 16px - matches p-3
+
+  @media (min-width: 1024px) {
+    padding-left: var(--spacing-3); // 16px - matches lg:px-3
+    padding-right: var(--spacing-3); // 16px - matches lg:px-3
+  }
+
   i {
     font-size: 1.125rem;
     line-height: 1.75rem;
+    margin-right: var(--spacing-2); // 8px - matches mr-2
   }
-  
+
   span {
     font-size: 1.125rem;
     line-height: 1.75rem;
