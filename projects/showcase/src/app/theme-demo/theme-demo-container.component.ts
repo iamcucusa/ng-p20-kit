@@ -55,7 +55,7 @@ import { SpacingTestComponent } from './spacing-test.component';
                     Typography values are generated from centralized design tokens ensuring consistency across the application.
                   </p>
                 </div>
-                <app-typography-demo></app-typography-demo>
+                <kit-typography-demo></kit-typography-demo>
               </div>
             </p-card>
           </div>
@@ -77,7 +77,7 @@ import { SpacingTestComponent } from './spacing-test.component';
                     Spacing values match PrimeFlex 17 for seamless migration and consistency.
                   </p>
                 </div>
-                <app-spacing-test></app-spacing-test>
+                <kit-spacing-test></kit-spacing-test>
               </div>
             </p-card>
           </div>
