@@ -3,10 +3,8 @@
  * Creates step routes dynamically using step configuration
  */
 
-import { inject } from '@angular/core';
 import { Routes } from '@angular/router';
-import { stepRoutingConfig, stepIds } from './step-routing.tokens';
-import { defaultStepRoutingConfig } from './step-routing.tokens';
+import { stepIds } from './step-routing.tokens';
 
 /**
  * Creates step routes dynamically using step configuration
@@ -34,17 +32,3 @@ export function createStepRoutes(): Routes {
   ];
 }
 
-/**
- * Step Routes Factory Service
- * @class
- */
-export class StepRoutesFactoryService {
-  /**
-   * Create step routes using stepIds from step.settings.ts
-   * @method
-   * @returns {Routes} Array of step routes
-   */
-  createRoutes(): Routes {
-    return createStepRoutes();
-  }
-}
