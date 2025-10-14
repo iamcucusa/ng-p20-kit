@@ -5,10 +5,12 @@
       Manage and monitor your clinical trials with comprehensive tracking and analytics.
     </ng-template>
     <ng-template #pageActions>
-      <button class="pg-trials-container__action-btn pg-trials-container__action-btn--primary">
-        <i class="pi pi-plus"></i>
-        New Trial
-      </button>
+      <p-button 
+        label="New Trial" 
+        icon="pi pi-plus" 
+        severity="primary"
+        pRipple>
+      </p-button>
     </ng-template>
   </pg-page-heading>
   
@@ -20,7 +22,7 @@
           Currently running clinical trials and their progress status.
         </p>
         <div class="pg-trials-container__card-actions">
-          <button class="pg-trials-container__btn">View Details</button>
+          <p-button label="View Details" severity="secondary" pRipple></p-button>
         </div>
       </div>
       
@@ -30,7 +32,7 @@
           Successfully completed trials with final results and reports.
         </p>
         <div class="pg-trials-container__card-actions">
-          <button class="pg-trials-container__btn">View Results</button>
+          <p-button label="View Results" severity="secondary" pRipple></p-button>
         </div>
       </div>
       
@@ -40,7 +42,7 @@
           Scheduled trials and their preparation status.
         </p>
         <div class="pg-trials-container__card-actions">
-          <button class="pg-trials-container__btn">View Schedule</button>
+          <p-button label="View Schedule" severity="secondary" pRipple></p-button>
         </div>
       </div>
     </div>
