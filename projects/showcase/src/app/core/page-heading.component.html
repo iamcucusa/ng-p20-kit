@@ -1,0 +1,21 @@
+<div class="pg-page-heading">
+  <div class="pg-page-heading__container">
+    <div class="pg-page-heading__content">
+      <div class="pg-page-heading__text">
+        <h1 class="pg-page-heading__title">
+          <ng-container *ngTemplateOutlet="pageTitle"></ng-container>
+        </h1>
+        @if (pageDescription) {
+          <p class="pg-page-heading__description">
+            <ng-container *ngTemplateOutlet="pageDescription"></ng-container>
+          </p>
+        }
+      </div>
+      @if (pageActions) {
+        <div class="pg-page-heading__actions">
+          <ng-container *ngTemplateOutlet="pageActions"></ng-container>
+        </div>
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="pg-trials-container">
+  <pg-page-heading>
+    <ng-template #pageTitle>Trials</ng-template>
+    <ng-template #pageDescription>
+      Manage and monitor your clinical trials with comprehensive tracking and analytics.
+    </ng-template>
+    <ng-template #pageActions>
+      <button class="pg-trials-container__action-btn pg-trials-container__action-btn--primary">
+        <i class="pi pi-plus"></i>
+        New Trial
+      </button>
+    </ng-template>
+  </pg-page-heading>
+  
+  <div class="pg-trials-container__content">
+    <div class="pg-trials-container__grid">
+      <div class="pg-trials-container__card">
+        <h3 class="pg-trials-container__card-title">Active Trials</h3>
+        <p class="pg-trials-container__card-description">
+          Currently running clinical trials and their progress status.
+        </p>
+        <div class="pg-trials-container__card-actions">
+          <button class="pg-trials-container__btn">View Details</button>
+        </div>
+      </div>
+      
+      <div class="pg-trials-container__card">
+        <h3 class="pg-trials-container__card-title">Completed Trials</h3>
+        <p class="pg-trials-container__card-description">
+          Successfully completed trials with final results and reports.
+        </p>
+        <div class="pg-trials-container__card-actions">
+          <button class="pg-trials-container__btn">View Results</button>
+        </div>
+      </div>
+      
+      <div class="pg-trials-container__card">
+        <h3 class="pg-trials-container__card-title">Upcoming Trials</h3>
+        <p class="pg-trials-container__card-description">
+          Scheduled trials and their preparation status.
+        </p>
+        <div class="pg-trials-container__card-actions">
+          <button class="pg-trials-container__btn">View Schedule</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { LayoutComponent } from '@core/layout.component';
-import { DashboardComponent } from '@core/dashboard.component';
 
 export const routes: Routes = [
   {
@@ -14,7 +13,7 @@ export const routes: Routes = [
       },
       {
         path: 'dashboard',
-        component: DashboardComponent
+        loadComponent: () => import('./trial/trials-container.component').then(m => m.TrialsContainerComponent)
       },
       {
         path: 'theme',
