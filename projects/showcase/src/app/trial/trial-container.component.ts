@@ -6,6 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { RouterModule } from '@angular/router';
 import { StepRoutingService } from '@trial-step/step-routing.service';
+import { RouteService } from '@core/route.service';
 
 @Component({
   selector: 'pg-trial-container',
@@ -20,7 +21,8 @@ export class TrialContainerComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private stepRoutingService: StepRoutingService
+    private stepRoutingService: StepRoutingService,
+    public routeService: RouteService
   ) {}
 
   ngOnInit(): void {

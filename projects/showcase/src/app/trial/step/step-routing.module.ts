@@ -4,7 +4,7 @@
  */
 
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { STEP_ROUTING_CONFIG, StepRoutingConfig } from './step-routing.tokens';
+import { stepRoutingConfig, StepRoutingConfig } from './step-routing.tokens';
 import { StepRoutingService } from './step-routing.service';
 
 /**
@@ -27,30 +27,11 @@ export class StepRoutingModule {
       ngModule: StepRoutingModule,
       providers: [
         {
-          provide: STEP_ROUTING_CONFIG,
+          provide: stepRoutingConfig,
           useValue: config
         }
       ]
     };
   }
 
-  /**
-   * Configure step routing with environment-based configuration
-   * @static
-   * @method
-   * @param {Object} environment - Environment configuration
-   * @param {StepRoutingConfig} [environment.stepRouting] - Optional step routing configuration
-   * @returns {ModuleWithProviders<StepRoutingModule>} Module with providers
-   */
-  static forEnvironment(environment: { stepRouting?: StepRoutingConfig }): ModuleWithProviders<StepRoutingModule> {
-    return {
-      ngModule: StepRoutingModule,
-      providers: [
-        {
-          provide: STEP_ROUTING_CONFIG,
-          useValue: environment.stepRouting || {}
-        }
-      ]
-    };
-  }
 }

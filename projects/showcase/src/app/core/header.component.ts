@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { AvatarModule } from 'primeng/avatar';
 import { RippleModule } from 'primeng/ripple';
 import { BadgeModule } from 'primeng/badge';
+import { RouteService } from './route.service';
 
 @Component({
   selector: 'pg-header',
@@ -34,7 +35,7 @@ import { BadgeModule } from 'primeng/badge';
         <ul class="pg-navigation__list">
           <li class="pg-navigation__item">
             <a
-              [routerLink]="['/dashboard']"
+              [routerLink]="[routeService.getDashboardPath()]"
               tabindex="0"
               [routerLinkActive]="'pg-navigation__link--active'"
               [routerLinkActiveOptions]="{ exact: false }"
@@ -109,7 +110,7 @@ export class HeaderComponent implements OnInit {
   name: string = 'John';
   lastName: string = 'Doe';
 
-  constructor() {}
+  constructor(public routeService: RouteService) {}
 
   @Input() set userRole(role: string | undefined | null) {
     this.role = role || 'ADMIN';

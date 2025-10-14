@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { LayoutComponent } from '@core/layout.component';
 import { createStepRoutes } from '@trial-step/step-routes.factory';
+import { appRoutes } from '@core/route.constants';
 
 export const routes: Routes = [
   {
@@ -9,11 +10,11 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/dashboard',
+        redirectTo: `/${appRoutes.dashboard}`,
         pathMatch: 'full'
       },
       {
-        path: 'dashboard',
+        path: appRoutes.dashboard,
         children: [
           {
             path: '',
@@ -34,6 +35,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/dashboard'
+    redirectTo: `/${appRoutes.dashboard}`
   }
 ];

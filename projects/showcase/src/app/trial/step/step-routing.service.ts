@@ -5,8 +5,8 @@
 
 import { Injectable, Inject, Optional } from '@angular/core';
 import { Router } from '@angular/router';
-import { STEP_ROUTING_CONFIG, StepRoutingConfig, stepIds } from './step-routing.tokens';
-import { DEFAULT_STEP_ROUTING_CONFIG } from './step-routing.tokens';
+import { stepRoutingConfig, StepRoutingConfig, stepIds } from './step-routing.tokens';
+import { defaultStepRoutingConfig } from './step-routing.tokens';
 
 /**
  * Step Routing Service
@@ -20,9 +20,9 @@ export class StepRoutingService {
 
   constructor(
     private router: Router,
-    @Optional() @Inject(STEP_ROUTING_CONFIG) config?: StepRoutingConfig
+    @Optional() @Inject(stepRoutingConfig) config?: StepRoutingConfig
   ) {
-    this.config = config || DEFAULT_STEP_ROUTING_CONFIG;
+    this.config = config || defaultStepRoutingConfig;
   }
 
   /**

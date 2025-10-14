@@ -4,6 +4,8 @@ import {routes} from '@ng-p20-kit/showcase/app/app.routes';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {providePrimeNG} from 'primeng/config';
 import {SagaBluePreset} from '@ng-p20-kit/theme';
+import { stepRoutingConfig } from '@trial-step/step-routing.tokens';
+import { appRoutes } from '@core/route.constants';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -26,6 +28,18 @@ export const appConfig: ApplicationConfig = {
           }
         }
       }
-    })
+    }),
+    /**
+     * Step Routing Configuration
+     * Provides step routing configuration for trial navigation
+     * Uses centralized route constants for consistency
+     */
+    {
+      provide: stepRoutingConfig,
+      useValue: {
+        basePath: appRoutes.dashboard,
+        trialIdParam: appRoutes.trialIdParam
+      }
+    }
   ]
 };

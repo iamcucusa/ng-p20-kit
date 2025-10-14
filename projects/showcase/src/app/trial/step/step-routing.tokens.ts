@@ -21,14 +21,15 @@ export interface StepRoutingConfig {
  * Step Routing Configuration Injection Token
  * @constant
  */
-export const STEP_ROUTING_CONFIG = new InjectionToken<StepRoutingConfig>('StepRoutingConfig');
+export const stepRoutingConfig = new InjectionToken<StepRoutingConfig>('StepRoutingConfig');
 
 /**
  * Default Step Routing Configuration
+ * Uses default values for step routing
  * @constant
  */
-export const DEFAULT_STEP_ROUTING_CONFIG: StepRoutingConfig = {
-  basePath: 'dashboard',
+export const defaultStepRoutingConfig: StepRoutingConfig = {
+  basePath: 'dashboard', // This is the default value, will be overridden by app.config.ts
   trialIdParam: 'id',
 };
 
