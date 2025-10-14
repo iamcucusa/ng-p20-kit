@@ -1,9 +1,4 @@
-// Pegasus Layout Component Styles
-// Professional SCSS implementation with proper organization
-
 @use '../../../../theme/src/lib/styles/breakpoints.scss' as bp;
-
-// Layout Styles
 .pg-layout {
   display: flex;
   flex-direction: column;
@@ -38,7 +33,7 @@
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 12.5rem); // 200px converted to rem
+  min-height: calc(100vh - 12.5rem);
 }
 
 .pg-layout-main-content {
@@ -56,7 +51,6 @@
   flex-shrink: 0;
 }
 
-// Responsive Design
 @include bp.desktop-down {
   .pg-layout-content {
     padding: var(--spacing-6) var(--spacing-5) 0;
@@ -102,7 +96,6 @@
   }
 }
 
-// Print Styles
 @media print {
   .pg-layout-header,
   .pg-layout-footer {

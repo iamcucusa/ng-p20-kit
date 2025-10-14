@@ -1,9 +1,4 @@
-// Pegasus Footer Component Styles
-// Professional SCSS implementation with proper organization
-
 @use '../../../../theme/src/lib/styles/breakpoints.scss' as bp;
-
-// Footer Mixins
 @mixin footer-container {
   background-color: var(--p-surface-section);
   border-top: 1px solid var(--p-surface-border);
@@ -125,7 +120,6 @@
   @include footer-link;
 }
 
-// Responsive Design
 @include bp.tablet-up {
   .pg-footer-content {
     flex-direction: row;
