@@ -1,4 +1,4 @@
-import {ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection} from '@angular/core';
+import {ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection, isDevMode} from '@angular/core';
 import {provideRouter} from '@angular/router';
 import {routes} from '@ng-p20-kit/showcase/app/app.routes';
 import {provideAnimations} from '@angular/platform-browser/animations';
@@ -6,6 +6,8 @@ import {providePrimeNG} from 'primeng/config';
 import {SagaBluePreset} from '@ng-p20-kit/theme';
 import { stepRoutingConfig } from '@trial-step/step-routing.tokens';
 import { appRoutes } from '@core/route.constants';
+import { provideStore } from '@ngrx/store';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,17 +19,17 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     providePrimeNG({
-      theme: {
-        preset: SagaBluePreset,
-        options: {
-          prefix: 'p',
-          darkModeSelector: '.app-dark',
-          cssLayer: {
-            name: 'primeng',
-            order: 'base,components,utilities,primeng'
-          }
+        theme: {
+            preset: SagaBluePreset,
+            options: {
+                prefix: 'p',
+                darkModeSelector: '.app-dark',
+                cssLayer: {
+                    name: 'primeng',
+                    order: 'base,components,utilities,primeng'
+                }
+            }
         }
-      }
     }),
     /**
      * Step Routing Configuration
@@ -35,11 +37,13 @@ export const appConfig: ApplicationConfig = {
      * Uses centralized route constants for consistency
      */
     {
-      provide: stepRoutingConfig,
-      useValue: {
-        basePath: appRoutes.dashboard,
-        trialIdParam: appRoutes.trialIdParam
-      }
-    }
-  ]
+        provide: stepRoutingConfig,
+        useValue: {
+            basePath: appRoutes.dashboard,
+            trialIdParam: appRoutes.trialIdParam
+        }
+    },
+    provideStore(),
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
+]
 };

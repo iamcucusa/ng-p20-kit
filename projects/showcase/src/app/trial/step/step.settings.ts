@@ -8,7 +8,6 @@ import type {
   TrialStepId, 
   TrialSteps, 
   StepState, 
-  NavigationDirection,
   StepValidationResult 
 } from './trial-step.d';
 

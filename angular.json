@@ -92,6 +92,16 @@
               "projects/showcase/src/styles.scss"
             ]
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/showcase/**/*.ts",
+              "projects/showcase/**/*.html"
+            ],
+            "eslintConfig": "projects/showcase/eslint.config.js"
+          }
         }
       }
     },
@@ -125,5 +135,10 @@
         }
       }
     }
+  },
+  "cli": {
+    "schematicCollections": [
+      "@ngrx/schematics"
+    ]
   }
 }

@@ -5,7 +5,7 @@ import { HeaderComponent } from '@core/header.component';
 import { FooterComponent } from '@core/footer.component';
 
 @Component({
-  selector: 'app-layout',
+  selector: 'kit-layout',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, RouterOutlet, HeaderComponent, FooterComponent],
@@ -13,12 +13,12 @@ import { FooterComponent } from '@core/footer.component';
   template: `
     <div class="pg-layout">
       <header class="pg-layout-header">
-        <pg-header
+        <kit-header
           [userRole]="'ADMIN'"
           [userEmail]="'john.doe@pegasus.com'"
           [givenName]="'John'"
           [userLastName]="'Doe'">
-        </pg-header>
+        </kit-header>
       </header>
 
       <main class="pg-layout-main">
@@ -27,7 +27,7 @@ import { FooterComponent } from '@core/footer.component';
             <router-outlet></router-outlet>
           </div>
           <footer class="pg-layout-footer">
-            <pg-footer></pg-footer>
+            <kit-footer></kit-footer>
           </footer>
         </div>
       </main>

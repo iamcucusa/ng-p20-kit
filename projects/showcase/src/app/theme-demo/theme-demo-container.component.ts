@@ -7,7 +7,7 @@ import { TypographyDemoComponent } from './typography-demo.component';
 import { SpacingTestComponent } from './spacing-test.component';
 
 @Component({
-  selector: 'app-theme-demo-container',
+  selector: 'kit-theme-demo-container',
   standalone: true,
   imports: [
     CommonModule,

@@ -4,7 +4,7 @@ import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 
 @Component({
-  selector: 'pg-trials-container',
+  selector: 'kit-trials-container',
   templateUrl: './trials-container.component.html',
   styleUrls: ['./trials-container.component.scss'],
   standalone: true,

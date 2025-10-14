@@ -3,7 +3,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
-  selector: 'pg-footer',
+  selector: 'kit-footer',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, TooltipModule],

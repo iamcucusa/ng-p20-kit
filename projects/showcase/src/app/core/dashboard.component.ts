@@ -18,7 +18,7 @@ interface DashboardItem {
 }
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'kit-dashboard',
   standalone: true,
   imports: [
     CommonModule,

@@ -12,7 +12,8 @@
     "docs:json:showcase": "compodoc -p projects/showcase/tsconfig.app.json -d ./.compodoc-showcase -e json --silent",
     "theme:generate": "tsx projects/theme/src/lib/scripts/generate-theme-assets.ts",
     "generate-spacing": "node projects/theme/src/lib/scripts/generate-spacing-scss.js",
-    "generate-typography": "node projects/theme/src/lib/scripts/generate-typography.js"
+    "generate-typography": "node projects/theme/src/lib/scripts/generate-typography.js",
+    "lint": "ng lint"
   },
   "prettier": {
     "printWidth": 100,
@@ -34,6 +35,8 @@
     "@angular/forms": "^20.3.3",
     "@angular/platform-browser": "^20.3.3",
     "@angular/router": "^20.3.3",
+    "@ngrx/store": "^20.0.1",
+    "@ngrx/store-devtools": "^20.0.1",
     "@primeuix/styles": "^1.2.5",
     "@primeuix/themes": "^1.2.5",
     "primeicons": "^7.0.0",
@@ -49,10 +52,14 @@
     "@angular/cli": "^20.3.3",
     "@angular/compiler-cli": "^20.3.3",
     "@compodoc/compodoc": "^1.1.30",
+    "@ngrx/eslint-plugin": "^20.0.1",
+    "@ngrx/schematics": "^20.0.1",
     "@tailwindcss/postcss": "^4.1.14",
     "@types/jasmine": "~5.1.0",
+    "angular-eslint": "20.4.0",
     "autoprefixer": "^10.4.21",
     "cross-env": "^10.1.0",
+    "eslint": "^9.37.0",
     "jasmine-core": "~5.9.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -64,6 +71,7 @@
     "postcss-cli": "^11.0.1",
     "tailwindcss": "^4.1.14",
     "tsx": "^4.20.6",
-    "typescript": "~5.9.2"
+    "typescript": "~5.9.2",
+    "typescript-eslint": "8.46.0"
   }
 }

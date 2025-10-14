@@ -4,7 +4,7 @@ import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 
 @Component({
-  selector: 'pg-step-one-container',
+  selector: 'kit-step-one-container',
   templateUrl: './step-one-container.component.html',
   styleUrls: ['./step-one-container.component.scss'],
   standalone: true,

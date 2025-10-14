@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PageHeadingComponent } from '@core/page-heading.component';
@@ -9,7 +9,7 @@ import { StepRoutingService } from '@trial-step/step-routing.service';
 import { RouteService } from '@core/route.service';
 
 @Component({
-  selector: 'pg-trial-container',
+  selector: 'kit-trial-container',
   templateUrl: './trial-container.component.html',
   styleUrls: ['./trial-container.component.scss'],
   standalone: true,
@@ -19,11 +19,9 @@ export class TrialContainerComponent implements OnInit {
   trialId: string | null = null;
   stepRoutes: Record<string, string> = {};
 
-  constructor(
-    private route: ActivatedRoute,
-    private stepRoutingService: StepRoutingService,
-    public routeService: RouteService
-  ) {}
+  private route = inject(ActivatedRoute);
+  private stepRoutingService = inject(StepRoutingService);
+  public routeService = inject(RouteService);
 
   ngOnInit(): void {
     this.trialId = this.route.snapshot.paramMap.get('id');

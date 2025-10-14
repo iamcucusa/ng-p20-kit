@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AvatarModule } from 'primeng/avatar';
@@ -7,7 +7,7 @@ import { BadgeModule } from 'primeng/badge';
 import { RouteService } from './route.service';
 
 @Component({
-  selector: 'pg-header',
+  selector: 'kit-header',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, RouterModule, AvatarModule, RippleModule, BadgeModule],
@@ -103,14 +103,14 @@ import { RouteService } from './route.service';
   `,
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   // Dummy data for styling validation
   role: string = 'ADMIN';
   email: string = 'john.doe@pegasus.com';
   name: string = 'John';
   lastName: string = 'Doe';
 
-  constructor(public routeService: RouteService) {}
+  public routeService = inject(RouteService);
 
   @Input() set userRole(role: string | undefined | null) {
     this.role = role || 'ADMIN';
@@ -138,8 +138,6 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-  }
 
   signOut() {
     // Dummy sign out - just log for validation

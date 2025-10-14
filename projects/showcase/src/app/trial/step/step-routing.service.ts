@@ -3,9 +3,9 @@
  * Provides centralized step routing functionality with dependency injection
  */
 
-import { Injectable, Inject, Optional } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { stepRoutingConfig, StepRoutingConfig, stepIds } from './step-routing.tokens';
+import { stepRoutingConfig, stepIds } from './step-routing.tokens';
 import { defaultStepRoutingConfig } from './step-routing.tokens';
 
 /**
@@ -16,14 +16,8 @@ import { defaultStepRoutingConfig } from './step-routing.tokens';
   providedIn: 'root'
 })
 export class StepRoutingService {
-  private readonly config: StepRoutingConfig;
-
-  constructor(
-    private router: Router,
-    @Optional() @Inject(stepRoutingConfig) config?: StepRoutingConfig
-  ) {
-    this.config = config || defaultStepRoutingConfig;
-  }
+  private router = inject(Router);
+  private config = inject(stepRoutingConfig, { optional: true }) || defaultStepRoutingConfig;
 
   /**
    * Navigate to a specific step for a trial

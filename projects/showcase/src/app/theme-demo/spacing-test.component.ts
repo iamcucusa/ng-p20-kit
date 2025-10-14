@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
  * configuration matches PrimeFlex values exactly.
  */
 @Component({
-  selector: 'app-spacing-test',
+  selector: 'kit-spacing-test',
   standalone: true,
   imports: [CommonModule],
   template: `
