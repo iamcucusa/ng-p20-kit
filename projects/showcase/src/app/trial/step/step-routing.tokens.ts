@@ -4,7 +4,6 @@
  */
 
 import { InjectionToken } from '@angular/core';
-import { stepIds } from './step.settings';
 
 /**
  * Step Routing Configuration Interface
@@ -33,8 +32,5 @@ export const defaultStepRoutingConfig: StepRoutingConfig = {
   trialIdParam: 'id',
 };
 
-/**
- * Step IDs from step settings - single source of truth
- * @constant
- */
-export { stepIds };
+// Re-export stepIds from step settings for convenience
+export { stepIds } from './step.settings';

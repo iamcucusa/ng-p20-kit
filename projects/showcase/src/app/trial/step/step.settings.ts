@@ -234,3 +234,50 @@ export const updateStepState = (step: TrialStep, newState: Partial<StepState>): 
     ...newState,
   };
 };
+
+/**
+ * Updates all steps state based on the active step
+ * @param activeStepId - The ID of the currently active step
+ * @param steps - Current steps state
+ * @returns Updated steps with proper state transitions
+ */
+export const updateStepsState = (activeStepId: TrialStepId, steps: TrialSteps): TrialSteps => {
+  let stepOne = steps[stepIds.one];
+  let stepTwo = steps[stepIds.two];
+  let stepThree = steps[stepIds.three];
+  let stepFour = steps[stepIds.four];
+
+  switch (activeStepId) {
+    case stepIds.one:
+      stepOne = { ...stepOne, ...stepStates.active };
+      stepTwo = { ...stepTwo, ...stepStates.default };
+      stepThree = { ...stepThree, ...stepStates.default };
+      stepFour = { ...stepFour, ...stepStates.default };
+      break;
+    case stepIds.two:
+      stepOne = { ...stepOne, ...stepStates.visited };
+      stepTwo = { ...stepTwo, ...stepStates.active };
+      stepThree = { ...stepThree, ...stepStates.default };
+      stepFour = { ...stepFour, ...stepStates.default };
+      break;
+    case stepIds.three:
+      stepOne = { ...stepOne, ...stepStates.visited };
+      stepTwo = { ...stepTwo, ...stepStates.visited };
+      stepThree = { ...stepThree, ...stepStates.active };
+      stepFour = { ...stepFour, ...stepStates.default };
+      break;
+    case stepIds.four:
+      stepOne = { ...stepOne, ...stepStates.visited };
+      stepTwo = { ...stepTwo, ...stepStates.visited };
+      stepThree = { ...stepThree, ...stepStates.visited };
+      stepFour = { ...stepFour, ...stepStates.active };
+      break;
+  }
+
+  return { 
+    [stepIds.one]: stepOne, 
+    [stepIds.two]: stepTwo, 
+    [stepIds.three]: stepThree, 
+    [stepIds.four]: stepFour 
+  };
+};
