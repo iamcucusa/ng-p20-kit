@@ -1,0 +1,46 @@
+<div class="pg-step-two-container">
+  <pg-page-heading>
+    <ng-template #pageTitle>Benchmark Trials Comparison</ng-template>
+    <ng-template #pageDescription>
+      Select and compare benchmark trials with non-benchmark trials to establish performance baselines and identify key differences in your clinical trial approach.
+    </ng-template>
+    <ng-template #pageActions>
+      <p-button 
+        label="Add Trial" 
+        icon="pi pi-plus" 
+        severity="primary"
+        pRipple>
+      </p-button>
+      <p-button 
+        label="Next Step" 
+        icon="pi pi-arrow-right" 
+        severity="secondary"
+        pRipple>
+      </p-button>
+    </ng-template>
+  </pg-page-heading>
+  
+  <div class="pg-step-two-container__content">
+    <div class="pg-step-two-container__grid">
+      <div class="pg-step-two-container__card">
+        <h3 class="pg-step-two-container__card-title">Benchmark Trials</h3>
+        <p class="pg-step-two-container__card-description">
+          Select trials that will serve as performance benchmarks for comparison.
+        </p>
+        <div class="pg-step-two-container__card-actions">
+          <p-button label="Select Trials" severity="secondary" pRipple></p-button>
+        </div>
+      </div>
+      
+      <div class="pg-step-two-container__card">
+        <h3 class="pg-step-two-container__card-title">Non-Benchmark Trials</h3>
+        <p class="pg-step-two-container__card-description">
+          Include additional trials for comprehensive comparison analysis.
+        </p>
+        <div class="pg-step-two-container__card-actions">
+          <p-button label="Add Trials" severity="secondary" pRipple></p-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

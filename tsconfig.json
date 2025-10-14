@@ -21,7 +21,12 @@
       "@ng-p20-kit/showcase/*": ["./projects/showcase/src/*"],
       "@core/*": ["./projects/showcase/src/app/core/*"],
       "@theme-demo/*": ["./projects/showcase/src/app/theme-demo/*"],
-      "@trial/*": ["./projects/showcase/src/app/trial/*"]
+      "@trial/*": ["./projects/showcase/src/app/trial/*"],
+      "@trial-step/*": ["./projects/showcase/src/app/trial/step/*"],
+      "@trial-step-one/*": ["./projects/showcase/src/app/trial/step-one/*"],
+      "@trial-step-two/*": ["./projects/showcase/src/app/trial/step-two/*"],
+      "@trial-step-three/*": ["./projects/showcase/src/app/trial/step-three/*"],
+      "@trial-step-four/*": ["./projects/showcase/src/app/trial/step-four/*"]
     }
   },
   "angularCompilerOptions": {

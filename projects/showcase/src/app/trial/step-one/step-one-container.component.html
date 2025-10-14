@@ -1,0 +1,53 @@
+<div class="pg-step-one-container">
+  <pg-page-heading>
+    <ng-template #pageTitle>Assumption Tracker</ng-template>
+    <ng-template #pageDescription>
+      Enter and track assumption details for your clinical trial. This step helps you document key assumptions that will guide your trial design and execution.
+    </ng-template>
+    <ng-template #pageActions>
+      <p-button 
+        label="Save Assumptions" 
+        icon="pi pi-save" 
+        severity="primary"
+        pRipple>
+      </p-button>
+      <p-button 
+        label="Next Step" 
+        icon="pi pi-arrow-right" 
+        severity="secondary"
+        pRipple>
+      </p-button>
+    </ng-template>
+  </pg-page-heading>
+  
+  <div class="pg-step-one-container__content">
+    <div class="pg-step-one-container__form">
+      <div class="pg-step-one-container__form-group">
+        <label class="pg-step-one-container__label">Primary Assumption</label>
+        <textarea 
+          class="pg-step-one-container__textarea"
+          placeholder="Enter your primary assumption here..."
+          rows="4">
+        </textarea>
+      </div>
+      
+      <div class="pg-step-one-container__form-group">
+        <label class="pg-step-one-container__label">Secondary Assumptions</label>
+        <textarea 
+          class="pg-step-one-container__textarea"
+          placeholder="Enter any secondary assumptions..."
+          rows="3">
+        </textarea>
+      </div>
+      
+      <div class="pg-step-one-container__form-group">
+        <label class="pg-step-one-container__label">Risk Factors</label>
+        <textarea 
+          class="pg-step-one-container__textarea"
+          placeholder="Identify potential risk factors..."
+          rows="3">
+        </textarea>
+      </div>
+    </div>
+  </div>
+</div>

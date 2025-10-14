@@ -1,0 +1,113 @@
+@use '../../../../theme/src/lib/styles/breakpoints.scss' as bp;
+@use '../../../../theme/src/lib/styles/typography.scss' as typography;
+
+.pg-trial-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: var(--spacing-6);
+}
+
+.pg-trial-container__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+
+  @include bp.desktop-up {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.pg-trial-container__steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  flex-shrink: 0;
+
+  @include bp.desktop-up {
+    width: 300px;
+  }
+}
+
+.pg-trial-container__steps-title {
+  @include typography.text-lg;
+  @include typography.font-semibold;
+  color: var(--p-text-color);
+  margin: 0;
+}
+
+.pg-trial-container__steps-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-3);
+
+  @include bp.tablet-up {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include bp.desktop-up {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pg-trial-container__step-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
+  background-color: var(--p-surface-card);
+  border: 1px solid var(--p-surface-border);
+  border-radius: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transform: translateY(-1px);
+    border-color: var(--p-primary-color);
+  }
+
+  &:focus {
+    outline: 2px solid var(--p-primary-color);
+    outline-offset: 2px;
+  }
+}
+
+.pg-trial-container__step-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: var(--p-primary-color);
+  border-radius: 0.5rem;
+  color: white;
+  font-size: 1.25rem;
+}
+
+.pg-trial-container__step-title {
+  @include typography.text-base;
+  @include typography.font-semibold;
+  color: var(--p-text-color);
+  margin: 0;
+  line-height: var(--line-height-tight);
+}
+
+.pg-trial-container__step-description {
+  @include typography.text-sm;
+  @include typography.font-normal;
+  color: var(--p-text-color-secondary);
+  margin: 0;
+  line-height: var(--line-height-normal);
+}
+
+.pg-trial-container__outlet {
+  flex: 1;
+  min-width: 0;
+
+  @include bp.desktop-up {
+    margin-left: var(--spacing-6);
+  }
+}

@@ -1,0 +1,54 @@
+<div class="pg-step-four-container">
+  <pg-page-heading>
+    <ng-template #pageTitle>Site Details Review</ng-template>
+    <ng-template #pageDescription>
+      Review and finalize site information for your clinical trial. This is the final step where you'll confirm all site details and complete your trial setup.
+    </ng-template>
+    <ng-template #pageActions>
+      <p-button 
+        label="Add Site" 
+        icon="pi pi-plus" 
+        severity="primary"
+        pRipple>
+      </p-button>
+      <p-button 
+        label="Complete Setup" 
+        icon="pi pi-check" 
+        severity="success"
+        pRipple>
+      </p-button>
+    </ng-template>
+  </pg-page-heading>
+  
+  <div class="pg-step-four-container__content">
+    <div class="pg-step-four-container__summary">
+      <h3 class="pg-step-four-container__summary-title">Trial Setup Summary</h3>
+      <div class="pg-step-four-container__summary-grid">
+        <div class="pg-step-four-container__summary-item">
+          <span class="pg-step-four-container__summary-label">Assumptions</span>
+          <span class="pg-step-four-container__summary-status">✓ Completed</span>
+        </div>
+        <div class="pg-step-four-container__summary-item">
+          <span class="pg-step-four-container__summary-label">Benchmark Trials</span>
+          <span class="pg-step-four-container__summary-status">✓ Completed</span>
+        </div>
+        <div class="pg-step-four-container__summary-item">
+          <span class="pg-step-four-container__summary-label">Country Data</span>
+          <span class="pg-step-four-container__summary-status">✓ Completed</span>
+        </div>
+        <div class="pg-step-four-container__summary-item">
+          <span class="pg-step-four-container__summary-label">Site Details</span>
+          <span class="pg-step-four-container__summary-status">⏳ In Progress</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="pg-step-four-container__sites">
+      <h3 class="pg-step-four-container__sites-title">Clinical Trial Sites</h3>
+      <div class="pg-step-four-container__empty-state">
+        <p class="pg-step-four-container__empty-text">No sites added yet</p>
+        <p-button label="Add First Site" severity="secondary" pRipple></p-button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,82 @@
+<div class="pg-trial-container">
+  <pg-page-heading>
+    <ng-template #pageTitle>Trial {{ trialId }}</ng-template>
+    <ng-template #pageDescription>
+      Manage and configure your clinical trial. Navigate through the steps to complete your trial setup.
+    </ng-template>
+    <ng-template #pageActions>
+      <p-button 
+        label="Save Trial" 
+        icon="pi pi-save" 
+        severity="primary"
+        pRipple>
+      </p-button>
+      <p-button 
+        label="Back to Trials" 
+        icon="pi pi-arrow-left" 
+        severity="secondary"
+        pRipple
+        routerLink="/dashboard">
+      </p-button>
+    </ng-template>
+  </pg-page-heading>
+  
+  <div class="pg-trial-container__content">
+    <div class="pg-trial-container__steps">
+      <h3 class="pg-trial-container__steps-title">Trial Steps</h3>
+      <div class="pg-trial-container__steps-grid">
+        <a 
+          class="pg-trial-container__step-card"
+          [routerLink]="[stepRoutes['one']]">
+          <div class="pg-trial-container__step-icon">
+            <i class="pi pi-list"></i>
+          </div>
+          <h4 class="pg-trial-container__step-title">Assumption Tracker</h4>
+          <p class="pg-trial-container__step-description">
+            Enter and track assumption details for your clinical trial.
+          </p>
+        </a>
+        
+        <a 
+          class="pg-trial-container__step-card"
+          [routerLink]="[stepRoutes['two']]">
+          <div class="pg-trial-container__step-icon">
+            <i class="pi pi-chart-bar"></i>
+          </div>
+          <h4 class="pg-trial-container__step-title">Benchmark Trials</h4>
+          <p class="pg-trial-container__step-description">
+            Select and compare benchmark trials with non-benchmark trials.
+          </p>
+        </a>
+        
+        <a 
+          class="pg-trial-container__step-card"
+          [routerLink]="[stepRoutes['three']]">
+          <div class="pg-trial-container__step-icon">
+            <i class="pi pi-globe"></i>
+          </div>
+          <h4 class="pg-trial-container__step-title">Country Data</h4>
+          <p class="pg-trial-container__step-description">
+            Review and analyze country-specific information and data.
+          </p>
+        </a>
+        
+        <a 
+          class="pg-trial-container__step-card"
+          [routerLink]="[stepRoutes['four']]">
+          <div class="pg-trial-container__step-icon">
+            <i class="pi pi-building"></i>
+          </div>
+          <h4 class="pg-trial-container__step-title">Site Details</h4>
+          <p class="pg-trial-container__step-description">
+            Review and finalize site information for your clinical trial.
+          </p>
+        </a>
+      </div>
+    </div>
+    
+    <div class="pg-trial-container__outlet">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

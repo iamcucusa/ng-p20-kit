@@ -1,0 +1,94 @@
+@use '../../../../../theme/src/lib/styles/breakpoints.scss' as bp;
+@use '../../../../../theme/src/lib/styles/typography.scss' as typography;
+
+.pg-step-four-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: var(--spacing-6);
+}
+
+.pg-step-four-container__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+.pg-step-four-container__summary {
+  background-color: var(--p-surface-card);
+  border: 1px solid var(--p-surface-border);
+  border-radius: 0.5rem;
+  padding: var(--spacing-5);
+}
+
+.pg-step-four-container__summary-title {
+  @include typography.text-lg;
+  @include typography.font-semibold;
+  color: var(--p-text-color);
+  margin: 0 0 var(--spacing-4) 0;
+}
+
+.pg-step-four-container__summary-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-3);
+
+  @include bp.tablet-up {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.pg-step-four-container__summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-3);
+  background-color: var(--p-surface-0);
+  border-radius: 0.375rem;
+  border: 1px solid var(--p-surface-border);
+}
+
+.pg-step-four-container__summary-label {
+  @include typography.text-base;
+  @include typography.font-medium;
+  color: var(--p-text-color);
+}
+
+.pg-step-four-container__summary-status {
+  @include typography.text-sm;
+  @include typography.font-medium;
+  color: var(--p-text-color-secondary);
+}
+
+.pg-step-four-container__sites {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.pg-step-four-container__sites-title {
+  @include typography.text-lg;
+  @include typography.font-semibold;
+  color: var(--p-text-color);
+  margin: 0;
+}
+
+.pg-step-four-container__empty-state {
+  background-color: var(--p-surface-card);
+  border: 2px dashed var(--p-surface-border);
+  border-radius: 0.5rem;
+  padding: var(--spacing-8);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.pg-step-four-container__empty-text {
+  @include typography.text-base;
+  @include typography.font-normal;
+  color: var(--p-text-color-secondary);
+  margin: 0;
+}
