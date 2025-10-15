@@ -21,7 +21,7 @@ export const routes: Routes = [
             loadComponent: () => import('@trial/trials-container.component').then(m => m.TrialsContainerComponent)
           },
           {
-            path: ':id',
+            path: `:${appRoutes.trialIdParam}`,
             loadComponent: () => import('@trial/trial-container.component').then(m => m.TrialContainerComponent),
             children: createStepRoutes()
           }

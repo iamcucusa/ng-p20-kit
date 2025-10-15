@@ -9,7 +9,9 @@ import { appRoutes } from '@core/route.constants';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideEffects } from '@ngrx/effects';
+import { provideRouterStore } from '@ngrx/router-store';
 import { trialStepFeature } from '@trial-step/trial-step.reducer';
+import { TrialStepEffects } from '@trial-step/trial-step.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -49,6 +51,7 @@ export const appConfig: ApplicationConfig = {
       [trialStepFeature.name]: trialStepFeature.reducer
     }),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
-    provideEffects()
+    provideRouterStore(),
+    provideEffects([TrialStepEffects])
 ]
 };

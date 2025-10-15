@@ -63,15 +63,15 @@
   letter-spacing: 0.025em;
 
   &--status {
-    &--active {
-      background-color: var(--p-green-100);
-      color: var(--p-green-800);
-    }
-    &--planning {
+    &--draft {
       background-color: var(--p-yellow-100);
       color: var(--p-yellow-800);
     }
-    &--completed {
+    &--final {
+      background-color: var(--p-green-100);
+      color: var(--p-green-800);
+    }
+    &--replicating {
       background-color: var(--p-blue-100);
       color: var(--p-blue-800);
     }

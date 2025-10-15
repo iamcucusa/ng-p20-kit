@@ -1,6 +1,10 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import type { TrialStep, TrialStepId } from './trial-step.d';
 
+/**
+ * Trial Step Actions
+ * Defines all actions for trial step state management
+ */
 export const TrialStepActions = createActionGroup({
   source: 'TrialStep',
   events: {

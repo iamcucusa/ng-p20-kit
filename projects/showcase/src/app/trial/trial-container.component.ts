@@ -1,5 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PageHeadingComponent } from '@core/page-heading.component';
 import { ButtonModule } from 'primeng/button';
@@ -19,28 +18,31 @@ import type { TrialStep } from '@trial-step/trial-step.d';
   standalone: true,
   imports: [CommonModule, PageHeadingComponent, ButtonModule, RippleModule, RouterModule, StepsComponent]
 })
-export class TrialContainerComponent implements OnInit {
-  trialId: string | null = null;
+export class TrialContainerComponent {
   stepRoutes: Record<string, string> = {};
+  trialId: string | null = null;
   
-  // Observable properties for template binding
-  steps$!: Observable<TrialStep[]>;
-  activeStep$!: Observable<TrialStep | null>;
 
-  private route = inject(ActivatedRoute);
   private stepRoutingService = inject(StepRoutingService);
   private trialStepFacade = inject(TrialStepFacadeService);
   public routeService = inject(RouteService);
 
-  ngOnInit(): void {
-    this.trialId = this.route.snapshot.paramMap.get('id');
-    if (this.trialId) {
-      this.stepRoutes = this.stepRoutingService.getTrialStepRoutes(this.trialId);
-    }
-    
+  // Observable properties for template binding
+  steps$!: Observable<TrialStep[]>;
+  activeStep$!: Observable<TrialStep | null>;
+
+  constructor() {
     // Initialize observables from facade
     this.steps$ = this.trialStepFacade.steps$;
     this.activeStep$ = this.trialStepFacade.activeStep$;
+  }
+
+  @Input()
+  set id(trialId: string) {
+    this.trialId = trialId;
+    if (trialId) {
+      this.stepRoutes = this.stepRoutingService.getTrialStepRoutes(trialId);
+    }
   }
 
   /**
@@ -48,6 +50,6 @@ export class TrialContainerComponent implements OnInit {
    * @param step - The selected step
    */
   onStepSelected(step: TrialStep): void {
-    this.trialStepFacade.goToStep(step, this.route);
+    this.trialStepFacade.goToStep(step);
   }
 }

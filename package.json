@@ -36,6 +36,7 @@
     "@angular/platform-browser": "^20.3.3",
     "@angular/router": "^20.3.3",
     "@ngrx/effects": "^20.0.1",
+    "@ngrx/router-store": "^20.0.1",
     "@ngrx/signals": "^20.0.1",
     "@ngrx/store": "^20.0.1",
     "@ngrx/store-devtools": "^20.0.1",

@@ -249,28 +249,28 @@ export const updateStepsState = (activeStepId: TrialStepId, steps: TrialSteps): 
 
   switch (activeStepId) {
     case stepIds.one:
-      stepOne = { ...stepOne, ...stepStates.active };
+      stepOne = { ...stepOne, ...stepStates.active, visited: stepOne.visited || true };
       stepTwo = { ...stepTwo, ...stepStates.default };
       stepThree = { ...stepThree, ...stepStates.default };
       stepFour = { ...stepFour, ...stepStates.default };
       break;
     case stepIds.two:
       stepOne = { ...stepOne, ...stepStates.visited };
-      stepTwo = { ...stepTwo, ...stepStates.active };
+      stepTwo = { ...stepTwo, ...stepStates.active, visited: stepTwo.visited || true };
       stepThree = { ...stepThree, ...stepStates.default };
       stepFour = { ...stepFour, ...stepStates.default };
       break;
     case stepIds.three:
       stepOne = { ...stepOne, ...stepStates.visited };
       stepTwo = { ...stepTwo, ...stepStates.visited };
-      stepThree = { ...stepThree, ...stepStates.active };
+      stepThree = { ...stepThree, ...stepStates.active, visited: stepThree.visited || true };
       stepFour = { ...stepFour, ...stepStates.default };
       break;
     case stepIds.four:
       stepOne = { ...stepOne, ...stepStates.visited };
       stepTwo = { ...stepTwo, ...stepStates.visited };
       stepThree = { ...stepThree, ...stepStates.visited };
-      stepFour = { ...stepFour, ...stepStates.active };
+      stepFour = { ...stepFour, ...stepStates.active, visited: stepFour.visited || true };
       break;
   }
 

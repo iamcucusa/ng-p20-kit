@@ -21,7 +21,7 @@
         *ngFor="let trial of sampleTrials; trackBy: trackByTrialId">
         
         <div class="pg-trials-container__card-header">
-          <h3 class="pg-trials-container__card-title">{{ trial.title }}</h3>
+          <h3 class="pg-trials-container__card-title">{{ trial.name }}</h3>
           <div class="pg-trials-container__card-badges">
             <span class="pg-trials-container__badge pg-trials-container__badge--status" 
                   [ngClass]="'pg-trials-container__badge--' + trial.status.toLowerCase()">

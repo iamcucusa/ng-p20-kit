@@ -18,6 +18,8 @@ export interface TrialStepState {
 
 /**
  * Creates new steps state with only first step enabled
+ * @param steps Current steps configuration
+ * @returns New steps state with first step active
  */
 const createNewStepsState = (steps: TrialSteps): TrialSteps => {
   const stepOne = createActiveStep(stepIds.one);
@@ -35,6 +37,8 @@ const createNewStepsState = (steps: TrialSteps): TrialSteps => {
 
 /**
  * Creates trial steps state with all steps enabled
+ * @param steps Current steps configuration
+ * @returns Steps state with all steps enabled
  */
 const createTrialStepsState = (steps: TrialSteps): TrialSteps => {
   return {
@@ -66,25 +70,34 @@ export const reducer = createReducer(
     steps: createTrialStepsState(state.steps),
   })),
   
-  on(TrialStepActions.goToStep, (state, action) => ({
-    ...state,
-    activeStep: state.steps[action.step.stepId],
-    steps: updateStepsState(action.step.stepId, state.steps),
-  })),
+  on(TrialStepActions.goToStep, (state, action) => {
+    const updatedSteps = updateStepsState(action.step.stepId, state.steps);
+    return {
+      ...state,
+      activeStep: updatedSteps[action.step.stepId],
+      steps: updatedSteps,
+    };
+  }),
   
-  on(TrialStepActions.updateStep, (state, action) => ({
-    ...state,
-    activeStep: state.steps[action.step.stepId],
-    steps: updateStepsState(action.step.stepId, state.steps),
-  })),
+  on(TrialStepActions.updateStep, (state, action) => {
+    const updatedSteps = updateStepsState(action.step.stepId, state.steps);
+    return {
+      ...state,
+      activeStep: updatedSteps[action.step.stepId],
+      steps: updatedSteps,
+    };
+  }),
   
   on(TrialStepActions.goToStepSuccess, (state) => state),
   
-  on(TrialStepActions.setActiveStepByRoute, (state, action) => ({
-    ...state,
-    activeStep: !state.activeStep ? state.steps[action.stepId] : state.activeStep,
-    steps: !state.activeStep ? updateStepsState(action.stepId, state.steps) : state.steps,
-  })),
+  on(TrialStepActions.setActiveStepByRoute, (state, action) => {
+    const updatedSteps = updateStepsState(action.stepId, state.steps);
+    return {
+      ...state,
+      activeStep: updatedSteps[action.stepId],
+      steps: updatedSteps,
+    };
+  }),
   
   on(TrialStepActions.goToStepFailure, (state) => state),
   

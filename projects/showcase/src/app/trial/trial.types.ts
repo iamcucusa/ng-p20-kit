@@ -2,6 +2,8 @@
  * Trial-related types and interfaces
  */
 
+import { TrialStatus } from './trial.d';
+
 export interface TrialData {
   id: string;
   name: string;
@@ -11,7 +13,11 @@ export interface TrialData {
   description?: string;
 }
 
-export type TrialStatus = 'active' | 'completed' | 'paused' | 'cancelled';
+export interface Trial extends TrialData {
+  phase: string;
+  participants: number;
+  public: boolean;
+}
 
 export interface TrialFilters {
   status?: TrialStatus[];

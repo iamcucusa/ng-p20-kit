@@ -27,7 +27,6 @@ export class TrialStepFacadeService {
   private router = inject(Router);
   private stepRoutingService = inject(StepRoutingService);
 
-  // Observable selectors
   readonly activeStep$: Observable<TrialStep | null> = this.store.select(selectActiveStep);
   readonly activeStepId$: Observable<TrialStepId | undefined> = this.store.select(selectActiveStepId);
   readonly isFirstStep$: Observable<boolean> = this.store.select(selectIsFirstStep);
@@ -36,58 +35,76 @@ export class TrialStepFacadeService {
   readonly steps$: Observable<TrialStep[]> = this.store.select(selectSteps);
 
   /**
-   * Navigate to a specific step and update the state
+   * Navigates to a specific step and updates the state
+   * @param step The step to navigate to
    */
-  goToStep(step: TrialStep, route: ActivatedRoute): void {
+  goToStep(step: TrialStep): void {
     this.store.dispatch(TrialStepActions.goToStep({ step }));
-    // Navigate to the step using the step ID directly
-    this.router.navigate([step.stepId], { relativeTo: route });
+    const trialId = this.stepRoutingService.getCurrentTrialId();
+    if (trialId) {
+      const stepPath = this.stepRoutingService.getStepRoutePath(trialId, step.stepId);
+      this.router.navigateByUrl(stepPath);
+    } else {
+      this.router.navigate([step.stepId]);
+    }
   }
 
   /**
-   * Update step state without navigation
+   * Updates step state without navigation
+   * @param step The step to update
    */
   updateStep(step: TrialStep): void {
     this.store.dispatch(TrialStepActions.updateStep({ step }));
   }
 
   /**
-   * Set active step by route parameter
+   * Updates step state by step ID
+   * @param stepId The step ID to update
+   */
+  updateStepById(stepId: TrialStepId): void {
+    this.store.dispatch(TrialStepActions.setActiveStepByRoute({ stepId }));
+  }
+
+  /**
+   * Sets active step by route parameter
+   * @param stepId The step ID from route
    */
   setActiveStepByRoute(stepId: TrialStepId): void {
     this.store.dispatch(TrialStepActions.setActiveStepByRoute({ stepId }));
   }
 
   /**
-   * Reset step navigation to initial state
+   * Resets all steps navigation to initial state
    */
   resetStepState(): void {
     this.store.dispatch(TrialStepActions.resetStepsNavigation());
   }
 
   /**
-   * Set new step state (only first step enabled)
+   * Sets new steps state with only first step enabled
    */
   setNewStepState(): void {
     this.store.dispatch(TrialStepActions.setNewSteps());
   }
 
   /**
-   * Set created trial steps state (all steps enabled)
+   * Sets created trial steps state with all steps enabled
    */
   setCreatedTrialSteps(): void {
     this.store.dispatch(TrialStepActions.createdTrialSteps());
   }
 
   /**
-   * Mark step navigation as successful
+   * Marks step navigation as successful
+   * @param data Optional success data
    */
   goToStepSuccess(data?: unknown): void {
     this.store.dispatch(TrialStepActions.goToStepSuccess({ data }));
   }
 
   /**
-   * Mark step navigation as failed
+   * Marks step navigation as failed
+   * @param error The error that occurred
    */
   goToStepFailure(error: unknown): void {
     this.store.dispatch(TrialStepActions.goToStepFailure({ error }));
