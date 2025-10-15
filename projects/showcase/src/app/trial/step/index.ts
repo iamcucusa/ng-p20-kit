@@ -14,3 +14,4 @@ export * from './trial-step.actions';
 export * from './trial-step.reducer';
 export * from './trial-step.selectors';
 export * from './trial-step-facade.service';
+export * from './steps.component';

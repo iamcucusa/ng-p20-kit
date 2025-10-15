@@ -16,33 +16,46 @@
   
   <div class="pg-trials-container__content">
     <div class="pg-trials-container__grid">
-      <div class="pg-trials-container__card">
-        <h3 class="pg-trials-container__card-title">Active Trials</h3>
-        <p class="pg-trials-container__card-description">
-          Currently running clinical trials and their progress status.
-        </p>
-        <div class="pg-trials-container__card-actions">
-          <p-button label="View Details" severity="secondary" pRipple></p-button>
+      <div 
+        class="pg-trials-container__card"
+        *ngFor="let trial of sampleTrials; trackBy: trackByTrialId">
+        
+        <div class="pg-trials-container__card-header">
+          <h3 class="pg-trials-container__card-title">{{ trial.title }}</h3>
+          <div class="pg-trials-container__card-badges">
+            <span class="pg-trials-container__badge pg-trials-container__badge--status" 
+                  [ngClass]="'pg-trials-container__badge--' + trial.status.toLowerCase()">
+              {{ trial.status }}
+            </span>
+            <span class="pg-trials-container__badge pg-trials-container__badge--phase">
+              {{ trial.phase }}
+            </span>
+          </div>
         </div>
-      </div>
-      
-      <div class="pg-trials-container__card">
-        <h3 class="pg-trials-container__card-title">Completed Trials</h3>
+        
         <p class="pg-trials-container__card-description">
-          Successfully completed trials with final results and reports.
+          {{ trial.description }}
         </p>
-        <div class="pg-trials-container__card-actions">
-          <p-button label="View Results" severity="secondary" pRipple></p-button>
+        
+        <div class="pg-trials-container__card-meta">
+          <div class="pg-trials-container__meta-item">
+            <i class="pi pi-users"></i>
+            <span>{{ trial.participants }} participants</span>
+          </div>
+          <div class="pg-trials-container__meta-item">
+            <i class="pi pi-calendar"></i>
+            <span>Started {{ trial.startDate }}</span>
+          </div>
         </div>
-      </div>
-      
-      <div class="pg-trials-container__card">
-        <h3 class="pg-trials-container__card-title">Upcoming Trials</h3>
-        <p class="pg-trials-container__card-description">
-          Scheduled trials and their preparation status.
-        </p>
+        
         <div class="pg-trials-container__card-actions">
-          <p-button label="View Schedule" severity="secondary" pRipple></p-button>
+          <p-button 
+            [label]="'Open Trial'"
+            [icon]="'pi pi-arrow-right'"
+            severity="primary"
+            pRipple
+            [routerLink]="[getTrialPath(trial.id)]">
+          </p-button>
         </div>
       </div>
     </div>

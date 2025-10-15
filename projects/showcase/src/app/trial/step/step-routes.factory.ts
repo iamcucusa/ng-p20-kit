@@ -14,6 +14,11 @@ import { stepIds } from './step-routing.tokens';
 export function createStepRoutes(): Routes {
   return [
     {
+      path: '',
+      redirectTo: stepIds.one,
+      pathMatch: 'full'
+    },
+    {
       path: stepIds.one,
       loadComponent: () => import('@trial-step-one/step-one-container.component').then(m => m.StepOneContainerComponent)
     },
