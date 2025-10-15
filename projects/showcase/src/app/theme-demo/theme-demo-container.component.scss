@@ -1,0 +1,47 @@
+@import '../../../../theme/src/lib/styles/mixins';
+@import '../../../../theme/src/lib/styles/variables';
+
+.pg-theme-demo-container {
+  padding: var(--spacing-6);
+  max-width: 1200px;
+  margin: 0 auto;
+
+  &__header {
+    margin-bottom: var(--spacing-8);
+    text-align: center;
+  }
+
+  &__title {
+    @include typography-heading-1;
+    margin-bottom: var(--spacing-4);
+    color: var(--color-text-primary);
+  }
+
+  &__description {
+    @include typography-body-large;
+    color: var(--color-text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6);
+  }
+
+  &__card {
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .pg-theme-demo-container {
+    &__content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-6);
+    }
+  }
+}
+
