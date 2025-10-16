@@ -82,4 +82,36 @@ export class TrialContainerComponent implements OnInit {
     this.trialStepFacade.goToStep(step);
   }
 
+  /**
+   * Handles select version action from trial heading
+   */
+  onSelectVersion(): void {
+    console.log('Select version action triggered');
+    // TODO: Implement select version logic
+  }
+
+  /**
+   * Handles save as final action from trial heading
+   */
+  onSaveAsFinal(): void {
+    console.log('Save as final action triggered');
+    // TODO: Implement save as final logic
+  }
+
+  /**
+   * Handles create new version action from trial heading
+   */
+  onCreateNewVersion(): void {
+    console.log('Create new version action triggered');
+    // TODO: Implement create new version logic
+  }
+
+  /**
+   * Handles toggle public action from trial heading
+   */
+  onTogglePublic(): void {
+    console.log('Toggle public action triggered');
+    // TODO: Implement toggle public logic
+  }
+
 }

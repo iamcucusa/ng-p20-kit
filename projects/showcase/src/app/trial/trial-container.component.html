@@ -3,7 +3,11 @@
   @if (trial) {
     <kit-trial-heading 
       [trial]="trial"
-      [permissions]="userPermissions">
+      [permissions]="userPermissions"
+      (selectVersion)="onSelectVersion()"
+      (saveAsFinal)="onSaveAsFinal()"
+      (createNewVersion)="onCreateNewVersion()"
+      (togglePublic)="onTogglePublic()">
     </kit-trial-heading>
   }
   

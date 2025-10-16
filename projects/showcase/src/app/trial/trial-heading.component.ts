@@ -1,8 +1,9 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { RouterModule } from '@angular/router';
+import { TooltipModule } from 'primeng/tooltip';
 import { StatusDisplayComponent } from '@core/status/status-display.component';
 import { RouteService } from '@core/route.service';
 import type { Trial } from './trial.types';
@@ -57,6 +58,60 @@ import { formatStudyNumber } from './study-number.utils';
           }
         </div>
         <nav class="pg-trial-heading__actions" aria-label="Trial Actions">
+          <div class="pg-trial-heading__trial-actions">
+            <p-button
+              pRipple
+              icon="pi pi-clone"
+              variant="outlined"
+              [pTooltip]="'Select Version'"
+              tooltipPosition="bottom"
+              (onClick)="onSelectVersion()"
+              [loading]="false"
+              [disabled]="false"
+              aria-label="Select Version">
+            </p-button>
+
+            @if (trial.status !== 'Final') {
+              <p-button
+                pRipple
+                icon="pi pi-check"
+                variant="outlined"
+                [pTooltip]="'Save as Final Version'"
+                tooltipPosition="bottom"
+                (onClick)="onSaveAsFinal()"
+                [loading]="false"
+                [disabled]="false"
+                aria-label="Save as Final Version">
+              </p-button>
+            }
+
+            @if (trial.status === 'Final') {
+              <p-button
+                pRipple
+                icon="pi pi-plus"
+                variant="outlined"
+                [pTooltip]="'Create New Version'"
+                tooltipPosition="bottom"
+                (onClick)="onCreateNewVersion()"
+                [loading]="false"
+                [disabled]="false"
+                aria-label="Create New Version">
+              </p-button>
+            }
+
+            <p-button
+              pRipple
+              [icon]="trial.public ? 'pi pi-eye' : 'pi pi-eye-slash'"
+              variant="outlined"
+              [pTooltip]="trial.public ? 'Hide trial' : 'Make trial public'"
+              tooltipPosition="bottom"
+              (onClick)="onTogglePublic()"
+              [loading]="false"
+              [disabled]="false"
+              [aria-label]="trial.public ? 'Hide trial' : 'Make trial public'">
+            </p-button>
+          </div>
+
           <p-button 
             label="Back to Trials" 
             icon="pi pi-arrow-left" 
@@ -71,11 +126,16 @@ import { formatStudyNumber } from './study-number.utils';
   `,
   styleUrls: ['./trial-heading.component.scss'],
   standalone: true,
-  imports: [CommonModule, StatusDisplayComponent, ButtonModule, RippleModule, RouterModule]
+  imports: [CommonModule, StatusDisplayComponent, ButtonModule, RippleModule, RouterModule, TooltipModule]
 })
 export class TrialHeadingComponent {
   @Input({ required: true }) trial!: Trial;
   @Input() permissions: string[] = [];
+
+  @Output() selectVersion = new EventEmitter<void>();
+  @Output() saveAsFinal = new EventEmitter<void>();
+  @Output() createNewVersion = new EventEmitter<void>();
+  @Output() togglePublic = new EventEmitter<void>();
 
   private routeService = inject(RouteService);
 
@@ -91,5 +151,33 @@ export class TrialHeadingComponent {
    */
   get backToTrialsPath(): string[] {
     return [this.routeService.getDashboardPath()];
+  }
+
+  /**
+   * Handles select version action
+   */
+  onSelectVersion(): void {
+    this.selectVersion.emit();
+  }
+
+  /**
+   * Handles save as final action
+   */
+  onSaveAsFinal(): void {
+    this.saveAsFinal.emit();
+  }
+
+  /**
+   * Handles create new version action
+   */
+  onCreateNewVersion(): void {
+    this.createNewVersion.emit();
+  }
+
+  /**
+   * Handles toggle public action
+   */
+  onTogglePublic(): void {
+    this.togglePublic.emit();
   }
 }
