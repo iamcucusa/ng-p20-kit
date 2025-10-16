@@ -31,38 +31,41 @@ import { formatStudyNumber } from './study-number.utils';
 @Component({
   selector: 'kit-trial-heading',
   template: `
-    <header class="pg-trial-heading" role="banner">
-      <div class="pg-trial-heading__container">
-        <div class="pg-trial-heading__content">
-          <div class="pg-trial-heading__text">
-            <div class="pg-trial-heading__title-row">
-              <h1 class="pg-trial-heading__title" id="trial-title">
-                <span class="sr-only">Trial Study Number: </span>{{ formattedStudyNumber }}
-              </h1>
-              <div class="pg-trial-heading__status" role="status" aria-label="Trial Status">
-                <kit-status-display 
-                  [status]="trial.status"
-                  [permissions]="permissions">
-                </kit-status-display>
-              </div>
-            </div>
-            @if (trial.description) {
-              <p class="pg-trial-heading__description" id="trial-description">
-                {{ trial.description }}
-              </p>
+    <header class="pg-trial-heading" role="banner" aria-labelledby="trial-title">
+      <div class="pg-trial-heading__content">
+        <div class="pg-trial-heading__text" role="region" aria-labelledby="trial-title">
+          <div class="pg-trial-heading__title-row">
+            <h1 class="pg-trial-heading__title" id="trial-title">
+              <span class="sr-only">Trial Study Number: </span>{{ formattedStudyNumber }}
+            </h1>
+            @if (trial.version) {
+              <div class="pg-trial-heading__divider" aria-hidden="true"></div>
+              <span class="pg-trial-heading__version" aria-label="Version {{ trial.version }}">V{{ trial.version }}</span>
             }
+            <div class="pg-trial-heading__divider" aria-hidden="true"></div>
+            <div class="pg-trial-heading__status" role="status" aria-live="polite" aria-label="Trial Status">
+              <kit-status-display 
+                [status]="trial.status"
+                [permissions]="permissions">
+              </kit-status-display>
+            </div>
           </div>
-          <nav class="pg-trial-heading__actions" aria-label="Trial Actions">
-            <p-button 
-              label="Back to Trials" 
-              icon="pi pi-arrow-left" 
-              severity="secondary"
-              pRipple
-              [routerLink]="backToTrialsPath"
-              aria-label="Navigate back to trials dashboard">
-            </p-button>
-          </nav>
+          @if (trial.description) {
+            <p class="pg-trial-heading__description" id="trial-description" aria-describedby="trial-title">
+              {{ trial.description }}
+            </p>
+          }
         </div>
+        <nav class="pg-trial-heading__actions" aria-label="Trial Actions">
+          <p-button 
+            label="Back to Trials" 
+            icon="pi pi-arrow-left" 
+            severity="secondary"
+            pRipple
+            [routerLink]="backToTrialsPath"
+            aria-label="Navigate back to trials dashboard">
+          </p-button>
+        </nav>
       </div>
     </header>
   `,

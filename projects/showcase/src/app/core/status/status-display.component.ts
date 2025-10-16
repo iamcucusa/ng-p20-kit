@@ -73,15 +73,14 @@ export class StatusDisplayComponent implements OnInit {
    * Gets the CSS classes for the status tag
    */
   get tagClasses(): string {
-    const baseClasses = 'mr-2 ml-2';
-    return `${baseClasses} ${this.statusConfig.customClasses || ''}`.trim();
+    return `${this.statusConfig.customClasses || ''}`.trim();
   }
 
   /**
    * Gets the CSS classes for the help link
    */
   get helpLinkClasses(): string {
-    return 'text-gray-500 font-medium no-underline cursor-pointer';
+    return 'text-gray-500 font-medium no-underline cursor-pointer ml-2';
   }
 
   /**

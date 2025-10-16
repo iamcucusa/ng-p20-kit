@@ -8,6 +8,7 @@ export interface TrialData {
   id: string;
   name: string;
   studyNumber: string | null;
+  version: number | null;
   status: TrialStatus;
   startDate: Date;
   endDate?: Date;
