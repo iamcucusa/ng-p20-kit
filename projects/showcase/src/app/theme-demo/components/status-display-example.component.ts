@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StatusDisplayComponent } from './status-display.component';
+import { StatusDisplayComponent } from '../../core/status/status-display.component';
 
 /**
  * Status Display Example Component

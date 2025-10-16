@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TrialHeadingComponent } from './trial-heading.component';
-import type { Trial } from './trial.types';
+import { TrialHeadingComponent } from '../../trial/trial-heading.component';
+import type { Trial } from '../../trial/trial.types';
 
 /**
  * Trial Heading Example Component

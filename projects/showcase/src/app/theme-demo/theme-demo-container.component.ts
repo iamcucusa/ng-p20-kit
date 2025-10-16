@@ -5,6 +5,8 @@ import { DividerModule } from 'primeng/divider';
 import { BadgeModule } from 'primeng/badge';
 import { TypographyDemoComponent } from './typography-demo.component';
 import { SpacingTestComponent } from './spacing-test.component';
+import { TrialHeadingExampleComponent } from './components/trial-heading-example.component';
+import { StatusDisplayExampleComponent } from './components/status-display-example.component';
 
 @Component({
   selector: 'kit-theme-demo-container',
@@ -15,7 +17,9 @@ import { SpacingTestComponent } from './spacing-test.component';
     DividerModule,
     BadgeModule,
     TypographyDemoComponent,
-    SpacingTestComponent
+    SpacingTestComponent,
+    TrialHeadingExampleComponent,
+    StatusDisplayExampleComponent
   ],
   template: `
     <div class="min-h-screen bg-gray-50 py-8">
@@ -81,6 +85,29 @@ import { SpacingTestComponent } from './spacing-test.component';
               </div>
             </p-card>
           </div>
+        </div>
+
+        <!-- Component Examples -->
+        <div class="mb-12 w-full">
+          <p-card header="Component Examples" class="w-full">
+            <div class="space-y-4">
+              <p class="text-gray-600 leading-relaxed">
+                Real-world examples of how to use components from the design system.
+                These examples demonstrate proper implementation patterns and best practices.
+              </p>
+              <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                <div class="flex items-center mb-2">
+                  <i class="pi pi-code text-purple-600 mr-2"></i>
+                  <span class="text-sm font-medium text-purple-800">Implementation Examples</span>
+                </div>
+                <p class="text-sm text-purple-700">
+                  These examples show how to properly implement and use design system components in your applications.
+                </p>
+              </div>
+              <kit-trial-heading-example></kit-trial-heading-example>
+              <kit-status-display-example></kit-status-display-example>
+            </div>
+          </p-card>
         </div>
 
         <!-- Design System Information -->
