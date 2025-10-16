@@ -49,6 +49,6 @@ export class FooterComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.year = this.pipe.transform(this.today, 'YYYY');
+    this.year = this.pipe.transform(this.today, 'y');
   }
 }
