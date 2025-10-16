@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TrialStepFacadeService } from './trial-step-facade.service';
-import type { TrialStepId } from './trial-step.d';
+import type { TrialStepId } from './trial-step.types';
 
 /**
  * Base component for all step containers

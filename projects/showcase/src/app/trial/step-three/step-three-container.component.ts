@@ -1,16 +1,16 @@
 import { Component, Input, inject } from '@angular/core';
-import { PageHeadingComponent } from '@core/page-heading.component';
+import { StepHeadingComponent } from '../step';
+import { TrialStepFacadeService } from '@trial-step/trial-step-facade.service';
+import type { TrialStepId } from '@trial-step/trial-step.types';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
-import { TrialStepFacadeService } from '@trial-step/trial-step-facade.service';
-import type { TrialStepId } from '@trial-step/trial-step.d';
 
 @Component({
   selector: 'kit-step-three-container',
   templateUrl: './step-three-container.component.html',
   styleUrls: ['./step-three-container.component.scss'],
   standalone: true,
-  imports: [PageHeadingComponent, ButtonModule, RippleModule]
+  imports: [StepHeadingComponent, ButtonModule, RippleModule]
 })
 export class StepThreeContainerComponent {
   private trialStepFacade = inject(TrialStepFacadeService);
@@ -20,4 +20,6 @@ export class StepThreeContainerComponent {
     // Set the active step based on the route parameter
     this.trialStepFacade.setActiveStepByRoute(step);
   }
+
+
 }

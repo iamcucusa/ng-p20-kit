@@ -21,6 +21,7 @@ export class TrialsContainerComponent {
     {
       id: 'trial-001',
       name: 'Cardiovascular Study Alpha',
+      studyNumber: 'CV-2024-001',
       status: 'Draft',
       phase: 'Phase II',
       participants: 150,
@@ -31,6 +32,7 @@ export class TrialsContainerComponent {
     {
       id: 'trial-002', 
       name: 'Oncology Research Beta',
+      studyNumber: 'ONC-2024-002',
       status: 'Final',
       phase: 'Phase III',
       participants: 300,
@@ -41,6 +43,7 @@ export class TrialsContainerComponent {
     {
       id: 'trial-003',
       name: 'Neurological Study Gamma',
+      studyNumber: 'NEU-2024-003',
       status: 'Replicating',
       phase: 'Phase I',
       participants: 50,
@@ -50,7 +53,7 @@ export class TrialsContainerComponent {
     }
   ];
 
-  constructor(public routeService: RouteService) { }
+  public routeService = inject(RouteService);
 
   /**
    * Get the trial path for navigation

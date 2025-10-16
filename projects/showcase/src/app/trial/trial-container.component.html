@@ -1,25 +1,11 @@
 <div class="pg-trial-container">
-  <kit-page-heading>
-    <ng-template #pageTitle>Trial {{ trialId }}</ng-template>
-    <ng-template #pageDescription>
-      Manage and configure your clinical trial. Navigate through the steps to complete your trial setup.
-    </ng-template>
-    <ng-template #pageActions>
-      <p-button 
-        label="Save Trial" 
-        icon="pi pi-save" 
-        severity="primary"
-        pRipple>
-      </p-button>
-      <p-button 
-        label="Back to Trials" 
-        icon="pi pi-arrow-left" 
-        severity="secondary"
-        pRipple
-            [routerLink]="[routeService.getDashboardPath()]">
-      </p-button>
-    </ng-template>
-  </kit-page-heading>
+  <!-- Trial Heading with Study Number and Status -->
+  @if (trial) {
+    <kit-trial-heading 
+      [trial]="trial"
+      [permissions]="userPermissions">
+    </kit-trial-heading>
+  }
   
   <div class="pg-trial-container__content">
     <!-- Steps Navigation -->

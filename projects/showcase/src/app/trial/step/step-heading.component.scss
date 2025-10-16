@@ -1,7 +1,12 @@
-@use '../../../../theme/src/lib/styles/breakpoints.scss' as bp;
-@use '../../../../theme/src/lib/styles/typography.scss' as typography;
+/**
+ * Step Heading Component Styles
+ * Matches PageHeadingComponent design but uses h2 typography
+ */
 
-.pg-page-heading {
+@use '../../../../../theme/src/lib/styles/breakpoints.scss' as bp;
+@use '../../../../../theme/src/lib/styles/typography.scss' as typography;
+
+.pg-step-heading {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -21,7 +26,7 @@
 
     @include bp.tablet-up {
       flex-direction: row;
-      align-items: flex-end;
+      align-items: flex-start;
     }
   }
 
@@ -33,8 +38,8 @@
   }
 
   &__title {
-    @include typography.text-4xl;
-    @include typography.font-semibold;
+    @include typography.text-3xl;
+    @include typography.font-normal;
     @include typography.leading-tight;
     color: var(--p-text-color);
     margin: 0 0 var(--spacing-1) 0;
@@ -45,7 +50,7 @@
     }
 
     @include bp.tablet-up {
-      @include typography.text-5xl;
+      @include typography.text-4xl;
     }
   }
 
@@ -59,17 +64,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-
-    @include bp.tablet-up {
-      white-space: normal;
-      overflow: visible;
-      text-overflow: unset;
-      max-width: 70ch; // Slightly wider on larger screens
-    }
-
-    @include bp.desktop-up {
-      max-width: 75ch; // Maximum comfortable reading width
-    }
   }
 
   &__actions {
@@ -77,10 +71,5 @@
     align-items: center;
     gap: var(--spacing-2);
     flex-shrink: 0;
-    margin-top: var(--spacing-3);
-
-    @include bp.tablet-up {
-      margin-top: 0;
-    }
   }
 }

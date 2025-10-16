@@ -1,16 +1,16 @@
-import { Component, Input, inject } from '@angular/core';
-import { PageHeadingComponent } from '@core/page-heading.component';
+import { Component, Input, inject, TemplateRef } from '@angular/core';
+import { StepHeadingComponent } from '../step';
+import { TrialStepFacadeService } from '@trial-step/trial-step-facade.service';
+import type { TrialStepId } from '@trial-step/trial-step.types';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
-import { TrialStepFacadeService } from '@trial-step/trial-step-facade.service';
-import type { TrialStepId } from '@trial-step/trial-step.d';
 
 @Component({
   selector: 'kit-step-two-container',
   templateUrl: './step-two-container.component.html',
   styleUrls: ['./step-two-container.component.scss'],
   standalone: true,
-  imports: [PageHeadingComponent, ButtonModule, RippleModule]
+  imports: [StepHeadingComponent, ButtonModule, RippleModule]
 })
 export class StepTwoContainerComponent {
   private trialStepFacade = inject(TrialStepFacadeService);
@@ -20,4 +20,16 @@ export class StepTwoContainerComponent {
     // Set the active step based on the route parameter
     this.trialStepFacade.setActiveStepByRoute(step);
   }
+
+  /** Template reference for step actions */
+  stepActions!: TemplateRef<unknown>;
+
+  /**
+   * Save trials action
+   */
+  saveTrials(): void {
+    // TODO: Implement save trials logic
+    console.log('Saving trials...');
+  }
+
 }

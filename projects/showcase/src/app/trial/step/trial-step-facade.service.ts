@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
-import type { TrialStep, TrialStepId } from './trial-step.d';
+import { Router } from '@angular/router';
+import type { TrialStep, TrialStepId } from './trial-step.types';
 import { TrialStepActions } from './trial-step.actions';
 import {
   selectActiveStep,

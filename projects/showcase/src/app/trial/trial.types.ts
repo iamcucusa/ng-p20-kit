@@ -7,6 +7,7 @@ import { TrialStatus } from './trial.d';
 export interface TrialData {
   id: string;
   name: string;
+  studyNumber: string | null;
   status: TrialStatus;
   startDate: Date;
   endDate?: Date;

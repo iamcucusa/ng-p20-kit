@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import type { TrialStep, TrialStepId } from './trial-step.d';
+import type { TrialStep, TrialStepId } from './trial-step.types';
 
 /**
  * Trial Step Actions

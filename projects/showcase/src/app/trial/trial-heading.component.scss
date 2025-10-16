@@ -1,14 +1,20 @@
+/**
+ * Trial Heading Component Styles
+ * Matches PageHeadingComponent typography and structure
+ */
+
 @use '../../../../theme/src/lib/styles/breakpoints.scss' as bp;
 @use '../../../../theme/src/lib/styles/typography.scss' as typography;
 
-.pg-page-heading {
+.pg-trial-heading {
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-bottom: var(--spacing-4);
+  max-width: 100%;
 
   &__container {
     width: 100%;
+    max-width: 100%;
   }
 
   &__content {
@@ -18,10 +24,11 @@
     justify-content: space-between;
     gap: var(--spacing-4);
     width: 100%;
+    max-width: 100%;
 
     @include bp.tablet-up {
       flex-direction: row;
-      align-items: flex-end;
+      align-items: flex-start;
     }
   }
 
@@ -32,21 +39,36 @@
     min-width: 0; // Allows text to shrink and truncate
   }
 
+  &__title-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    flex-wrap: wrap;
+  }
+
   &__title {
     @include typography.text-4xl;
     @include typography.font-semibold;
     @include typography.leading-tight;
     color: var(--p-text-color);
-    margin: 0 0 var(--spacing-1) 0;
+    margin: 0;
     line-height: var(--line-height-tight);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
     
-    &:first-letter {
-      text-transform: uppercase;
-    }
-
     @include bp.tablet-up {
       @include typography.text-5xl;
     }
+  }
+
+  &__status {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    flex-shrink: 0;
+    margin-left: var(--spacing-1);
+    padding-left: var(--spacing-2);
+    border-left: 1px solid var(--p-surface-border);
   }
 
   &__description {
@@ -77,10 +99,18 @@
     align-items: center;
     gap: var(--spacing-2);
     flex-shrink: 0;
-    margin-top: var(--spacing-3);
-
-    @include bp.tablet-up {
-      margin-top: 0;
-    }
   }
+}
+
+// Screen reader only class for accessibility
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

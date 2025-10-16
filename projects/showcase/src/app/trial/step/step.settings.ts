@@ -9,7 +9,7 @@ import type {
   TrialSteps, 
   StepState, 
   StepValidationResult 
-} from './trial-step.d';
+} from './trial-step.types';
 
 /**
  * Step identifiers for consistent referencing across the application
@@ -44,13 +44,13 @@ export type StepOrder = typeof stepOrder[number];
  * Maximum number of steps in the trial process
  * @constant
  */
-export const MAX_STEPS = 4;
+export const maxSteps = 4;
 
 /**
  * Default timeout for step transitions in milliseconds
  * @constant
  */
-export const DEFAULT_STEP_TIMEOUT = 300;
+export const defaultStepTimeout = 300;
 
 /**
  * Predefined step state configurations for different step states

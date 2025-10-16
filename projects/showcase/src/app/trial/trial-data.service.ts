@@ -1,0 +1,73 @@
+import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { delay } from 'rxjs/operators';
+import type { Trial } from './trial.types';
+
+/**
+ * Trial Data Service
+ * 
+ * Provides trial data for the application.
+ * In a real application, this would fetch data from an API.
+ */
+@Injectable({
+  providedIn: 'root'
+})
+export class TrialDataService {
+  /**
+   * Mock trial data for demonstration
+   */
+  private mockTrials: Record<string, Trial> = {
+    'trial-001': {
+      id: 'trial-001',
+      name: 'Cardiovascular Study Alpha',
+      studyNumber: 'CV2024001',
+      status: 'Draft',
+      phase: 'Phase II',
+      participants: 150,
+      startDate: new Date('2024-01-15'),
+      description: 'A comprehensive study on cardiovascular health outcomes in elderly patients.',
+      public: true
+    },
+    'trial-002': {
+      id: 'trial-002',
+      name: 'Oncology Research Beta',
+      studyNumber: 'ONC2024002',
+      status: 'Final',
+      phase: 'Phase III',
+      participants: 300,
+      startDate: new Date('2024-02-01'),
+      description: 'Advanced oncology treatment efficacy study with extended follow-up periods.',
+      public: false
+    },
+    'trial-003': {
+      id: 'trial-003',
+      name: 'Neurological Study Gamma',
+      studyNumber: 'NEU2024003',
+      status: 'Replicating',
+      phase: 'Phase I',
+      participants: 50,
+      startDate: new Date('2024-03-01'),
+      description: 'Early-stage neurological intervention study focusing on cognitive outcomes.',
+      public: true
+    }
+  };
+
+  /**
+   * Gets trial data by ID
+   * @param trialId The trial ID
+   * @returns Observable of trial data
+   */
+  getTrialById(trialId: string): Observable<Trial | null> {
+    const trial = this.mockTrials[trialId];
+    return of(trial || null).pipe(delay(100)); // Simulate API delay
+  }
+
+  /**
+   * Gets all trials
+   * @returns Observable of all trials
+   */
+  getAllTrials(): Observable<Trial[]> {
+    return of(Object.values(this.mockTrials)).pipe(delay(100));
+  }
+
+}

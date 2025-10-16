@@ -1,21 +1,21 @@
-<div class="pg-page-heading">
+<header class="pg-page-heading" role="banner">
   <div class="pg-page-heading__container">
     <div class="pg-page-heading__content">
       <div class="pg-page-heading__text">
-        <h1 class="pg-page-heading__title">
+        <h1 class="pg-page-heading__title" id="page-title">
           <ng-container *ngTemplateOutlet="pageTitle"></ng-container>
         </h1>
         @if (pageDescription) {
-          <p class="pg-page-heading__description">
+          <p class="pg-page-heading__description" id="page-description">
             <ng-container *ngTemplateOutlet="pageDescription"></ng-container>
           </p>
         }
       </div>
       @if (pageActions) {
-        <div class="pg-page-heading__actions">
+        <nav class="pg-page-heading__actions" aria-label="Page Actions">
           <ng-container *ngTemplateOutlet="pageActions"></ng-container>
-        </div>
+        </nav>
       }
     </div>
   </div>
-</div>
+</header>

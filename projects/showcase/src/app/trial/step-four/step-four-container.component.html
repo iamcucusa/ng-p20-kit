@@ -1,24 +1,9 @@
 <div class="pg-step-four-container">
-  <kit-page-heading>
-    <ng-template #pageTitle>Site Details Review</ng-template>
-    <ng-template #pageDescription>
-      Review and finalize site information for your clinical trial. This is the final step where you'll confirm all site details and complete your trial setup.
-    </ng-template>
-    <ng-template #pageActions>
-      <p-button 
-        label="Add Site" 
-        icon="pi pi-plus" 
-        severity="primary"
-        pRipple>
-      </p-button>
-      <p-button 
-        label="Complete Setup" 
-        icon="pi pi-check" 
-        severity="success"
-        pRipple>
-      </p-button>
-    </ng-template>
-  </kit-page-heading>
+  <kit-step-heading
+    title="Site Details Review"
+    description="Review and finalize site information to complete your trial setup."
+    [stepActions]="stepActions">
+  </kit-step-heading>
   
   <div class="pg-step-four-container__content">
     <div class="pg-step-four-container__summary">
@@ -51,4 +36,14 @@
       </div>
     </div>
   </div>
+
+  <!-- Step Actions Template -->
+  <ng-template #stepActions>
+    <p-button
+      label="Add Site"
+      icon="pi pi-plus"
+      (onClick)="addSite()"
+      pRipple>
+    </p-button>
+  </ng-template>
 </div>

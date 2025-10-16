@@ -1,24 +1,9 @@
 <div class="pg-step-one-container">
-  <kit-page-heading>
-    <ng-template #pageTitle>Assumption Tracker</ng-template>
-    <ng-template #pageDescription>
-      Enter and track assumption details for your clinical trial. This step helps you document key assumptions that will guide your trial design and execution.
-    </ng-template>
-    <ng-template #pageActions>
-      <p-button 
-        label="Save Assumptions" 
-        icon="pi pi-save" 
-        severity="primary"
-        pRipple>
-      </p-button>
-      <p-button 
-        label="Next Step" 
-        icon="pi pi-arrow-right" 
-        severity="secondary"
-        pRipple>
-      </p-button>
-    </ng-template>
-  </kit-page-heading>
+  <kit-step-heading
+    title="Assumption Tracker"
+    description="Document key assumptions that will guide your trial design and execution."
+    [stepActions]="stepActions">
+  </kit-step-heading>
   
   <div class="pg-step-one-container__content">
     <div class="pg-step-one-container__form">
@@ -50,4 +35,14 @@
       </div>
     </div>
   </div>
+
+  <!-- Step Actions Template -->
+  <ng-template #stepActions>
+    <p-button
+      label="Save"
+      icon="pi pi-save"
+      (onClick)="saveAssumptions()"
+      pRipple>
+    </p-button>
+  </ng-template>
 </div>
