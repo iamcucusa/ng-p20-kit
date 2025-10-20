@@ -1,6 +1,7 @@
 /**
-* Page related tokens
-*/
+ * Page related tokens and constants for assumptions navigation
+ * @fileoverview Contains all navigation constants, tokens, and providers for the assumptions navigation system
+ */
 import {
   AssumptionsScenarioPage,
   CohortsSection,
@@ -19,13 +20,19 @@ import {
   TrialAssumptionsNavigationItem
 } from '@assumptions/navigation/assumptions-navigation';
 
+/** Overview section constant for scenarios navigation */
 export const overview: ScenariosOverviewSection = 'overview';
+/** Injection token for overview section */
 export const overviewSectionToken = new InjectionToken<ScenariosOverviewSection>('overview section');
 
+/** New scenario section constant */
 export const newScenario: NewScenarioSection = 'new-scenario';
+/** Injection token for new scenario section */
 export const newScenarioSectionToken = new InjectionToken<NewScenarioSection>('new scenario section');
 
+/** Details section constant for trial navigation */
 export const details: TrialSection = 'details';
+/** Injection token for details section */
 export const trialSectionToken = new InjectionToken<TrialSection>('details section');
 
 export const trialParameters: TrialParameters = 'parameters';
@@ -51,21 +58,30 @@ export const referenceSectionToken = new InjectionToken<ReferenceSection>('refer
 export const complexity: ComplexitySection = 'complexity';
 export const complexitySectionToken = new InjectionToken<ComplexitySection>('complexity section');
 
+/** Scientific section constant */
 export const scientific: ScientificSection = 'scientific';
-export const scientificSectionToken = new InjectionToken<ScientificSection>('reference section');
+/** Injection token for scientific section */
+export const scientificSectionToken = new InjectionToken<ScientificSection>('scientific section');
 
+/** Operational section constant */
 export const operational: OperationalSection = 'operational';
+/** Injection token for operational section */
 export const operationalSectionToken = new InjectionToken<OperationalSection>('operational section');
 
+/** Cohorts section constant */
 export const cohorts: CohortsSection = 'cohorts';
+/** Injection token for cohorts section */
 export const cohortsSectionToken = new InjectionToken<CohortsSection>('cohorts section');
 
+/** Impact assessment section constant */
 export const impact: ImpactAssessmentSection = 'impact';
-export const impactSectionToken = new InjectionToken<ImpactAssessmentSection>('cohorts section');
+/** Injection token for impact assessment section */
+export const impactSectionToken = new InjectionToken<ImpactAssessmentSection>('impact assessment section');
 
 export const newTrial: NewTrialSection = 'new-trial';
 export const newTrialSectionToken = new InjectionToken<NewTrialSection>('new-trial section');
 
+/** Trial sections for assumptions navigation */
 export const assumptionsTrialSections: TrialAssumptionsPage[] = [
   trialParameters,
   contacts,
@@ -79,7 +95,8 @@ export const assumptionsTrialSections: TrialAssumptionsPage[] = [
   impact,
 ];
 
-export const assumptionsTrialSectionsToken = new InjectionToken<AssumptionsScenarioPage[]>('trial sections');
+/** Injection token for trial sections */
+export const assumptionsTrialSectionsToken = new InjectionToken<TrialAssumptionsPage[]>('trial sections');
 
 export const assumptionsScenarioSections: AssumptionsScenarioPage[] = [
   scenarioParameters,
@@ -170,11 +187,7 @@ export const trialItems: TrialAssumptionsNavigationItem[] = [detailItem];
 
 export const trialItemsToken = new InjectionToken<TrialAssumptionsNavigationItem[]>('Trial Items Sections');
 
-const newTrialItemsMap: { [key: string]: string } = {};
-
-newTrialItemsMap[`${newTrial}`] = 'New Trial';
-
-
+/** New trial navigation item */
 const newTrialItem = {
   slug: newTrial,
   title: 'New Trial',
@@ -184,46 +197,7 @@ export const newTrialItems: NewTrialNavigationItem[] = [newTrialItem];
 
 export const newTrialItemsToken = new InjectionToken<NewTrialNavigationItem[]>('New Trial Items Sections');
 
-export const scenarioSections: AssumptionsBaseNavigationItem[] = [
-  {
-    slug: contacts,
-    title: baseAssumptionsItems.contacts,
-  },
-  {
-    slug: timeFramework,
-    title: baseAssumptionsItems.planning,
-  },
-  {
-    slug: evidence,
-    title: baseAssumptionsItems.evidence,
-  },
-  {
-    slug: reference,
-    title: baseAssumptionsItems.reference,
-  },
-  {
-    slug: complexity,
-    title: baseAssumptionsItems.complexity,
-  },
-  {
-    slug: scientific,
-    title: baseAssumptionsItems.scientific,
-  },
-  {
-    slug: operational,
-    title: baseAssumptionsItems.operational,
-  },
-  {
-    slug: cohorts,
-    title: baseAssumptionsItems.cohorts,
-  },
-  {
-    slug: impact,
-    title: baseAssumptionsItems.impact,
-  },
-];
-export const scenarioSectionsToken = new InjectionToken<AssumptionsBaseNavigationItem[]>('Scenario Sections');
-
+/** Base assumptions navigation items for all sections */
 export const baseAssumptionsNavItems: AssumptionsBaseNavigationItem[] = [
   {
     slug: contacts,
@@ -262,10 +236,17 @@ export const baseAssumptionsNavItems: AssumptionsBaseNavigationItem[] = [
     title: baseAssumptionsItems.impact,
   },
 ];
+/** Injection token for base assumptions navigation items */
 export const baseAssumptionsNavItemsToken = new InjectionToken<AssumptionsBaseNavigationItem[]>(
   'Nav Items for Trial Assumptions Sections'
 );
 
+/** Scenario sections navigation items (reuses baseAssumptionsNavItems to avoid duplication) */
+export const scenarioSections: AssumptionsBaseNavigationItem[] = baseAssumptionsNavItems;
+/** Injection token for scenario sections */
+export const scenarioSectionsToken = new InjectionToken<AssumptionsBaseNavigationItem[]>('Scenario Sections');
+
+/** Navigation providers array for dependency injection */
 export const navProviders = [
   {
     provide: scenarioSectionsToken,
