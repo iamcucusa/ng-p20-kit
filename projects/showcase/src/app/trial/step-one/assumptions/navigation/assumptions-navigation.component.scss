@@ -1,0 +1,213 @@
+/* Navigation Container */
+.pg-navigation-container {
+  padding: var(--spacing-2) 0;
+  display: flex;
+  flex-direction: column;
+  // No height restrictions - let content flow naturally
+}
+
+.pg-navigation-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+/* Navigation Items */
+.pg-item {
+  &:disabled {
+    color: var(--p-text-color-secondary);
+    cursor: not-allowed;
+  }
+}
+
+/* Navigation Links */
+.pg-nav-link {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-3);
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  transition: all 0.2s ease;
+  color: var(--p-text-color);
+  font-weight: 500;
+  
+  &:hover {
+    background-color: var(--p-surface-hover);
+    color: var(--p-primary-color);
+  }
+  
+  &.active {
+    background-color: var(--p-primary-50);
+    color: var(--p-primary-color);
+    border-left: 3px solid var(--p-primary-color);
+    font-weight: 600;
+  }
+  
+  &:disabled {
+    color: var(--p-text-color-secondary);
+    cursor: not-allowed;
+    
+    &:hover {
+      background-color: transparent;
+      color: var(--p-text-color-secondary);
+    }
+  }
+}
+
+/* Scenario Section */
+.pg-scenario-section {
+  // No additional margin - let the parent gap handle spacing
+  
+  .pg-scenario-header {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-3);
+    font-weight: 600;
+    color: var(--p-text-color);
+    background-color: var(--p-surface-50);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing-2);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      background-color: var(--p-surface-hover);
+      color: var(--p-primary-color);
+    }
+  }
+  
+  .pg-scenario-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    
+    &.hidden {
+      max-height: 0;
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    
+    &:not(.hidden) {
+      max-height: 1000px; // Large enough to accommodate all items
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .pg-scenario-item {
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      left: var(--spacing-4);
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background-color: var(--p-surface-border);
+    }
+    
+    .pg-scenario-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--spacing-3) var(--spacing-3) var(--spacing-3) var(--spacing-6);
+      text-decoration: none;
+      border-radius: var(--border-radius);
+      transition: all 0.2s ease;
+      color: var(--p-text-color);
+      font-weight: 500;
+      position: relative;
+      
+      &:hover {
+        background-color: var(--p-surface-hover);
+        color: var(--p-primary-color);
+      }
+      
+      &.active {
+        background-color: var(--p-primary-50);
+        color: var(--p-primary-color);
+        border-left: 3px solid var(--p-primary-color);
+        font-weight: 600;
+      }
+      
+      &:disabled {
+        color: var(--p-text-color-secondary);
+        cursor: not-allowed;
+        
+        &:hover {
+          background-color: transparent;
+          color: var(--p-text-color-secondary);
+        }
+      }
+    }
+  }
+}
+
+/* Status Indicators */
+.pg-status-indicator {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  border: 2px solid var(--p-surface-border);
+  transition: all 0.3s ease;
+  
+  &--primary {
+    background-color: var(--p-primary-color);
+    box-shadow: 0 0 0 0.1rem var(--p-primary-color);
+  }
+  
+  &--warning {
+    background-color: var(--p-orange-500);
+    box-shadow: 0 0 0 0.1rem var(--p-orange-500);
+  }
+  
+  &--success {
+    background-color: var(--p-green-500);
+    box-shadow: 0 0 0 0.1rem var(--p-green-500);
+  }
+}
+
+/* Navigation Animation Classes */
+:host ::ng-deep .hidden {
+  display: none;
+}
+
+:host ::ng-deep .slidedown {
+  animation: slidedown 0.3s ease-out;
+}
+
+:host ::ng-deep .slideup {
+  animation: slideup 0.3s ease-out;
+}
+
+@keyframes slidedown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideup {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}

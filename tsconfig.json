@@ -26,7 +26,8 @@
       "@trial-step-one/*": ["./projects/showcase/src/app/trial/step-one/*"],
       "@trial-step-two/*": ["./projects/showcase/src/app/trial/step-two/*"],
       "@trial-step-three/*": ["./projects/showcase/src/app/trial/step-three/*"],
-      "@trial-step-four/*": ["./projects/showcase/src/app/trial/step-four/*"]
+      "@trial-step-four/*": ["./projects/showcase/src/app/trial/step-four/*"],
+      "@assumptions/*": ["./projects/showcase/src/app/trial/step-one/assumptions/*"]
     }
   },
   "angularCompilerOptions": {

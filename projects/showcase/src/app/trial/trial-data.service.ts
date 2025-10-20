@@ -27,7 +27,37 @@ export class TrialDataService {
       participants: 150,
       startDate: new Date('2024-01-15'),
       description: 'A comprehensive study on cardiovascular health outcomes in elderly patients.',
-      public: true
+      public: true,
+      assumptionsScenarios: [
+        {
+          metadata: {
+            id: 1,
+            name: 'Primary Scenario',
+            slug: 'scenario-1',
+            title: 'Primary Scenario',
+            lastUpdate: '2024-01-15',
+            timeCreated: '2024-01-15',
+            source: 1,
+            by: 'System',
+            order: 1,
+            sections: null
+          }
+        },
+        {
+          metadata: {
+            id: 2,
+            name: 'Alternative Scenario',
+            slug: 'scenario-2',
+            title: 'Alternative Scenario',
+            lastUpdate: '2024-01-15',
+            timeCreated: '2024-01-15',
+            source: 1,
+            by: 'System',
+            order: 2,
+            sections: null
+          }
+        }
+      ]
     },
     'trial-002': {
       id: 'trial-002',
@@ -39,7 +69,37 @@ export class TrialDataService {
       participants: 300,
       startDate: new Date('2024-02-01'),
       description: 'Advanced oncology treatment efficacy study with extended follow-up periods.',
-      public: false
+      public: false,
+      assumptionsScenarios: [
+        {
+          metadata: {
+            id: 1,
+            name: 'Standard Treatment',
+            slug: 'scenario-1',
+            title: 'Standard Treatment',
+            lastUpdate: '2024-02-01',
+            timeCreated: '2024-02-01',
+            source: 1,
+            by: 'System',
+            order: 1,
+            sections: null
+          }
+        },
+        {
+          metadata: {
+            id: 2,
+            name: 'Enhanced Protocol',
+            slug: 'scenario-2',
+            title: 'Enhanced Protocol',
+            lastUpdate: '2024-02-01',
+            timeCreated: '2024-02-01',
+            source: 1,
+            by: 'System',
+            order: 2,
+            sections: null
+          }
+        }
+      ]
     },
     'trial-003': {
       id: 'trial-003',
@@ -51,7 +111,23 @@ export class TrialDataService {
       participants: 50,
       startDate: new Date('2024-03-01'),
       description: 'Early-stage neurological intervention study focusing on cognitive outcomes.',
-      public: true
+      public: true,
+      assumptionsScenarios: [
+        {
+          metadata: {
+            id: 1,
+            name: 'Cognitive Assessment',
+            slug: 'scenario-1',
+            title: 'Cognitive Assessment',
+            lastUpdate: '2024-03-01',
+            timeCreated: '2024-03-01',
+            source: 1,
+            by: 'System',
+            order: 1,
+            sections: null
+          }
+        }
+      ]
     }
   };
 

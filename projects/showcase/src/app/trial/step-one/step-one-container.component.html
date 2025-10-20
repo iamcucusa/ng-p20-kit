@@ -1,47 +1,33 @@
-<div class="pg-step-one-container">
+<div class="pg-step-container pg-step-container--two-column">
   <kit-step-heading
     title="Assumption Tracker"
     description="Document key assumptions that will guide your trial design and execution."
     [stepActions]="stepActions">
   </kit-step-heading>
   
-  <div class="pg-step-one-container__content">
-    <div class="pg-step-one-container__form">
-      <div class="pg-step-one-container__form-group">
-        <label class="pg-step-one-container__label">Primary Assumption</label>
-        <textarea 
-          class="pg-step-one-container__textarea"
-          placeholder="Enter your primary assumption here..."
-          rows="4">
-        </textarea>
-      </div>
-      
-      <div class="pg-step-one-container__form-group">
-        <label class="pg-step-one-container__label">Secondary Assumptions</label>
-        <textarea 
-          class="pg-step-one-container__textarea"
-          placeholder="Enter any secondary assumptions..."
-          rows="3">
-        </textarea>
-      </div>
-      
-      <div class="pg-step-one-container__form-group">
-        <label class="pg-step-one-container__label">Risk Factors</label>
-        <textarea 
-          class="pg-step-one-container__textarea"
-          placeholder="Identify potential risk factors..."
-          rows="3">
-        </textarea>
-      </div>
-    </div>
+  <div class="pg-step-container__content">
+    <!-- Navigation Sidebar -->
+    <aside class="pg-step-container__sidebar" aria-label="Assumptions Navigation">
+      <kit-assumptions-navigation
+        [trialNavigation]="trialNavItems"
+        [baseNavigation]="baseNavItems"
+        [scenariosNavigation]="scenarioItems"
+      ></kit-assumptions-navigation>
+    </aside>
+    
+    <!-- Main Content Area -->
+    <main class="pg-step-container__main">
+      <router-outlet></router-outlet>
+    </main>
   </div>
 
   <!-- Step Actions Template -->
   <ng-template #stepActions>
     <p-button
-      label="Save"
-      icon="pi pi-save"
-      (onClick)="saveAssumptions()"
+      label="Export"
+      icon="pi pi-download"
+      variant="outlined"
+      (onClick)="exportAssumptions()"
       pRipple>
     </p-button>
   </ng-template>

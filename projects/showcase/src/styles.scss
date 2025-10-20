@@ -2,3 +2,258 @@
 @use '../../theme/src/lib/styles/saga-blue-layers.css';
 @use '../../theme/src/lib/styles/tailwind-spacing.scss';
 @use '../../theme/src/lib/styles/typography.scss';
+
+/* ========================================
+   STEP CONTAINER UTILITY CLASSES
+   ======================================== */
+
+/**
+ * Base step container layout
+ * Provides consistent structure for all step containers
+ */
+.pg-step-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: var(--spacing-4);
+}
+
+/**
+ * Step container content area
+ * Flexible content area that takes remaining space
+ */
+.pg-step-container__content {
+  flex: 1;
+}
+
+/**
+ * Step container with two-column layout
+ * Navigation sidebar + main content area
+ */
+.pg-step-container--two-column {
+  .pg-step-container__content {
+    display: flex;
+    gap: var(--spacing-6);
+    min-height: calc(100vh - 200px); // Adjust based on header height
+  }
+}
+
+/**
+ * Step container navigation sidebar
+ * Fixed width sidebar for navigation elements with natural flow
+ */
+.pg-step-container__sidebar {
+  width: 280px;
+  flex-shrink: 0;
+  position: sticky;
+  top: var(--spacing-4); // Offset from top for better visual spacing
+  align-self: flex-start;
+  // No height restrictions - let content determine natural height
+}
+
+/**
+ * Step container main content area
+ * Flexible content area that takes remaining space
+ */
+.pg-step-container__main {
+  flex: 1;
+  min-width: 0; // Prevents flex item from overflowing
+}
+
+/**
+ * Step container navigation list
+ * Styling for navigation items in sidebar
+ */
+.pg-step-container__nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pg-step-container__nav-item {
+  margin-bottom: var(--spacing-2);
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.pg-step-container__nav-link {
+  display: block;
+  padding: var(--spacing-3);
+  text-decoration: none;
+  color: var(--p-text-color);
+  border-radius: 0.375rem;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background-color: var(--p-surface-hover);
+    color: var(--p-primary-color);
+  }
+  
+  &.active {
+    background-color: var(--p-primary-color);
+    color: var(--p-primary-color-text);
+  }
+}
+
+
+/**
+ * Step container with card-style content
+ * Provides consistent card styling for step content
+ */
+.pg-step-container__card {
+  background-color: var(--p-surface-card);
+  border: 1px solid var(--p-surface-border);
+  border-radius: 0.5rem;
+  padding: var(--spacing-5);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transform: translateY(-1px);
+  }
+}
+
+/**
+ * Step container grid layout
+ * Responsive grid for step content
+ */
+.pg-step-container__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-4);
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/**
+ * Step container form layout
+ * Consistent form styling for step inputs
+ */
+.pg-step-container__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  max-width: 800px;
+}
+
+.pg-step-container__form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.pg-step-container__label {
+  @include typography.text-base;
+  @include typography.font-semibold;
+  color: var(--p-text-color);
+  margin: 0;
+}
+
+.pg-step-container__input {
+  @include typography.text-base;
+  @include typography.font-normal;
+  color: var(--p-text-color);
+  background-color: var(--p-surface-card);
+  border: 1px solid var(--p-surface-border);
+  border-radius: 0.375rem;
+  padding: var(--spacing-3);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: var(--p-primary-color);
+    box-shadow: 0 0 0 2px rgba(var(--p-primary-color-rgb), 0.2);
+  }
+
+  &::placeholder {
+    color: var(--p-text-color-secondary);
+  }
+}
+
+.pg-step-container__textarea {
+  @extend .pg-step-container__input;
+  resize: vertical;
+  min-height: 100px;
+}
+
+/**
+ * Step container empty state
+ * Consistent empty state styling
+ */
+.pg-step-container__empty-state {
+  background-color: var(--p-surface-card);
+  border: 2px dashed var(--p-surface-border);
+  border-radius: 0.5rem;
+  padding: var(--spacing-8);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.pg-step-container__empty-text {
+  @include typography.text-base;
+  @include typography.font-normal;
+  color: var(--p-text-color-secondary);
+  margin: 0;
+}
+
+/**
+ * Step container section titles
+ * Consistent section heading styling
+ */
+.pg-step-container__section-title {
+  @include typography.text-lg;
+  @include typography.font-semibold;
+  color: var(--p-text-color);
+  margin: 0 0 var(--spacing-4) 0;
+}
+
+/**
+ * Step container stats grid
+ * Consistent stats display
+ */
+.pg-step-container__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-4);
+}
+
+.pg-step-container__stat {
+  background-color: var(--p-surface-card);
+  border: 1px solid var(--p-surface-border);
+  border-radius: 0.5rem;
+  padding: var(--spacing-4);
+  text-align: center;
+  transition: all 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.pg-step-container__stat-title {
+  @include typography.text-sm;
+  @include typography.font-medium;
+  color: var(--p-text-color-secondary);
+  margin: 0 0 var(--spacing-1) 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.pg-step-container__stat-value {
+  @include typography.text-2xl;
+  @include typography.font-bold;
+  color: var(--p-text-color);
+  margin: 0;
+}

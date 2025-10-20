@@ -1,38 +1,40 @@
-<div class="pg-step-four-container">
+<div class="pg-step-container">
   <kit-step-heading
     title="Site Details Review"
     description="Review and finalize site information to complete your trial setup."
     [stepActions]="stepActions">
   </kit-step-heading>
   
-  <div class="pg-step-four-container__content">
-    <div class="pg-step-four-container__summary">
-      <h3 class="pg-step-four-container__summary-title">Trial Setup Summary</h3>
-      <div class="pg-step-four-container__summary-grid">
-        <div class="pg-step-four-container__summary-item">
-          <span class="pg-step-four-container__summary-label">Assumptions</span>
-          <span class="pg-step-four-container__summary-status">✓ Completed</span>
-        </div>
-        <div class="pg-step-four-container__summary-item">
-          <span class="pg-step-four-container__summary-label">Benchmark Trials</span>
-          <span class="pg-step-four-container__summary-status">✓ Completed</span>
-        </div>
-        <div class="pg-step-four-container__summary-item">
-          <span class="pg-step-four-container__summary-label">Country Data</span>
-          <span class="pg-step-four-container__summary-status">✓ Completed</span>
-        </div>
-        <div class="pg-step-four-container__summary-item">
-          <span class="pg-step-four-container__summary-label">Site Details</span>
-          <span class="pg-step-four-container__summary-status">⏳ In Progress</span>
+  <div class="pg-step-container__content">
+    <div class="space-y-6">
+      <div class="pg-step-container__card">
+        <h3 class="pg-step-container__section-title">Trial Setup Summary</h3>
+        <div class="pg-step-container__grid">
+          <div class="flex justify-between items-center p-3 bg-gray-50 rounded-md border">
+            <span class="font-medium text-gray-900">Assumptions</span>
+            <span class="text-sm text-gray-600">✓ Completed</span>
+          </div>
+          <div class="flex justify-between items-center p-3 bg-gray-50 rounded-md border">
+            <span class="font-medium text-gray-900">Benchmark Trials</span>
+            <span class="text-sm text-gray-600">✓ Completed</span>
+          </div>
+          <div class="flex justify-between items-center p-3 bg-gray-50 rounded-md border">
+            <span class="font-medium text-gray-900">Country Data</span>
+            <span class="text-sm text-gray-600">✓ Completed</span>
+          </div>
+          <div class="flex justify-between items-center p-3 bg-gray-50 rounded-md border">
+            <span class="font-medium text-gray-900">Site Details</span>
+            <span class="text-sm text-gray-600">⏳ In Progress</span>
+          </div>
         </div>
       </div>
-    </div>
-    
-    <div class="pg-step-four-container__sites">
-      <h3 class="pg-step-four-container__sites-title">Clinical Trial Sites</h3>
-      <div class="pg-step-four-container__empty-state">
-        <p class="pg-step-four-container__empty-text">No sites added yet</p>
-        <p-button label="Add First Site" severity="secondary" pRipple></p-button>
+      
+      <div class="space-y-4">
+        <h3 class="pg-step-container__section-title">Clinical Trial Sites</h3>
+        <div class="pg-step-container__empty-state">
+          <p class="pg-step-container__empty-text">No sites added yet</p>
+          <p-button label="Add First Site" severity="secondary" pRipple></p-button>
+        </div>
       </div>
     </div>
   </div>

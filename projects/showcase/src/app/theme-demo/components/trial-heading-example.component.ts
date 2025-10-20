@@ -81,7 +81,8 @@ export class TrialHeadingExampleComponent {
     participants: 150,
     startDate: new Date('2024-01-15'),
     description: 'A comprehensive study on cardiovascular health outcomes.',
-    public: true
+    public: true,
+    assumptionsScenarios: []
   };
 
   finalTrial: Trial = {
@@ -94,7 +95,8 @@ export class TrialHeadingExampleComponent {
     participants: 300,
     startDate: new Date('2024-02-01'),
     description: 'Advanced oncology treatment efficacy study.',
-    public: false
+    public: false,
+    assumptionsScenarios: []
   };
 
   replicatingTrial: Trial = {
@@ -107,7 +109,8 @@ export class TrialHeadingExampleComponent {
     participants: 50,
     startDate: new Date('2024-03-01'),
     description: 'Early-stage neurological intervention study.',
-    public: true
+    public: true,
+    assumptionsScenarios: []
   };
 
   trialWithLongStudyNumber: Trial = {
@@ -120,7 +123,8 @@ export class TrialHeadingExampleComponent {
     participants: 25,
     startDate: new Date('2024-04-01'),
     description: 'Test with long study number.',
-    public: true
+    public: true,
+    assumptionsScenarios: []
   };
 
   trialWithShortStudyNumber: Trial = {
@@ -133,6 +137,7 @@ export class TrialHeadingExampleComponent {
     participants: 100,
     startDate: new Date('2024-05-01'),
     description: 'Test with short study number.',
-    public: false
+    public: false,
+    assumptionsScenarios: []
   };
 }

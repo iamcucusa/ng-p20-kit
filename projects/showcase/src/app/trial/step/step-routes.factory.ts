@@ -6,6 +6,7 @@
 import { Routes } from '@angular/router';
 import { stepIds } from './step-routing.tokens';
 import { stepIds as stepIdsFromSettings } from './step.settings';
+import { details as stepOneDetailsPath, scenarioParameters as scenarioPathSegment, overview as stepOneOverviewPath } from '@assumptions/navigation/assumptions-navigation.settings';
 
 /**
  * Creates step routes dynamically using step configuration
@@ -23,7 +24,13 @@ export function createStepRoutes(): Routes {
       data: {
         step: stepIdsFromSettings.one
       },
-      loadComponent: () => import('@trial-step-one/step-one-container.component').then(m => m.StepOneContainerComponent)
+      loadComponent: () => import('@trial-step-one/step-one-container.component').then(m => m.StepOneContainerComponent),
+      children: [
+        { path: '', redirectTo: stepOneOverviewPath, pathMatch: 'full' },
+        { path: stepOneOverviewPath, loadComponent: () => import('@trial-step-one/sections/step-one-overview.section').then(m => m.StepOneOverviewSection) },
+        { path: stepOneDetailsPath, loadComponent: () => import('@trial-step-one/sections/step-one-details.section').then(m => m.StepOneDetailsSection) },
+        { path: `:scenarioId/${scenarioPathSegment}`, loadComponent: () => import('@trial-step-one/sections/step-one-scenario.section').then(m => m.StepOneScenarioSection) }
+      ]
     },
     {
       path: stepIds.two,

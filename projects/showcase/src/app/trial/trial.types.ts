@@ -3,6 +3,7 @@
  */
 
 import { TrialStatus } from './trial.d';
+import {AssumptionsScenario} from '@assumptions/scenario/assumptions-scenario';
 
 export interface TrialData {
   id: string;
@@ -15,7 +16,11 @@ export interface TrialData {
   description?: string;
 }
 
-export interface Trial extends TrialData {
+export interface TrialWithAssumptions extends TrialData {
+  assumptionsScenarios: AssumptionsScenario[];
+}
+
+export interface Trial extends TrialWithAssumptions {
   phase: string;
   participants: number;
   public: boolean;

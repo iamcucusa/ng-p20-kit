@@ -8,7 +8,6 @@ import { RippleModule } from 'primeng/ripple';
 @Component({
   selector: 'kit-step-three-container',
   templateUrl: './step-three-container.component.html',
-  styleUrls: ['./step-three-container.component.scss'],
   standalone: true,
   imports: [StepHeadingComponent, ButtonModule, RippleModule]
 })
