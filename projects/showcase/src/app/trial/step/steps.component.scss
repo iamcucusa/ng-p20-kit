@@ -1,3 +1,5 @@
+@use '../../../../../theme/src/lib/styles/breakpoints.scss' as bp;
+
 .pg-steps {
   display: flex;
   flex-direction: column;
@@ -7,39 +9,39 @@
   overflow: hidden;
   width: 100%;
 
-  @media (min-width: 1024px) {
+  @include bp.desktop-up {
     flex-direction: row;
   }
 
   &__item {
     flex: 1;
     position: relative;
-    border-left: 2px solid transparent;
-    transition: all 0.2s ease-in-out;
+    border-left: 3px solid transparent;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: default;
 
-    @media (min-width: 1024px) {
+    @include bp.desktop-up {
       border-left: none;
-      border-bottom: 2px solid transparent;
+      border-bottom: 3px solid transparent;
     }
 
     &--active {
-      border-left-color: var(--blue-500);
-      background: var(--blue-50);
+      border-left-color: var(--p-primary-400);
+      background: var(--p-primary-50);
 
-      @media (min-width: 1024px) {
+      @include bp.desktop-up {
         border-left-color: transparent;
-        border-bottom-color: var(--blue-500);
+        border-bottom-color: var(--p-primary-400);
       }
     }
 
     &--visited {
-      border-left-color: var(--blue-500);
-      background: var(--blue-25);
+      border-left-color: var(--p-primary-300);
+      background: var(--p-primary-25);
 
-      @media (min-width: 1024px) {
+      @include bp.desktop-up {
         border-left-color: transparent;
-        border-bottom-color: var(--blue-500);
+        border-bottom-color: var(--p-primary-300);
       }
     }
 
@@ -52,8 +54,14 @@
       cursor: pointer;
 
       &:hover {
-        background: var(--surface-hover);
+        background: var(--p-surface-hover);
         transform: translateY(-1px);
+        border-left-color: var(--p-primary-300);
+
+        @include bp.desktop-up {
+          border-left-color: transparent;
+          border-bottom-color: var(--p-primary-300);
+        }
       }
     }
   }
@@ -66,7 +74,7 @@
     flex-direction: column;
     justify-content: center;
 
-    @media (min-width: 1024px) {
+    @include bp.desktop-up {
       border-bottom: none;
       border-right: 1px solid var(--surface-border);
       min-height: 100px;
@@ -95,7 +103,7 @@
   }
 
   // Responsive adjustments
-  @media (max-width: 1023px) {
+  @include bp.desktop-down {
     &__item {
       &:not(:last-child) {
         border-bottom: 1px solid var(--surface-border);

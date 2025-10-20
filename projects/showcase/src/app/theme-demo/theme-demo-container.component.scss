@@ -35,7 +35,9 @@
   }
 }
 
-@media (min-width: 768px) {
+@use '../../../../theme/src/lib/styles/breakpoints.scss' as bp;
+
+@include bp.tablet-up {
   .pg-theme-demo-container {
     &__content {
       display: grid;

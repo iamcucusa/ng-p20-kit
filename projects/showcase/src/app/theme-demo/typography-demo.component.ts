@@ -249,7 +249,7 @@ import { CommonModule } from '@angular/common';
       word-break: break-word;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
       .demo-grid {
         grid-template-columns: 1fr;
       }

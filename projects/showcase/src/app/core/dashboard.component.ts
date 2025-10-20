@@ -276,7 +276,7 @@ interface DashboardItem {
     }
 
 
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
       .dashboard-grid {
         grid-template-columns: 1fr;
       }

@@ -21,6 +21,11 @@
     background-color: var(--p-indigo-500);
     color: var(--p-white);
     margin-right: var(--spacing-4);
+    
+    /* Remove margin when user info is hidden on smaller screens */
+    @include bp.desktop-down {
+      margin-right: 0;
+    }
   }
 
   &__info {
@@ -99,12 +104,22 @@
     font-size: var(--font-size-lg);
     line-height: var(--line-height-loose);
     margin-right: var(--spacing-2);
+    
+    /* Remove margin when text is hidden on smaller screens */
+    @include bp.desktop-down {
+      margin-right: 0;
+    }
   }
 
   span {
     font-size: var(--font-size-lg);
     line-height: var(--line-height-loose);
     font-weight: var(--font-weight-medium);
+    
+    /* Hide text on screens under 1200px (desktop-down) */
+    @include bp.desktop-down {
+      display: none;
+    }
   }
 }
 

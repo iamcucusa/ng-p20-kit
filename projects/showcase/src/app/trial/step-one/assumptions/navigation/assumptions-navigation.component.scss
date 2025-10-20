@@ -30,19 +30,21 @@
   padding: var(--spacing-3);
   text-decoration: none;
   border-radius: var(--border-radius);
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   color: var(--p-text-color);
   font-weight: 500;
+  border-left: 3px solid transparent; /* Always have a border, but transparent by default */
   
   &:hover {
     background-color: var(--p-surface-hover);
     color: var(--p-primary-color);
+    border-left-color: var(--p-primary-300); /* Subtle border on hover */
   }
   
   &.active {
     background-color: var(--p-primary-50);
     color: var(--p-primary-color);
-    border-left: 3px solid var(--p-primary-color);
+    border-left-color: var(--p-primary-400); /* Softer border for active */
     font-weight: 600;
   }
   
@@ -123,20 +125,22 @@
       padding: var(--spacing-3) var(--spacing-3) var(--spacing-3) var(--spacing-6);
       text-decoration: none;
       border-radius: var(--border-radius);
-      transition: all 0.2s ease;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       color: var(--p-text-color);
       font-weight: 500;
       position: relative;
+      border-left: 3px solid transparent; /* Always have a border, but transparent by default */
       
       &:hover {
         background-color: var(--p-surface-hover);
         color: var(--p-primary-color);
+        border-left-color: var(--p-primary-300); /* Subtle border on hover */
       }
       
       &.active {
         background-color: var(--p-primary-50);
         color: var(--p-primary-color);
-        border-left: 3px solid var(--p-primary-color);
+        border-left-color: var(--p-primary-400); /* Softer border for active */
         font-weight: 600;
       }
       

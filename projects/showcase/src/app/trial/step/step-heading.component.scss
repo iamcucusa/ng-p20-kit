@@ -23,7 +23,7 @@
     gap: var(--spacing-4);
     width: 100%;
 
-    @include bp.tablet-up {
+    @include bp.desktop-up {
       flex-direction: row;
       align-items: flex-start;
     }
@@ -70,5 +70,12 @@
     align-items: center;
     gap: var(--spacing-2);
     flex-shrink: 0;
+    justify-content: flex-end;
+    width: 100%;
+    
+    @include bp.desktop-up {
+      justify-content: flex-start;
+      width: auto;
+    }
   }
 }
