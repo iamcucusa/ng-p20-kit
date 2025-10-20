@@ -5,9 +5,49 @@
     [stepActions]="stepActions">
   </kit-step-heading>
   
+  <!-- Sidebar Overlay (for mobile/tablet) -->
+  <div 
+    class="pg-sidebar-overlay"
+    [class.overlay-visible]="sidebarOpen"
+    (click)="closeSidebar()">
+  </div>
+  
   <div class="pg-step-container__content">
+    <!-- Sidebar Toggle Buttons (hidden on desktop) -->
+    <!-- Expand Button (top-left) - shown when sidebar is closed -->
+    @if (!sidebarOpen) {
+      <p-button
+        icon="pi pi-bars"
+        severity="secondary"
+        [text]="true"
+        [rounded]="true"
+        class="pg-sidebar-toggle pg-sidebar-toggle--expand"
+        (onClick)="openSidebar()"
+        pRipple
+        pTooltip="Open Navigation Menu"
+        tooltipPosition="right">
+      </p-button>
+    }
+    
+    <!-- Collapse Button (top-right) - shown when sidebar is open -->
+    @if (sidebarOpen) {
+      <p-button
+        icon="pi pi-times"
+        severity="secondary"
+        [text]="true"
+        [rounded]="true"
+        class="pg-sidebar-toggle pg-sidebar-toggle--collapse"
+        (onClick)="closeSidebar()"
+        pRipple
+        pTooltip="Close Navigation Menu"
+        tooltipPosition="left">
+      </p-button>
+    }
     <!-- Navigation Sidebar -->
-    <aside class="pg-step-container__sidebar" aria-label="Assumptions Navigation">
+    <aside 
+      class="pg-step-container__sidebar"
+      [class.sidebar-open]="sidebarOpen"
+      aria-label="Assumptions Navigation">
       <kit-assumptions-navigation
         [trialNavigation]="trialNavItems"
         [baseNavigation]="baseNavItems"

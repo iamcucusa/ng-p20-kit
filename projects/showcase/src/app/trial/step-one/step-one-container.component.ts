@@ -1,9 +1,10 @@
-import { Component, Input, inject, TemplateRef } from '@angular/core';
+import { Component, Input, inject, TemplateRef, HostListener } from '@angular/core';
 import { StepHeadingComponent } from '../step';
 import { TrialStepFacadeService } from '@trial-step/trial-step-facade.service';
 import type { TrialStepId } from '@trial-step/trial-step.types';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
+import { TooltipModule } from 'primeng/tooltip';
 import { AssumptionsNavigationComponent } from '@assumptions/navigation/assumptions-navigation.component';
 import { navProviders, trialItems, baseAssumptionsNavItems, overviewSectionToken, newScenarioSectionToken } from '@assumptions/navigation/assumptions-navigation.settings';
 import type { AssumptionsScenariosNavigationItem } from '@assumptions/navigation/assumptions-navigation';
@@ -13,7 +14,7 @@ import { RouterModule } from '@angular/router';
   selector: 'kit-step-one-container',
   templateUrl: './step-one-container.component.html',
   standalone: true,
-  imports: [StepHeadingComponent, ButtonModule, RippleModule, AssumptionsNavigationComponent, RouterModule],
+  imports: [StepHeadingComponent, ButtonModule, RippleModule, TooltipModule, AssumptionsNavigationComponent, RouterModule],
   providers: [...navProviders]
 })
 export class StepOneContainerComponent {
@@ -27,6 +28,9 @@ export class StepOneContainerComponent {
 
   /** Template reference for step actions */
   stepActions!: TemplateRef<unknown>;
+  
+  /** Sidebar state for responsive behavior */
+  sidebarOpen = false;
 
   /** Navigation inputs for trial and base navigation items */
   trialNavItems = trialItems;
@@ -102,6 +106,48 @@ export class StepOneContainerComponent {
   exportAssumptions(): void {
     /** TODO: Implement export logic */
     console.log('Exporting assumptions...');
+  }
+
+  /**
+   * Open sidebar for mobile/tablet
+   */
+  openSidebar(): void {
+    this.sidebarOpen = true;
+  }
+
+  /**
+   * Close sidebar (used by overlay click and collapse button)
+   */
+  closeSidebar(): void {
+    this.sidebarOpen = false;
+  }
+
+  /**
+   * Toggle sidebar visibility for mobile/tablet (legacy method)
+   */
+  toggleSidebar(): void {
+    this.sidebarOpen = !this.sidebarOpen;
+  }
+
+  /**
+   * Handle window resize to close sidebar on desktop
+   */
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+    const target = event.target as Window;
+    if (target.innerWidth >= 1200) {
+      this.sidebarOpen = false;
+    }
+  }
+
+  /**
+   * Handle escape key to close sidebar
+   */
+  @HostListener('document:keydown.escape')
+  onEscapeKey(): void {
+    if (this.sidebarOpen) {
+      this.closeSidebar();
+    }
   }
 
 }

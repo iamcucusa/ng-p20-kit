@@ -2,6 +2,7 @@
 @use '../../theme/src/lib/styles/saga-blue-layers.css';
 @use '../../theme/src/lib/styles/tailwind-spacing.scss';
 @use '../../theme/src/lib/styles/typography.scss';
+@use '../../theme/src/lib/styles/breakpoints.scss' as bp;
 
 /* ========================================
    STEP CONTAINER UTILITY CLASSES
@@ -24,6 +25,7 @@
  */
 .pg-step-container__content {
   flex: 1;
+  position: relative; /* For absolute positioning of toggle button */
 }
 
 /**
@@ -40,7 +42,7 @@
 
 /**
  * Step container navigation sidebar
- * Fixed width sidebar for navigation elements with natural flow
+ * Responsive sidebar with adaptive behavior for dashboard UX
  */
 .pg-step-container__sidebar {
   width: 280px;
@@ -49,15 +51,161 @@
   top: var(--spacing-4); // Offset from top for better visual spacing
   align-self: flex-start;
   /* No height restrictions - let content determine natural height */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); // Smooth transitions
+  
+  /* Tablet: Collapsible sidebar (≤1199px) */
+  @include bp.desktop-down {
+    position: absolute;
+    left: -280px;
+    top: 0;
+    height: 100%;
+    z-index: 1000;
+    background-color: var(--p-surface-card);
+    border-right: 1px solid var(--p-surface-border);
+    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    
+    &.sidebar-open {
+      left: 0;
+    }
+  }
+  
+  /* Mobile: Full overlay */
+  @include bp.mobile-down {
+    width: 100%;
+    left: -100%;
+    
+    &.sidebar-open {
+      left: 0;
+    }
+  }
 }
 
 /**
  * Step container main content area
- * Flexible content area that takes remaining space
+ * Flexible content area with responsive behavior for horizontal tabs
  */
 .pg-step-container__main {
   flex: 1;
   min-width: 0; // Prevents flex item from overflowing
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Tablet: Adjust for sidebar overlay (≤1199px) */
+  @include bp.desktop-down {
+    width: 100%;
+    position: relative; /* Ensure proper positioning context for sidebar */
+  }
+  
+  /* Mobile: Full width (≤767px) */
+  @include bp.mobile-down {
+    width: 100%;
+  }
+}
+
+/**
+ * Sidebar overlay for mobile/tablet
+ * Dark overlay when sidebar is open
+ */
+.pg-sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &.overlay-visible {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/**
+ * Sidebar toggle buttons
+ * Floating action buttons for mobile/tablet
+ */
+.pg-sidebar-toggle {
+  position: absolute;
+  top: var(--spacing-4);
+  z-index: 1001;
+  display: none;
+  
+  /* Show on tablet and mobile (≤1199px) */
+  @include bp.desktop-down {
+    display: block;
+  }
+  
+  /* Expand button (top-left) */
+  &--expand {
+    left: var(--spacing-4);
+  }
+  
+  /* Collapse button (top-right) */
+  &--collapse {
+    right: var(--spacing-4);
+  }
+}
+
+/**
+ * Horizontal tabs responsive behavior
+ * Optimized for dashboard content with sidebar navigation
+ */
+.pg-horizontal-tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Desktop: Full horizontal layout */
+  @include bp.desktop-up {
+    flex-wrap: nowrap;
+  }
+  
+  /* Tablet: Horizontal scroll with touch support */
+  @include bp.tablet-down {
+    padding-bottom: var(--spacing-2);
+    scroll-snap-type: x mandatory;
+    
+    .pg-tab-item {
+      scroll-snap-align: start;
+      flex-shrink: 0;
+    }
+  }
+  
+  /* Mobile: Stack vertically or use dropdown */
+  @include bp.mobile-down {
+    flex-direction: column;
+    overflow-x: visible;
+    
+    &.tabs-collapsed {
+      .pg-tab-item:not(.active) {
+        display: none;
+      }
+    }
+  }
+}
+
+/**
+ * Tab item responsive behavior
+ */
+.pg-tab-item {
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  
+  /* Mobile: Full width when stacked */
+  @include bp.mobile-down {
+    width: 100%;
+    text-align: left;
+  }
 }
 
 /**
@@ -125,11 +273,11 @@
   grid-template-columns: 1fr;
   gap: var(--spacing-4);
 
-  @media (min-width: 768px) {
+  @include bp.tablet-up {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (min-width: 1024px) {
+  @include bp.desktop-up {
     grid-template-columns: repeat(3, 1fr);
   }
 }
