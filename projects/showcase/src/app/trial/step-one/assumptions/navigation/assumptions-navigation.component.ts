@@ -98,12 +98,12 @@ import { newScenarioSectionToken, overviewSectionToken, details as stepOneDetail
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AssumptionsNavigationComponent {
-  // expose route constants for template usage
+  /** Route constants exposed for template usage */
   protected readonly detailsPath = stepOneDetailsPath;
   @Input() readonlyTrial = false;
   @Input() finalScenario: number | null | undefined = null;
   
-  // Control scenarios visibility
+  /** Controls scenarios section visibility state */
   scenariosExpanded = true;
   
   /**
@@ -121,7 +121,7 @@ export class AssumptionsNavigationComponent {
 
   items: AssumptionsNavigationItem[] = [];
 
-  // Prefer inject() over constructor injection
+  /** Overview section token injected for template usage */
   public overview = inject(overviewSectionToken) as ScenariosOverviewSection;
   public newScenario = inject(newScenarioSectionToken) as NewScenarioSection;
 

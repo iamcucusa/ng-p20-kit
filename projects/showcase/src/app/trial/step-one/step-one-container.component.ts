@@ -21,18 +21,18 @@ export class StepOneContainerComponent {
 
   @Input()
   set step(step: TrialStepId) {
-    // Set the active step based on the route parameter
+    /** Set the active step based on the route parameter */
     this.trialStepFacade.setActiveStepByRoute(step);
   }
 
   /** Template reference for step actions */
   stepActions!: TemplateRef<unknown>;
 
-  // Navigation inputs
+  /** Navigation inputs for trial and base navigation items */
   trialNavItems = trialItems;
   baseNavItems = baseAssumptionsNavItems;
   
-  // Mock scenarios data
+  /** Mock scenarios data for navigation testing */
   scenarioItems: AssumptionsScenariosNavigationItem[] | null = [
     { 
       slug: inject(overviewSectionToken), 
@@ -100,7 +100,7 @@ export class StepOneContainerComponent {
    * Export assumptions action
    */
   exportAssumptions(): void {
-    // TODO: Implement export logic
+    /** TODO: Implement export logic */
     console.log('Exporting assumptions...');
   }
 

@@ -3,7 +3,7 @@
   padding: var(--spacing-2) 0;
   display: flex;
   flex-direction: column;
-  // No height restrictions - let content flow naturally
+  /* No height restrictions - let content flow naturally */
 }
 
 .pg-navigation-list {
@@ -59,7 +59,7 @@
 
 /* Scenario Section */
 .pg-scenario-section {
-  // No additional margin - let the parent gap handle spacing
+  /* No additional margin - let the parent gap handle spacing */
   
   .pg-scenario-header {
     display: flex;
