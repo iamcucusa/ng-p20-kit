@@ -35,7 +35,14 @@ import { baseAssumptionsItemsToken, assumptionsTrialSectionsToken } from '@assum
       </kit-assumptions-section-heading>
         
       <!-- Tabs Example Component -->
-      <kit-assumptions-tabs-example (tabChange)="onTabChange($event)"></kit-assumptions-tabs-example>
+      <kit-assumptions-tabs-example 
+        [activeTrial]="activeTrial"
+        [level]="'Trial'"
+        [isLoading]="false"
+        [canEdit]="true"
+        [canView]="false"
+        (tabChange)="onTabChange($event)">
+      </kit-assumptions-tabs-example>
     </div>
     
     <ng-template #actionsTemplate>

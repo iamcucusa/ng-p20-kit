@@ -1,7 +1,9 @@
-import { Component, inject, Output, EventEmitter } from '@angular/core';
+import { Component, inject, Output, EventEmitter, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TabsModule } from 'primeng/tabs';
 import { baseAssumptionsItemsToken, assumptionsTrialSectionsToken } from '@assumptions/navigation/assumptions-navigation.settings';
+import { AssumptionsTabContentComponent } from './assumptions-tab-content.component';
+import type { Trial } from '@trial/trial.types';
 
 /**
  * Assumptions Tabs Example Component
@@ -17,7 +19,7 @@ import { baseAssumptionsItemsToken, assumptionsTrialSectionsToken } from '@assum
 @Component({
   selector: 'kit-assumptions-tabs-example',
   standalone: true,
-  imports: [TabsModule, CommonModule],
+  imports: [TabsModule, CommonModule, AssumptionsTabContentComponent],
   template: `
     <p-tabs [value]="activeTabIndex" (valueChange)="onTabChange($event)">
         <p-tablist>
@@ -28,26 +30,17 @@ import { baseAssumptionsItemsToken, assumptionsTrialSectionsToken } from '@assum
         <p-tabpanels>
           @for (section of assumptionsTrialSections; track section; let i = $index) {
             <p-tabpanel [value]="i">
-              <div class="p-4">
-                <h4 class="text-lg font-medium mb-3">{{ getSectionTitle(section) }}</h4>
-                <p class="text-gray-600 mb-4">{{ getSectionDescription(section) }}</p>
-                
-                <div class="bg-gray-50 p-4 rounded-lg">
-                  <h5 class="font-medium mb-2">Tab Information:</h5>
-                  <ul class="text-sm space-y-1">
-                    <li><strong>Index:</strong> {{ i }}</li>
-                    <li><strong>Section:</strong> {{ section }}</li>
-                    <li><strong>Title:</strong> {{ getSectionTitle(section) }}</li>
-                  </ul>
-                </div>
-                
-                <div class="mt-4 p-3 bg-blue-50 border border-blue-200 rounded">
-                  <p class="text-sm text-blue-800">
-                    <strong>Note:</strong> This is tab {{ i + 1 }} of {{ assumptionsTrialSections.length }} tabs.
-                    Content for {{ getSectionTitle(section) }} will be implemented here.
-                  </p>
-                </div>
-              </div>
+              <kit-assumptions-tab-content
+                [tab]="section"
+                [activeIndex]="activeTabIndex"
+                [canEdit]="canEdit"
+                [canView]="canView"
+                [level]="level"
+                [isLoading]="isLoading"
+                [activeTrial]="activeTrial"
+                (registerUpdater)="onRegisterUpdater($event)"
+                (formStateChange)="onFormStateChange($event)">
+              </kit-assumptions-tab-content>
             </p-tabpanel>
           }
         </p-tabpanels>
@@ -64,8 +57,28 @@ export class AssumptionsTabsExampleComponent {
   /** Active tab index (0-based) */
   activeTabIndex: number = 0;
 
+  /** Active trial data */
+  @Input() activeTrial?: Trial | null;
+
+  /** Assumption level */
+  @Input() level: string = 'Trial';
+
+  /** Loading state */
+  @Input() isLoading: boolean = false;
+
+  /** Can edit content */
+  @Input() canEdit: boolean = true;
+
+  /** Can view content */
+  @Input() canView: boolean = false;
+
   /** Output event emitter for tab changes */
   @Output() tabChange = new EventEmitter<number>();
+
+  /** Form state management */
+  canSaveForm = false;
+  private currentActiveTab = '';
+  private sectionUpdaters: { [tab: string]: () => void } = {};
 
 
   /**
@@ -121,16 +134,77 @@ export class AssumptionsTabsExampleComponent {
    * 
    * @param event - The tab change event containing the new active index
    */
-  onTabChange(event: any): void {
-    // The event might be the index directly, not an object with .value
+  onTabChange(event: number | string | { value: number } | undefined): void {
+    // Handle undefined or invalid events
+    if (event === undefined || event === null) {
+      return;
+    }
+    
+    // The event might be the index directly (number or string), not an object with .value
     if (typeof event === 'number') {
       this.activeTabIndex = event;
+    } else if (typeof event === 'string') {
+      const numericValue = parseInt(event, 10);
+      if (!isNaN(numericValue)) {
+        this.activeTabIndex = numericValue;
+      } else {
+        return;
+      }
     } else if (event && typeof event === 'object' && 'value' in event) {
       this.activeTabIndex = event.value;
     } else {
       return;
     }
     
+    // Handle tab change logic
+    this.onTabChangeInternal();
     this.tabChange.emit(this.activeTabIndex);
+  }
+
+  /**
+   * Handles internal tab change logic
+   */
+  private onTabChangeInternal(): void {
+    const newActiveTab = this.assumptionsTrialSections[this.activeTabIndex];
+    if (this.currentActiveTab !== newActiveTab) {
+      this.canSaveForm = false;
+      this.currentActiveTab = newActiveTab;
+    }
+  }
+
+  /**
+   * Registers an updater function for a specific tab
+   * 
+   * @param updater - The updater function to register
+   */
+  onRegisterUpdater(updater: (tab: string) => void): void {
+    const currentTab = this.assumptionsTrialSections[this.activeTabIndex];
+    this.sectionUpdaters[currentTab] = () => updater(currentTab);
+  }
+
+  /**
+   * Handles form state changes from tab content components
+   * 
+   * @param event - The form state change event
+   */
+  onFormStateChange(event: { tab: string; formValidChanged: boolean }): void {
+    const activeTab = this.assumptionsTrialSections[this.activeTabIndex];
+    if (event.tab === activeTab) {
+      this.canSaveForm = event.formValidChanged;
+    }
+  }
+
+  /**
+   * Triggers update for a specific tab
+   * 
+   * @param tab - The tab to update
+   */
+  onUpdateTriggered(tab: string): void {
+    const updater = this.sectionUpdaters[tab];
+    if (updater) {
+      updater();
+    } else {
+      console.warn(`No update method registered for section: ${tab}`);
+    }
   }
 }

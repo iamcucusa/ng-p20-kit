@@ -405,3 +405,16 @@
   color: var(--p-text-color);
   margin: 0;
 }
+
+/* ========================================
+   PRIMENG TABS GLOBAL CUSTOMIZATION
+   ======================================== */
+
+/**
+ * Global customization for PrimeNG Tabs component
+ * Makes all tab panels have transparent background
+ * Using more specific selector to override PrimeNG defaults
+ */
+.p-tabs .p-tabpanels {
+  background: transparent;
+}
