@@ -27,9 +27,9 @@ export function createStepRoutes(): Routes {
       loadComponent: () => import('@trial-step-one/step-one-container.component').then(m => m.StepOneContainerComponent),
       children: [
         { path: '', redirectTo: stepOneDetailsPath, pathMatch: 'full' },
-        { path: stepOneOverviewPath, loadComponent: () => import('@trial-step-one/sections/step-one-overview.section').then(m => m.StepOneOverviewSection) },
-        { path: stepOneDetailsPath, loadComponent: () => import('@trial-step-one/sections/step-one-details.section').then(m => m.StepOneDetailsSection) },
-        { path: `:scenarioId/${scenarioPathSegment}`, loadComponent: () => import('@trial-step-one/sections/step-one-scenario.section').then(m => m.StepOneScenarioSection) }
+        { path: stepOneOverviewPath, loadComponent: () => import('@trial-step-one/assumptions/sections/step-one-overview.section').then(m => m.StepOneOverviewSection) },
+        { path: stepOneDetailsPath, loadComponent: () => import('@trial-step-one/assumptions/sections/assumptions-section-container.component').then(m => m.AssumptionsSectionContainerComponent) },
+        { path: `:scenarioId/${scenarioPathSegment}`, loadComponent: () => import('@trial-step-one/assumptions/sections/step-one-scenario.section').then(m => m.StepOneScenarioSection) }
       ]
     },
     {
