@@ -1,9 +1,11 @@
-import { ChangeDetectionStrategy, Component, Input, inject, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
 import { AssumptionsSectionHeadingComponent } from './assumptions-section-heading.component';
-import { AssumptionsTabsExampleComponent } from './assumptions-tabs-example.component';
+import { AssumptionsTabContentComponent } from './assumptions-tab-content.component';
+import { AssumptionsTabActionsComponent } from './assumptions-tab-actions.component';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import type { Trial } from '@trial/trial.types';
+import type { TrialAssumptionsPage, AssumptionsScenarioPage } from '@assumptions/assumptions';
 import { baseAssumptionsItemsToken, assumptionsTrialSectionsToken } from '@assumptions/navigation/assumptions-navigation.settings';
 
 /**
@@ -23,7 +25,7 @@ import { baseAssumptionsItemsToken, assumptionsTrialSectionsToken } from '@assum
 @Component({
   selector: 'kit-assumptions-section-container',
   standalone: true,
-  imports: [AssumptionsSectionHeadingComponent, AssumptionsTabsExampleComponent, ButtonModule, RippleModule],
+  imports: [AssumptionsSectionHeadingComponent, AssumptionsTabContentComponent, AssumptionsTabActionsComponent, ButtonModule, RippleModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './assumptions-section-container.component.scss',
   template: `
@@ -34,26 +36,26 @@ import { baseAssumptionsItemsToken, assumptionsTrialSectionsToken } from '@assum
         [actions]="actionsTemplate">
       </kit-assumptions-section-heading>
         
-      <!-- Tabs Example Component -->
-      <kit-assumptions-tabs-example 
+      <!-- Tab Content Component -->
+      <kit-assumptions-tab-content 
         [activeTrial]="activeTrial"
         [level]="'Trial'"
-        [isLoading]="false"
+        [isLoading]="isSaving"
         [canEdit]="true"
         [canView]="false"
-        (tabChange)="onTabChange($event)">
-      </kit-assumptions-tabs-example>
+        (tabChange)="onTabChange($event)"
+        (canSaveFormChange)="onCanSaveFormChange($event)">
+      </kit-assumptions-tab-content>
     </div>
     
     <ng-template #actionsTemplate>
-      <p-button
-        label="Save"
-        severity="primary"
-        pRipple
-        (onClick)="onSave()"
-        [loading]="isSaving"
-        aria-label="Save assumptions">
-      </p-button>
+      <kit-assumptions-tab-actions
+        [activeTab]="getCurrentActiveTab()"
+        [isLoading]="isSaving"
+        [canEdit]="true"
+        [canSaveForm]="canSaveForm"
+        (triggerUpdate)="onUpdate($event)">
+      </kit-assumptions-tab-actions>
     </ng-template>
   `
 })
@@ -62,7 +64,7 @@ export class AssumptionsSectionContainerComponent {
   private baseAssumptionsItems = inject(baseAssumptionsItemsToken);
   
   /** Injected trial sections array for index-based slug resolution */
-  private assumptionsTrialSections = inject(assumptionsTrialSectionsToken);
+  public assumptionsTrialSections = inject(assumptionsTrialSectionsToken);
 
   /** 
    * Active tab index (0-based) that determines which section is currently displayed
@@ -87,6 +89,9 @@ export class AssumptionsSectionContainerComponent {
 
   /** Save loading state */
   isSaving: boolean = false;
+
+  /** Whether the form can be saved (validation state) */
+  canSaveForm: boolean = true;
 
   /** Current section title - updated when activeIndex changes */
   sectionTitle: string = this.getSectionTitle();
@@ -181,6 +186,25 @@ export class AssumptionsSectionContainerComponent {
   }
 
   /**
+   * Gets the current active tab with proper typing
+   * 
+   * @returns The current active tab properly typed
+   */
+  getCurrentActiveTab(): TrialAssumptionsPage | AssumptionsScenarioPage {
+    return this.assumptionsTrialSections[this.activeIndex] as TrialAssumptionsPage | AssumptionsScenarioPage;
+  }
+
+  /**
+   * Handles update trigger from the tab actions component
+   * 
+   * @param tab - The tab that triggered the update
+   */
+  onUpdate(tab: TrialAssumptionsPage | AssumptionsScenarioPage): void {
+    console.log(`Update triggered for tab: ${tab}`);
+    this.onSave();
+  }
+
+  /**
    * Handles tab change event from the tabs example component
    * 
    * @param activeIndex - The new active tab index
@@ -188,5 +212,14 @@ export class AssumptionsSectionContainerComponent {
   onTabChange(activeIndex: number): void {
     this.activeIndex = activeIndex;
     this.updateSectionContent();
+  }
+
+  /**
+   * Handles canSaveForm change event from the tabs example component
+   * 
+   * @param canSaveForm - The new canSaveForm state
+   */
+  onCanSaveFormChange(canSaveForm: boolean): void {
+    this.canSaveForm = canSaveForm;
   }
 }
