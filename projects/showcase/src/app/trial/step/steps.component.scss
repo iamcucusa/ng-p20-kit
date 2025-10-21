@@ -27,17 +27,17 @@
 
     &--active {
       border-left-color: var(--p-primary-400);
-      background: var(--p-primary-50);
+      background-color: var(--p-primary-50);
 
       @include bp.desktop-up {
         border-left-color: transparent;
         border-bottom-color: var(--p-primary-400);
+        background-color: var(--p-primary-50);
       }
     }
 
     &--visited {
       border-left-color: var(--p-primary-300);
-      background: var(--p-primary-25);
 
       @include bp.desktop-up {
         border-left-color: transparent;
