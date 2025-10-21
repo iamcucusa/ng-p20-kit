@@ -7,6 +7,7 @@ import { Routes } from '@angular/router';
 import { stepIds } from './step-routing.tokens';
 import { stepIds as stepIdsFromSettings } from './step.settings';
 import { details as stepOneDetailsPath, scenarioParameters as scenarioPathSegment, overview as stepOneOverviewPath } from '@assumptions/navigation/assumptions-navigation.settings';
+import { activeTrialResolver } from '@core/resolvers/active-trial.resolver';
 
 /**
  * Creates step routes dynamically using step configuration
@@ -28,7 +29,16 @@ export function createStepRoutes(): Routes {
       children: [
         { path: '', redirectTo: stepOneDetailsPath, pathMatch: 'full' },
         { path: stepOneOverviewPath, loadComponent: () => import('@trial-step-one/assumptions/sections/step-one-overview.section').then(m => m.StepOneOverviewSection) },
-        { path: stepOneDetailsPath, loadComponent: () => import('@trial-step-one/assumptions/sections/assumptions-section-container.component').then(m => m.AssumptionsSectionContainerComponent) },
+        { 
+          path: stepOneDetailsPath, 
+          loadComponent: () => import('@trial-step-one/assumptions/sections/assumptions-section-container.component').then(m => m.AssumptionsSectionContainerComponent),
+          data: {
+            slug: stepOneDetailsPath,
+          },
+          resolve: {
+            activeTrial: activeTrialResolver,
+          },
+        },
         { path: `:scenarioId/${scenarioPathSegment}`, loadComponent: () => import('@trial-step-one/assumptions/sections/step-one-scenario.section').then(m => m.StepOneScenarioSection) }
       ]
     },
