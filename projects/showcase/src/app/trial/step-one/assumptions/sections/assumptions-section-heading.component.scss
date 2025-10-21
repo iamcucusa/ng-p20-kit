@@ -1,0 +1,83 @@
+/**
+ * Assumptions Section Heading Component Styles
+ * 
+ * Provides consistent styling for assumptions section headings
+ * following the same pattern as other heading components.
+ */
+
+@use '../../../../../../../theme/src/lib/styles/breakpoints.scss' as bp;
+@use '../../../../../../../theme/src/lib/styles/typography.scss' as typography;
+
+.pg-assumptions-section-heading {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &__container {
+    width: 100%;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--spacing-4);
+    width: 100%;
+
+    @include bp.desktop-up {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0; // Allows text to shrink and truncate
+  }
+
+  &__title {
+    @include typography.text-lg;
+    @include typography.font-medium;
+    @include typography.leading-snug;
+    color: var(--p-text-color);
+    margin: 0 0 var(--spacing-1) 0;
+    line-height: var(--line-height-snug);
+    
+    &:first-letter {
+      text-transform: uppercase;
+    }
+
+    @include bp.tablet-up {
+      @include typography.text-xl;
+    }
+  }
+
+  &__description {
+    @include typography.text-base;
+    @include typography.font-normal;
+    @include typography.leading-relaxed;
+    color: var(--p-text-color-secondary);
+    margin: 0;
+    max-width: 65ch; // Optimal reading width (65 characters)
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    flex-shrink: 0;
+    justify-content: flex-end;
+    width: 100%;
+    
+    @include bp.desktop-up {
+      justify-content: flex-start;
+      width: auto;
+    }
+  }
+}

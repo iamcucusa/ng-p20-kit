@@ -47,7 +47,7 @@
 
   &__title {
     @include typography.text-4xl;
-    @include typography.font-semibold;
+    @include typography.font-medium;
     @include typography.leading-tight;
     color: var(--p-text-color);
     margin: 0;

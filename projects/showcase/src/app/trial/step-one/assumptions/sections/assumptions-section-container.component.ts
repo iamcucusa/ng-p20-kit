@@ -1,13 +1,20 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { AssumptionsSectionHeadingComponent } from './assumptions-section-heading.component';
 import type { Trial } from '@trial/trial.types';
 
 @Component({
   selector: 'kit-assumptions-section-container',
   standalone: true,
+  imports: [AssumptionsSectionHeadingComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="pg-assumptions-section-container">
-      <h3 class="text-lg font-semibold mb-4">Assumptions Section</h3>
+      <kit-assumptions-section-heading 
+        title="Assumptions Section"
+        description="Manage and configure trial assumptions">
+      </kit-assumptions-section-heading>
+      <br>
+      <br>
       <p class="text-sm text-500 mb-2">Slug: {{ slug }}</p>
       <p class="text-sm text-500 mb-4">Active Trial: {{ activeTrial?.name || 'Loading...' }}</p>
       <p class="text-sm text-500">Assumptions content will be implemented here</p>
