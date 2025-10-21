@@ -10,7 +10,7 @@ import {
   TrialAssumptionsNavigationItem,
 } from '@assumptions/navigation/assumptions-navigation';
 import { NewScenarioSection, ScenariosOverviewSection } from '@assumptions/assumptions';
-import { newScenarioSectionToken, overviewSectionToken, details as stepOneDetailsPath } from '@assumptions/navigation/assumptions-navigation.settings';
+import { newScenarioSectionToken, overviewSectionToken } from '@assumptions/navigation/assumptions-navigation.settings';
 
 @Component({
   selector: 'kit-assumptions-navigation',
@@ -31,7 +31,7 @@ import { newScenarioSectionToken, overviewSectionToken, details as stepOneDetail
               </a>
             } @else {
               <a
-                [routerLink]="['./', trialItem.slug]"
+                [routerLink]="trialItem.slug ? ['./', trialItem.slug] : ['./']"
                 [routerLinkActive]="'active'"
                 [routerLinkActiveOptions]="{ exact: true }"
                 pRipple
@@ -98,8 +98,6 @@ import { newScenarioSectionToken, overviewSectionToken, details as stepOneDetail
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AssumptionsNavigationComponent {
-  /** Route constants exposed for template usage */
-  protected readonly detailsPath = stepOneDetailsPath;
   @Input() readonlyTrial = false;
   @Input() finalScenario: number | null | undefined = null;
   

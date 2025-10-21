@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, inject, ChangeDetectorRef } from '@angular/core';
 import { AssumptionsSectionHeadingComponent } from './assumptions-section-heading.component';
+import { AssumptionsTabsExampleComponent } from './assumptions-tabs-example.component';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import type { Trial } from '@trial/trial.types';
@@ -22,20 +23,19 @@ import { baseAssumptionsItemsToken, assumptionsTrialSectionsToken } from '@assum
 @Component({
   selector: 'kit-assumptions-section-container',
   standalone: true,
-  imports: [AssumptionsSectionHeadingComponent, ButtonModule, RippleModule],
+  imports: [AssumptionsSectionHeadingComponent, AssumptionsTabsExampleComponent, ButtonModule, RippleModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrl: './assumptions-section-container.component.scss',
   template: `
     <div class="pg-assumptions-section-container">
       <kit-assumptions-section-heading 
-        [title]="getSectionTitle()"
-        [description]="getSectionDescription()"
+        [title]="sectionTitle"
+        [description]="sectionDescription"
         [actions]="actionsTemplate">
       </kit-assumptions-section-heading>
-      <br>
-      <br>
-      <p class="text-sm text-500 mb-2">Slug: {{ slug }}</p>
-      <p class="text-sm text-500 mb-4">Active Trial: {{ activeTrial?.name || 'Loading...' }}</p>
-      <p class="text-sm text-500">Assumptions content will be implemented here</p>
+        
+      <!-- Tabs Example Component -->
+      <kit-assumptions-tabs-example (tabChange)="onTabChange($event)"></kit-assumptions-tabs-example>
     </div>
     
     <ng-template #actionsTemplate>
@@ -61,22 +61,13 @@ export class AssumptionsSectionContainerComponent {
    * Active tab index (0-based) that determines which section is currently displayed
    * 
    * The index maps to the assumptionsTrialSections array:
-   * - activeIndex = 0 → assumptionsTrialSections[0] → 'contacts' → 'Contacts'
-   * - activeIndex = 1 → assumptionsTrialSections[1] → 'planning' → 'Time Framework'
-   * - activeIndex = 2 → assumptionsTrialSections[2] → 'evidence' → 'Country Requirements'
+   * - activeIndex = 0 → assumptionsTrialSections[0] → 'parameters' → 'Trial Parameters'
+   * - activeIndex = 1 → assumptionsTrialSections[1] → 'contacts' → 'Contacts'
+   * - activeIndex = 2 → assumptionsTrialSections[2] → 'planning' → 'Time Framework'
    * 
    * @default 0
    */
   activeIndex: number = 0;
-
-  /** Route slug data */
-  @Input() set slug(value: string) {
-    this.#slug = value;
-  }
-  get slug(): string {
-    return this.#slug;
-  }
-  #slug: string = '';
 
   /** Active trial data from resolver */
   @Input() set activeTrial(value: Trial | null) {
@@ -90,6 +81,25 @@ export class AssumptionsSectionContainerComponent {
   /** Save loading state */
   isSaving: boolean = false;
 
+  /** Current section title - updated when activeIndex changes */
+  sectionTitle: string = this.getSectionTitle();
+
+  /** Current section description - updated when activeIndex changes */
+  sectionDescription: string = this.getSectionDescription();
+
+  constructor() {
+    // Initialize with default values
+    this.updateSectionContent();
+  }
+
+  /**
+   * Updates section title and description based on current activeIndex
+   */
+  private updateSectionContent(): void {
+    this.sectionTitle = this.getSectionTitle();
+    this.sectionDescription = this.getSectionDescription();
+  }
+
   /**
    * Gets the dynamic section title using activeIndex and baseAssumptionsItems token
    * 
@@ -98,8 +108,8 @@ export class AssumptionsSectionContainerComponent {
    * 2. currentSlug → baseAssumptionsItems[currentSlug] → sectionTitle
    * 
    * @example
-   * // activeIndex = 0 → assumptionsTrialSections[0] = 'contacts' → baseAssumptionsItems.contacts = 'Contacts'
-   * // activeIndex = 1 → assumptionsTrialSections[1] = 'planning' → baseAssumptionsItems.planning = 'Time Framework'
+   * // activeIndex = 0 → assumptionsTrialSections[0] = 'parameters' → baseAssumptionsItems.parameters = 'Trial Parameters'
+   * // activeIndex = 1 → assumptionsTrialSections[1] = 'contacts' → baseAssumptionsItems.contacts = 'Contacts'
    * 
    * @returns The section title based on the current activeIndex, or fallback title
    */
@@ -123,8 +133,8 @@ export class AssumptionsSectionContainerComponent {
    * 2. currentSlug → sectionDescriptions[currentSlug] → sectionDescription
    * 
    * @example
-   * // activeIndex = 0 → assumptionsTrialSections[0] = 'contacts' → 'Manage trial contacts and stakeholders'
-   * // activeIndex = 1 → assumptionsTrialSections[1] = 'planning' → 'Define trial timeline and milestones'
+   * // activeIndex = 0 → assumptionsTrialSections[0] = 'parameters' → 'Configure trial parameters and settings'
+   * // activeIndex = 1 → assumptionsTrialSections[1] = 'contacts' → 'Manage trial contacts and stakeholders'
    * 
    * @returns The section description based on the current activeIndex, or fallback description
    */
@@ -133,7 +143,7 @@ export class AssumptionsSectionContainerComponent {
     const currentSlug = this.assumptionsTrialSections[this.activeIndex];
     
     const sectionDescriptions: Record<keyof typeof this.baseAssumptionsItems, string> = {
-      'details': 'Configure basic trial information and parameters',
+      'trial-section': 'Configure basic trial information and parameters',
       'contacts': 'Manage trial contacts and stakeholders',
       'planning': 'Define trial timeline and milestones',
       'evidence': 'Set country-specific requirements and regulations',
@@ -161,5 +171,15 @@ export class AssumptionsSectionContainerComponent {
       this.isSaving = false;
       console.log('Assumptions saved successfully');
     }, 1000);
+  }
+
+  /**
+   * Handles tab change event from the tabs example component
+   * 
+   * @param activeIndex - The new active tab index
+   */
+  onTabChange(activeIndex: number): void {
+    this.activeIndex = activeIndex;
+    this.updateSectionContent();
   }
 }

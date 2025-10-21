@@ -30,10 +30,10 @@ export const newScenario: NewScenarioSection = 'new-scenario';
 /** Injection token for new scenario section */
 export const newScenarioSectionToken = new InjectionToken<NewScenarioSection>('new scenario section');
 
-/** Details section constant for trial navigation */
-export const details: TrialSection = 'details';
-/** Injection token for details section */
-export const trialSectionToken = new InjectionToken<TrialSection>('details section');
+/** Trial section constant for trial navigation */
+export const trialSection: TrialSection = 'trial-section';
+/** Injection token for trial section */
+export const trialSectionToken = new InjectionToken<TrialSection>('trial section');
 
 export const trialParameters: TrialParameters = 'parameters';
 export const trialParametersSectionToken = new InjectionToken<TrialParameters>('parameters section');
@@ -134,7 +134,7 @@ export const assumptionsEditableSectionsToken = new InjectionToken<TrialAssumpti
  * Navigation related tokens (typed map for safe dot-access)
  */
 type AssumptionsKey =
-  | typeof details
+  | typeof trialSection
   | typeof trialParameters
   | typeof scenarioParameters
   | typeof contacts
@@ -148,7 +148,7 @@ type AssumptionsKey =
   | typeof impact;
 
 export const baseAssumptionsItems = {
-  details: 'Trial',
+'trial-section': 'Trial',
   parameters: 'Parameters',
   scenario: 'Scenario Parameters',
   contacts: 'Contacts',
@@ -163,7 +163,7 @@ export const baseAssumptionsItems = {
 } satisfies Record<AssumptionsKey, string>;
 
 export const sectionOptions: SelectItem[] = [
-  { label: baseAssumptionsItems.details, value: details },
+  { label: baseAssumptionsItems.parameters, value: trialParameters },
   { label: baseAssumptionsItems.contacts, value: contacts },
   { label: baseAssumptionsItems.planning, value: timeFramework },
   { label: baseAssumptionsItems.evidence, value: evidence },
@@ -179,8 +179,8 @@ export const baseAssumptionsItemsToken = new InjectionToken<typeof baseAssumptio
 );
 
 const detailItem = {
-  slug: details,
-  title: baseAssumptionsItems.details,
+  slug: '', // Use empty string for default route
+  title: baseAssumptionsItems[trialSection as keyof typeof baseAssumptionsItems],
 };
 
 export const trialItems: TrialAssumptionsNavigationItem[] = [detailItem];
@@ -262,7 +262,7 @@ export const navProviders = [
   },
   {
     provide: trialSectionToken,
-    useValue: details,
+    useValue: trialSection,
   },
   {
     provide: trialParametersSectionToken,

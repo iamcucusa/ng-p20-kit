@@ -1,4 +1,4 @@
-import { Component, Input, TemplateRef } from '@angular/core';
+import { Component, Input, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 /**
@@ -35,7 +35,8 @@ import { CommonModule } from '@angular/common';
       </div>
     </header>
   `,
-  styleUrls: ['./assumptions-section-heading.component.scss']
+  styleUrls: ['./assumptions-section-heading.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AssumptionsSectionHeadingComponent {
   /** Assumptions section title (required) */
