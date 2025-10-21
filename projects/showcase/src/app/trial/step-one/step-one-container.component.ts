@@ -2,6 +2,7 @@ import { Component, Input, inject, TemplateRef, HostListener } from '@angular/co
 import { StepHeadingComponent } from '../step';
 import { TrialStepFacadeService } from '@trial-step/trial-step-facade.service';
 import type { TrialStepId } from '@trial-step/trial-step.types';
+import type { Trial } from '@trial/trial.types';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { TooltipModule } from 'primeng/tooltip';
@@ -25,6 +26,9 @@ export class StepOneContainerComponent {
     /** Set the active step based on the route parameter */
     this.trialStepFacade.setActiveStepByRoute(step);
   }
+
+  /** Active trial data for contextual titles */
+  @Input() activeTrial?: Trial | null;
 
   /** Template reference for step actions */
   stepActions!: TemplateRef<unknown>;

@@ -174,7 +174,7 @@ export const sectionOptions: SelectItem[] = [
   { label: baseAssumptionsItems.impact, value: impact },
 ];
 
-export const baseAssumptionsItemsToken = new InjectionToken<AssumptionsBaseNavigationItem[]>(
+export const baseAssumptionsItemsToken = new InjectionToken<typeof baseAssumptionsItems>(
   'Base Assumptions Items Sections'
 );
 

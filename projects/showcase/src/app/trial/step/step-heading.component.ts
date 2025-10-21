@@ -2,6 +2,7 @@ import { Component, Input, TemplateRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
+import type { Trial } from '@trial/trial.types';
 
 /**
  * Step Heading Component
@@ -18,7 +19,7 @@ import { RippleModule } from 'primeng/ripple';
         <div class="pg-step-heading__content">
           <div class="pg-step-heading__text">
             <h2 id="step-title" class="pg-step-heading__title">
-              {{ title }}
+              {{ getContextualTitle() }}
             </h2>
             @if (description) {
               <p id="step-description" class="pg-step-heading__description">
@@ -47,4 +48,20 @@ export class StepHeadingComponent {
   
   /** Optional template for step actions */
   @Input() stepActions?: TemplateRef<unknown> | null;
+  
+  /** Active trial data for contextual titles */
+  @Input() activeTrial?: Trial | null;
+  
+  /** Whether to show trial context in title */
+  @Input() showTrialContext: boolean = false;
+  
+  /**
+   * Gets the contextual title with trial information if enabled
+   */
+  getContextualTitle(): string {
+    if (this.showTrialContext && this.activeTrial?.studyNumber) {
+      return `${this.title} for Trial ${this.activeTrial.studyNumber.toUpperCase()}`;
+    }
+    return this.title;
+  }
 }
