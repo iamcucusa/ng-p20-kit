@@ -6,7 +6,6 @@
 export * from './trial-step.types';
 export * from './step.settings';
 export * from './step-routing.tokens';
-export * from './step-routing.service';
 export * from './step-routes.factory';
 
 // NgRx State Management

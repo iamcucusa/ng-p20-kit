@@ -10,6 +10,21 @@
  * - IDE autocomplete and IntelliSense support
  */
 
+import { stepIds } from '@trial-step/step.settings';
+import { overview, scenarioParameters } from '@assumptions/navigation/assumptions-navigation.settings';
+
+/**
+ * Route Parameter Constants
+ * Centralized parameter names for type safety
+ * @constant
+ */
+export const routeParams = {
+  id: 'id',
+  stepId: 'stepId',
+  trialId: 'trialId',
+  scenarioId: 'scenarioId',
+} as const;
+
 /**
  * Application Route Constants
  * Centralized route definitions for the entire application
@@ -21,8 +36,19 @@ export const appRoutes = {
   trials: 'trials',
   
   /** Trial routes */
-  trialIdParam: 'id',
-  trialStepParam: 'stepId',
+  trialIdParam: routeParams.id,
+  trialStepParam: routeParams.stepId,
+  
+  /** Step routes - imported from step.settings.ts */
+  stepOne: stepIds.one,
+  stepTwo: stepIds.two,
+  stepThree: stepIds.three,
+  stepFour: stepIds.four,
+  
+  /** Assumptions navigation routes - imported from assumptions-navigation.settings.ts */
+  overview: overview,
+  scenario: scenarioParameters,
+  scenarioIdParam: routeParams.scenarioId,
   
   /** Theme routes */
   theme: 'theme',
@@ -31,17 +57,6 @@ export const appRoutes = {
   /** Common route patterns */
   root: '',
   wildcard: '**',
-} as const;
-
-/**
- * Route Parameter Constants
- * Centralized parameter names for type safety
- * @constant
- */
-export const routeParams = {
-  id: 'id',
-  stepId: 'stepId',
-  trialId: 'trialId',
 } as const;
 
 /**
@@ -65,57 +80,3 @@ export type AppRoute = typeof appRoutes[keyof typeof appRoutes];
 export type RouteParam = typeof routeParams[keyof typeof routeParams];
 export type QueryParam = typeof queryParams[keyof typeof queryParams];
 
-/**
- * Route Builder Utilities
- * Helper functions for building routes with type safety
- */
-export class RouteBuilder {
-  /**
-   * Build dashboard route
-   * @returns Dashboard route path
-   */
-  static dashboard(): string {
-    return `/${appRoutes.dashboard}`;
-  }
-
-  /**
-   * Build trial route with ID
-   * @param trialId - The trial identifier
-   * @returns Trial route path
-   */
-  static trial(trialId: string): string {
-    return `/${appRoutes.dashboard}/${trialId}`;
-  }
-
-  /**
-   * Build trial step route
-   * @param trialId - The trial identifier
-   * @param stepId - The step identifier
-   * @returns Trial step route path
-   */
-  static trialStep(trialId: string, stepId: string): string {
-    return `/${appRoutes.dashboard}/${trialId}/${stepId}`;
-  }
-
-  /**
-   * Build theme route
-   * @returns Theme route path
-   */
-  static theme(): string {
-    return `/${appRoutes.theme}`;
-  }
-
-  /**
-   * Build route with query parameters
-   * @param baseRoute - Base route path
-   * @param queryParams - Query parameters object
-   * @returns Route with query parameters
-   */
-  static withQueryParams(baseRoute: string, queryParams: Record<string, string | number>): string {
-    const params = new URLSearchParams();
-    Object.entries(queryParams).forEach(([key, value]) => {
-      params.set(key, String(value));
-    });
-    return `${baseRoute}?${params.toString()}`;
-  }
-}

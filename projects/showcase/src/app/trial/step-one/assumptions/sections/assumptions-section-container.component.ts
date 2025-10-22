@@ -122,7 +122,10 @@ export class AssumptionsSectionContainerComponent {
   sectionName: string = this.getSectionName();
 
   constructor() {
-    // Initialize with default values
+    /**
+     * Initialize with default values
+     * This ensures the component starts with proper content
+     */
     this.updateSectionContent();
   }
 
@@ -142,9 +145,11 @@ export class AssumptionsSectionContainerComponent {
    * @returns The context name for the current section
    */
   getContextName(): string {
-    // For trials: use level token (shorter, consistent)
-    // For scenarios: use actual name (has length limits)
-    // TODO: Add scenario detection logic when scenarios are implemented
+    /**
+     * For trials: use level token (shorter, consistent)
+     * For scenarios: use actual name (has length limits)
+     * TODO: Add scenario detection logic when scenarios are implemented
+     */
     return this.trialLevel; // Always use level for now (trials)
   }
 
@@ -178,7 +183,10 @@ export class AssumptionsSectionContainerComponent {
    * @returns The section description based on the current activeIndex, or fallback description
    */
   getSectionDescription(): string {
-    // Get the current slug from the activeIndex
+    /**
+     * Get the current slug from the activeIndex
+     * This maps the active tab to its corresponding description
+     */
     const currentSlug = this.assumptionsTrialSections[this.activeIndex];
     
     const sectionDescriptions: Record<keyof typeof this.baseAssumptionsItems, string> = {
@@ -205,7 +213,10 @@ export class AssumptionsSectionContainerComponent {
   onSave(): void {
     this.isSaving = true;
     
-    // Simulate save operation
+    /**
+     * Simulate save operation
+     * In a real application, this would call an API service
+     */
     setTimeout(() => {
       this.isSaving = false;
       console.log('Assumptions saved successfully');

@@ -8,7 +8,7 @@ import type { TrialStep, TrialStepId } from './trial-step.types';
 export const TrialStepActions = createActionGroup({
   source: 'TrialStep',
   events: {
-    'Go To Step': props<{ step: TrialStep }>(),
+    'Go To Step': props<{ step: TrialStep; trialId: string }>(),
     'Update Step': props<{ step: TrialStep }>(),
     'Set Active Step By Route': props<{ stepId: TrialStepId }>(),
     'Go To Step Success': props<{ data?: unknown }>(),

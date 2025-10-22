@@ -4,7 +4,6 @@ import {routes} from '@ng-p20-kit/showcase/app/app.routes';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {providePrimeNG} from 'primeng/config';
 import {SagaBluePreset} from '@ng-p20-kit/theme';
-import { stepRoutingConfig } from '@trial-step/step-routing.tokens';
 import { appRoutes, routeParams } from '@core/route.constants';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
@@ -40,13 +39,6 @@ export const appConfig: ApplicationConfig = {
      * Provides step routing configuration for trial navigation
      * Uses centralized route constants for consistency
      */
-    {
-        provide: stepRoutingConfig,
-        useValue: {
-            basePath: appRoutes.dashboard,
-            trialIdParam: routeParams.id
-        }
-    },
     provideStore({
       [trialStepFeature.name]: trialStepFeature.reducer
     }),

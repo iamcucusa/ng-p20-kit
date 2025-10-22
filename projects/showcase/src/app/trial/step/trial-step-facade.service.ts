@@ -1,7 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
 import type { TrialStep, TrialStepId } from './trial-step.types';
 import { TrialStepActions } from './trial-step.actions';
 import {
@@ -13,7 +12,6 @@ import {
   selectSteps
 } from './trial-step.selectors';
 import { TrialStepState } from './trial-step.reducer';
-import { StepRoutingService } from './step-routing.service';
 
 /**
  * Facade service for TrialStep NgRx feature
@@ -24,8 +22,6 @@ import { StepRoutingService } from './step-routing.service';
 })
 export class TrialStepFacadeService {
   private store = inject(Store<TrialStepState>);
-  private router = inject(Router);
-  private stepRoutingService = inject(StepRoutingService);
 
   readonly activeStep$: Observable<TrialStep | null> = this.store.select(selectActiveStep);
   readonly activeStepId$: Observable<TrialStepId | undefined> = this.store.select(selectActiveStepId);
@@ -36,17 +32,12 @@ export class TrialStepFacadeService {
 
   /**
    * Navigates to a specific step and updates the state
+   * Dispatches the Go To Step action - navigation is handled by effects
    * @param step The step to navigate to
+   * @param trialId Required trial ID for navigation
    */
-  goToStep(step: TrialStep): void {
-    this.store.dispatch(TrialStepActions.goToStep({ step }));
-    const trialId = this.stepRoutingService.getCurrentTrialId();
-    if (trialId) {
-      const stepPath = this.stepRoutingService.getStepRoutePath(trialId, step.stepId);
-      this.router.navigateByUrl(stepPath);
-    } else {
-      this.router.navigate([step.stepId]);
-    }
+  goToStep(step: TrialStep, trialId: string): void {
+    this.store.dispatch(TrialStepActions.goToStep({ step, trialId }));
   }
 
   /**
