@@ -1,0 +1,303 @@
+@use '../../../theme/src/lib/styles/breakpoints.scss' as bp;
+@use '../../../theme/src/lib/styles/typography.scss';
+
+/* ========================================
+   STEP CONTAINER UTILITY CLASSES
+   ======================================== */
+
+/**
+ * Base step container layout
+ * Provides consistent structure for all step containers
+ */
+.pg-step-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: var(--spacing-4);
+}
+
+/**
+ * Step container content area
+ * Flexible content area that takes remaining space
+ */
+.pg-step-container__content {
+  flex: 1;
+  position: relative; /* For absolute positioning of toggle button */
+}
+
+/**
+ * Step container with two-column layout
+ * Navigation sidebar + main content area
+ */
+.pg-step-container--two-column {
+  .pg-step-container__content {
+    display: flex;
+    gap: var(--spacing-6);
+    min-height: calc(100vh - 200px); // Adjust based on header height
+  }
+}
+
+/**
+ * Step container with content + aside layout
+ * Main content area + information aside panel
+ */
+.pg-step-container--content-aside {
+  .pg-step-container__content {
+    display: grid;
+    grid-template-columns: 1fr 20rem; // Main content + fixed aside
+    gap: var(--spacing-6);
+    min-height: calc(100vh - 200px);
+    
+    /* Tablet: Stack vertically */
+    @include bp.tablet-down {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-4);
+    }
+  }
+}
+
+/**
+ * Step container navigation sidebar
+ * Responsive sidebar with adaptive behavior for dashboard UX
+ */
+.pg-step-container__sidebar {
+  width: 17.5rem; // 280px at 16px base
+  min-width: 15rem; // 240px minimum for content
+  max-width: 22rem; // 352px maximum for consistency
+  flex-shrink: 0;
+  position: sticky;
+  top: var(--spacing-4); // Offset from top for better visual spacing
+  align-self: flex-start;
+  /* No height restrictions - let content determine natural height */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); // Smooth transitions
+  
+  /* Tablet: Collapsible sidebar (≤1199px) */
+  @include bp.desktop-down {
+    position: absolute;
+    left: -280px;
+    top: 0;
+    height: 100%;
+    z-index: 1000;
+    background-color: var(--p-surface-card);
+    border-right: 1px solid var(--p-surface-border);
+    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    
+    &.sidebar-open {
+      left: 0;
+    }
+  }
+  
+  /* Mobile: Full overlay */
+  @include bp.mobile-down {
+    width: 100%;
+    left: -100%;
+    
+    &.sidebar-open {
+      left: 0;
+    }
+  }
+}
+
+/**
+ * Step container main content area
+ * Flexible content area with responsive behavior for horizontal tabs
+ */
+.pg-step-container__main {
+  flex: 1;
+  min-width: 0; // Prevents flex item from overflowing
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Tablet: Adjust for sidebar overlay (≤1199px) */
+  @include bp.desktop-down {
+    width: 100%;
+    position: relative; /* Ensure proper positioning context for sidebar */
+  }
+  
+  /* Mobile: Full width (≤767px) */
+  @include bp.mobile-down {
+    width: 100%;
+  }
+}
+
+/**
+ * Step container aside information panel
+ * Fixed-width information panel for content + aside layout
+ */
+.pg-step-container__aside {
+  width: 20rem; // Fixed width for information panel
+  min-width: 18rem; // Minimum width for content
+  max-width: 24rem; // Maximum width for consistency
+  flex-shrink: 0;
+  background-color: var(--p-surface-card);
+  border: 1px solid var(--p-surface-border);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-4);
+  align-self: flex-start;
+  position: sticky;
+  top: var(--spacing-4);
+  
+  /* Tablet: Full width when stacked */
+  @include bp.tablet-down {
+    width: 100%;
+    position: static;
+    margin-top: var(--spacing-4);
+  }
+}
+
+/**
+ * Sidebar overlay for mobile/tablet
+ * Dark overlay when sidebar is open
+ */
+.pg-sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &.overlay-visible {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/**
+ * Sidebar toggle buttons
+ * Floating action buttons for mobile/tablet
+ */
+.pg-sidebar-toggle {
+  position: absolute;
+  top: var(--spacing-4);
+  z-index: 1001;
+  display: none;
+  
+  /* Show on tablet and mobile (≤1199px) */
+  @include bp.desktop-down {
+    display: block;
+  }
+  
+  /* Expand button (top-left) */
+  &--expand {
+    left: var(--spacing-4);
+  }
+  
+  /* Collapse button (top-right) */
+  &--collapse {
+    right: var(--spacing-4);
+  }
+}
+
+/**
+ * Step container with card-style content
+ * Provides consistent card styling for step content
+ */
+.pg-step-container__card {
+  background-color: var(--p-surface-card);
+  border: 1px solid var(--p-surface-border);
+  border-radius: 0.5rem;
+  padding: var(--spacing-5);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transform: translateY(-1px);
+  }
+}
+
+/**
+ * Step container grid layout
+ * Responsive grid for step content
+ */
+.pg-step-container__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-4);
+
+  @include bp.tablet-up {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include bp.desktop-up {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/**
+ * Step container empty state
+ * Consistent empty state styling
+ */
+.pg-step-container__empty-state {
+  background-color: var(--p-surface-card);
+  border: 2px dashed var(--p-surface-border);
+  border-radius: 0.5rem;
+  padding: var(--spacing-8);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.pg-step-container__empty-text {
+  @include typography.text-base;
+  @include typography.font-normal;
+  color: var(--p-text-color-secondary);
+  margin: 0;
+}
+
+/**
+ * Step container section titles
+ * Consistent section heading styling
+ */
+.pg-step-container__section-title {
+  @include typography.text-lg;
+  @include typography.font-semibold;
+  color: var(--p-text-color);
+  margin: 0 0 var(--spacing-4) 0;
+}
+
+/**
+ * Step container stats grid
+ * Consistent stats display
+ */
+.pg-step-container__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-4);
+}
+
+.pg-step-container__stat {
+  background-color: var(--p-surface-card);
+  border: 1px solid var(--p-surface-border);
+  border-radius: 0.5rem;
+  padding: var(--spacing-4);
+  text-align: center;
+  transition: all 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.pg-step-container__stat-title {
+  @include typography.text-sm;
+  @include typography.font-medium;
+  color: var(--p-text-color-secondary);
+  margin: 0 0 var(--spacing-1) 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.pg-step-container__stat-value {
+  @include typography.text-2xl;
+  @include typography.font-bold;
+  color: var(--p-text-color);
+  margin: 0;
+}
