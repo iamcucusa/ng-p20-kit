@@ -6,7 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import type { Trial } from '@trial/trial.types';
 import type { TrialAssumptionsPage, AssumptionsScenarioPage } from '@assumptions/assumptions';
-import { baseAssumptionsItemsToken, assumptionsTrialSectionsToken } from '@assumptions/navigation/assumptions-navigation.settings';
+import { baseAssumptionsItemsToken, assumptionsTrialSectionsToken, trialLevelToken, assumptionsNavigationLevelProvides } from '@assumptions/navigation/assumptions-navigation.settings';
 
 /**
  * Assumptions Section Container Component
@@ -28,18 +28,25 @@ import { baseAssumptionsItemsToken, assumptionsTrialSectionsToken } from '@assum
   imports: [AssumptionsSectionHeadingComponent, AssumptionsTabContentComponent, AssumptionsTabActionsComponent, ButtonModule, RippleModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './assumptions-section-container.component.scss',
+  providers: [
+    /**
+     * Local providers for assumptions navigation level tokens
+     * Provides trial and scenario level tokens for this component and its children
+     */
+    ...assumptionsNavigationLevelProvides
+  ],
   template: `
     <div class="pg-assumptions-section-container">
       <kit-assumptions-section-heading 
-        [title]="sectionTitle"
         [description]="sectionDescription"
+        [titleTemplate]="titleTemplate"
         [actions]="actionsTemplate">
       </kit-assumptions-section-heading>
         
       <!-- Tab Content Component -->
       <kit-assumptions-tab-content 
         [activeTrial]="activeTrial"
-        [level]="'Trial'"
+        [level]="trialLevel"
         [isLoading]="isSaving"
         [canEdit]="true"
         [canView]="false"
@@ -47,6 +54,14 @@ import { baseAssumptionsItemsToken, assumptionsTrialSectionsToken } from '@assum
         (canSaveFormChange)="onCanSaveFormChange($event)">
       </kit-assumptions-tab-content>
     </div>
+    
+    <ng-template #titleTemplate>
+      <div class="pg-assumptions-section-title">
+        <span class="pg-assumptions-section-title__context">{{ contextName }}</span>
+        <div class="pg-assumptions-section-title__divider" aria-hidden="true"></div>
+        <span class="pg-assumptions-section-title__section">{{ sectionName }}</span>
+      </div>
+    </ng-template>
     
     <ng-template #actionsTemplate>
       <kit-assumptions-tab-actions
@@ -65,6 +80,9 @@ export class AssumptionsSectionContainerComponent {
   
   /** Injected trial sections array for index-based slug resolution */
   public assumptionsTrialSections = inject(assumptionsTrialSectionsToken);
+
+  /** Injected trial level token */
+  public trialLevel = inject(trialLevelToken);
 
   /** 
    * Active tab index (0-based) that determines which section is currently displayed
@@ -93,11 +111,15 @@ export class AssumptionsSectionContainerComponent {
   /** Whether the form can be saved (validation state) */
   canSaveForm: boolean = true;
 
-  /** Current section title - updated when activeIndex changes */
-  sectionTitle: string = this.getSectionTitle();
 
   /** Current section description - updated when activeIndex changes */
   sectionDescription: string = this.getSectionDescription();
+
+  /** Current context name (Trial, Scenario, etc.) - updated when activeIndex changes */
+  contextName: string = this.getContextName();
+
+  /** Current section name - updated when activeIndex changes */
+  sectionName: string = this.getSectionName();
 
   constructor() {
     // Initialize with default values
@@ -105,37 +127,42 @@ export class AssumptionsSectionContainerComponent {
   }
 
   /**
-   * Updates section title and description based on current activeIndex
+   * Updates section content based on current activeIndex
    */
   private updateSectionContent(): void {
-    this.sectionTitle = this.getSectionTitle();
     this.sectionDescription = this.getSectionDescription();
+    this.contextName = this.getContextName();
+    this.sectionName = this.getSectionName();
+  }
+
+
+  /**
+   * Gets the context name (Trial, Scenario, etc.)
+   * 
+   * @returns The context name for the current section
+   */
+  getContextName(): string {
+    // For trials: use level token (shorter, consistent)
+    // For scenarios: use actual name (has length limits)
+    // TODO: Add scenario detection logic when scenarios are implemented
+    return this.trialLevel; // Always use level for now (trials)
   }
 
   /**
-   * Gets the dynamic section title using activeIndex and baseAssumptionsItems token
+   * Gets the section name based on the activeIndex
    * 
-   * The title is determined by the following dependency chain:
-   * 1. activeIndex (0-based) → assumptionsTrialSections[activeIndex] → currentSlug
-   * 2. currentSlug → baseAssumptionsItems[currentSlug] → sectionTitle
-   * 
-   * @example
-   * // activeIndex = 0 → assumptionsTrialSections[0] = 'parameters' → baseAssumptionsItems.parameters = 'Trial Parameters'
-   * // activeIndex = 1 → assumptionsTrialSections[1] = 'contacts' → baseAssumptionsItems.contacts = 'Contacts'
-   * 
-   * @returns The section title based on the current activeIndex, or fallback title
+   * @returns The section name for the current activeIndex
    */
-  getSectionTitle(): string {
-    // Get the current slug from the activeIndex
+  getSectionName(): string {
     const currentSlug = this.assumptionsTrialSections[this.activeIndex];
     
-    // Check if the slug exists as a key in baseAssumptionsItems
     if (currentSlug in this.baseAssumptionsItems) {
       return this.baseAssumptionsItems[currentSlug as keyof typeof this.baseAssumptionsItems];
     }
     
-    return 'Assumptions Section';
+    return 'Assumptions';
   }
+
   
   /**
    * Gets the dynamic section description based on the activeIndex

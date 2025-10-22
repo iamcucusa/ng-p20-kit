@@ -3,3 +3,46 @@
   flex-direction: column;
   gap: var(--spacing-4);
 }
+
+/**
+ * Structured title with visual divider
+ * Matches the design pattern from pg-trial-heading__divider
+ * Only handles layout and divider - font styles inherit from parent
+ */
+.pg-assumptions-section-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+
+  &__context {
+    transition: opacity 0.15s ease-out;
+  }
+
+  &__divider {
+    width: 1.5px;
+    height: 1.3rem;
+    background: var(--p-primary-300);
+    flex-shrink: 0;
+    align-self: center;
+    transition: opacity 0.1s ease-out;
+  }
+
+  &__section {
+    transition: opacity 0.15s ease-out;
+  }
+}
+
+/**
+ * Accessibility: Respect user's motion preferences
+ */
+@media (prefers-reduced-motion: reduce) {
+  .pg-assumptions-section-title {
+    transition: none;
+    
+    &__context,
+    &__section,
+    &__divider {
+      transition: none;
+    }
+  }
+}

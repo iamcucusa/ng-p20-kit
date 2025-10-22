@@ -16,7 +16,7 @@ import {
 import {InjectionToken} from '@angular/core';
 import {SelectItem} from 'primeng/api';
 import {
-  AssumptionsBaseNavigationItem, NewTrialNavigationItem,
+  AssumptionsBaseNavigationItem, AssumptionsLevel, NewTrialNavigationItem,
   TrialAssumptionsNavigationItem
 } from '@assumptions/navigation/assumptions-navigation';
 
@@ -341,3 +341,24 @@ export const navProviders = [
     useValue: newScenario,
   },
 ];
+
+
+export const trialLevel: AssumptionsLevel = 'Trial';
+
+export const scenarioLevel: AssumptionsLevel = 'Scenario';
+
+export const trialLevelToken = new InjectionToken<AssumptionsLevel>('Trial Level For Assumptions Actions');
+
+export const scenarioLevelToken = new InjectionToken<AssumptionsLevel>('Scenario Level For Assumptions Actions');
+
+export const assumptionsNavigationLevelProvides = [
+  {
+    provide: trialLevelToken,
+    useValue: trialLevel,
+  },
+  {
+    provide: scenarioLevelToken,
+    useValue: scenarioLevel,
+  },
+];
+

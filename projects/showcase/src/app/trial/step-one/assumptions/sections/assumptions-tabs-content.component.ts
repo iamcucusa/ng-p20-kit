@@ -28,6 +28,7 @@ import {
 } from '@assumptions/navigation/assumptions-navigation.settings';
 import type { Trial } from '@trial/trial.types';
 import type { TrialAssumptionsPage } from '@assumptions/assumptions';
+import type { AssumptionsLevel } from '@assumptions/navigation/assumptions-navigation';
 
 /**
  * Assumptions Tab Content Component
@@ -339,7 +340,7 @@ export class AssumptionsTabContentComponent implements AfterViewInit {
   @Input() activeTrial?: Trial | null;
 
   /** Assumption level */
-  @Input() level: string = 'Trial';
+  @Input() level!: AssumptionsLevel;
 
   /** Loading state */
   @Input() isLoading: boolean = false;

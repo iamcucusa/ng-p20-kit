@@ -17,7 +17,7 @@ import { CommonModule } from '@angular/common';
         <div class="pg-assumptions-section-heading__content">
           <div class="pg-assumptions-section-heading__text">
             <h3 id="assumptions-title" class="pg-assumptions-section-heading__title">
-              {{ title }}
+              <ng-container [ngTemplateOutlet]="titleTemplate"></ng-container>
             </h3>
             @if (description) {
               <p id="assumptions-description" class="pg-assumptions-section-heading__description">
@@ -39,12 +39,13 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AssumptionsSectionHeadingComponent {
-  /** Assumptions section title (required) */
-  @Input({ required: true }) title!: string;
   
   /** Optional assumptions section description */
   @Input() description?: string;
   
   /** Optional template for assumptions actions */
   @Input() actions?: TemplateRef<unknown> | null;
+
+  /** Template for structured title with divider (required) */
+  @Input({ required: true }) titleTemplate!: TemplateRef<unknown>;
 }
