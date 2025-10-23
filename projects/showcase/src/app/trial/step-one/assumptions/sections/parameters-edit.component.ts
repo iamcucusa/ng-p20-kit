@@ -1,0 +1,466 @@
+import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { TextareaModule } from 'primeng/textarea';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { CheckboxModule } from 'primeng/checkbox';
+import { SelectModule } from 'primeng/select';
+import { CardModule } from 'primeng/card';
+import { MessageModule } from 'primeng/message';
+import { RippleModule } from 'primeng/ripple';
+import { TooltipModule } from 'primeng/tooltip';
+
+/**
+ * Trial parameters interface for edit component
+ */
+interface TrialParameters {
+  name?: string;
+  description?: string;
+  studyType?: string;
+  phase?: string;
+  participants?: number;
+  duration?: number;
+  startDate?: Date | string;
+  endDate?: Date | string;
+  requiresIRB?: boolean;
+  requiresFDA?: boolean;
+  requiresEMA?: boolean;
+  regulatoryNotes?: string;
+  dataCollectionMethod?: string;
+  dataRetention?: number;
+}
+
+/**
+ * Parameters Edit Component
+ * 
+ * Handles trial parameters editing including:
+ * - Trial basic information
+ * - Study design parameters
+ * - Timeline settings
+ * - Regulatory requirements
+ * - Data collection parameters
+ * 
+ * @example
+ * ```html
+ * <kit-parameters-edit 
+ *   [activeTrial]="trial"
+ *   (parametersChange)="onParametersChange($event)">
+ * </kit-parameters-edit>
+ * ```
+ */
+@Component({
+  selector: 'kit-parameters-edit',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    ButtonModule,
+    InputTextModule,
+    TextareaModule,
+    InputNumberModule,
+    CheckboxModule,
+    SelectModule,
+    CardModule,
+    MessageModule,
+    RippleModule,
+    TooltipModule
+  ],
+  template: `
+    <div class="pg-parameters-edit-container">
+      <main class="pg-parameters-edit-main">
+        <form [formGroup]="parametersForm" (ngSubmit)="onSubmit()" class="flex flex-col w-full pg-parameters-edit-form">
+          
+          <!-- Basic Information Card -->
+          <p-card header="Basic Information" class="pg-parameters-edit-card">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pg-parameters-edit-grid">
+              <div class="flex flex-col gap-1">
+                <label for="trialName" class="pg-form-label" required>Trial Name</label>
+                <input 
+                  id="trialName"
+                  type="text" 
+                  pInputText 
+                  formControlName="trialName"
+                  placeholder="Enter trial name"
+                  [invalid]="isFieldInvalid('trialName')"
+                  pTooltip="Enter a descriptive name for your trial"
+                  tooltipPosition="top">
+                @if (isFieldInvalid('trialName')) {
+                  <p-message severity="error" size="small" variant="simple">Trial name is required</p-message>
+                }
+              </div>
+
+              <div class="flex flex-col gap-1">
+                <label for="trialDescription" class="pg-form-label">Description</label>
+                <textarea 
+                  id="trialDescription"
+                  pTextarea 
+                  formControlName="trialDescription"
+                  placeholder="Describe the trial objectives and scope"
+                  rows="3">
+                </textarea>
+              </div>
+            </div>
+          </p-card>
+
+          <!-- Study Design Card -->
+          <p-card header="Study Design" class="pg-parameters-edit-card">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pg-parameters-edit-grid">
+              <div class="flex flex-col gap-1">
+                <label for="studyType" class="pg-form-label" required>Study Type</label>
+                <p-select 
+                  id="studyType"
+                  formControlName="studyType"
+                  [options]="studyTypeOptions"
+                  placeholder="Select study type"
+                  [invalid]="isFieldInvalid('studyType')"
+                  pTooltip="Choose the type of clinical study">
+                </p-select>
+                @if (isFieldInvalid('studyType')) {
+                  <p-message severity="error" size="small" variant="simple">Study type is required</p-message>
+                }
+              </div>
+
+              <div class="flex flex-col gap-1">
+                <label for="phase" class="pg-form-label">Phase</label>
+                <p-select 
+                  id="phase"
+                  formControlName="phase"
+                  [options]="phaseOptions"
+                  placeholder="Select phase"
+                  pTooltip="Clinical trial phase">
+                </p-select>
+              </div>
+
+              <div class="flex flex-col gap-1">
+                <label for="participants" class="pg-form-label">Expected Participants</label>
+                <p-inputNumber 
+                  id="participants"
+                  formControlName="participants"
+                  placeholder="Number of participants"
+                  [min]="1"
+                  [max]="10000"
+                  pTooltip="Estimated number of participants">
+                </p-inputNumber>
+              </div>
+
+              <div class="flex flex-col gap-1">
+                <label for="duration" class="pg-form-label">Duration (months)</label>
+                <p-inputNumber 
+                  id="duration"
+                  formControlName="duration"
+                  placeholder="Trial duration"
+                  [min]="1"
+                  [max]="120"
+                  pTooltip="Expected trial duration in months">
+                </p-inputNumber>
+              </div>
+            </div>
+          </p-card>
+
+          <!-- Regulatory Requirements Card -->
+          <p-card header="Regulatory Requirements" class="pg-parameters-edit-card">
+              <div class="flex flex-col pg-parameters-edit-flex-col">
+              <div class="flex flex-wrap pg-parameters-edit-flex-wrap">
+                @for (item of regulatoryKeys; track item) {
+                  <div class="flex items-center gap-2">
+                    <p-checkbox 
+                      [formControlName]="item" 
+                      [binary]="true" 
+                      [inputId]="item" 
+                      [invalid]="isFieldInvalid(item)" />
+                    <label [for]="item" class="pg-form-label">{{ getRegulatoryLabel(item) }}</label>
+                  </div>
+                }
+              </div>
+              
+              <div class="flex flex-col gap-1">
+                <label for="regulatoryNotes" class="pg-form-label">Regulatory Notes</label>
+                <textarea 
+                  id="regulatoryNotes"
+                  pTextarea 
+                  formControlName="regulatoryNotes"
+                  placeholder="Additional regulatory requirements or notes"
+                  rows="2">
+                </textarea>
+              </div>
+            </div>
+          </p-card>
+
+          <!-- Data Collection Card -->
+          <p-card header="Data Collection" class="pg-parameters-edit-card">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pg-parameters-edit-grid">
+              <div class="flex flex-col gap-1">
+                <label for="dataCollectionMethod" class="pg-form-label">Data Collection Method</label>
+                <p-select 
+                  id="dataCollectionMethod"
+                  formControlName="dataCollectionMethod"
+                  [options]="dataCollectionOptions"
+                  placeholder="Select method"
+                  pTooltip="How data will be collected">
+                </p-select>
+              </div>
+
+              <div class="flex flex-col gap-1">
+                <label for="dataRetention" class="pg-form-label">Data Retention (years)</label>
+                <p-inputNumber 
+                  id="dataRetention"
+                  formControlName="dataRetention"
+                  placeholder="Retention period"
+                  [min]="1"
+                  [max]="50"
+                  pTooltip="How long data will be retained">
+                </p-inputNumber>
+              </div>
+            </div>
+          </p-card>
+
+          <!-- Form Actions -->
+          <div class="flex justify-end gap-3">
+            <p-button 
+              type="button" 
+              severity="secondary" 
+              (onClick)="onReset()"
+              pRipple>
+              <span pButtonLabel>Reset</span>
+            </p-button>
+            
+            <p-button 
+              type="submit" 
+              severity="primary"
+              [disabled]="parametersForm.invalid"
+              [loading]="isSaving"
+              pRipple>
+              <span pButtonLabel>Save Parameters</span>
+            </p-button>
+          </div>
+
+          <!-- Status Messages -->
+          @if (saveMessage) {
+            <p-message 
+              [severity]="saveMessage.severity" 
+              [text]="saveMessage.text"
+              [closable]="true"
+              (onClose)="clearMessage()">
+            </p-message>
+          }
+        </form>
+      </main>
+
+      <aside class="pg-parameters-edit-aside">
+        <p-card header="Comments & Utilities" class="pg-parameters-edit-card">
+              <div class="flex flex-col pg-parameters-edit-flex-col">
+            <div class="flex flex-col gap-2">
+              <label for="comments" class="pg-form-label">Comments</label>
+              <textarea 
+                id="comments"
+                pTextarea 
+                placeholder="Add comments or notes about this trial..."
+                rows="4">
+              </textarea>
+            </div>
+            
+            <div class="flex flex-col gap-2">
+              <label for="tags" class="pg-form-label">Tags</label>
+              <input 
+                id="tags"
+                type="text" 
+                pInputText 
+                placeholder="Add tags separated by commas">
+            </div>
+            
+            <div class="flex flex-col gap-2">
+              <h5 class="font-medium text-sm text-gray-700">Quick Actions</h5>
+              <div class="flex flex-col gap-2">
+                <p-button 
+                  label="Validate Form" 
+                  severity="info" 
+                  size="small"
+                  [outlined]="true"
+                  pRipple>
+                </p-button>
+                <p-button 
+                  label="Export Data" 
+                  severity="secondary" 
+                  size="small"
+                  [outlined]="true"
+                  pRipple>
+                </p-button>
+                <p-button 
+                  label="Save Template" 
+                  severity="help" 
+                  size="small"
+                  [outlined]="true"
+                  pRipple>
+                </p-button>
+              </div>
+            </div>
+          </div>
+        </p-card>
+      </aside>
+    </div>
+  `,
+  styleUrls: ['./parameters-edit.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class ParametersEditComponent {
+  private fb = new FormBuilder();
+
+  /**
+   * Active trial data
+   * Used to populate form with existing trial parameters
+   */
+  @Input() activeTrial?: TrialParameters;
+
+  /**
+   * Loading state for save operation
+   */
+  isSaving = false;
+
+  /**
+   * Status message for user feedback
+   */
+  saveMessage?: { severity: 'success' | 'error' | 'info' | 'warn'; text: string };
+
+  /**
+   * Output event for parameters changes
+   */
+  @Output() parametersChange = new EventEmitter<TrialParameters>();
+
+  /**
+   * Form group for trial parameters
+   * Contains all form controls and validation rules
+   */
+  parametersForm: FormGroup;
+
+  /**
+   * Study type options for dropdown
+   */
+  studyTypeOptions = [
+    { label: 'Interventional', value: 'interventional' },
+    { label: 'Observational', value: 'observational' },
+    { label: 'Expanded Access', value: 'expanded_access' },
+    { label: 'Other', value: 'other' }
+  ];
+
+  /**
+   * Phase options for dropdown
+   */
+  phaseOptions = [
+    { label: 'Phase I', value: 'phase_1' },
+    { label: 'Phase II', value: 'phase_2' },
+    { label: 'Phase III', value: 'phase_3' },
+    { label: 'Phase IV', value: 'phase_4' },
+    { label: 'Not Applicable', value: 'not_applicable' }
+  ];
+
+  /**
+   * Data collection method options
+   */
+  dataCollectionOptions = [
+    { label: 'Electronic Data Capture (EDC)', value: 'edc' },
+    { label: 'Paper Forms', value: 'paper' },
+    { label: 'Mobile App', value: 'mobile' },
+    { label: 'Wearable Devices', value: 'wearable' },
+    { label: 'Other', value: 'other' }
+  ];
+
+  /**
+   * Regulatory requirement keys for dynamic checkbox generation
+   */
+  regulatoryKeys = ['requiresIRB', 'requiresFDA', 'requiresEMA'];
+
+  constructor() {
+    this.parametersForm = this.createForm();
+  }
+
+  /**
+   * Creates the reactive form with all controls and validators
+   * @returns FormGroup with trial parameters configuration
+   */
+  private createForm(): FormGroup {
+    return this.fb.group({
+      // Basic Information
+      trialName: ['', [Validators.required, Validators.minLength(3)]],
+      trialDescription: [''],
+      
+      // Study Design
+      studyType: ['', Validators.required],
+      phase: [''],
+      participants: [null, [Validators.min(1), Validators.max(10000)]],
+      duration: [null, [Validators.min(1), Validators.max(120)]],
+      
+      // Regulatory Requirements
+      requiresIRB: [false],
+      requiresFDA: [false],
+      requiresEMA: [false],
+      regulatoryNotes: [''],
+      
+      // Data Collection
+      dataCollectionMethod: [''],
+      dataRetention: [null, [Validators.min(1), Validators.max(50)]]
+    });
+  }
+
+  /**
+   * Handles form submission
+   * Validates form and emits parameters change event
+   */
+  onSubmit(): void {
+    if (this.parametersForm.valid) {
+      this.isSaving = true;
+      
+      // Simulate API call
+      setTimeout(() => {
+        this.isSaving = false;
+        this.saveMessage = {
+          severity: 'success',
+          text: 'Trial parameters saved successfully'
+        };
+        
+        // Emit the form data
+        this.parametersChange.emit(this.parametersForm.value);
+      }, 1000);
+    }
+  }
+
+  /**
+   * Resets the form to initial state
+   */
+  onReset(): void {
+    this.parametersForm.reset();
+    this.clearMessage();
+  }
+
+  /**
+   * Checks if a form field is invalid and has been touched
+   * @param fieldName - Name of the form control
+   * @returns True if field is invalid and touched
+   */
+  isFieldInvalid(fieldName: string): boolean {
+    const field = this.parametersForm.get(fieldName);
+    return !!(field && field.invalid && (field.touched || field.dirty));
+  }
+
+  /**
+   * Clears the status message
+   */
+  clearMessage(): void {
+    this.saveMessage = undefined;
+  }
+
+  /**
+   * Gets the display label for regulatory requirements
+   * @param key - The form control key
+   * @returns The formatted label
+   */
+  getRegulatoryLabel(key: string): string {
+    const labels: Record<string, string> = {
+      'requiresIRB': 'IRB Approval Required',
+      'requiresFDA': 'FDA Approval Required',
+      'requiresEMA': 'EMA Approval Required'
+    };
+    return labels[key] || key;
+  }
+}

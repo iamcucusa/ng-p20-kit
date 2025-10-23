@@ -12,6 +12,8 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { TabsModule } from 'primeng/tabs';
+import { ParametersViewComponent } from './parameters-view.component';
+import { ParametersEditComponent } from './parameters-edit.component';
 import { 
   baseAssumptionsItemsToken, 
   assumptionsTrialSectionsToken,
@@ -43,7 +45,7 @@ import type { TrialAssumptionsPage } from '@assumptions/assumptions';
 @Component({
   selector: 'kit-assumptions-tab-content',
   standalone: true,
-  imports: [TabsModule, CommonModule],
+  imports: [TabsModule, CommonModule, ParametersViewComponent, ParametersEditComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <p-tabs [value]="activeTabIndex" (valueChange)="onTabChange($event)">
@@ -58,26 +60,14 @@ import type { TrialAssumptionsPage } from '@assumptions/assumptions';
               <!-- Trial Parameters Section -->
               @if (section === trialParameters) {
                 @if (canEdit) {
-                  <div class="p-4">
-                    <h4 class="text-lg font-medium mb-3">Trial Parameters</h4>
-                    <p class="text-gray-600 mb-4">Configure trial parameters and settings</p>
-                    <div class="bg-blue-50 p-4 rounded-lg">
-                      <p class="text-sm text-blue-800">
-                        <strong>Edit Mode:</strong> Trial Parameters form will be implemented here.
-                      </p>
-                    </div>
-                  </div>
+                  <kit-parameters-edit 
+                    [activeTrial]="activeTrial || undefined"
+                    (parametersChange)="onParametersChange($event)">
+                  </kit-parameters-edit>
                 } @else {
-                  <div class="p-4">
-                    <h4 class="text-lg font-medium mb-3">Trial Parameters</h4>
-                    <p class="text-gray-600 mb-4">View trial parameters and settings</p>
-                    <div class="bg-gray-50 p-4 rounded-lg">
-                      <p class="text-sm text-gray-600">
-                        <strong>View Mode:</strong> Trial Parameters display will be implemented here.
-                      </p>
-                    </div>
-                  </div>
-                }
+                   <kit-parameters-view [activeTrial]="activeTrial || undefined">
+                   </kit-parameters-view>
+                 }
               }
 
               <!-- Contacts Section -->
@@ -561,4 +551,18 @@ export class AssumptionsTabContentComponent implements AfterViewInit {
   public isValidTab(tab: string): boolean {
     return this.assumptionsTrialSections.includes(tab as TrialAssumptionsPage);
   }
+
+  /**
+   * Handles parameters change from the ParametersEditComponent
+   * @param parameters - The updated parameters data
+   */
+  onParametersChange(parameters: any): void {
+    console.log('Parameters changed:', parameters);
+    // TODO: Implement parameters change handling
+    // This could include:
+    // - Updating the trial data
+    // - Emitting changes to parent component
+    // - Saving to backend
+  }
+
 }

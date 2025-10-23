@@ -10,7 +10,12 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'kit-step-one-overview-section',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule  ],
+  styles: [`
+    .pg-overview-grid {
+      gap: var(--spacing-3);
+    }
+  `],
   template: `
     <div class="p-6 space-y-6">
       <div class="bg-white border border-gray-200 rounded-lg p-6">
@@ -20,7 +25,7 @@ import { CommonModule } from '@angular/common';
           Use the navigation on the left to access specific sections and scenarios.
         </p>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pg-overview-grid">
           <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
             <h3 class="text-lg font-medium text-blue-900 mb-2">Trial Details</h3>
             <p class="text-blue-700 text-sm">Basic trial information and parameters</p>
@@ -53,7 +58,6 @@ import { CommonModule } from '@angular/common';
         </div>
       </div>
     </div>
-  `,
-  styles: []
+  `
 })
 export class StepOneOverviewSection {}

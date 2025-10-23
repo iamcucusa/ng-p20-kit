@@ -1,0 +1,44 @@
+// Shadow Tokens for Design System
+// Provides consistent shadow scale across the application
+// 
+// ⚠️ WARNING: This file is part of the theme library's design tokens.
+// All files under projects/theme/src/lib/styles/ are part of the design system.
+
+:root {
+  /* Shadow Scale - Consistent with modern design systems */
+  --shadow-none: none;
+  
+  /* Small shadows - subtle elevation */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  
+  /* Medium shadows - standard card elevation */
+  --shadow-md: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  
+  /* Large shadows - elevated cards, hover states */
+  --shadow-lg: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  
+  /* Extra large shadows - modals, dropdowns */
+  --shadow-xl: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  
+  /* 2XL shadows - high elevation elements */
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  
+  /* Sidebar shadow - directional shadow for sidebars */
+  --shadow-sidebar: 4px 0 12px rgba(0, 0, 0, 0.1);
+  
+  /* Inner shadows - for inset elements */
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+}
+
+/* Dark mode shadow adjustments */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Slightly stronger shadows for dark mode */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+    --shadow-md: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+    --shadow-sidebar: 4px 0 12px rgba(0, 0, 0, 0.2);
+  }
+}

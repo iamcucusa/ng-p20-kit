@@ -80,7 +80,7 @@
     z-index: 1000;
     background-color: var(--p-surface-card);
     border-right: 1px solid var(--p-surface-border);
-    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-sidebar);
     overflow-y: auto;
     
     &.sidebar-open {
@@ -200,13 +200,13 @@
 .pg-step-container__card {
   background-color: var(--p-surface-card);
   border: 1px solid var(--p-surface-border);
-  border-radius: 0.5rem;
+  border-radius: var(--border-radius);
   padding: var(--spacing-5);
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-md);
   transition: all 0.2s ease;
 
   &:hover {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--shadow-lg);
     transform: translateY(-1px);
   }
 }
@@ -236,7 +236,7 @@
 .pg-step-container__empty-state {
   background-color: var(--p-surface-card);
   border: 2px dashed var(--p-surface-border);
-  border-radius: 0.5rem;
+  border-radius: var(--border-radius);
   padding: var(--spacing-8);
   text-align: center;
   display: flex;
@@ -276,7 +276,7 @@
 .pg-step-container__stat {
   background-color: var(--p-surface-card);
   border: 1px solid var(--p-surface-border);
-  border-radius: 0.5rem;
+  border-radius: var(--border-radius);
   padding: var(--spacing-4);
   text-align: center;
   transition: all 0.2s ease;

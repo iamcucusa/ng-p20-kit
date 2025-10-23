@@ -18,7 +18,7 @@
     // Custom tag styling using design tokens
     &.custom-draft-style {
       // Example custom styling for draft status
-      border-radius: 0.375rem;
+      border-radius: var(--border-radius);
       font-weight: 600;
     }
   }

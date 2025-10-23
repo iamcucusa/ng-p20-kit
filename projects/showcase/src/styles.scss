@@ -3,6 +3,7 @@
 @use '../../theme/src/lib/styles/tailwind-spacing.scss';
 @use '../../theme/src/lib/styles/typography.scss';
 @use '../../theme/src/lib/styles/breakpoints.scss' as bp;
+@use '../../theme/src/lib/styles/shadows.scss';
 
 /* ========================================
    STEP CONTAINER UTILITIES
@@ -20,4 +21,5 @@
  */
 .p-tabs .p-tabpanels {
   background: transparent;
+  padding: var(--spacing-3) var(--spacing-2);
 }

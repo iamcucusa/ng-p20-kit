@@ -1,0 +1,70 @@
+@use '../../../../../../../theme/src/lib/styles/typography.scss';
+@use '../../../../../../../theme/src/lib/styles/breakpoints.scss' as bp;
+
+/* ========================================
+   PARAMETERS EDIT COMPONENT STYLES
+   ======================================== */
+
+.pg-parameters-edit-container {
+  display: grid;
+  grid-template-columns: 1fr 24rem;
+  gap: var(--spacing-3);
+  padding: var(--spacing-2) 0;
+  max-width: 100%;
+  
+  /* Stack aside below main content below xl breakpoint */
+  @include bp.xl-down {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-3);
+  }
+}
+
+.pg-parameters-edit-main {
+  min-width: 0; /* Prevents grid overflow */
+  padding: 0;
+}
+
+.pg-parameters-edit-aside {
+  min-width: 0; /* Prevents grid overflow */
+  padding: 0;
+  
+  /* Full width when stacked below xl breakpoint */
+  @include bp.xl-down {
+    width: 100%;
+  }
+}
+
+/* Form Layout Classes */
+.pg-parameters-edit-form {
+  gap: var(--spacing-3);
+}
+
+.pg-parameters-edit-grid {
+  gap: var(--spacing-3);
+}
+
+.pg-parameters-edit-flex-col {
+  gap: var(--spacing-3);
+}
+
+.pg-parameters-edit-flex-wrap {
+  gap: var(--spacing-3);
+}
+
+/* Form Labels */
+.pg-form-label {
+  @include typography.text-sm;
+  @include typography.font-medium;
+  color: var(--p-text-color);
+  margin: 0;
+  
+  &::after {
+    content: ' *';
+    color: var(--p-red-500);
+    font-weight: 600;
+  }
+  
+  &:not([required])::after {
+    display: none;
+  }
+}

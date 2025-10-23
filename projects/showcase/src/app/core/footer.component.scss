@@ -55,7 +55,7 @@
   padding: var(--spacing-2) var(--spacing-3);
   background-color: var(--p-surface-card);
   border: 1px solid var(--p-surface-border);
-  border-radius: 0.375rem; // 6px converted to rem
+  border-radius: var(--border-radius);
   color: var(--p-text-color);
   text-decoration: none;
   font-size: var(--font-size-sm);

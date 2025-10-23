@@ -144,6 +144,12 @@ $semantic-breakpoints: (
   }
 }
 
+@mixin xl-down {
+  @media (max-width: map.get($breakpoints, 'xl') - 1px) {
+    @content;
+  }
+}
+
 // Range-based breakpoints
 @mixin tablet-only {
   @media (min-width: map.get($breakpoints, 'md')) and (max-width: map.get($breakpoints, 'lg') - 1px) {
