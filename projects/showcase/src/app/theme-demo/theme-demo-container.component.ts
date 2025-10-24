@@ -7,6 +7,8 @@ import { SpacingTestComponent } from './spacing-test.component';
 import { TrialHeadingExampleComponent } from './components/trial-heading-example.component';
 import { StatusDisplayExampleComponent } from './components/status-display-example.component';
 import { CardExampleComponent } from './components/card-example.component';
+import { CountrySelectExampleComponent } from './components/country-select-example.component';
+import { CountryFormExampleComponent } from './components/country-form-example.component';
 
 @Component({
   selector: 'kit-theme-demo-container',
@@ -19,7 +21,9 @@ import { CardExampleComponent } from './components/card-example.component';
     SpacingTestComponent,
     TrialHeadingExampleComponent,
     StatusDisplayExampleComponent,
-    CardExampleComponent
+    CardExampleComponent,
+    CountrySelectExampleComponent,
+    CountryFormExampleComponent
   ],
   template: `
     <div class="min-h-screen bg-gray-50 py-8">
@@ -145,6 +149,35 @@ import { CardExampleComponent } from './components/card-example.component';
               </div>
             </div>
             <kit-card-example></kit-card-example>
+          </div>
+        </div>
+
+        <!-- Country Select Examples -->
+        <div class="mb-12">
+          <div class="pg-card pg-card--padding-lg w-full">
+            <div class="pg-card__header">
+              <div class="pg-card__title">Country Select Components</div>
+              <div class="pg-card__description">
+                Reusable country selection components with PrimeNG 20 integration, custom templates, and full TypeScript support.
+              </div>
+            </div>
+            <div class="pg-card__content">
+              <div class="space-y-8">
+                <!-- Country Select Example -->
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-4">Basic Country Select</h3>
+                  <kit-country-select-example></kit-country-select-example>
+                </div>
+                
+                <p-divider></p-divider>
+                
+                <!-- Country Form Example -->
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-4">Country Form Integration</h3>
+                  <kit-country-form-example></kit-country-form-example>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

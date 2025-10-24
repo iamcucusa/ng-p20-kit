@@ -11,6 +11,7 @@ import { provideEffects } from '@ngrx/effects';
 import { provideRouterStore } from '@ngrx/router-store';
 import { trialStepFeature } from '@trial-step/trial-step.reducer';
 import { TrialStepEffects } from '@trial-step/trial-step.effects';
+import { countriesProviders } from '@country/country.settings';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -44,6 +45,7 @@ export const appConfig: ApplicationConfig = {
     }),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideRouterStore(),
-    provideEffects([TrialStepEffects])
+    provideEffects([TrialStepEffects]),
+    ...countriesProviders
 ]
 };

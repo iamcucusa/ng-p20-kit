@@ -31,21 +31,74 @@
       
       <div class="space-y-4">
         <h3 class="pg-step-container__section-title">Clinical Trial Sites</h3>
-        <div class="pg-step-container__empty-state">
-          <p class="pg-step-container__empty-text">No sites added yet</p>
-          <p-button label="Add First Site" severity="secondary" pRipple></p-button>
-        </div>
+        
+        @if (isLoadingSites) {
+          <div class="pg-step-container__empty-state">
+            <div class="flex items-center justify-center">
+              <i class="pi pi-spin pi-spinner text-2xl text-blue-600 mr-3"></i>
+              <p class="pg-step-container__empty-text">Loading sites for {{ selectedCountry?.name }}...</p>
+            </div>
+          </div>
+        } @else if (availableSites.length > 0) {
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            @for (site of availableSites; track site.id) {
+              <div class="pg-card pg-card--padding-md">
+                <div class="pg-card__header">
+                  <div class="pg-card__title">{{ site.name }}</div>
+                </div>
+                <div class="pg-card__content">
+                  <div class="space-y-2">
+                    <div class="flex justify-between">
+                      <span class="text-sm text-gray-600">City:</span>
+                      <span class="text-sm font-medium">{{ site.city }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span class="text-sm text-gray-600">Status:</span>
+                      <span class="text-sm font-medium" [class]="site.status === 'Available' ? 'text-green-600' : 'text-yellow-600'">
+                        {{ site.status }}
+                      </span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span class="text-sm text-gray-600">Capacity:</span>
+                      <span class="text-sm font-medium">{{ site.capacity }} patients</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="pg-card__actions">
+                  <p-button 
+                    label="Select Site" 
+                    size="small" 
+                    [disabled]="site.status !== 'Available'"
+                    pRipple>
+                  </p-button>
+                </div>
+              </div>
+            }
+          </div>
+        } @else if (selectedCountry) {
+          <div class="pg-step-container__empty-state">
+            <p class="pg-step-container__empty-text">No sites available for {{ selectedCountry.name }}</p>
+          </div>
+        } @else {
+          <div class="pg-step-container__empty-state">
+            <p class="pg-step-container__empty-text">Select a country to view available clinical sites</p>
+          </div>
+        }
       </div>
     </div>
   </div>
 
   <!-- Step Actions Template -->
   <ng-template #stepActions>
-    <p-button
-      label="Add Site"
-      icon="pi pi-plus"
-      (onClick)="addSite()"
-      pRipple>
-    </p-button>
+    <kit-country-select
+      [selectedCountry]="selectedCountry"
+      [countries]="availableCountries"
+      (countryChange)="onCountryChange($event)"
+      placeholder="Select country to load sites"
+      [showClear]="true"
+      [filter]="true"
+      [required]="true"
+      tooltip="Choose a country to automatically load available clinical sites">
+    </kit-country-select>
   </ng-template>
 </div>
