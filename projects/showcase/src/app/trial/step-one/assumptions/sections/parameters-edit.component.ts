@@ -73,7 +73,8 @@ interface TrialParameters {
           <!-- Basic Information Card -->
           <div class="pg-card pg-card--padding-md">
             <div class="pg-card__header">
-              <div class="pg-card__title">Basic Information</div>
+              <div class="pg-card__title">Basic Parameters</div>
+              <div class="pg-card__description">Ensure trial details are accurate and complete to proceed with the next steps.</div>
             </div>
             <div class="pg-card__content">
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pg-parameters-edit-grid">
@@ -110,7 +111,9 @@ interface TrialParameters {
           <!-- Study Design Card -->
           <div class="pg-card pg-card--padding-md">
             <div class="pg-card__header">
-              <div class="pg-card__title">Study Design</div>
+              <div class="pg-card__title">Trial Version</div>
+              <div class="pg-card__description">Track version changes and add detailed descriptions to manage changes over time.</div>
+
             </div>
             <div class="pg-card__content">
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pg-parameters-edit-grid">
@@ -166,101 +169,15 @@ interface TrialParameters {
               </div>
             </div>
           </div>
-
-          <!-- Regulatory Requirements Card -->
-          <div class="pg-card pg-card--padding-md">
-            <div class="pg-card__header">
-              <div class="pg-card__title">Regulatory Requirements</div>
-            </div>
-            <div class="pg-card__content">
-              <div class="flex flex-col pg-parameters-edit-flex-col">
-                <div class="flex flex-wrap pg-parameters-edit-flex-wrap">
-                  @for (item of regulatoryKeys; track item) {
-                    <div class="flex items-center gap-2">
-                      <p-checkbox 
-                        [formControlName]="item" 
-                        [binary]="true" 
-                        [inputId]="item" 
-                        [invalid]="isFieldInvalid(item)" />
-                      <label [for]="item" class="pg-form-label">{{ getRegulatoryLabel(item) }}</label>
-                    </div>
-                  }
-                </div>
-                
-                <div class="flex flex-col gap-1">
-                  <label for="regulatoryNotes" class="pg-form-label">Regulatory Notes</label>
-                  <textarea 
-                    id="regulatoryNotes"
-                    pTextarea 
-                    formControlName="regulatoryNotes"
-                    placeholder="Additional regulatory requirements or notes"
-                    rows="2">
-                  </textarea>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Data Collection Card -->
-          <div class="pg-card pg-card--padding-md">
-            <div class="pg-card__header">
-              <div class="pg-card__title">Data Collection</div>
-            </div>
-            <div class="pg-card__content">
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pg-parameters-edit-grid">
-                <div class="flex flex-col gap-1">
-                  <label for="dataCollectionMethod" class="pg-form-label">Data Collection Method</label>
-                  <p-select 
-                    id="dataCollectionMethod"
-                    formControlName="dataCollectionMethod"
-                    [options]="dataCollectionOptions"
-                    placeholder="Select method"
-                    pTooltip="How data will be collected">
-                  </p-select>
-                </div>
-
-                <div class="flex flex-col gap-1">
-                  <label for="dataRetention" class="pg-form-label">Data Retention (years)</label>
-                  <p-inputNumber 
-                    id="dataRetention"
-                    formControlName="dataRetention"
-                    placeholder="Retention period"
-                    [min]="1"
-                    [max]="50"
-                    pTooltip="How long data will be retained">
-                  </p-inputNumber>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Form Actions -->
-          <div class="flex justify-end gap-3">
-            <p-button 
-              type="button" 
-              severity="secondary" 
-              (onClick)="onReset()"
-              pRipple>
-              <span pButtonLabel>Reset</span>
-            </p-button>
-            
-            <p-button 
-              type="submit" 
-              severity="primary"
-              [disabled]="parametersForm.invalid"
-              [loading]="isSaving"
-              pRipple>
-              <span pButtonLabel>Save Parameters</span>
-            </p-button>
-          </div>
+          
 
           <!-- Status Messages -->
           @if (saveMessage) {
             <p-message 
               [severity]="saveMessage.severity" 
-              [text]="saveMessage.text"
               [closable]="true"
               (onClose)="clearMessage()">
+              {{ saveMessage.text }}
             </p-message>
           }
         </form>
@@ -378,21 +295,7 @@ export class ParametersEditComponent {
     { label: 'Not Applicable', value: 'not_applicable' }
   ];
 
-  /**
-   * Data collection method options
-   */
-  dataCollectionOptions = [
-    { label: 'Electronic Data Capture (EDC)', value: 'edc' },
-    { label: 'Paper Forms', value: 'paper' },
-    { label: 'Mobile App', value: 'mobile' },
-    { label: 'Wearable Devices', value: 'wearable' },
-    { label: 'Other', value: 'other' }
-  ];
-
-  /**
-   * Regulatory requirement keys for dynamic checkbox generation
-   */
-  regulatoryKeys = ['requiresIRB', 'requiresFDA', 'requiresEMA'];
+  // Removed unused options arrays
 
   constructor() {
     this.parametersForm = this.createForm();
@@ -414,15 +317,7 @@ export class ParametersEditComponent {
       participants: [null, [Validators.min(1), Validators.max(10000)]],
       duration: [null, [Validators.min(1), Validators.max(120)]],
       
-      // Regulatory Requirements
-      requiresIRB: [false],
-      requiresFDA: [false],
-      requiresEMA: [false],
-      regulatoryNotes: [''],
-      
-      // Data Collection
-      dataCollectionMethod: [''],
-      dataRetention: [null, [Validators.min(1), Validators.max(50)]]
+      // Removed unused form controls
     });
   }
 
@@ -473,17 +368,5 @@ export class ParametersEditComponent {
     this.saveMessage = undefined;
   }
 
-  /**
-   * Gets the display label for regulatory requirements
-   * @param key - The form control key
-   * @returns The formatted label
-   */
-  getRegulatoryLabel(key: string): string {
-    const labels: Record<string, string> = {
-      'requiresIRB': 'IRB Approval Required',
-      'requiresFDA': 'FDA Approval Required',
-      'requiresEMA': 'EMA Approval Required'
-    };
-    return labels[key] || key;
-  }
+  // Removed unused getRegulatoryLabel method
 }
