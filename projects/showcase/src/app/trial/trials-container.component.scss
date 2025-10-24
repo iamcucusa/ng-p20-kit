@@ -27,26 +27,12 @@
 }
 
 .pg-trials-container__card {
-  background-color: var(--p-surface-card);
-  border: 1px solid var(--p-surface-border);
-  border-radius: var(--border-radius);
-  padding: var(--spacing-5);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-4);
-  transition: all 0.2s ease;
-
-  &:hover {
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-1px);
-  }
 }
 
-.pg-trials-container__card-header {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2);
-}
+// Card header styles are now handled by .pg-card__header
 
 .pg-trials-container__card-badges {
   display: flex;
@@ -62,24 +48,11 @@
   text-transform: uppercase;
   letter-spacing: 0.025em;
 
-  &--status {
-    &--draft {
-      background-color: var(--p-yellow-100);
-      color: var(--p-yellow-800);
-    }
-    &--final {
-      background-color: var(--p-green-100);
-      color: var(--p-green-800);
-    }
-    &--replicating {
-      background-color: var(--p-blue-100);
-      color: var(--p-blue-800);
-    }
-  }
+  // Status styles are now handled by StatusDisplayComponent
 
   &--phase {
-    background-color: var(--p-surface-100);
-    color: var(--p-text-color-secondary);
+    background-color: var(--surface-100);
+    color: var(--text-secondary);
   }
 }
 
@@ -96,35 +69,30 @@
   gap: var(--spacing-2);
   @include typography.text-sm;
   @include typography.font-normal;
-  color: var(--p-text-color-secondary);
+  color: var(--text-secondary);
 
   i {
-    color: var(--p-primary-color);
+    color: var(--primary-color);
     font-size: 0.875rem;
   }
 }
 
-.pg-trials-container__card-title {
-  @include typography.text-xl;
-  @include typography.font-semibold;
-  color: var(--p-text-color);
-  margin: 0;
-  line-height: var(--line-height-tight);
-}
-
-.pg-trials-container__card-description {
-  @include typography.text-base;
-  @include typography.font-normal;
-  color: var(--p-text-color-secondary);
-  margin: 0;
-  line-height: var(--line-height-normal);
-  flex: 1;
-}
-
-.pg-trials-container__card-actions {
+.pg-trials-container__meta-value {
   display: flex;
+  align-items: center;
   gap: var(--spacing-2);
-  margin-top: var(--spacing-2);
+  margin: 0;
 }
 
-// Custom button styles removed - using PrimeNG p-button components
+// Screen reader only class for accessibility
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

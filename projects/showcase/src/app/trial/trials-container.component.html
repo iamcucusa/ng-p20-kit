@@ -1,6 +1,6 @@
-<div class="pg-trials-container">
+<main class="pg-trials-container" role="main" aria-labelledby="trials-page-title">
   <kit-page-heading>
-    <ng-template #pageTitle>Trials</ng-template>
+    <ng-template #pageTitle id="trials-page-title">Clinical Trials</ng-template>
     <ng-template #pageDescription>
       Manage and monitor your clinical trials with comprehensive tracking and analytics.
     </ng-template>
@@ -9,55 +9,72 @@
         label="New Trial" 
         icon="pi pi-plus" 
         severity="primary"
-        pRipple>
+        pRipple
+        aria-label="Create a new clinical trial">
       </p-button>
     </ng-template>
   </kit-page-heading>
   
-  <div class="pg-trials-container__content">
-    <div class="pg-trials-container__grid">
-      <div 
-        class="pg-trials-container__card"
-        *ngFor="let trial of sampleTrials; trackBy: trackByTrialId">
+  <section class="pg-trials-container__content" aria-labelledby="trials-page-title">
+    <div class="pg-trials-container__grid" role="list" aria-label="Clinical trials list">
+      <article 
+        class="pg-card pg-card--padding-lg"
+        role="listitem"
+        *ngFor="let trial of sampleTrials; trackBy: trackByTrialId"
+        [attr.aria-labelledby]="'trial-title-' + trial.id"
+        [attr.aria-describedby]="'trial-description-' + trial.id">
         
-        <div class="pg-trials-container__card-header">
-          <h3 class="pg-trials-container__card-title">{{ trial.name }}</h3>
-          <div class="pg-trials-container__card-badges">
-            <span class="pg-trials-container__badge pg-trials-container__badge--status" 
-                  [ngClass]="'pg-trials-container__badge--' + trial.status.toLowerCase()">
-              {{ trial.status }}
-            </span>
-            <span class="pg-trials-container__badge pg-trials-container__badge--phase">
+        <header class="pg-card__header">
+          <h2 class="pg-card__title" [id]="'trial-title-' + trial.id">
+            {{ trial.name }}
+          </h2>
+          <p class="pg-card__description" [id]="'trial-description-' + trial.id">
+            {{ trial.description }}
+          </p>
+        </header>
+        
+        <div class="pg-card__content">
+          <div class="pg-trials-container__card-badges" role="group" aria-label="Trial status and phase">
+            <kit-status-display 
+              [status]="trial.status"
+              [permissions]="[]"
+              [showHelp]="false">
+            </kit-status-display>
+            <span class="pg-trials-container__badge pg-trials-container__badge--phase" 
+                  aria-label="Trial phase: {{ trial.phase }}">
               {{ trial.phase }}
             </span>
           </div>
+          
+          <dl class="pg-trials-container__card-meta" role="group" aria-label="Trial details">
+            <div class="pg-trials-container__meta-item">
+              <dt class="sr-only">Participants</dt>
+              <dd class="pg-trials-container__meta-value">
+                <i class="pi pi-users" aria-hidden="true"></i>
+                <span>{{ trial.participants }} participants</span>
+              </dd>
+            </div>
+            <div class="pg-trials-container__meta-item">
+              <dt class="sr-only">Start Date</dt>
+              <dd class="pg-trials-container__meta-value">
+                <i class="pi pi-calendar" aria-hidden="true"></i>
+                <span>Started {{ trial.startDate }}</span>
+              </dd>
+            </div>
+          </dl>
         </div>
         
-        <p class="pg-trials-container__card-description">
-          {{ trial.description }}
-        </p>
-        
-        <div class="pg-trials-container__card-meta">
-          <div class="pg-trials-container__meta-item">
-            <i class="pi pi-users"></i>
-            <span>{{ trial.participants }} participants</span>
-          </div>
-          <div class="pg-trials-container__meta-item">
-            <i class="pi pi-calendar"></i>
-            <span>Started {{ trial.startDate }}</span>
-          </div>
-        </div>
-        
-        <div class="pg-trials-container__card-actions">
+        <footer class="pg-card__actions">
           <p-button 
             [label]="'Open Trial'"
             [icon]="'pi pi-arrow-right'"
             severity="primary"
             pRipple
-            [routerLink]="[getTrialPath(trial.id)]">
+            [routerLink]="[getTrialPath(trial.id)]"
+            [attr.aria-label]="'Open trial: ' + trial.name">
           </p-button>
-        </div>
-      </div>
+        </footer>
+      </article>
     </div>
-  </div>
-</div>
+  </section>
+</main>

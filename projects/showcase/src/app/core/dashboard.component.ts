@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardModule } from 'primeng/card';
 import { ListboxModule } from 'primeng/listbox';
 import { ButtonModule } from 'primeng/button';
 import { BadgeModule } from 'primeng/badge';
@@ -22,7 +21,6 @@ interface DashboardItem {
   standalone: true,
   imports: [
     CommonModule,
-    CardModule,
     ListboxModule,
     ButtonModule,
     BadgeModule,
@@ -42,55 +40,74 @@ interface DashboardItem {
       <div class="dashboard-grid">
         <!-- Statistics Cards -->
         <div class="dashboard-cards">
-          <p-card header="Total Items" class="stat-card">
-            <div class="stat-content">
-              <div class="stat-number">{{ totalItems }}</div>
-              <div class="stat-label">Active Items</div>
+          <div class="pg-card pg-card--padding-md stat-card">
+            <div class="pg-card__header">
+              <div class="pg-card__title">Total Items</div>
             </div>
-            <ng-template pTemplate="footer">
+            <div class="pg-card__content">
+              <div class="stat-content">
+                <div class="stat-number">{{ totalItems }}</div>
+                <div class="stat-label">Active Items</div>
+              </div>
+            </div>
+            <div class="pg-card__actions">
               <p-button 
                 label="View All" 
                 icon="pi pi-eye" 
                 [outlined]="true"
                 size="small">
               </p-button>
-            </ng-template>
-          </p-card>
-
-          <p-card header="Categories" class="stat-card">
-            <div class="stat-content">
-              <div class="stat-number">{{ categories.length }}</div>
-              <div class="stat-label">Available Categories</div>
             </div>
-            <ng-template pTemplate="footer">
+          </div>
+
+          <div class="pg-card pg-card--padding-md stat-card">
+            <div class="pg-card__header">
+              <div class="pg-card__title">Categories</div>
+            </div>
+            <div class="pg-card__content">
+              <div class="stat-content">
+                <div class="stat-number">{{ categories.length }}</div>
+                <div class="stat-label">Available Categories</div>
+              </div>
+            </div>
+            <div class="pg-card__actions">
               <p-button 
                 label="Manage" 
                 icon="pi pi-cog" 
                 [outlined]="true"
                 size="small">
               </p-button>
-            </ng-template>
-          </p-card>
-
-          <p-card header="High Priority" class="stat-card">
-            <div class="stat-content">
-              <div class="stat-number">{{ highPriorityCount }}</div>
-              <div class="stat-label">Urgent Items</div>
             </div>
-            <ng-template pTemplate="footer">
+          </div>
+
+          <div class="pg-card pg-card--padding-md stat-card">
+            <div class="pg-card__header">
+              <div class="pg-card__title">High Priority</div>
+            </div>
+            <div class="pg-card__content">
+              <div class="stat-content">
+                <div class="stat-number">{{ highPriorityCount }}</div>
+                <div class="stat-label">Urgent Items</div>
+              </div>
+            </div>
+            <div class="pg-card__actions">
               <p-button 
                 label="Review" 
                 icon="pi pi-exclamation-triangle" 
                 [outlined]="true"
                 size="small">
               </p-button>
-            </ng-template>
-          </p-card>
+            </div>
+          </div>
         </div>
 
         <!-- Items List -->
         <div class="dashboard-content">
-          <p-card header="Recent Items" class="list-card">
+          <div class="pg-card pg-card--padding-md list-card">
+            <div class="pg-card__header">
+              <div class="pg-card__title">Recent Items</div>
+            </div>
+            <div class="pg-card__content">
             <div class="list-header">
               <p-button 
                 label="Add Item" 
@@ -145,7 +162,8 @@ interface DashboardItem {
                 </div>
               </ng-template>
             </p-listbox>
-          </p-card>
+            </div>
+          </div>
         </div>
       </div>
     </div>

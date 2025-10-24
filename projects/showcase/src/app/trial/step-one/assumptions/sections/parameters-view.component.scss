@@ -17,34 +17,19 @@
   .pg-parameters-view-title {
     @include typography.text-xl;
     @include typography.font-semibold;
-    color: var(--p-text-color);
+    color: var(--text-primary);
     margin: 0 0 var(--spacing-2) 0;
   }
   
   .pg-parameters-view-description {
     @include typography.text-base;
     @include typography.font-normal;
-    color: var(--p-text-color-secondary);
+    color: var(--text-secondary);
     margin: 0;
   }
 }
 
-/* Card Styling */
-.pg-parameters-view-card {
-  margin-bottom: var(--spacing-4);
-  
-  .p-card-header {
-    @include typography.text-lg;
-    @include typography.font-semibold;
-    color: var(--p-text-color);
-    padding: var(--spacing-4) var(--spacing-4) var(--spacing-2) var(--spacing-4);
-    border-bottom: 1px solid var(--p-surface-border);
-  }
-  
-  .p-card-content {
-    padding: var(--spacing-4);
-  }
-}
+/* Card Styling - Now using pg-card system directly */
 
 /* Info Grid Layout */
 .pg-info-grid {
@@ -114,14 +99,14 @@
   .pg-empty-title {
     @include typography.text-lg;
     @include typography.font-semibold;
-    color: var(--p-text-color);
+    color: var(--text-primary);
     margin: 0 0 var(--spacing-2) 0;
   }
   
   .pg-empty-description {
     @include typography.text-base;
     @include typography.font-normal;
-    color: var(--p-text-color-secondary);
+    color: var(--text-secondary);
     margin: 0;
     max-width: 400px;
     margin-left: auto;
@@ -155,28 +140,14 @@
     margin-bottom: var(--spacing-4);
   }
   
-  .pg-parameters-view-card {
-    margin-bottom: var(--spacing-3);
-    
-    .p-card-header {
-      padding: var(--spacing-3);
-    }
-    
-    .p-card-content {
-      padding: var(--spacing-3);
-    }
-  }
+  // Card styles removed - now using unified pg-card system
   
   .pg-info-grid {
     gap: var(--spacing-3);
   }
 }
 
-/* Hover Effects */
-.pg-parameters-view-card:hover {
-  box-shadow: var(--shadow-lg);
-  transition: box-shadow 0.2s ease;
-}
+// Hover effects now handled by pg-card system
 
 /* Print Styles */
 @media print {
@@ -184,10 +155,10 @@
     padding: 0;
   }
   
-  .pg-parameters-view-card {
+  .pg-card {
     break-inside: avoid;
     box-shadow: none;
-    border: 1px solid var(--p-surface-border);
+    border: 1px solid var(--surface-border);
     margin-bottom: var(--spacing-4);
   }
   

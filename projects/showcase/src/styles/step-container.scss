@@ -78,8 +78,8 @@
     top: 0;
     height: 100%;
     z-index: 1000;
-    background-color: var(--p-surface-card);
-    border-right: 1px solid var(--p-surface-border);
+    background-color: var(--surface-card);
+    border-right: 1px solid var(--surface-border);
     box-shadow: var(--shadow-sidebar);
     overflow-y: auto;
     
@@ -129,8 +129,8 @@
   min-width: 18rem; // Minimum width for content
   max-width: 24rem; // Maximum width for consistency
   flex-shrink: 0;
-  background-color: var(--p-surface-card);
-  border: 1px solid var(--p-surface-border);
+  background-color: var(--surface-card);
+  border: 1px solid var(--surface-border);
   border-radius: var(--border-radius);
   padding: var(--spacing-4);
   align-self: flex-start;
@@ -193,23 +193,7 @@
   }
 }
 
-/**
- * Step container with card-style content
- * Provides consistent card styling for step content
- */
-.pg-step-container__card {
-  background-color: var(--p-surface-card);
-  border: 1px solid var(--p-surface-border);
-  border-radius: var(--border-radius);
-  padding: var(--spacing-5);
-  box-shadow: var(--shadow-md);
-  transition: all 0.2s ease;
-
-  &:hover {
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-1px);
-  }
-}
+// Card styles removed - now using unified pg-card system
 
 /**
  * Step container grid layout
@@ -234,8 +218,8 @@
  * Consistent empty state styling
  */
 .pg-step-container__empty-state {
-  background-color: var(--p-surface-card);
-  border: 2px dashed var(--p-surface-border);
+  background-color: var(--surface-card);
+  border: 2px dashed var(--surface-border);
   border-radius: var(--border-radius);
   padding: var(--spacing-8);
   text-align: center;
@@ -274,8 +258,8 @@
 }
 
 .pg-step-container__stat {
-  background-color: var(--p-surface-card);
-  border: 1px solid var(--p-surface-border);
+  background-color: var(--surface-card);
+  border: 1px solid var(--surface-border);
   border-radius: var(--border-radius);
   padding: var(--spacing-4);
   text-align: center;

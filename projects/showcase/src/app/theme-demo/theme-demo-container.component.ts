@@ -1,25 +1,25 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardModule } from 'primeng/card';
 import { DividerModule } from 'primeng/divider';
 import { BadgeModule } from 'primeng/badge';
 import { TypographyDemoComponent } from './typography-demo.component';
 import { SpacingTestComponent } from './spacing-test.component';
 import { TrialHeadingExampleComponent } from './components/trial-heading-example.component';
 import { StatusDisplayExampleComponent } from './components/status-display-example.component';
+import { CardExampleComponent } from './components/card-example.component';
 
 @Component({
   selector: 'kit-theme-demo-container',
   standalone: true,
   imports: [
     CommonModule,
-    CardModule,
     DividerModule,
     BadgeModule,
     TypographyDemoComponent,
     SpacingTestComponent,
     TrialHeadingExampleComponent,
-    StatusDisplayExampleComponent
+    StatusDisplayExampleComponent,
+    CardExampleComponent
   ],
   template: `
     <div class="min-h-screen bg-gray-50 py-8">
@@ -44,7 +44,11 @@ import { StatusDisplayExampleComponent } from './components/status-display-examp
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 w-full">
           <!-- Typography Demo -->
           <div class="space-y-4 w-full">
-            <p-card header="Typography System" class="h-full w-full">
+            <div class="pg-card pg-card--padding-md h-full w-full">
+              <div class="pg-card__header">
+                <div class="pg-card__title">Typography System</div>
+              </div>
+              <div class="pg-card__content">
               <div class="space-y-4">
                 <p class="text-gray-600 leading-relaxed">
                   Explore the complete typography system with font sizes, weights, and line heights.
@@ -61,12 +65,17 @@ import { StatusDisplayExampleComponent } from './components/status-display-examp
                 </div>
                 <kit-typography-demo></kit-typography-demo>
               </div>
-            </p-card>
+              </div>
+            </div>
           </div>
 
           <!-- Spacing Demo -->
           <div class="space-y-4 w-full">
-            <p-card header="Spacing System" class="h-full w-full">
+            <div class="pg-card pg-card--padding-md h-full w-full">
+              <div class="pg-card__header">
+                <div class="pg-card__title">Spacing System</div>
+              </div>
+              <div class="pg-card__content">
               <div class="space-y-4">
                 <p class="text-gray-600 leading-relaxed">
                   Test the spacing system with PrimeFlex-compatible values.
@@ -83,13 +92,18 @@ import { StatusDisplayExampleComponent } from './components/status-display-examp
                 </div>
                 <kit-spacing-test></kit-spacing-test>
               </div>
-            </p-card>
+              </div>
+            </div>
           </div>
         </div>
 
         <!-- Component Examples -->
         <div class="mb-12 w-full">
-          <p-card header="Component Examples" class="w-full">
+          <div class="pg-card pg-card--padding-md w-full">
+            <div class="pg-card__header">
+              <div class="pg-card__title">Component Examples</div>
+            </div>
+            <div class="pg-card__content">
             <div class="space-y-4">
               <p class="text-gray-600 leading-relaxed">
                 Real-world examples of how to use components from the design system.
@@ -107,13 +121,41 @@ import { StatusDisplayExampleComponent } from './components/status-display-examp
               <kit-trial-heading-example></kit-trial-heading-example>
               <kit-status-display-example></kit-status-display-example>
             </div>
-          </p-card>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card System Examples -->
+        <div class="mb-12 w-full bg-transparent">
+          <div class="space-y-4">
+            <div class="text-center mb-8">
+              <h2 class="text-3xl font-bold text-gray-900 mb-4">Card System Migration</h2>
+              <p class="text-gray-600 leading-relaxed max-w-3xl mx-auto">
+                Migration from PrimeFlex 17 card system to modern theme-based card components.
+                These examples show how to replace old PrimeFlex classes with new theme tokens.
+              </p>
+              <div class="bg-orange-50 border border-orange-200 rounded-lg p-4 max-w-2xl mx-auto mt-6">
+                <div class="flex items-center justify-center mb-2">
+                  <i class="pi pi-refresh text-orange-600 mr-2"></i>
+                  <span class="text-sm font-medium text-orange-800">Migration Ready</span>
+                </div>
+                <p class="text-sm text-orange-700 text-center">
+                  Card system replaces old PrimeFlex classes with modern theme tokens for better consistency and maintainability.
+                </p>
+              </div>
+            </div>
+            <kit-card-example></kit-card-example>
+          </div>
         </div>
 
         <!-- Design System Information -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full">
           <!-- Typography Info -->
-          <p-card header="Typography Features" class="h-full w-full">
+          <div class="pg-card pg-card--padding-md h-full w-full">
+            <div class="pg-card__header">
+              <div class="pg-card__title">Typography Features</div>
+            </div>
+            <div class="pg-card__content">
             <div class="space-y-6">
               <div class="flex items-start space-x-3">
                 <div class="bg-blue-100 rounded-full p-2">
@@ -146,10 +188,15 @@ import { StatusDisplayExampleComponent } from './components/status-display-examp
                 </div>
               </div>
             </div>
-          </p-card>
+            </div>
+          </div>
 
           <!-- Spacing Info -->
-          <p-card header="Spacing Features" class="h-full w-full">
+          <div class="pg-card pg-card--padding-md h-full w-full">
+            <div class="pg-card__header">
+              <div class="pg-card__title">Spacing Features</div>
+            </div>
+            <div class="pg-card__content">
             <div class="space-y-6">
               <div class="flex items-start space-x-3">
                 <div class="bg-green-100 rounded-full p-2">
@@ -182,7 +229,8 @@ import { StatusDisplayExampleComponent } from './components/status-display-examp
                 </div>
               </div>
             </div>
-          </p-card>
+            </div>
+          </div>
         </div>
 
         <!-- Footer Info -->

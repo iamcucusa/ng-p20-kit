@@ -1,0 +1,266 @@
+@use '../../../theme/src/lib/styles/breakpoints.scss' as bp;
+@use '../../../theme/src/lib/styles/typography.scss' as typography;
+@use '../../../theme/src/lib/styles/shadows.scss';
+
+/* ========================================
+   CARD COMPONENT SYSTEM
+   ======================================== */
+
+/**
+ * Base card component
+ * Replaces old PrimeFlex .surface-card with modern theme tokens
+ */
+.pg-card {
+  background-color: var(--surface-card);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  transition: all 0.2s ease;
+  
+  &:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-1px);
+  }
+}
+
+/**
+ * Card padding variants
+ * Replaces old PrimeFlex .p-4 with theme spacing
+ */
+.pg-card--padding-sm {
+  padding: var(--spacing-3);
+}
+
+.pg-card--padding-md {
+  padding: var(--spacing-4);
+}
+
+.pg-card--padding-lg {
+  padding: var(--spacing-5);
+}
+
+.pg-card--padding-xl {
+  padding: var(--spacing-6);
+}
+
+/**
+ * Card header section
+ * Replaces old flex layout with modern structure
+ */
+.pg-card__header {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-bottom: 1px solid var(--surface-border);
+  padding-bottom: var(--spacing-3);
+  margin-bottom: var(--spacing-4);
+}
+
+.pg-card__title {
+  @include typography.text-lg;
+  @include typography.font-semibold;
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-2) 0;
+}
+
+.pg-card__description {
+  @include typography.text-base;
+  color: var(--text-secondary);
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+/**
+ * Card content section
+ * Replaces old grid formgrid with modern grid
+ */
+.pg-card__content {
+  display: grid;
+  gap: var(--spacing-4);
+  
+  /* Fluid grid for form layouts */
+  &.pg-card__content--fluid {
+    grid-template-columns: 1fr;
+    
+    @include bp.tablet-up {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @include bp.desktop-up {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  /* Single column for simple content */
+  &.pg-card__content--single {
+    grid-template-columns: 1fr;
+  }
+}
+
+/**
+ * Card footer section
+ */
+.pg-card__footer {
+  border-top: 1px solid var(--p-surface-border);
+  padding-top: var(--spacing-3);
+  margin-top: var(--spacing-4);
+}
+
+/**
+ * Card variants
+ */
+.pg-card--elevated {
+  box-shadow: var(--shadow-lg);
+  
+  &:hover {
+    box-shadow: var(--shadow-xl);
+  }
+}
+
+.pg-card--flat {
+  box-shadow: none;
+  border: 1px solid var(--surface-border);
+  
+  &:hover {
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+.pg-card--outlined {
+  border: 2px solid var(--surface-border);
+  box-shadow: none;
+  
+  &:hover {
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+/**
+ * Card size variants
+ */
+.pg-card--small {
+  .pg-card__header {
+    padding-bottom: var(--spacing-2);
+    margin-bottom: var(--spacing-3);
+  }
+  
+  .pg-card__title {
+    @include typography.text-base;
+    margin-bottom: var(--spacing-1);
+  }
+  
+  .pg-card__description {
+    @include typography.text-sm;
+  }
+}
+
+.pg-card--large {
+  .pg-card__header {
+    padding-bottom: var(--spacing-4);
+    margin-bottom: var(--spacing-5);
+  }
+  
+  .pg-card__title {
+    @include typography.text-xl;
+    margin-bottom: var(--spacing-3);
+  }
+  
+  .pg-card__description {
+    @include typography.text-lg;
+  }
+}
+
+/**
+ * Responsive card behavior
+ */
+@include bp.mobile-down {
+  .pg-card {
+    margin: 0 var(--spacing-2);
+  }
+  
+  .pg-card__content--fluid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/**
+ * Card with actions
+ */
+.pg-card__actions {
+  display: flex;
+  gap: var(--spacing-2);
+  justify-content: flex-end;
+  margin-top: var(--spacing-4);
+  
+  &.pg-card__actions--start {
+    justify-content: flex-start;
+  }
+  
+  &.pg-card__actions--center {
+    justify-content: center;
+  }
+  
+  &.pg-card__actions--between {
+    justify-content: space-between;
+  }
+}
+
+/**
+ * Card loading state
+ */
+.pg-card--loading {
+  position: relative;
+  pointer-events: none;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/**
+ * Card with image
+ */
+.pg-card__image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  margin: calc(-1 * var(--spacing-4)) calc(-1 * var(--spacing-4)) var(--spacing-4) calc(-1 * var(--spacing-4));
+}
+
+/**
+ * Utility classes for quick styling
+ */
+.pg-card-title {
+  @include typography.text-lg;
+  @include typography.font-semibold;
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-2) 0;
+}
+
+.pg-card-description {
+  @include typography.text-base;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.pg-card-meta {
+  @include typography.text-sm;
+  color: var(--text-secondary);
+  margin-top: var(--spacing-2);
+}

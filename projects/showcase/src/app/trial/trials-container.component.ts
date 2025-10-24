@@ -5,6 +5,7 @@ import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { RouterModule } from '@angular/router';
 import { RouteService } from '@core/route.service';
+import { StatusDisplayComponent } from '@core/status/status-display.component';
 import type { Trial } from './trial.types';
 
 @Component({
@@ -12,7 +13,7 @@ import type { Trial } from './trial.types';
   templateUrl: './trials-container.component.html',
   styleUrls: ['./trials-container.component.scss'],
   standalone: true,
-  imports: [CommonModule, PageHeadingComponent, ButtonModule, RippleModule, RouterModule]
+  imports: [CommonModule, PageHeadingComponent, ButtonModule, RippleModule, RouterModule, StatusDisplayComponent]
 })
 export class TrialsContainerComponent {
 

@@ -55,12 +55,12 @@
 .pg-form-label {
   @include typography.text-sm;
   @include typography.font-medium;
-  color: var(--p-text-color);
+  color: var(--text-primary);
   margin: 0;
   
   &::after {
     content: ' *';
-    color: var(--p-red-500);
+    color: var(--red-500);
     font-weight: 600;
   }
   

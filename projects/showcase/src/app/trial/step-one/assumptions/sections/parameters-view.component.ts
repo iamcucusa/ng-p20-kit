@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardModule } from 'primeng/card';
 import { DividerModule } from 'primeng/divider';
 import { BadgeModule } from 'primeng/badge';
 import { TagModule } from 'primeng/tag';
@@ -48,7 +47,6 @@ interface TrialParameters {
   standalone: true,
   imports: [
     CommonModule,
-    CardModule,
     DividerModule,
     BadgeModule,
     TagModule
@@ -62,22 +60,31 @@ interface TrialParameters {
       </div>
 
       <!-- Basic Information Card -->
-      <p-card header="Basic Information" class="pg-parameters-view-card">
-        <div class="pg-info-grid">
-          <div class="pg-info-item">
-            <label class="pg-info-label">Trial Name</label>
-            <span class="pg-info-value">{{ activeTrial?.name || 'Not specified' }}</span>
-          </div>
-          
-          <div class="pg-info-item">
-            <label class="pg-info-label">Description</label>
-            <span class="pg-info-value">{{ activeTrial?.description || 'No description provided' }}</span>
+      <div class="pg-card pg-card--padding-md">
+        <div class="pg-card__header">
+          <div class="pg-card__title">Basic Information</div>
+        </div>
+        <div class="pg-card__content">
+          <div class="pg-info-grid">
+            <div class="pg-info-item">
+              <label class="pg-info-label">Trial Name</label>
+              <span class="pg-info-value">{{ activeTrial?.name || 'Not specified' }}</span>
+            </div>
+            
+            <div class="pg-info-item">
+              <label class="pg-info-label">Description</label>
+              <span class="pg-info-value">{{ activeTrial?.description || 'No description provided' }}</span>
+            </div>
           </div>
         </div>
-      </p-card>
+      </div>
 
       <!-- Study Design Card -->
-      <p-card header="Study Design" class="pg-parameters-view-card">
+      <div class="pg-card pg-card--padding-md">
+        <div class="pg-card__header">
+          <div class="pg-card__title">Study Design</div>
+        </div>
+        <div class="pg-card__content">
         <div class="pg-info-grid">
           <div class="pg-info-item">
             <label class="pg-info-label">Study Type</label>
@@ -107,10 +114,15 @@ interface TrialParameters {
             <span class="pg-info-value">{{ getDurationText(activeTrial?.duration) }}</span>
           </div>
         </div>
-      </p-card>
+        </div>
+      </div>
 
       <!-- Timeline Card -->
-      <p-card header="Timeline" class="pg-parameters-view-card">
+      <div class="pg-card pg-card--padding-md">
+        <div class="pg-card__header">
+          <div class="pg-card__title">Timeline</div>
+        </div>
+        <div class="pg-card__content">
         <div class="pg-info-grid">
           <div class="pg-info-item">
             <label class="pg-info-label">Planned Start Date</label>
@@ -122,10 +134,15 @@ interface TrialParameters {
             <span class="pg-info-value">{{ getFormattedDate(activeTrial?.endDate) }}</span>
           </div>
         </div>
-      </p-card>
+        </div>
+      </div>
 
       <!-- Regulatory Requirements Card -->
-      <p-card header="Regulatory Requirements" class="pg-parameters-view-card">
+      <div class="pg-card pg-card--padding-md">
+        <div class="pg-card__header">
+          <div class="pg-card__title">Regulatory Requirements</div>
+        </div>
+        <div class="pg-card__content">
         <div class="pg-info-grid">
           <div class="pg-info-item">
             <label class="pg-info-label">IRB Approval</label>
@@ -158,10 +175,15 @@ interface TrialParameters {
             </div>
           }
         </div>
-      </p-card>
+        </div>
+      </div>
 
       <!-- Data Collection Card -->
-      <p-card header="Data Collection" class="pg-parameters-view-card">
+      <div class="pg-card pg-card--padding-md">
+        <div class="pg-card__header">
+          <div class="pg-card__title">Data Collection</div>
+        </div>
+        <div class="pg-card__content">
         <div class="pg-info-grid">
           <div class="pg-info-item">
             <label class="pg-info-label">Collection Method</label>
@@ -173,7 +195,8 @@ interface TrialParameters {
             <span class="pg-info-value">{{ getDataRetentionText(activeTrial?.dataRetention) }}</span>
           </div>
         </div>
-      </p-card>
+        </div>
+      </div>
 
       <!-- Empty State -->
       @if (!activeTrial) {

@@ -7,7 +7,6 @@ import { TextareaModule } from 'primeng/textarea';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CheckboxModule } from 'primeng/checkbox';
 import { SelectModule } from 'primeng/select';
-import { CardModule } from 'primeng/card';
 import { MessageModule } from 'primeng/message';
 import { RippleModule } from 'primeng/ripple';
 import { TooltipModule } from 'primeng/tooltip';
@@ -62,7 +61,6 @@ interface TrialParameters {
     InputNumberModule,
     CheckboxModule,
     SelectModule,
-    CardModule,
     MessageModule,
     RippleModule,
     TooltipModule
@@ -73,148 +71,168 @@ interface TrialParameters {
         <form [formGroup]="parametersForm" (ngSubmit)="onSubmit()" class="flex flex-col w-full pg-parameters-edit-form">
           
           <!-- Basic Information Card -->
-          <p-card header="Basic Information" class="pg-parameters-edit-card">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pg-parameters-edit-grid">
-              <div class="flex flex-col gap-1">
-                <label for="trialName" class="pg-form-label" required>Trial Name</label>
-                <input 
-                  id="trialName"
-                  type="text" 
-                  pInputText 
-                  formControlName="trialName"
-                  placeholder="Enter trial name"
-                  [invalid]="isFieldInvalid('trialName')"
-                  pTooltip="Enter a descriptive name for your trial"
-                  tooltipPosition="top">
-                @if (isFieldInvalid('trialName')) {
-                  <p-message severity="error" size="small" variant="simple">Trial name is required</p-message>
-                }
-              </div>
+          <div class="pg-card pg-card--padding-md">
+            <div class="pg-card__header">
+              <div class="pg-card__title">Basic Information</div>
+            </div>
+            <div class="pg-card__content">
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pg-parameters-edit-grid">
+                <div class="flex flex-col gap-1">
+                  <label for="trialName" class="pg-form-label" required>Trial Name</label>
+                  <input 
+                    id="trialName"
+                    type="text" 
+                    pInputText 
+                    formControlName="trialName"
+                    placeholder="Enter trial name"
+                    [invalid]="isFieldInvalid('trialName')"
+                    pTooltip="Enter a descriptive name for your trial"
+                    tooltipPosition="top">
+                  @if (isFieldInvalid('trialName')) {
+                    <p-message severity="error" size="small" variant="simple">Trial name is required</p-message>
+                  }
+                </div>
 
-              <div class="flex flex-col gap-1">
-                <label for="trialDescription" class="pg-form-label">Description</label>
-                <textarea 
-                  id="trialDescription"
-                  pTextarea 
-                  formControlName="trialDescription"
-                  placeholder="Describe the trial objectives and scope"
-                  rows="3">
-                </textarea>
+                <div class="flex flex-col gap-1">
+                  <label for="trialDescription" class="pg-form-label">Description</label>
+                  <textarea 
+                    id="trialDescription"
+                    pTextarea 
+                    formControlName="trialDescription"
+                    placeholder="Describe the trial objectives and scope"
+                    rows="3">
+                  </textarea>
+                </div>
               </div>
             </div>
-          </p-card>
+          </div>
 
           <!-- Study Design Card -->
-          <p-card header="Study Design" class="pg-parameters-edit-card">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pg-parameters-edit-grid">
-              <div class="flex flex-col gap-1">
-                <label for="studyType" class="pg-form-label" required>Study Type</label>
-                <p-select 
-                  id="studyType"
-                  formControlName="studyType"
-                  [options]="studyTypeOptions"
-                  placeholder="Select study type"
-                  [invalid]="isFieldInvalid('studyType')"
-                  pTooltip="Choose the type of clinical study">
-                </p-select>
-                @if (isFieldInvalid('studyType')) {
-                  <p-message severity="error" size="small" variant="simple">Study type is required</p-message>
-                }
-              </div>
+          <div class="pg-card pg-card--padding-md">
+            <div class="pg-card__header">
+              <div class="pg-card__title">Study Design</div>
+            </div>
+            <div class="pg-card__content">
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pg-parameters-edit-grid">
+                <div class="flex flex-col gap-1">
+                  <label for="studyType" class="pg-form-label" required>Study Type</label>
+                  <p-select 
+                    id="studyType"
+                    formControlName="studyType"
+                    [options]="studyTypeOptions"
+                    placeholder="Select study type"
+                    [invalid]="isFieldInvalid('studyType')"
+                    pTooltip="Choose the type of clinical study">
+                  </p-select>
+                  @if (isFieldInvalid('studyType')) {
+                    <p-message severity="error" size="small" variant="simple">Study type is required</p-message>
+                  }
+                </div>
 
-              <div class="flex flex-col gap-1">
-                <label for="phase" class="pg-form-label">Phase</label>
-                <p-select 
-                  id="phase"
-                  formControlName="phase"
-                  [options]="phaseOptions"
-                  placeholder="Select phase"
-                  pTooltip="Clinical trial phase">
-                </p-select>
-              </div>
+                <div class="flex flex-col gap-1">
+                  <label for="phase" class="pg-form-label">Phase</label>
+                  <p-select 
+                    id="phase"
+                    formControlName="phase"
+                    [options]="phaseOptions"
+                    placeholder="Select phase"
+                    pTooltip="Clinical trial phase">
+                  </p-select>
+                </div>
 
-              <div class="flex flex-col gap-1">
-                <label for="participants" class="pg-form-label">Expected Participants</label>
-                <p-inputNumber 
-                  id="participants"
-                  formControlName="participants"
-                  placeholder="Number of participants"
-                  [min]="1"
-                  [max]="10000"
-                  pTooltip="Estimated number of participants">
-                </p-inputNumber>
-              </div>
+                <div class="flex flex-col gap-1">
+                  <label for="participants" class="pg-form-label">Expected Participants</label>
+                  <p-inputNumber 
+                    id="participants"
+                    formControlName="participants"
+                    placeholder="Number of participants"
+                    [min]="1"
+                    [max]="10000"
+                    pTooltip="Estimated number of participants">
+                  </p-inputNumber>
+                </div>
 
-              <div class="flex flex-col gap-1">
-                <label for="duration" class="pg-form-label">Duration (months)</label>
-                <p-inputNumber 
-                  id="duration"
-                  formControlName="duration"
-                  placeholder="Trial duration"
-                  [min]="1"
-                  [max]="120"
-                  pTooltip="Expected trial duration in months">
-                </p-inputNumber>
+                <div class="flex flex-col gap-1">
+                  <label for="duration" class="pg-form-label">Duration (months)</label>
+                  <p-inputNumber 
+                    id="duration"
+                    formControlName="duration"
+                    placeholder="Trial duration"
+                    [min]="1"
+                    [max]="120"
+                    pTooltip="Expected trial duration in months">
+                  </p-inputNumber>
+                </div>
               </div>
             </div>
-          </p-card>
+          </div>
 
           <!-- Regulatory Requirements Card -->
-          <p-card header="Regulatory Requirements" class="pg-parameters-edit-card">
+          <div class="pg-card pg-card--padding-md">
+            <div class="pg-card__header">
+              <div class="pg-card__title">Regulatory Requirements</div>
+            </div>
+            <div class="pg-card__content">
               <div class="flex flex-col pg-parameters-edit-flex-col">
-              <div class="flex flex-wrap pg-parameters-edit-flex-wrap">
-                @for (item of regulatoryKeys; track item) {
-                  <div class="flex items-center gap-2">
-                    <p-checkbox 
-                      [formControlName]="item" 
-                      [binary]="true" 
-                      [inputId]="item" 
-                      [invalid]="isFieldInvalid(item)" />
-                    <label [for]="item" class="pg-form-label">{{ getRegulatoryLabel(item) }}</label>
-                  </div>
-                }
-              </div>
-              
-              <div class="flex flex-col gap-1">
-                <label for="regulatoryNotes" class="pg-form-label">Regulatory Notes</label>
-                <textarea 
-                  id="regulatoryNotes"
-                  pTextarea 
-                  formControlName="regulatoryNotes"
-                  placeholder="Additional regulatory requirements or notes"
-                  rows="2">
-                </textarea>
+                <div class="flex flex-wrap pg-parameters-edit-flex-wrap">
+                  @for (item of regulatoryKeys; track item) {
+                    <div class="flex items-center gap-2">
+                      <p-checkbox 
+                        [formControlName]="item" 
+                        [binary]="true" 
+                        [inputId]="item" 
+                        [invalid]="isFieldInvalid(item)" />
+                      <label [for]="item" class="pg-form-label">{{ getRegulatoryLabel(item) }}</label>
+                    </div>
+                  }
+                </div>
+                
+                <div class="flex flex-col gap-1">
+                  <label for="regulatoryNotes" class="pg-form-label">Regulatory Notes</label>
+                  <textarea 
+                    id="regulatoryNotes"
+                    pTextarea 
+                    formControlName="regulatoryNotes"
+                    placeholder="Additional regulatory requirements or notes"
+                    rows="2">
+                  </textarea>
+                </div>
               </div>
             </div>
-          </p-card>
+          </div>
 
           <!-- Data Collection Card -->
-          <p-card header="Data Collection" class="pg-parameters-edit-card">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pg-parameters-edit-grid">
-              <div class="flex flex-col gap-1">
-                <label for="dataCollectionMethod" class="pg-form-label">Data Collection Method</label>
-                <p-select 
-                  id="dataCollectionMethod"
-                  formControlName="dataCollectionMethod"
-                  [options]="dataCollectionOptions"
-                  placeholder="Select method"
-                  pTooltip="How data will be collected">
-                </p-select>
-              </div>
+          <div class="pg-card pg-card--padding-md">
+            <div class="pg-card__header">
+              <div class="pg-card__title">Data Collection</div>
+            </div>
+            <div class="pg-card__content">
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pg-parameters-edit-grid">
+                <div class="flex flex-col gap-1">
+                  <label for="dataCollectionMethod" class="pg-form-label">Data Collection Method</label>
+                  <p-select 
+                    id="dataCollectionMethod"
+                    formControlName="dataCollectionMethod"
+                    [options]="dataCollectionOptions"
+                    placeholder="Select method"
+                    pTooltip="How data will be collected">
+                  </p-select>
+                </div>
 
-              <div class="flex flex-col gap-1">
-                <label for="dataRetention" class="pg-form-label">Data Retention (years)</label>
-                <p-inputNumber 
-                  id="dataRetention"
-                  formControlName="dataRetention"
-                  placeholder="Retention period"
-                  [min]="1"
-                  [max]="50"
-                  pTooltip="How long data will be retained">
-                </p-inputNumber>
+                <div class="flex flex-col gap-1">
+                  <label for="dataRetention" class="pg-form-label">Data Retention (years)</label>
+                  <p-inputNumber 
+                    id="dataRetention"
+                    formControlName="dataRetention"
+                    placeholder="Retention period"
+                    [min]="1"
+                    [max]="50"
+                    pTooltip="How long data will be retained">
+                  </p-inputNumber>
+                </div>
               </div>
             </div>
-          </p-card>
+          </div>
 
           <!-- Form Actions -->
           <div class="flex justify-end gap-3">
@@ -249,55 +267,60 @@ interface TrialParameters {
       </main>
 
       <aside class="pg-parameters-edit-aside">
-        <p-card header="Comments & Utilities" class="pg-parameters-edit-card">
-              <div class="flex flex-col pg-parameters-edit-flex-col">
-            <div class="flex flex-col gap-2">
-              <label for="comments" class="pg-form-label">Comments</label>
-              <textarea 
-                id="comments"
-                pTextarea 
-                placeholder="Add comments or notes about this trial..."
-                rows="4">
-              </textarea>
-            </div>
-            
-            <div class="flex flex-col gap-2">
-              <label for="tags" class="pg-form-label">Tags</label>
-              <input 
-                id="tags"
-                type="text" 
-                pInputText 
-                placeholder="Add tags separated by commas">
-            </div>
-            
-            <div class="flex flex-col gap-2">
-              <h5 class="font-medium text-sm text-gray-700">Quick Actions</h5>
+        <div class="pg-card pg-card--padding-md">
+          <div class="pg-card__header">
+            <div class="pg-card__title">Comments & Utilities</div>
+          </div>
+          <div class="pg-card__content">
+            <div class="flex flex-col pg-parameters-edit-flex-col">
               <div class="flex flex-col gap-2">
-                <p-button 
-                  label="Validate Form" 
-                  severity="info" 
-                  size="small"
-                  [outlined]="true"
-                  pRipple>
-                </p-button>
-                <p-button 
-                  label="Export Data" 
-                  severity="secondary" 
-                  size="small"
-                  [outlined]="true"
-                  pRipple>
-                </p-button>
-                <p-button 
-                  label="Save Template" 
-                  severity="help" 
-                  size="small"
-                  [outlined]="true"
-                  pRipple>
-                </p-button>
+                <label for="comments" class="pg-form-label">Comments</label>
+                <textarea 
+                  id="comments"
+                  pTextarea 
+                  placeholder="Add comments or notes about this trial..."
+                  rows="4">
+                </textarea>
+              </div>
+              
+              <div class="flex flex-col gap-2">
+                <label for="tags" class="pg-form-label">Tags</label>
+                <input 
+                  id="tags"
+                  type="text" 
+                  pInputText 
+                  placeholder="Add tags separated by commas">
+              </div>
+              
+              <div class="flex flex-col gap-2">
+                <h5 class="font-medium text-sm text-gray-700">Quick Actions</h5>
+                <div class="flex flex-col gap-2">
+                  <p-button 
+                    label="Validate Form" 
+                    severity="info" 
+                    size="small"
+                    [outlined]="true"
+                    pRipple>
+                  </p-button>
+                  <p-button 
+                    label="Export Data" 
+                    severity="secondary" 
+                    size="small"
+                    [outlined]="true"
+                    pRipple>
+                  </p-button>
+                  <p-button 
+                    label="Save Template" 
+                    severity="help" 
+                    size="small"
+                    [outlined]="true"
+                    pRipple>
+                  </p-button>
+                </div>
               </div>
             </div>
           </div>
-        </p-card>
+        </div>
       </aside>
     </div>
   `,

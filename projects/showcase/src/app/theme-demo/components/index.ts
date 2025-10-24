@@ -8,3 +8,4 @@
 
 export { TrialHeadingExampleComponent } from './trial-heading-example.component';
 export { StatusDisplayExampleComponent } from './status-display-example.component';
+export { CardExampleComponent } from './card-example.component';
