@@ -77,23 +77,44 @@ interface TrialParameters {
               <div class="pg-card__description">Ensure trial details are accurate and complete to proceed with the next steps.</div>
             </div>
             <div class="pg-card__content">
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pg-parameters-edit-grid">
-                <div class="flex flex-col gap-1">
-                  <label for="trialName" class="pg-form-label" required>Trial Name</label>
-                  <input 
-                    id="trialName"
-                    type="text" 
-                    pInputText 
-                    formControlName="trialName"
-                    placeholder="Enter trial name"
-                    [invalid]="isFieldInvalid('trialName')"
-                    pTooltip="Enter a descriptive name for your trial"
-                    tooltipPosition="top">
-                  @if (isFieldInvalid('trialName')) {
-                    <p-message severity="error" size="small" variant="simple">Trial name is required</p-message>
-                  }
+              <!-- Form Layout with Tailwind Grid -->
+              <div class="grid grid-cols-1 gap-4">
+                
+                <!-- First Row: Two columns (half width each) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div class="flex flex-col gap-1">
+                    <label for="trialName" class="pg-form-label" required>Trial Name</label>
+                    <input 
+                      id="trialName"
+                      type="text" 
+                      pInputText 
+                      formControlName="trialName"
+                      placeholder="Enter trial name"
+                      [invalid]="isFieldInvalid('trialName')"
+                      pTooltip="Enter a descriptive name for your trial"
+                      tooltipPosition="top">
+                    @if (isFieldInvalid('trialName')) {
+                      <p-message severity="error" size="small" variant="simple">Trial name is required</p-message>
+                    }
+                  </div>
+                  
+                  <div class="flex flex-col gap-1">
+                    <label for="studyType" class="pg-form-label" required>Study Type</label>
+                    <p-select 
+                      id="studyType"
+                      formControlName="studyType"
+                      [options]="studyTypeOptions"
+                      placeholder="Select study type"
+                      [invalid]="isFieldInvalid('studyType')"
+                      pTooltip="Choose the type of clinical study">
+                    </p-select>
+                    @if (isFieldInvalid('studyType')) {
+                      <p-message severity="error" size="small" variant="simple">Study type is required</p-message>
+                    }
+                  </div>
                 </div>
 
+                <!-- Second Row: One column (full width) -->
                 <div class="flex flex-col gap-1">
                   <label for="trialDescription" class="pg-form-label">Description</label>
                   <textarea 
@@ -104,6 +125,49 @@ interface TrialParameters {
                     rows="3">
                   </textarea>
                 </div>
+
+                <!-- Third Row: One column (full width) -->
+                <div class="flex flex-col gap-1">
+                  <label for="phase" class="pg-form-label">Phase</label>
+                  <p-select 
+                    id="phase"
+                    formControlName="phase"
+                    [options]="phaseOptions"
+                    placeholder="Select phase"
+                    pTooltip="Clinical trial phase">
+                  </p-select>
+                </div>
+
+                <!-- Form Divider -->
+                <div class="pg-form-divider"></div>
+
+                <!-- Fourth Row: Two columns (4/12 and 8/12) -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+                  <div class="md:col-span-4 flex flex-col gap-1">
+                    <label for="participants" class="pg-form-label">Expected Participants</label>
+                    <p-inputNumber 
+                      id="participants"
+                      formControlName="participants"
+                      placeholder="Number of participants"
+                      [min]="1"
+                      [max]="10000"
+                      pTooltip="Estimated number of participants">
+                    </p-inputNumber>
+                  </div>
+                  
+                  <div class="md:col-span-8 flex flex-col gap-1">
+                    <label for="duration" class="pg-form-label">Duration (months)</label>
+                    <p-inputNumber 
+                      id="duration"
+                      formControlName="duration"
+                      placeholder="Trial duration"
+                      [min]="1"
+                      [max]="120"
+                      pTooltip="Expected trial duration in months">
+                    </p-inputNumber>
+                  </div>
+                </div>
+                
               </div>
             </div>
           </div>

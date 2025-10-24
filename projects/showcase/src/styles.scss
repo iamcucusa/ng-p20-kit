@@ -28,3 +28,54 @@
   background: transparent;
   padding: var(--spacing-3) var(--spacing-2);
 }
+
+/* ========================================
+   FORM DIVIDER UTILITIES
+   ======================================== */
+
+/**
+ * Reusable form divider component
+ * Creates a subtle horizontal line between form sections
+ * Uses theme surface color and consistent spacing
+ */
+.pg-form-divider {
+  background-color: var(--surface-border);
+  height: 2px;
+  width: 100%;
+  margin: var(--spacing-3) 0;
+  border: none;
+  display: block;
+}
+
+/**
+ * Form divider variants
+ */
+.pg-form-divider--thin {
+  height: 1px;
+  margin: var(--spacing-2) 0; /* 8px - less margin for subtle divider */
+}
+
+.pg-form-divider--thick {
+  height: 3px;
+  margin: var(--spacing-4) 0; /* 24px - more margin for prominent divider */
+}
+
+.pg-form-divider--spaced {
+  margin: var(--spacing-5) 0; /* 32px - extra spacing for major sections */
+}
+
+/**
+ * Responsive form divider
+ * Adjusts margin based on screen size
+ */
+.pg-form-divider--responsive {
+  margin: var(--spacing-2) 0; /* 8px - mobile */
+  
+  @include bp.tablet-up {
+    margin: var(--spacing-3) 0; /* 16px - tablet */
+  }
+  
+  @include bp.desktop-up {
+    margin: var(--spacing-4) 0; /* 24px - desktop */
+  }
+}
