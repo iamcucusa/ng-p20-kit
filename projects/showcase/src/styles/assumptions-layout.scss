@@ -1,0 +1,104 @@
+@use '../../../theme/src/lib/styles/breakpoints.scss' as bp;
+
+/* ========================================
+   ASSUMPTIONS SECTIONS LAYOUT STYLES
+   ======================================== */
+
+/**
+ * Reusable layout container for assumptions sections
+ * Provides main content + aside layout with responsive stacking
+ * Used by ParametersEditComponent and TimeFrameworkEditComponent
+ */
+.pg-assumptions-container {
+  display: grid;
+  grid-template-columns: 1fr 24.5rem;
+  gap: var(--spacing-3);
+  padding: var(--spacing-2) 0;
+  max-width: 100%;
+  
+  /* Stack aside below main content below xl breakpoint */
+  @include bp.xl-down {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-3);
+  }
+}
+
+.pg-assumptions-main {
+  min-width: 0; /* Prevents grid overflow */
+  padding: 0;
+}
+
+.pg-assumptions-aside {
+  min-width: 0; /* Prevents grid overflow */
+  padding: 0;
+  
+  /* Full width when stacked below xl breakpoint */
+  @include bp.xl-down {
+    width: 100%;
+  }
+}
+
+/* ========================================
+   FORM LAYOUT UTILITIES
+   ======================================== */
+
+/**
+ * Form container with consistent gap spacing
+ */
+.pg-assumptions-form {
+  display: flex;
+  width: 100%;
+  gap: var(--spacing-3);
+}
+
+/**
+ * Grid layout for form fields
+ */
+.pg-assumptions-grid {
+  display: grid;
+  gap: var(--spacing-3);
+}
+
+/**
+ * Two-column responsive grid layout
+ * Used across multiple assumptions sections
+ */
+.pg-assumptions-grid--two-col {
+  @extend .pg-assumptions-grid;
+  grid-template-columns: 1fr;
+  
+  @include bp.tablet-up {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/**
+ * Three-column responsive grid layout
+ * Used across multiple assumptions sections
+ */
+.pg-assumptions-grid--three-col {
+  @extend .pg-assumptions-grid;
+  grid-template-columns: 1fr;
+  
+  @include bp.tablet-up {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  @include bp.desktop-up {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/**
+ * Flex column layout for form groups
+ */
+.pg-assumptions-flex-col {
+  gap: var(--spacing-1);
+}
+
+/**
+ * Flex wrap layout for form actions
+ */
+.pg-assumptions-flex-wrap {
+  gap: var(--spacing-2);
+}

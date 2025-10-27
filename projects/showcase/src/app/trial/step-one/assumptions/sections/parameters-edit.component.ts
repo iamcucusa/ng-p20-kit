@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
@@ -10,6 +10,9 @@ import { SelectModule } from 'primeng/select';
 import { MessageModule } from 'primeng/message';
 import { RippleModule } from 'primeng/ripple';
 import { TooltipModule } from 'primeng/tooltip';
+import { AssumptionSectionTabContent } from './assumptions-sections';
+import type { Trial } from '@trial/trial.types';
+import { CommentsComponent } from '@core/comments/comments.component';
 
 /**
  * Trial parameters interface for edit component
@@ -44,8 +47,7 @@ interface TrialParameters {
  * @example
  * ```html
  * <kit-parameters-edit 
- *   [activeTrial]="trial"
- *   (parametersChange)="onParametersChange($event)">
+ *   [activeTrial]="trial">
  * </kit-parameters-edit>
  * ```
  */
@@ -63,12 +65,13 @@ interface TrialParameters {
     SelectModule,
     MessageModule,
     RippleModule,
-    TooltipModule
+    TooltipModule,
+    CommentsComponent
   ],
   template: `
     <div class="pg-parameters-edit-container">
       <main class="pg-parameters-edit-main">
-        <form [formGroup]="parametersForm" (ngSubmit)="onSubmit()" class="flex flex-col w-full pg-parameters-edit-form">
+        <form [formGroup]="parametersForm" (ngSubmit)="onSubmit()" class="pg-parameters-edit-form">
           
           <!-- Basic Information Card -->
           <div class="pg-card pg-card--padding-md">
@@ -78,10 +81,10 @@ interface TrialParameters {
             </div>
             <div class="pg-card__content">
               <!-- Form Layout with Tailwind Grid -->
-              <div class="grid grid-cols-1 gap-4">
+              <div class="pg-parameters-edit-grid">
                 
                 <!-- First Row: Two columns (half width each) -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="pg-parameters-edit-grid--two-col">
                   <div class="flex flex-col gap-1">
                     <label for="trialName" class="pg-form-label" required>Trial Name</label>
                     <input 
@@ -142,7 +145,7 @@ interface TrialParameters {
                 <div class="pg-form-divider"></div>
 
                 <!-- Fourth Row: Two columns (4/12 and 8/12) -->
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+                <div class="pg-parameters-edit-grid--twelve-col">
                   <div class="md:col-span-4 flex flex-col gap-1">
                     <label for="participants" class="pg-form-label">Expected Participants</label>
                     <p-inputNumber 
@@ -180,7 +183,7 @@ interface TrialParameters {
 
             </div>
             <div class="pg-card__content">
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pg-parameters-edit-grid">
+              <div class="pg-parameters-edit-grid--three-col">
                 <div class="flex flex-col gap-1">
                   <label for="studyType" class="pg-form-label" required>Study Type</label>
                   <p-select 
@@ -248,60 +251,13 @@ interface TrialParameters {
       </main>
 
       <aside class="pg-parameters-edit-aside">
-        <div class="pg-card pg-card--padding-md">
-          <div class="pg-card__header">
-            <div class="pg-card__title">Comments & Utilities</div>
-          </div>
-          <div class="pg-card__content">
-            <div class="flex flex-col pg-parameters-edit-flex-col">
-              <div class="flex flex-col gap-2">
-                <label for="comments" class="pg-form-label">Comments</label>
-                <textarea 
-                  id="comments"
-                  pTextarea 
-                  placeholder="Add comments or notes about this trial..."
-                  rows="4">
-                </textarea>
-              </div>
-              
-              <div class="flex flex-col gap-2">
-                <label for="tags" class="pg-form-label">Tags</label>
-                <input 
-                  id="tags"
-                  type="text" 
-                  pInputText 
-                  placeholder="Add tags separated by commas">
-              </div>
-              
-              <div class="flex flex-col gap-2">
-                <h5 class="font-medium text-sm text-gray-700">Quick Actions</h5>
-                <div class="flex flex-col gap-2">
-                  <p-button 
-                    label="Validate Form" 
-                    severity="info" 
-                    size="small"
-                    [outlined]="true"
-                    pRipple>
-                  </p-button>
-                  <p-button 
-                    label="Export Data" 
-                    severity="secondary" 
-                    size="small"
-                    [outlined]="true"
-                    pRipple>
-                  </p-button>
-                  <p-button 
-                    label="Save Template" 
-                    severity="help" 
-                    size="small"
-                    [outlined]="true"
-                    pRipple>
-                  </p-button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <kit-comments 
+          [comments]="comments"
+          [tags]="tags"
+          (commentsChange)="onCommentsChange($event)"
+          (tagsChange)="onTagsChange($event)"
+          (actionClick)="onActionClick($event)">
+        </kit-comments>
       </aside>
     </div>
   `,
@@ -315,7 +271,7 @@ export class ParametersEditComponent {
    * Active trial data
    * Used to populate form with existing trial parameters
    */
-  @Input() activeTrial?: TrialParameters;
+  @Input() activeTrial?: Trial | null;
 
   /**
    * Loading state for save operation
@@ -327,10 +283,11 @@ export class ParametersEditComponent {
    */
   saveMessage?: { severity: 'success' | 'error' | 'info' | 'warn'; text: string };
 
-  /**
-   * Output event for parameters changes
-   */
-  @Output() parametersChange = new EventEmitter<TrialParameters>();
+  /** Comments text */
+  comments: string = '';
+
+  /** Tags text */
+  tags: string = '';
 
   /**
    * Form group for trial parameters
@@ -401,8 +358,7 @@ export class ParametersEditComponent {
           text: 'Trial parameters saved successfully'
         };
         
-        // Emit the form data
-        this.parametersChange.emit(this.parametersForm.value);
+        console.log('Parameters saved successfully:', this.parametersForm.value);
       }, 1000);
     }
   }
@@ -432,5 +388,30 @@ export class ParametersEditComponent {
     this.saveMessage = undefined;
   }
 
-  // Removed unused getRegulatoryLabel method
+  /**
+   * Handle comments change from CommentsComponent
+   * @param comments - The new comments value
+   */
+  onCommentsChange(comments: string): void {
+    this.comments = comments;
+    console.log('Comments changed:', comments);
+  }
+
+  /**
+   * Handle tags change from CommentsComponent
+   * @param tags - The new tags value
+   */
+  onTagsChange(tags: string): void {
+    this.tags = tags;
+    console.log('Tags changed:', tags);
+  }
+
+  /**
+   * Handle action click from CommentsComponent
+   * @param action - The action that was clicked
+   */
+  onActionClick(action: string): void {
+    console.log('Action clicked:', action);
+    // TODO: Implement action handling based on action type
+  }
 }

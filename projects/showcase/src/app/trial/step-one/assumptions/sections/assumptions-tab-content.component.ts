@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 import { TabsModule } from 'primeng/tabs';
 import { ParametersViewComponent } from './parameters-view.component';
 import { ParametersEditComponent } from './parameters-edit.component';
+import { TimeFrameworkEditComponent } from './time-framework-edit.component';
 import { 
   baseAssumptionsItemsToken, 
   assumptionsTrialSectionsToken,
@@ -45,7 +46,7 @@ import type { TrialAssumptionsPage } from '@assumptions/assumptions';
 @Component({
   selector: 'kit-assumptions-tab-content',
   standalone: true,
-  imports: [TabsModule, CommonModule, ParametersViewComponent, ParametersEditComponent],
+  imports: [TabsModule, CommonModule, ParametersViewComponent, ParametersEditComponent, TimeFrameworkEditComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <p-tabs [value]="activeTabIndex" (valueChange)="onTabChange($event)">
@@ -61,8 +62,7 @@ import type { TrialAssumptionsPage } from '@assumptions/assumptions';
               @if (section === trialParameters) {
                 @if (canEdit) {
                   <kit-parameters-edit 
-                    [activeTrial]="activeTrial || undefined"
-                    (parametersChange)="onParametersChange($event)">
+                    [activeTrial]="activeTrial || undefined">
                   </kit-parameters-edit>
                 } @else {
                    <kit-parameters-view [activeTrial]="activeTrial || undefined">
@@ -98,15 +98,9 @@ import type { TrialAssumptionsPage } from '@assumptions/assumptions';
               <!-- Planning Section -->
               @if (section === timeFramework) {
                 @if (canEdit) {
-                  <div class="p-4">
-                    <h4 class="text-lg font-medium mb-3">Time Framework</h4>
-                    <p class="text-gray-600 mb-4">Define trial timeline and milestones</p>
-                    <div class="bg-blue-50 p-4 rounded-lg">
-                      <p class="text-sm text-blue-800">
-                        <strong>Edit Mode:</strong> Planning form will be implemented here.
-                      </p>
-                    </div>
-                  </div>
+                  <kit-time-framework-edit 
+                    [activeTrial]="activeTrial || null">
+                  </kit-time-framework-edit>
                 } @else {
                   <div class="p-4">
                     <h4 class="text-lg font-medium mb-3">Time Framework</h4>
@@ -550,19 +544,6 @@ export class AssumptionsTabContentComponent implements AfterViewInit {
    */
   public isValidTab(tab: string): boolean {
     return this.assumptionsTrialSections.includes(tab as TrialAssumptionsPage);
-  }
-
-  /**
-   * Handles parameters change from the ParametersEditComponent
-   * @param parameters - The updated parameters data
-   */
-  onParametersChange(parameters: any): void {
-    console.log('Parameters changed:', parameters);
-    // TODO: Implement parameters change handling
-    // This could include:
-    // - Updating the trial data
-    // - Emitting changes to parent component
-    // - Saving to backend
   }
 
 }

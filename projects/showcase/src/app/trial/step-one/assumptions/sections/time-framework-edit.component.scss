@@ -2,60 +2,55 @@
 @use '../../../../../../../theme/src/lib/styles/typography.scss';
 @use '../../../../../../../theme/src/lib/styles/breakpoints.scss' as bp;
 
-/* ========================================
-   PARAMETERS EDIT COMPONENT STYLES
-   ======================================== */
+/**
+ * Time Framework Edit Component Styles
+ * 
+ * Provides responsive layout for time framework editing with main content
+ * and aside sidebar for guidelines and utilities.
+ */
 
 /* Use shared assumptions layout styles */
-.pg-parameters-edit-container {
+.pg-time-framework-edit-container {
   @extend .pg-assumptions-container;
 }
 
-.pg-parameters-edit-main {
+.pg-time-framework-edit-main {
   @extend .pg-assumptions-main;
 }
 
-.pg-parameters-edit-aside {
+.pg-time-framework-edit-aside {
   @extend .pg-assumptions-aside;
-}
-
-/* Form layout utilities */
-.pg-parameters-edit-form {
   @extend .pg-assumptions-form;
   flex-direction: column;
 }
 
-.pg-parameters-edit-grid {
+/* Form layout utilities */
+.pg-time-framework-edit-form {
+  @extend .pg-assumptions-form;
+  flex-direction: column;
+}
+
+.pg-time-framework-edit-grid {
   @extend .pg-assumptions-grid;
+  display: grid;
   grid-template-columns: 1fr;
 }
 
-.pg-parameters-edit-grid--two-col {
+.pg-time-framework-edit-grid--two-col {
   @extend .pg-assumptions-grid--two-col;
 }
 
-.pg-parameters-edit-grid--three-col {
-  @extend .pg-assumptions-grid--three-col;
-}
-
-.pg-parameters-edit-grid--twelve-col {
-  @extend .pg-assumptions-grid;
-  grid-template-columns: 1fr;
-  
-  @include bp.tablet-up {
-    grid-template-columns: repeat(12, 1fr);
-  }
-}
-
-.pg-parameters-edit-flex-col {
+.pg-time-framework-edit-flex-col {
   @extend .pg-assumptions-flex-col;
 }
 
-.pg-parameters-edit-flex-wrap {
+.pg-time-framework-edit-flex-wrap {
   @extend .pg-assumptions-flex-wrap;
 }
 
-/* Form Labels */
+/**
+ * Form label styling
+ */
 .pg-form-label {
   @include typography.text-sm;
   @include typography.font-medium;
