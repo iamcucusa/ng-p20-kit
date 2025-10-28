@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { DividerModule } from 'primeng/divider';
 import { BadgeModule } from 'primeng/badge';
 import { TagModule } from 'primeng/tag';
-import type { Trial } from '@trial/trial.types';
 
 /**
  * Trial parameters interface for parameters view

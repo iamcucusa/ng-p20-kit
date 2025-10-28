@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import type { Trial } from './trial.types';
+import { createDefaultTimeFramework } from './mock-data.utils';
 
 /**
  * Trial Data Service
@@ -57,7 +58,8 @@ export class TrialDataService {
             sections: null
           }
         }
-      ]
+      ],
+      planning: createDefaultTimeFramework()
     },
     'trial-002': {
       id: 'trial-002',
@@ -99,7 +101,8 @@ export class TrialDataService {
             sections: null
           }
         }
-      ]
+      ],
+      planning: createDefaultTimeFramework()
     },
     'trial-003': {
       id: 'trial-003',
@@ -127,7 +130,8 @@ export class TrialDataService {
             sections: null
           }
         }
-      ]
+      ],
+      planning: createDefaultTimeFramework()
     }
   };
 

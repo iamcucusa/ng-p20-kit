@@ -4,7 +4,6 @@ import {routes} from '@ng-p20-kit/showcase/app/app.routes';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {providePrimeNG} from 'primeng/config';
 import {SagaBluePreset} from '@ng-p20-kit/theme';
-import { appRoutes, routeParams } from '@core/route.constants';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideEffects } from '@ngrx/effects';
@@ -12,6 +11,7 @@ import { provideRouterStore } from '@ngrx/router-store';
 import { trialStepFeature } from '@trial-step/trial-step.reducer';
 import { TrialStepEffects } from '@trial-step/trial-step.effects';
 import { countriesProviders } from '@country/country.settings';
+import {dateProviders} from '@core/date.settings';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -46,6 +46,7 @@ export const appConfig: ApplicationConfig = {
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideRouterStore(),
     provideEffects([TrialStepEffects]),
+    ...dateProviders,
     ...countriesProviders
 ]
 };

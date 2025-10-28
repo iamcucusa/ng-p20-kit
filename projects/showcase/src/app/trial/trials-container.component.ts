@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { RouteService } from '@core/route.service';
 import { StatusDisplayComponent } from '@core/status/status-display.component';
 import type { Trial } from './trial.types';
+import { createDefaultTimeFramework } from './mock-data.utils';
 
 @Component({
   selector: 'kit-trials-container',
@@ -59,7 +60,8 @@ export class TrialsContainerComponent {
             sections: null
           }
         }
-      ]
+      ],
+      planning: createDefaultTimeFramework()
     },
     {
       id: 'trial-002', 
@@ -101,7 +103,8 @@ export class TrialsContainerComponent {
             sections: null
           }
         }
-      ]
+      ],
+      planning: createDefaultTimeFramework()
     },
     {
       id: 'trial-003',
@@ -129,7 +132,8 @@ export class TrialsContainerComponent {
             sections: null
           }
         }
-      ]
+      ],
+      planning: createDefaultTimeFramework()
     }
   ];
 

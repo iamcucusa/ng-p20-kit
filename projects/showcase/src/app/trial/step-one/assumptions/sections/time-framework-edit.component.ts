@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, Input} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
@@ -12,24 +12,34 @@ import { RippleModule } from 'primeng/ripple';
 import { TooltipModule } from 'primeng/tooltip';
 import type { Trial } from '@trial/trial.types';
 import { CommentsComponent } from '@core/comments/comments.component';
+import {timeFrameworkControlsToken} from '@assumptions/sections/time-framework.settings';
+import {AssumptionsTimeFrameworkControls, TimeFrameworkAutofill, TimeFramework} from '@assumptions/sections/time-framework';
+import {
+  DatePlaceholderFormat,
+  datePlaceholderFormatToken,
+  TrialDateFormat, trialDateFormatToken
+} from '@core/date.settings';
+import {updateFillInChanges} from '@assumptions/sections/autofill.settings';
+import {TrialAutofillChanges} from '@assumptions/sections/autofill';
+import {timeFrameworkProviders} from '@assumptions/sections/time-framework.settings';
 
 /**
  * Time Framework Edit Component
- * 
+ *
  * Handles trial time framework editing including:
  * - Planning phase details
  * - Timeline milestones
  * - Duration estimates
  * - Risk assessment
  * - Dependencies management
- * 
+ *
  * @example
  * ```html
- * <kit-time-framework-edit 
+ * <kit-time-framework-edit
  *   [activeTrial]="trial">
  * </kit-time-framework-edit>
  * ```
- * 
+ *
  * @since 1.0.0
  * @author Angular Team
  */
@@ -50,153 +60,156 @@ import { CommentsComponent } from '@core/comments/comments.component';
     TooltipModule,
     CommentsComponent
   ],
+  providers: [
+    ...timeFrameworkProviders
+  ],
   styleUrls: ['./time-framework-edit.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="pg-time-framework-edit-container">
       <!-- Main Content -->
       <main class="pg-time-framework-edit-main">
-        <form [formGroup]="timeFrameworkForm" (ngSubmit)="onSubmit()" class="pg-time-framework-edit-form">
-        
-        <!-- Planning Card -->
-        <div class="pg-card pg-card--padding-md">
-          <div class="pg-card__header">
-            <div class="pg-card__title">Planning</div>
-            <div class="pg-card__description">
-              Define the timeline and milestones for your trial planning phase
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="pg-time-framework-edit-form">
+
+          <!-- Planning Card -->
+          <div class="pg-card pg-card--padding-md">
+            <div class="pg-card__header">
+              <div class="pg-card__title">Planning</div>
+              <div class="pg-card__description">
+                Define the timeline and milestones for your trial planning phase
+              </div>
             </div>
-          </div>
-          <div class="pg-card__content">
-            <!-- Form Layout with Tailwind Grid -->
-            <div class="pg-time-framework-edit-grid">
+            <div class="pg-card__content">
+              <!-- Form Layout with Tailwind Grid -->
+              <div class="pg-time-framework-edit-grid">
 
-              <!-- First Row: Two columns (half width each) -->
-              <div class="pg-time-framework-edit-grid--two-col">
-                <div class="flex flex-col pg-time-framework-edit-flex-col">
-                  <label for="planningPhase" class="pg-form-label" required>Planning Phase</label>
-                  <p-select
-                    id="planningPhase"
-                    formControlName="planningPhase"
-                    [options]="planningPhaseOptions"
-                    placeholder="Select planning phase"
-                    [invalid]="isFieldInvalid('planningPhase')"
-                    pTooltip="Choose the current planning phase">
-                  </p-select>
-                  @if (isFieldInvalid('planningPhase')) {
-                    <p-message severity="error" size="small" variant="simple">Planning phase is required</p-message>
-                  }
+                <!-- First Row: Two columns (half width each) -->
+                <div class="pg-time-framework-edit-grid--two-col">
+                  <div class="flex flex-col pg-time-framework-edit-flex-col">
+                    <label for="planningPhase" class="pg-form-label" required>Planning Phase</label>
+                    <p-select
+                      id="planningPhase"
+                      formControlName="planningPhase"
+                      [options]="planningPhaseOptions"
+                      placeholder="Select planning phase"
+                      [invalid]="isFieldInvalid('planningPhase')"
+                      pTooltip="Choose the current planning phase">
+                    </p-select>
+                    @if (isFieldInvalid('planningPhase')) {
+                      <p-message severity="error" size="small" variant="simple">Planning phase is required</p-message>
+                    }
+                  </div>
+
+                  <div class="flex flex-col pg-time-framework-edit-flex-col">
+                    <label for="preparationTime" class="pg-form-label">Preparation Time (weeks)</label>
+                    <p-inputNumber
+                      id="preparationTime"
+                      formControlName="preparationTime"
+                      placeholder="Preparation time"
+                      [min]="1"
+                      [max]="52"
+                      pTooltip="Estimated preparation time in weeks">
+                    </p-inputNumber>
+                  </div>
                 </div>
 
-                <div class="flex flex-col pg-time-framework-edit-flex-col">
-                  <label for="preparationTime" class="pg-form-label">Preparation Time (weeks)</label>
-                  <p-inputNumber
-                    id="preparationTime"
-                    formControlName="preparationTime"
-                    placeholder="Preparation time"
-                    [min]="1"
-                    [max]="52"
-                    pTooltip="Estimated preparation time in weeks">
-                  </p-inputNumber>
-                </div>
-              </div>
+                <!-- Second Row: Two columns (half width each) -->
+                <div class="pg-time-framework-edit-grid--two-col">
+                  <div class="flex flex-col pg-time-framework-edit-flex-col">
+                    <label for="recruitmentPeriod" class="pg-form-label">Recruitment Period (weeks)</label>
+                    <p-inputNumber
+                      id="recruitmentPeriod"
+                      formControlName="recruitmentPeriod"
+                      placeholder="Recruitment period"
+                      [min]="1"
+                      [max]="104"
+                      pTooltip="Estimated recruitment period in weeks">
+                    </p-inputNumber>
+                  </div>
 
-              <!-- Second Row: Two columns (half width each) -->
-              <div class="pg-time-framework-edit-grid--two-col">
-                <div class="flex flex-col pg-time-framework-edit-flex-col">
-                  <label for="recruitmentPeriod" class="pg-form-label">Recruitment Period (weeks)</label>
-                  <p-inputNumber
-                    id="recruitmentPeriod"
-                    formControlName="recruitmentPeriod"
-                    placeholder="Recruitment period"
-                    [min]="1"
-                    [max]="104"
-                    pTooltip="Estimated recruitment period in weeks">
-                  </p-inputNumber>
-                </div>
-
-                <div class="flex flex-col pg-time-framework-edit-flex-col">
-                  <label for="dataCollectionPeriod" class="pg-form-label">Data Collection Period (weeks)</label>
-                  <p-inputNumber
-                    id="dataCollectionPeriod"
-                    formControlName="dataCollectionPeriod"
-                    placeholder="Data collection period"
-                    [min]="1"
-                    [max]="208"
-                    pTooltip="Estimated data collection period in weeks">
-                  </p-inputNumber>
-                </div>
-              </div>
-
-              <!-- Third Row: Two columns (half width each) -->
-              <div class="pg-time-framework-edit-grid--two-col">
-                <div class="flex flex-col pg-time-framework-edit-flex-col">
-                  <label for="analysisPeriod" class="pg-form-label">Analysis Period (weeks)</label>
-                  <p-inputNumber
-                    id="analysisPeriod"
-                    formControlName="analysisPeriod"
-                    placeholder="Analysis period"
-                    [min]="1"
-                    [max]="52"
-                    pTooltip="Estimated analysis period in weeks">
-                  </p-inputNumber>
+                  <div class="flex flex-col pg-time-framework-edit-flex-col">
+                    <label for="dataCollectionPeriod" class="pg-form-label">Data Collection Period (weeks)</label>
+                    <p-inputNumber
+                      id="dataCollectionPeriod"
+                      formControlName="dataCollectionPeriod"
+                      placeholder="Data collection period"
+                      [min]="1"
+                      [max]="208"
+                      pTooltip="Estimated data collection period in weeks">
+                    </p-inputNumber>
+                  </div>
                 </div>
 
-                <div class="flex flex-col pg-time-framework-edit-flex-col">
-                  <label for="reportingPeriod" class="pg-form-label">Reporting Period (weeks)</label>
-                  <p-inputNumber
-                    id="reportingPeriod"
-                    formControlName="reportingPeriod"
-                    placeholder="Reporting period"
-                    [min]="1"
-                    [max]="26"
-                    pTooltip="Estimated reporting period in weeks">
-                  </p-inputNumber>
+                <!-- Third Row: Two columns (half width each) -->
+                <div class="pg-time-framework-edit-grid--two-col">
+                  <div class="flex flex-col pg-time-framework-edit-flex-col">
+                    <label for="analysisPeriod" class="pg-form-label">Analysis Period (weeks)</label>
+                    <p-inputNumber
+                      id="analysisPeriod"
+                      formControlName="analysisPeriod"
+                      placeholder="Analysis period"
+                      [min]="1"
+                      [max]="52"
+                      pTooltip="Estimated analysis period in weeks">
+                    </p-inputNumber>
+                  </div>
+
+                  <div class="flex flex-col pg-time-framework-edit-flex-col">
+                    <label for="reportingPeriod" class="pg-form-label">Reporting Period (weeks)</label>
+                    <p-inputNumber
+                      id="reportingPeriod"
+                      formControlName="reportingPeriod"
+                      placeholder="Reporting period"
+                      [min]="1"
+                      [max]="26"
+                      pTooltip="Estimated reporting period in weeks">
+                    </p-inputNumber>
+                  </div>
                 </div>
-              </div>
 
-              <!-- Form Divider -->
-              <div class="pg-form-divider"></div>
+                <!-- Form Divider -->
+                <div class="pg-form-divider"></div>
 
-              <!-- Fourth Row: One column (full width) -->
-              <div class="flex flex-col pg-time-framework-edit-flex-col">
-                <label for="milestones" class="pg-form-label">Key Milestones</label>
-                <textarea
-                  id="milestones"
-                  pTextarea
-                  formControlName="milestones"
-                  placeholder="Describe key milestones and deliverables"
-                  rows="3">
+                <!-- Fourth Row: One column (full width) -->
+                <div class="flex flex-col pg-time-framework-edit-flex-col">
+                  <label for="milestones" class="pg-form-label">Key Milestones</label>
+                  <textarea
+                    id="milestones"
+                    pTextarea
+                    formControlName="milestones"
+                    placeholder="Describe key milestones and deliverables"
+                    rows="3">
                 </textarea>
-              </div>
-
-              <!-- Fifth Row: Two columns (half width each) -->
-              <div class="pg-time-framework-edit-grid--two-col">
-                <div class="flex flex-col pg-time-framework-edit-flex-col">
-                  <label for="dependencies" class="pg-form-label">Dependencies</label>
-                  <textarea
-                    id="dependencies"
-                    pTextarea
-                    formControlName="dependencies"
-                    placeholder="List external dependencies"
-                    rows="2">
-                  </textarea>
                 </div>
 
-                <div class="flex flex-col pg-time-framework-edit-flex-col">
-                  <label for="risks" class="pg-form-label">Risk Factors</label>
-                  <textarea
-                    id="risks"
-                    pTextarea
-                    formControlName="risks"
-                    placeholder="Identify potential risks"
-                    rows="2">
+                <!-- Fifth Row: Two columns (half width each) -->
+                <div class="pg-time-framework-edit-grid--two-col">
+                  <div class="flex flex-col pg-time-framework-edit-flex-col">
+                    <label for="dependencies" class="pg-form-label">Dependencies</label>
+                    <textarea
+                      id="dependencies"
+                      pTextarea
+                      formControlName="dependencies"
+                      placeholder="List external dependencies"
+                      rows="2">
                   </textarea>
-                </div>
-              </div>
+                  </div>
 
+                  <div class="flex flex-col pg-time-framework-edit-flex-col">
+                    <label for="risks" class="pg-form-label">Risk Factors</label>
+                    <textarea
+                      id="risks"
+                      pTextarea
+                      formControlName="risks"
+                      placeholder="Identify potential risks"
+                      rows="2">
+                  </textarea>
+                  </div>
+                </div>
+
+              </div>
             </div>
           </div>
-        </div>
 
         </form>
       </main>
@@ -222,7 +235,7 @@ import { CommentsComponent } from '@core/comments/comments.component';
                   <li>• Account for data quality checks</li>
                 </ul>
               </div>
-              
+
               <div>
                 <h4 class="font-semibold text-gray-900 mb-2">Risk Mitigation</h4>
                 <ul class="text-sm text-gray-600 space-y-1">
@@ -237,7 +250,7 @@ import { CommentsComponent } from '@core/comments/comments.component';
         </div>
 
         <!-- Comments Component -->
-        <kit-comments 
+        <kit-comments
           [comments]="comments"
           [tags]="tags"
           (commentsChange)="onCommentsChange($event)"
@@ -257,7 +270,13 @@ import { CommentsComponent } from '@core/comments/comments.component';
 export class TimeFrameworkEditComponent {
   @Input() activeTrial: Trial | null = null;
 
-  timeFrameworkForm: FormGroup;
+  readonly dateFormat: TrialDateFormat = inject(trialDateFormatToken);
+  readonly datePlaceholder: DatePlaceholderFormat = inject(datePlaceholderFormatToken);
+  readonly formControlNames: AssumptionsTimeFrameworkControls =  inject(timeFrameworkControlsToken);
+  formGroup: FormGroup;
+
+  autofill: TimeFrameworkAutofill | null = null;
+  autofillChanges: TrialAutofillChanges | null = null;
 
   /** Comments text */
   comments: string = '';
@@ -275,8 +294,10 @@ export class TimeFrameworkEditComponent {
     { label: 'Final Preparation', value: 'final' }
   ];
 
-  constructor(private fb: FormBuilder) {
-    this.timeFrameworkForm = this.createForm();
+  private fb = inject(FormBuilder);
+
+  constructor() {
+    this.formGroup = this.createForm();
   }
 
   /**
@@ -301,7 +322,7 @@ export class TimeFrameworkEditComponent {
    * Check if a form field is invalid
    */
   isFieldInvalid(fieldName: string): boolean {
-    const field = this.timeFrameworkForm.get(fieldName);
+    const field = this.formGroup.get(fieldName);
     return !!(field && field.invalid && field.touched);
   }
 
@@ -309,8 +330,8 @@ export class TimeFrameworkEditComponent {
    * Handle form submission
    */
   onSubmit(): void {
-    if (this.timeFrameworkForm.valid) {
-      const formValue = this.timeFrameworkForm.value;
+    if (this.formGroup.valid) {
+      const formValue = this.formGroup.value;
       console.log('Time framework updated:', formValue);
     } else {
       console.log('Form is invalid');
@@ -321,7 +342,7 @@ export class TimeFrameworkEditComponent {
    * Reset the form
    */
   onReset(): void {
-    this.timeFrameworkForm.reset();
+    this.formGroup.reset();
   }
 
   /**
@@ -343,11 +364,48 @@ export class TimeFrameworkEditComponent {
   }
 
   /**
-   * Handle action click from CommentsComponent
-   * @param action - The action that was clicked
+   * Handles action button clicks from the comments component
+   * 
+   * @param {string} action - The action type that was clicked
+   * 
+   * @example
+   * ```typescript
+   * onActionClick('save'); // Handles save action
+   * onActionClick('export'); // Handles export action
+   * ```
+   * 
+   * @since 1.0.0
    */
   onActionClick(action: string): void {
     console.log('Action clicked:', action);
-    // TODO: Implement action handling based on action type
+    // Action handling implementation will be added based on specific requirements
+  }
+
+  fillInField(newValue: string | undefined | null, field: keyof TimeFramework): void {
+    if (newValue === null || newValue === undefined) {
+      return;
+    }
+    
+    const trimmedValue = newValue.trim();
+    if (!trimmedValue) {
+      return;
+    }
+
+    const control = this.formGroup.get(field);
+    if (!control) {
+      console.error(`Field '${field}' not found in form`);
+      return;
+    }
+
+    control.patchValue(trimmedValue);
+
+    this.autofillChanges = updateFillInChanges<keyof TimeFrameworkAutofill>(
+      field as keyof TimeFrameworkAutofill,
+      trimmedValue,
+      this.autofillChanges
+    );
+
+    control.markAsDirty();
+    this.formGroup.markAsTouched();
   }
 }

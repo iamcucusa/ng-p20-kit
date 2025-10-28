@@ -39,7 +39,7 @@ export function getCountryNameByCode3(code3: CountryCode3, countryDic: TrialCoun
 }
 
 export function splitCountries(countriesSource: string, countryDic: TrialCountryDictionary): string {
-  let countries = countriesSource.split(',');
-  let focus = countries.map((code) => getCountryNameByCode3(code as CountryCode3, countryDic));
+  const countries = countriesSource.split(',');
+  const focus = countries.map((code) => getCountryNameByCode3(code as CountryCode3, countryDic));
   return focus.toString();
 }

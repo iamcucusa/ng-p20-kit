@@ -10,29 +10,9 @@ import { SelectModule } from 'primeng/select';
 import { MessageModule } from 'primeng/message';
 import { RippleModule } from 'primeng/ripple';
 import { TooltipModule } from 'primeng/tooltip';
-import { AssumptionSectionTabContent } from './assumptions-sections';
 import type { Trial } from '@trial/trial.types';
 import { CommentsComponent } from '@core/comments/comments.component';
 
-/**
- * Trial parameters interface for edit component
- */
-interface TrialParameters {
-  name?: string;
-  description?: string;
-  studyType?: string;
-  phase?: string;
-  participants?: number;
-  duration?: number;
-  startDate?: Date | string;
-  endDate?: Date | string;
-  requiresIRB?: boolean;
-  requiresFDA?: boolean;
-  requiresEMA?: boolean;
-  regulatoryNotes?: string;
-  dataCollectionMethod?: string;
-  dataRetention?: number;
-}
 
 /**
  * Parameters Edit Component

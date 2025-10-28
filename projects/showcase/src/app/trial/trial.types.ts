@@ -4,6 +4,7 @@
 
 import { TrialStatus } from './trial.d';
 import {AssumptionsScenario} from '@assumptions/scenario/assumptions-scenario';
+import {TimeFramework} from '@assumptions/sections/time-framework';
 
 export interface TrialData {
   id: string;
@@ -18,26 +19,11 @@ export interface TrialData {
 
 export interface TrialWithAssumptions extends TrialData {
   assumptionsScenarios: AssumptionsScenario[];
+  planning: TimeFramework;
 }
 
 export interface Trial extends TrialWithAssumptions {
   phase: string;
   participants: number;
   public: boolean;
-}
-
-export interface TrialFilters {
-  status?: TrialStatus[];
-  dateRange?: {
-    start: Date;
-    end: Date;
-  };
-  searchTerm?: string;
-}
-
-export interface TrialMetrics {
-  totalTrials: number;
-  activeTrials: number;
-  completedTrials: number;
-  successRate: number;
 }

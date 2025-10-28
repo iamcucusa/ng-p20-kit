@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TrialHeadingComponent } from '../../trial/trial-heading.component';
 import type { Trial } from '../../trial/trial.types';
+import { createDefaultTimeFramework } from '../../trial/mock-data.utils';
 
 /**
  * Trial Heading Example Component
@@ -82,7 +83,8 @@ export class TrialHeadingExampleComponent {
     startDate: new Date('2024-01-15'),
     description: 'A comprehensive study on cardiovascular health outcomes.',
     public: true,
-    assumptionsScenarios: []
+    assumptionsScenarios: [],
+    planning: createDefaultTimeFramework()
   };
 
   finalTrial: Trial = {
@@ -96,7 +98,8 @@ export class TrialHeadingExampleComponent {
     startDate: new Date('2024-02-01'),
     description: 'Advanced oncology treatment efficacy study.',
     public: false,
-    assumptionsScenarios: []
+    assumptionsScenarios: [],
+    planning: createDefaultTimeFramework()
   };
 
   replicatingTrial: Trial = {
@@ -110,7 +113,8 @@ export class TrialHeadingExampleComponent {
     startDate: new Date('2024-03-01'),
     description: 'Early-stage neurological intervention study.',
     public: true,
-    assumptionsScenarios: []
+    assumptionsScenarios: [],
+    planning: createDefaultTimeFramework()
   };
 
   trialWithLongStudyNumber: Trial = {
@@ -124,7 +128,8 @@ export class TrialHeadingExampleComponent {
     startDate: new Date('2024-04-01'),
     description: 'Test with long study number.',
     public: true,
-    assumptionsScenarios: []
+    assumptionsScenarios: [],
+    planning: createDefaultTimeFramework()
   };
 
   trialWithShortStudyNumber: Trial = {
@@ -138,6 +143,7 @@ export class TrialHeadingExampleComponent {
     startDate: new Date('2024-05-01'),
     description: 'Test with short study number.',
     public: false,
-    assumptionsScenarios: []
+    assumptionsScenarios: [],
+    planning: createDefaultTimeFramework()
   };
 }
