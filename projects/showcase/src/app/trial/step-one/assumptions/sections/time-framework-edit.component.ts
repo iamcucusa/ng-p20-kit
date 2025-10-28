@@ -10,9 +10,11 @@ import { SelectModule } from 'primeng/select';
 import { MessageModule } from 'primeng/message';
 import { RippleModule } from 'primeng/ripple';
 import { TooltipModule } from 'primeng/tooltip';
+import { DatePickerModule } from 'primeng/datepicker';
+import { AssumptionsFieldComponent } from './assumptions-field.component';
 import type { Trial } from '@trial/trial.types';
 import { CommentsComponent } from '@core/comments/comments.component';
-import {timeFrameworkControlsToken} from '@assumptions/sections/time-framework.settings';
+import {timeFrameworkControlsToken, timeFrameworkAutofillStateToken} from '@assumptions/sections/time-framework.settings';
 import {AssumptionsTimeFrameworkControls, TimeFrameworkAutofill, TimeFramework} from '@assumptions/sections/time-framework';
 import {
   DatePlaceholderFormat,
@@ -20,7 +22,7 @@ import {
   TrialDateFormat, trialDateFormatToken
 } from '@core/date.settings';
 import {updateFillInChanges} from '@assumptions/sections/autofill.settings';
-import {TrialAutofillChanges} from '@assumptions/sections/autofill';
+import {TrialAutofillChanges, AutofillState} from '@assumptions/sections/autofill';
 import {timeFrameworkProviders} from '@assumptions/sections/time-framework.settings';
 
 /**
@@ -58,6 +60,8 @@ import {timeFrameworkProviders} from '@assumptions/sections/time-framework.setti
     MessageModule,
     RippleModule,
     TooltipModule,
+    DatePickerModule,
+    AssumptionsFieldComponent,
     CommentsComponent
   ],
   providers: [
@@ -170,7 +174,61 @@ import {timeFrameworkProviders} from '@assumptions/sections/time-framework.setti
                 <!-- Form Divider -->
                 <div class="pg-form-divider"></div>
 
-                <!-- Fourth Row: One column (full width) -->
+                <!-- Fourth Row: Study Synopsis and Key Results -->
+                <div class="pg-time-framework-edit-grid--two-col">
+                  <pg-assumptions-field
+                    [loading]="isLoading"
+                    [title]="formControlNames.studySynopsis.title"
+                    [field]="fieldStudySynopsis"
+                    [errorsMessages]="{
+                      studySynopsisAfterTdoKickoff: 'Should not be later than the TDO Kick Off.',
+                    }"
+                    [errorsToValidate]="['studySynopsisAfterTdoKickoff']"
+                    [formField]="formGroup"
+                    [name]="formControlNames.studySynopsis.name"
+                  >
+                    <ng-template #fieldStudySynopsis>
+                      <p-datepicker
+                        id="{{ formControlNames.studySynopsis.name }}"
+                        inputId="{{ formControlNames.studySynopsis.name }}"
+                        [dateFormat]="dateFormat"
+                        [formControlName]="formControlNames.studySynopsis.name"
+                        [placeholder]="datePlaceholder"
+                        [iconDisplay]="'input'"
+                        [showIcon]="true"
+                      >
+                      </p-datepicker>
+                    </ng-template>
+                  </pg-assumptions-field>
+
+                  <pg-assumptions-field
+                    [loading]="isLoading"
+                    [title]="formControlNames.keyResults.title"
+                    [field]="fieldKeyResults"
+                    [name]="formControlNames.keyResults.name"
+                    [autoFill]="autofillState[formControlNames.keyResults.name]"
+                    [formField]="formGroup"
+                    [autoFillValue]="autofill?.keyResults ?? null"
+                    (fillIn)="fillInField($event, formControlNames.keyResults.name)"
+                  >
+                    <ng-template #fieldKeyResults>
+                      <p-datepicker
+                        id="{{ formControlNames.keyResults.name }}"
+                        inputId="{{ formControlNames.keyResults.name }}"
+                        [dateFormat]="dateFormat"
+                        [formControlName]="formControlNames.keyResults.name"
+                        [placeholder]="datePlaceholder"
+                        [iconDisplay]="'input'"
+                        [showIcon]="true"
+                      ></p-datepicker>
+                    </ng-template>
+                  </pg-assumptions-field>
+                </div>
+
+                <!-- Form Divider -->
+                <div class="pg-form-divider"></div>
+
+                <!-- Fifth Row: One column (full width) -->
                 <div class="flex flex-col pg-time-framework-edit-flex-col">
                   <label for="milestones" class="pg-form-label">Key Milestones</label>
                   <textarea
@@ -182,7 +240,7 @@ import {timeFrameworkProviders} from '@assumptions/sections/time-framework.setti
                 </textarea>
                 </div>
 
-                <!-- Fifth Row: Two columns (half width each) -->
+                <!-- Sixth Row: Two columns (half width each) -->
                 <div class="pg-time-framework-edit-grid--two-col">
                   <div class="flex flex-col pg-time-framework-edit-flex-col">
                     <label for="dependencies" class="pg-form-label">Dependencies</label>
@@ -273,7 +331,9 @@ export class TimeFrameworkEditComponent {
   readonly dateFormat: TrialDateFormat = inject(trialDateFormatToken);
   readonly datePlaceholder: DatePlaceholderFormat = inject(datePlaceholderFormatToken);
   readonly formControlNames: AssumptionsTimeFrameworkControls =  inject(timeFrameworkControlsToken);
-  formGroup: FormGroup;
+  readonly autofillState: AutofillState = inject(timeFrameworkAutofillStateToken);
+  private fb = inject(FormBuilder);
+  formGroup: FormGroup = this.createForm();
 
   autofill: TimeFrameworkAutofill | null = null;
   autofillChanges: TrialAutofillChanges | null = null;
@@ -284,6 +344,9 @@ export class TimeFrameworkEditComponent {
   /** Tags text */
   tags: string = '';
 
+  /** Loading state for form fields */
+  isLoading: boolean = false;
+
   /** Planning phase options */
   planningPhaseOptions = [
     { label: 'Initial Planning', value: 'initial' },
@@ -293,12 +356,6 @@ export class TimeFrameworkEditComponent {
     { label: 'Recruitment Planning', value: 'recruitment' },
     { label: 'Final Preparation', value: 'final' }
   ];
-
-  private fb = inject(FormBuilder);
-
-  constructor() {
-    this.formGroup = this.createForm();
-  }
 
   /**
    * Create the reactive form
@@ -314,7 +371,9 @@ export class TimeFrameworkEditComponent {
       totalDuration: [null],
       milestones: [''],
       dependencies: [''],
-      risks: ['']
+      risks: [''],
+      studySynopsis: [null],
+      keyResults: [null]
     });
   }
 
@@ -381,7 +440,7 @@ export class TimeFrameworkEditComponent {
     // Action handling implementation will be added based on specific requirements
   }
 
-  fillInField(newValue: string | undefined | null, field: keyof TimeFramework): void {
+  fillInField(newValue: string | undefined | null, field: string): void {
     if (newValue === null || newValue === undefined) {
       return;
     }
@@ -399,8 +458,8 @@ export class TimeFrameworkEditComponent {
 
     control.patchValue(trimmedValue);
 
-    this.autofillChanges = updateFillInChanges<keyof TimeFrameworkAutofill>(
-      field as keyof TimeFrameworkAutofill,
+    this.autofillChanges = updateFillInChanges(
+      field,
       trimmedValue,
       this.autofillChanges
     );

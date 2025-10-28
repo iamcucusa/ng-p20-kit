@@ -1,0 +1,573 @@
+import { Component, inject } from '@angular/core';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { AssumptionsFieldComponent } from '../../trial/step-one/assumptions/sections/assumptions-field.component';
+import { DatePickerModule } from 'primeng/datepicker';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { TextareaModule } from 'primeng/textarea';
+import { SelectModule } from 'primeng/select';
+import { CheckboxModule } from 'primeng/checkbox';
+import { SkeletonModule } from 'primeng/skeleton';
+import { TooltipModule } from 'primeng/tooltip';
+
+/**
+ * Assumptions Field Component Example
+ * 
+ * Demonstrates all the different states and configurations of the AssumptionsFieldComponent:
+ * - Required fields (automatic detection from validators)
+ * - Optional fields
+ * - Loading states
+ * - Error states
+ * - Different field types (text, number, date, textarea, select, checkbox)
+ * - Autofill suggestions
+ * - Source indicators
+ * - Different field sizes and layouts
+ * 
+ * @since 1.0.0
+ */
+@Component({
+  selector: 'kit-assumptions-field-example',
+  standalone: true,
+  imports: [
+    CommonModule,
+    AssumptionsFieldComponent,
+    DatePickerModule,
+    InputTextModule,
+    InputNumberModule,
+    TextareaModule,
+    SelectModule,
+    CheckboxModule,
+    SkeletonModule,
+    TooltipModule
+  ],
+  template: `
+    <div class="space-y-8">
+      <!-- Header -->
+      <div class="text-center">
+        <h2 class="text-3xl font-bold text-gray-900 mb-2">Assumptions Field Component</h2>
+        <p class="text-lg text-gray-600">Comprehensive examples of all field states and configurations</p>
+      </div>
+
+      <!-- Basic Examples -->
+      <div class="pg-card pg-card--padding-lg">
+        <h3 class="text-xl font-semibold mb-4">Basic Field Examples</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Required Text Field -->
+          <pg-assumptions-field
+            title="Required Text Field"
+            name="requiredText"
+            [field]="requiredTextField"
+            [formField]="getFormControl('requiredText', basicForm)"
+            [errorsMessages]="{ required: 'This field is required' }"
+            [errorsToValidate]="['required']"
+            info="This field is automatically detected as required due to Validators.required"
+          >
+            <ng-template #requiredTextField>
+              <input
+                pInputText
+                formControlName="requiredText"
+                placeholder="Enter required text"
+                class="w-full"
+              />
+            </ng-template>
+          </pg-assumptions-field>
+
+          <!-- Optional Text Field -->
+          <pg-assumptions-field
+            title="Optional Text Field"
+            name="optionalText"
+            [field]="optionalTextField"
+            [autoFill]="autofillState.keyResults"
+            [formField]="getFormControl('optionalText', basicForm)"
+            [autoFillValue]="autofill.keyResults"
+            (fillIn)="onAutofillFillIn($event)"
+            info="This field has no validators, so no red asterisk appears, but has autofill"
+          >
+            <ng-template #optionalTextField>
+              <input
+                pInputText
+                formControlName="optionalText"
+                placeholder="Enter optional text"
+                class="w-full"
+              />
+            </ng-template>
+          </pg-assumptions-field>
+
+          <!-- Manually Required Field -->
+          <pg-assumptions-field
+            title="Manually Required Field"
+            name="manualRequired"
+            [field]="manualRequiredField"
+            [required]="true"
+            [formField]="getFormControl('manualRequired', basicForm)"
+            info="This field uses [required]='true' input property"
+          >
+            <ng-template #manualRequiredField>
+              <input
+                pInputText
+                formControlName="manualRequired"
+                placeholder="Enter manually required text"
+                class="w-full"
+              />
+            </ng-template>
+          </pg-assumptions-field>
+
+          <!-- Field with Unit -->
+          <pg-assumptions-field
+            title="Field with Unit"
+            name="fieldWithUnit"
+            [field]="fieldWithUnitTemplate"
+            unit="kg"
+            [formField]="getFormControl('fieldWithUnit', basicForm)"
+            info="This field includes a unit display"
+          >
+            <ng-template #fieldWithUnitTemplate>
+              <p-inputNumber
+                formControlName="fieldWithUnit"
+                placeholder="Enter weight"
+                [suffix]="'kg'"
+                class="w-full"
+              />
+            </ng-template>
+          </pg-assumptions-field>
+        </div>
+      </div>
+
+      <!-- Different Field Types -->
+      <div class="pg-card pg-card--padding-lg">
+        <h3 class="text-xl font-semibold mb-4">Different Field Types</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Date Field -->
+          <pg-assumptions-field
+            title="Date Field"
+            name="dateField"
+            [field]="dateFieldTemplate"
+            [formField]="getFormControl('dateField', fieldTypesForm)"
+            [errorsMessages]="{ required: 'Date is required' }"
+            [errorsToValidate]="['required']"
+            info="PrimeNG DatePicker with automatic required detection"
+          >
+            <ng-template #dateFieldTemplate>
+              <p-datepicker
+                formControlName="dateField"
+                placeholder="Select date"
+                [showIcon]="true"
+                [iconDisplay]="'input'"
+                class="w-full"
+              />
+            </ng-template>
+          </pg-assumptions-field>
+
+          <!-- Number Field -->
+          <pg-assumptions-field
+            title="Number Field"
+            name="numberField"
+            [field]="numberFieldTemplate"
+            unit="%"
+            [formField]="getFormControl('numberField', fieldTypesForm)"
+            info="PrimeNG InputNumber with unit display"
+          >
+            <ng-template #numberFieldTemplate>
+              <p-inputNumber
+                formControlName="numberField"
+                placeholder="Enter percentage"
+                [min]="0"
+                [max]="100"
+                [suffix]="'%'"
+                class="w-full"
+              />
+            </ng-template>
+          </pg-assumptions-field>
+
+          <!-- Textarea Field -->
+          <pg-assumptions-field
+            title="Textarea Field"
+            name="textareaField"
+            [field]="textareaFieldTemplate"
+            [autoFill]="autofillState.studySynopsis"
+            [formField]="getFormControl('textareaField', fieldTypesForm)"
+            [autoFillValue]="autofill.studySynopsis"
+            [errorsMessages]="{ required: 'Description is required' }"
+            [errorsToValidate]="['required']"
+            (fillIn)="onAutofillFillIn($event)"
+            info="Multi-line text input with validation and autofill"
+          >
+            <ng-template #textareaFieldTemplate>
+              <textarea
+                pTextarea
+                formControlName="textareaField"
+                rows="4"
+                placeholder="Enter description"
+                class="w-full"
+              ></textarea>
+            </ng-template>
+          </pg-assumptions-field>
+
+          <!-- Select Field -->
+          <pg-assumptions-field
+            title="Select Field"
+            name="selectField"
+            [field]="selectFieldTemplate"
+            [formField]="getFormControl('selectField', fieldTypesForm)"
+            info="Dropdown selection with options"
+          >
+            <ng-template #selectFieldTemplate>
+              <p-select
+                formControlName="selectField"
+                [options]="selectOptions"
+                placeholder="Choose an option"
+                class="w-full"
+              />
+            </ng-template>
+          </pg-assumptions-field>
+
+          <!-- Checkbox Field -->
+          <pg-assumptions-field
+            title="Checkbox Field"
+            name="checkboxField"
+            [field]="checkboxFieldTemplate"
+            [formField]="getFormControl('checkboxField', fieldTypesForm)"
+            info="Boolean input with checkbox"
+          >
+            <ng-template #checkboxFieldTemplate>
+              <div class="flex items-center space-x-2">
+                <p-checkbox
+                  formControlName="checkboxField"
+                  [binary]="true"
+                />
+                <label class="text-sm text-gray-700">I agree to the terms and conditions</label>
+              </div>
+            </ng-template>
+          </pg-assumptions-field>
+        </div>
+      </div>
+
+      <!-- Field States -->
+      <div class="pg-card pg-card--padding-lg">
+        <h3 class="text-xl font-semibold mb-4">Field States</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Loading State -->
+          <pg-assumptions-field
+            title="Loading State"
+            name="loadingField"
+            [field]="loadingFieldTemplate"
+            [loading]="true"
+            [formField]="getFormControl('loadingField', statesForm)"
+            info="Field in loading state with skeleton animation"
+          >
+            <ng-template #loadingFieldTemplate>
+              <p-skeleton height="2.5rem" />
+            </ng-template>
+          </pg-assumptions-field>
+
+          <!-- Error State -->
+          <pg-assumptions-field
+            title="Error State"
+            name="errorField"
+            [field]="errorFieldTemplate"
+            [formField]="getFormControl('errorField', statesForm)"
+            [errorsMessages]="{ required: 'This field is required', minlength: 'Minimum 3 characters required' }"
+            [errorsToValidate]="['required', 'minlength']"
+            info="Field with validation errors"
+          >
+            <ng-template #errorFieldTemplate>
+              <input
+                pInputText
+                formControlName="errorField"
+                placeholder="This will show errors"
+                class="w-full"
+              />
+            </ng-template>
+          </pg-assumptions-field>
+
+          <!-- Disabled State -->
+          <pg-assumptions-field
+            title="Disabled State"
+            name="disabledField"
+            [field]="disabledFieldTemplate"
+            [formField]="getFormControl('disabledField', statesForm)"
+            info="Field that is disabled and cannot be edited"
+          >
+            <ng-template #disabledFieldTemplate>
+              <input
+                pInputText
+                formControlName="disabledField"
+                placeholder="This field is disabled"
+                class="w-full"
+              />
+            </ng-template>
+          </pg-assumptions-field>
+
+          <!-- Readonly State -->
+          <pg-assumptions-field
+            title="Readonly State"
+            name="readonlyField"
+            [field]="readonlyFieldTemplate"
+            [formField]="getFormControl('readonlyField', statesForm)"
+            info="Field that is readonly and cannot be edited"
+          >
+            <ng-template #readonlyFieldTemplate>
+              <input
+                pInputText
+                formControlName="readonlyField"
+                placeholder="This field is readonly"
+                class="w-full"
+              />
+            </ng-template>
+          </pg-assumptions-field>
+        </div>
+      </div>
+
+      <!-- Autofill and Source Examples -->
+      <div class="pg-card pg-card--padding-lg">
+        <h3 class="text-xl font-semibold mb-4">Autofill and Source Indicators</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Field with Autofill Suggestion -->
+          <pg-assumptions-field
+            title="Field with Autofill"
+            name="autofillField"
+            [field]="autofillFieldTemplate"
+            [autoFill]="autofillState.autofillField"
+            [formField]="getFormControl('autofillField', autofillForm)"
+            [autoFillValue]="autofill.autofillField"
+            (fillIn)="onAutofillFillIn($event)"
+            info="Field with autofill suggestion from external source"
+          >
+            <ng-template #autofillFieldTemplate>
+              <input
+                pInputText
+                formControlName="autofillField"
+                placeholder="Type to see autofill suggestion"
+                class="w-full"
+              />
+            </ng-template>
+          </pg-assumptions-field>
+
+          <!-- Field with Source Indicator -->
+          <pg-assumptions-field
+            title="Field with Source"
+            name="sourceField"
+            [field]="sourceFieldTemplate"
+            dataSource="CAPTARIO"
+            [formField]="getFormControl('sourceField', autofillForm)"
+            info="Field with data source indicator (purple dot)"
+          >
+            <ng-template #sourceFieldTemplate>
+              <input
+                pInputText
+                formControlName="sourceField"
+                placeholder="Field with source indicator"
+                class="w-full"
+              />
+            </ng-template>
+          </pg-assumptions-field>
+
+          <!-- Field with Both Autofill and Source -->
+          <pg-assumptions-field
+            title="Field with Both"
+            name="bothField"
+            [field]="bothFieldTemplate"
+            dataSource="CAPTARIO"
+            [autoFill]="autofillState.bothField"
+            [formField]="getFormControl('bothField', autofillForm)"
+            [autoFillValue]="autofill.bothField"
+            (fillIn)="onAutofillFillIn($event)"
+            info="Field with both autofill and source indicator"
+          >
+            <ng-template #bothFieldTemplate>
+              <input
+                pInputText
+                formControlName="bothField"
+                placeholder="Field with both features"
+                class="w-full"
+              />
+            </ng-template>
+          </pg-assumptions-field>
+        </div>
+      </div>
+
+      <!-- Accessibility Features -->
+      <div class="pg-card pg-card--padding-lg">
+        <h3 class="text-xl font-semibold mb-4">Accessibility Features</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Field with Hidden Label -->
+          <pg-assumptions-field
+            title="Hidden Label Field"
+            name="hiddenLabelField"
+            [field]="hiddenLabelFieldTemplate"
+            [labelHidden]="true"
+            [formField]="getFormControl('hiddenLabelField', accessibilityForm)"
+            info="Field with visually hidden label for screen readers"
+          >
+            <ng-template #hiddenLabelFieldTemplate>
+              <input
+                pInputText
+                formControlName="hiddenLabelField"
+                placeholder="Label is hidden but accessible"
+                class="w-full"
+              />
+            </ng-template>
+          </pg-assumptions-field>
+
+          <!-- Field with Advice Text -->
+          <pg-assumptions-field
+            title="Field with Advice"
+            name="adviceField"
+            [field]="adviceFieldTemplate"
+            [formField]="getFormControl('adviceField', accessibilityForm)"
+            advice="This is helpful advice text that appears below the field"
+            info="Field with additional advice text for users"
+          >
+            <ng-template #adviceFieldTemplate>
+              <input
+                pInputText
+                formControlName="adviceField"
+                placeholder="Field with advice text"
+                class="w-full"
+              />
+            </ng-template>
+          </pg-assumptions-field>
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="flex justify-center space-x-4">
+        <button 
+          type="button" 
+          (click)="resetForms()"
+          class="px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors"
+        >
+          Reset All Forms
+        </button>
+        <button 
+          type="button" 
+          (click)="validateForms()"
+          class="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+        >
+          Validate All Forms
+        </button>
+      </div>
+
+      <!-- Form Values Display -->
+      <div class="pg-card pg-card--padding-lg">
+        <h3 class="text-xl font-semibold mb-4">Current Form Values</h3>
+        <pre class="bg-gray-100 p-4 rounded-lg text-sm overflow-auto">{{ getFormValues() }}</pre>
+      </div>
+    </div>
+  `
+})
+export class AssumptionsFieldExampleComponent {
+  private fb = inject(FormBuilder);
+
+  // Basic form examples
+  basicForm: FormGroup = this.fb.group({
+    requiredText: ['', Validators.required],
+    optionalText: [''],
+    manualRequired: [''],
+    fieldWithUnit: ['']
+  });
+
+  // Different field types
+  fieldTypesForm: FormGroup = this.fb.group({
+    dateField: ['', Validators.required],
+    numberField: [''],
+    textareaField: ['', Validators.required],
+    selectField: [''],
+    checkboxField: [false]
+  });
+
+  // Field states
+  statesForm: FormGroup = this.fb.group({
+    loadingField: [''],
+    errorField: ['', [Validators.required, Validators.minLength(3)]],
+    disabledField: [{ value: 'Disabled value', disabled: true }],
+    readonlyField: [{ value: 'Readonly value' }]
+  });
+
+  // Autofill and source
+  autofillForm: FormGroup = this.fb.group({
+    autofillField: [''],
+    sourceField: [''],
+    bothField: ['']
+  });
+
+  // Accessibility
+  accessibilityForm: FormGroup = this.fb.group({
+    hiddenLabelField: [''],
+    adviceField: ['']
+  });
+
+  // Select options
+  selectOptions = [
+    { label: 'Option 1', value: 'option1' },
+    { label: 'Option 2', value: 'option2' },
+    { label: 'Option 3', value: 'option3' }
+  ];
+
+  // Autofill state
+  autofillState = {
+    autofillField: true,
+    bothField: true,
+    keyResults: true,
+    studySynopsis: true
+  };
+
+  // Mock autofill data
+  autofill = {
+    keyResults: 'Suggested key results value',
+    studySynopsis: 'Suggested study synopsis value',
+    autofillField: 'Suggested autofill value',
+    bothField: 'Suggested both field value'
+  };
+
+
+  /**
+   * Handles autofill value selection
+   */
+  onAutofillFillIn(value: string | null | undefined): void {
+    console.log('Autofill value selected:', value);
+  }
+
+  /**
+   * Resets all forms to their initial state
+   */
+  resetForms(): void {
+    this.basicForm.reset();
+    this.fieldTypesForm.reset();
+    this.statesForm.reset();
+    this.autofillForm.reset();
+    this.accessibilityForm.reset();
+  }
+
+  /**
+   * Validates all forms and marks fields as touched
+   */
+  validateForms(): void {
+    Object.values(this.basicForm.controls).forEach(control => control.markAsTouched());
+    Object.values(this.fieldTypesForm.controls).forEach(control => control.markAsTouched());
+    Object.values(this.statesForm.controls).forEach(control => control.markAsTouched());
+    Object.values(this.autofillForm.controls).forEach(control => control.markAsTouched());
+    Object.values(this.accessibilityForm.controls).forEach(control => control.markAsTouched());
+  }
+
+  /**
+   * Gets a FormControl from a FormGroup
+   */
+  getFormControl(controlName: string, form: FormGroup): FormControl {
+    return form.get(controlName) as FormControl;
+  }
+
+  /**
+   * Gets current form values for display
+   */
+  getFormValues(): string {
+    return JSON.stringify({
+      basicForm: this.basicForm.value,
+      fieldTypesForm: this.fieldTypesForm.value,
+      statesForm: this.statesForm.value,
+      autofillForm: this.autofillForm.value,
+      accessibilityForm: this.accessibilityForm.value
+    }, null, 2);
+  }
+}

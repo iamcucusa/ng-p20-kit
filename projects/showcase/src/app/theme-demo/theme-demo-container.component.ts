@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DividerModule } from 'primeng/divider';
 import { BadgeModule } from 'primeng/badge';
-import { TypographyDemoComponent } from './typography-demo.component';
-import { SpacingTestComponent } from './spacing-test.component';
+import { TypographyDemoExampleComponent } from './components/typography-demo-example.component';
+import { SpacingTestExampleComponent } from './components/spacing-test-example.component';
 import { TrialHeadingExampleComponent } from './components/trial-heading-example.component';
 import { StatusDisplayExampleComponent } from './components/status-display-example.component';
 import { CardExampleComponent } from './components/card-example.component';
 import { CountrySelectExampleComponent } from './components/country-select-example.component';
 import { CountryFormExampleComponent } from './components/country-form-example.component';
+import { AssumptionsFieldExampleComponent } from './components/assumptions-field-example.component';
 
 @Component({
   selector: 'kit-theme-demo-container',
@@ -17,13 +18,14 @@ import { CountryFormExampleComponent } from './components/country-form-example.c
     CommonModule,
     DividerModule,
     BadgeModule,
-    TypographyDemoComponent,
-    SpacingTestComponent,
+    TypographyDemoExampleComponent,
+    SpacingTestExampleComponent,
     TrialHeadingExampleComponent,
     StatusDisplayExampleComponent,
     CardExampleComponent,
     CountrySelectExampleComponent,
-    CountryFormExampleComponent
+    CountryFormExampleComponent,
+    AssumptionsFieldExampleComponent
   ],
   template: `
     <div class="min-h-screen bg-gray-50 py-8">
@@ -67,7 +69,7 @@ import { CountryFormExampleComponent } from './components/country-form-example.c
                     Typography values are generated from centralized design tokens ensuring consistency across the application.
                   </p>
                 </div>
-                <kit-typography-demo></kit-typography-demo>
+                <kit-typography-demo-example></kit-typography-demo-example>
               </div>
               </div>
             </div>
@@ -94,7 +96,7 @@ import { CountryFormExampleComponent } from './components/country-form-example.c
                     Spacing values match PrimeFlex 17 for seamless migration and consistency.
                   </p>
                 </div>
-                <kit-spacing-test></kit-spacing-test>
+                <kit-spacing-test-example></kit-spacing-test-example>
               </div>
               </div>
             </div>
@@ -178,6 +180,29 @@ import { CountryFormExampleComponent } from './components/country-form-example.c
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+        <!-- Assumptions Field Examples -->
+        <div class="mb-12">
+          <div class="space-y-4">
+            <div class="text-center mb-8">
+              <h2 class="text-3xl font-bold text-gray-900 mb-4">Assumptions Field Component</h2>
+              <p class="text-gray-600 leading-relaxed max-w-3xl mx-auto">
+                Comprehensive form field wrapper with automatic required field detection, validation states, 
+                autofill suggestions, and full accessibility support. Perfect for complex form scenarios.
+              </p>
+              <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 max-w-2xl mx-auto mt-6">
+                <div class="flex items-center justify-center mb-2">
+                  <i class="pi pi-cog text-indigo-600 mr-2"></i>
+                  <span class="text-sm font-medium text-indigo-800">Smart Validation</span>
+                </div>
+                <p class="text-sm text-indigo-700 text-center">
+                  Automatically detects required fields from form validators and applies proper styling and accessibility features.
+                </p>
+              </div>
+            </div>
+            <kit-assumptions-field-example></kit-assumptions-field-example>
           </div>
         </div>
 

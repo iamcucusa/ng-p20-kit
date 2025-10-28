@@ -30,6 +30,20 @@
 }
 
 /* ========================================
+   REQUIRED FIELD INDICATOR
+   ======================================== */
+
+/**
+ * Required field indicator - red asterisk
+ * Used by PrimeNG components and custom form fields
+ */
+.p-required:after {
+  content: "*";
+  color: var(--red-500);
+  margin-left: 2px;
+}
+
+/* ========================================
    FORM DIVIDER UTILITIES
    ======================================== */
 

@@ -1,0 +1,255 @@
+/**
+ * Assumptions Field Component Styles
+ * 
+ * Provides styling for the reusable assumptions field wrapper component.
+ * Includes field layout, validation states, and autofill suggestions.
+ * 
+ * @since 1.0.0
+ */
+
+@use 'sass:map';
+@use '../../../../../../../theme/src/lib/styles/breakpoints.scss' as bp;
+
+.pg-assumptions-field {
+  width: 100%;
+
+  &__container {
+    margin-bottom: var(--spacing-4);
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin-bottom: var(--spacing-1);
+
+    &--with-source {
+      overflow: hidden;
+    }
+  }
+
+  &__source-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-index-1);
+    margin-bottom: var(--spacing-1);
+    width: var(--spacing-0-5);
+
+    &-dot {
+      width: var(--spacing-3);
+      height: var(--spacing-3);
+      border: 2px solid;
+      border-radius: var(--border-radius-full);
+
+      &--captario {
+        background-color: var(--purple-400);
+        border-color: var(--purple-400);
+      }
+    }
+  }
+
+  &__label {
+    margin-bottom: var(--spacing-1);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-1);
+
+    // Remove custom required styling - let PrimeNG handle it
+    // PrimeNG automatically adds .p-required class with red asterisk
+
+    &--sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    &--with-source {
+      padding-left: var(--spacing-2);
+    }
+  }
+
+  &__unit {
+    font-weight: var(--font-weight-medium);
+    color: var(--text-700);
+    font-size: var(--font-size-xs);
+  }
+
+  &__actions {
+    display: flex;
+    gap: var(--spacing-2);
+  }
+
+  &__metric-info {
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--gray-600);
+    font-size: var(--font-size-sm);
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  // Field container styling removed - let PrimeNG handle it
+
+  &__error {
+    color: var(--red-500);
+    font-size: var(--font-size-sm);
+    margin-top: var(--spacing-1);
+    display: block;
+  }
+
+  &__autofill-suggestion {
+    margin-top: var(--spacing-2);
+    font-size: var(--font-size-sm);
+    background-color: var(--blue-50);
+    border: 1px solid var(--blue-200);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-2) var(--spacing-3);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-900);
+    cursor: pointer;
+    transition: all var(--transition-duration-fast) var(--transition-easing);
+
+    &:hover {
+      border-color: var(--blue-300);
+      color: var(--blue-600);
+    }
+
+    &-content {
+      display: flex;
+      align-items: center;
+    }
+
+    &-label {
+      color: var(--purple-600);
+      font-weight: var(--font-weight-medium);
+      margin-right: var(--spacing-1);
+    }
+  }
+
+  &__advice {
+    font-size: var(--font-size-sm);
+    color: var(--text-600);
+    margin-top: var(--spacing-1);
+  }
+
+  // State Management System - Minimal overrides
+  &--loading {
+    .pg-assumptions-field__field-container {
+      pointer-events: none;
+      opacity: var(--opacity-60);
+    }
+  }
+
+  // Let PrimeNG handle error/success states with .p-invalid/.p-valid classes
+  // Only add custom states that PrimeNG doesn't provide
+  &--warning {
+    .pg-assumptions-field__label {
+      color: var(--yellow-600);
+    }
+  }
+
+  &--disabled {
+    .pg-assumptions-field__field-container {
+      pointer-events: none;
+      opacity: var(--opacity-50);
+    }
+    
+    .pg-assumptions-field__label {
+      color: var(--gray-500);
+    }
+  }
+
+  &--readonly {
+    .pg-assumptions-field__label {
+      color: var(--gray-600);
+    }
+  }
+
+  // Focus styling removed - PrimeNG components handle their own focus states
+}
+
+// Screen reader only utility
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+// Responsive design - Minimal overrides
+@include bp.mobile-down {
+  .pg-assumptions-field {
+    &__header {
+      &--responsive {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-2);
+      }
+    }
+
+    &__actions {
+      width: 100%;
+      justify-content: flex-end;
+    }
+    
+    &__autofill-suggestion {
+      width: 100%;
+      max-width: none;
+    }
+  }
+}
+
+// Accessibility enhancements
+@media (prefers-reduced-motion: reduce) {
+  .pg-assumptions-field {
+    &__autofill-suggestion {
+      transition: none;
+    }
+  }
+}
+
+@media (prefers-contrast: high) {
+  .pg-assumptions-field {
+    &__label {
+      font-weight: var(--font-weight-bold);
+    }
+    
+    &__autofill-suggestion {
+      border-width: 2px;
+    }
+  }
+}
+
+// Print styles
+@media print {
+  .pg-assumptions-field {
+    &__autofill-suggestion {
+      display: none;
+    }
+    
+    &__source-indicator {
+      display: none;
+    }
+    
+    &__metric-info {
+      display: none;
+    }
+  }
+}

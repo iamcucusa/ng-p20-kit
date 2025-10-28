@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
  * configuration matches PrimeFlex values exactly.
  */
 @Component({
-  selector: 'kit-spacing-test',
+  selector: 'kit-spacing-test-example',
   standalone: true,
   imports: [CommonModule],
   template: `
@@ -128,7 +128,7 @@ import { CommonModule } from '@angular/common';
     }
   `]
 })
-export class SpacingTestComponent {
+export class SpacingTestExampleComponent {
   // This component is purely for testing spacing values
   // It can be imported and used in any route to verify spacing
 }

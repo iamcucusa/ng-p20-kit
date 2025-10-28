@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'kit-typography-demo',
+  selector: 'kit-typography-demo-example',
   standalone: true,
   imports: [CommonModule],
   template: `
@@ -260,6 +260,6 @@ import { CommonModule } from '@angular/common';
     }
   `]
 })
-export class TypographyDemoComponent {
+export class TypographyDemoExampleComponent {
   // Component for showcasing typography utilities
 }

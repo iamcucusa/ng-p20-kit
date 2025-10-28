@@ -11,3 +11,6 @@ export { StatusDisplayExampleComponent } from './status-display-example.componen
 export { CardExampleComponent } from './card-example.component';
 export { CountrySelectExampleComponent } from './country-select-example.component';
 export { CountryFormExampleComponent } from './country-form-example.component';
+export { AssumptionsFieldExampleComponent } from './assumptions-field-example.component';
+export { TypographyDemoExampleComponent } from './typography-demo-example.component';
+export { SpacingTestExampleComponent } from './spacing-test-example.component';
