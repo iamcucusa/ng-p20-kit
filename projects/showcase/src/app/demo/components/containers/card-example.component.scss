@@ -1,0 +1,16 @@
+@use '../../../../../../theme/src/lib/styles/breakpoints.scss' as bp;
+
+.pg-card-examples {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-4);
+
+  @include bp.tablet-up {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  // Make the divider span the full width row
+  > p-divider {
+    grid-column: 1 / -1;
+  }
+}

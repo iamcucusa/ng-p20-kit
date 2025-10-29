@@ -4,7 +4,7 @@ import { AssumptionsTabContentComponent } from './assumptions-tab-content.compon
 import { AssumptionsTabActionsComponent } from './assumptions-tab-actions.component';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
-import type { Trial } from '@trial/trial.types';
+import type { Trial } from '@trial/trial';
 import type { TrialAssumptionsPage, AssumptionsScenarioPage } from '@assumptions/assumptions';
 import { baseAssumptionsItemsToken, assumptionsTrialSectionsToken, trialLevelToken, assumptionsNavigationLevelProvides } from '@assumptions/navigation/assumptions-navigation.settings';
 

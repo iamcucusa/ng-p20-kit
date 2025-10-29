@@ -21,7 +21,7 @@
 
     @include bp.tablet-up {
       flex-direction: row;
-      align-items: flex-end;
+      align-items: flex-start;
     }
   }
 
@@ -77,10 +77,5 @@
     align-items: center;
     gap: var(--spacing-2);
     flex-shrink: 0;
-    margin-top: var(--spacing-3);
-
-    @include bp.tablet-up {
-      margin-top: 0;
-    }
   }
 }

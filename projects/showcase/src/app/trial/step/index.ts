@@ -3,7 +3,20 @@
  * Centralized exports for trial step navigation system and NgRx state management
  */
 
-export * from './trial-step.types';
+export type {
+  TrialStepOne,
+  TrialStepTwo,
+  TrialStepThree,
+  TrialStepFour,
+  TrialStepId,
+  NavigationDirection
+} from './trial-step';
+export type { TrialSteps } from './trial-step';
+export type {
+  StepState,
+  TrialStep,
+  StepValidationResult
+} from './trial-step';
 export * from './step.settings';
 export * from './step-routing.tokens';
 export * from './step-routes.factory';

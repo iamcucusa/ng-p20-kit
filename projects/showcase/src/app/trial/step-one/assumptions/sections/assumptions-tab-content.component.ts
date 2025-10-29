@@ -29,7 +29,7 @@ import {
   cohortsSectionToken,
   impactSectionToken
 } from '@assumptions/navigation/assumptions-navigation.settings';
-import type { Trial } from '@trial/trial.types';
+import type { Trial } from '@trial/trial';
 import type { TrialAssumptionsPage } from '@assumptions/assumptions';
 
 /**

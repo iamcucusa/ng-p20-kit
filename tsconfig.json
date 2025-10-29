@@ -20,7 +20,7 @@
       "@ng-p20-kit/theme/*": ["./projects/theme/src/*"],
       "@ng-p20-kit/showcase/*": ["./projects/showcase/src/*"],
       "@core/*": ["./projects/showcase/src/app/core/*"],
-      "@theme-demo/*": ["./projects/showcase/src/app/theme-demo/*"],
+      "@demo/*": ["./projects/showcase/src/app/demo/*"],
       "@trial/*": ["./projects/showcase/src/app/trial/*"],
       "@trial-step/*": ["./projects/showcase/src/app/trial/step/*"],
       "@trial-step-one/*": ["./projects/showcase/src/app/trial/step-one/*"],

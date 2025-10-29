@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import type { Trial } from './trial.types';
+import type { Trial } from './trial';
 import { createDefaultTimeFramework } from './mock-data.utils';
 
 /**

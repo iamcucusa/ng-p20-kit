@@ -1,0 +1,78 @@
+@use '../../../../../../theme/src/lib/styles/breakpoints.scss' as bp;
+@use '../../../../../../theme/src/lib/styles/typography.scss' as typography;
+
+.pg-country-select-examples {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  background-color: transparent;
+}
+
+.pg-country-select-example {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+
+  h3 {
+    @include typography.text-lg;
+    @include typography.font-medium;
+    color: var(--p-text-color);
+    margin: 0;
+  }
+}
+
+.pg-country-select-example__control {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.pg-country-select-example__label {
+  @include typography.text-sm;
+  @include typography.font-medium;
+  color: var(--p-text-color-secondary);
+}
+
+.pg-country-select-example__details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+
+  .pg-country-select-example__details-box {
+    padding: var(--spacing-3);
+    background-color: var(--p-surface-50);
+    border: 1px solid var(--p-surface-border);
+    border-radius: var(--border-radius);
+
+    p {
+      margin: 0 0 var(--spacing-1) 0;
+      color: var(--p-text-color);
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.pg-country-select-example__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+
+  @include bp.tablet-up {
+    flex-wrap: nowrap;
+  }
+}
+
+/* Two column layout for selector + details */
+.pg-country-select-example--two-col {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-6);
+
+  @include bp.tablet-up {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}

@@ -47,3 +47,4 @@ export interface StepValidationResult {
   /** Error message if validation fails */
   errorMessage?: string;
 }
+

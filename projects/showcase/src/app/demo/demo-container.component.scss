@@ -1,0 +1,24 @@
+
+.pg-demo-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: var(--spacing-4);
+}
+
+.pg-demo-container__content {
+  flex: 1;
+}
+
+.pg-demo-container__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  padding-bottom: var(--spacing-6);
+}
+
+.pg-demo-container__section-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}

@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { AssumptionsFieldComponent } from '../../trial/step-one/assumptions/sections/assumptions-field.component';
+import { AssumptionsFieldComponent } from '@assumptions/sections/assumptions-field.component';
 import { DatePickerModule } from 'primeng/datepicker';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
@@ -10,6 +10,7 @@ import { SelectModule } from 'primeng/select';
 import { CheckboxModule } from 'primeng/checkbox';
 import { SkeletonModule } from 'primeng/skeleton';
 import { TooltipModule } from 'primeng/tooltip';
+import { ButtonModule } from 'primeng/button';
 
 /**
  * Assumptions Field Component Example
@@ -39,20 +40,18 @@ import { TooltipModule } from 'primeng/tooltip';
     SelectModule,
     CheckboxModule,
     SkeletonModule,
-    TooltipModule
+    TooltipModule,
+    ButtonModule
   ],
   template: `
-    <div class="space-y-8">
-      <!-- Header -->
-      <div class="text-center">
-        <h2 class="text-3xl font-bold text-gray-900 mb-2">Assumptions Field Component</h2>
-        <p class="text-lg text-gray-600">Comprehensive examples of all field states and configurations</p>
-      </div>
-
+    <div class="pg-assumptions-field-examples">
       <!-- Basic Examples -->
       <div class="pg-card pg-card--padding-lg">
-        <h3 class="text-xl font-semibold mb-4">Basic Field Examples</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <header class="pg-card__header">
+          <h2 class="pg-card__title">Assumptions Field: Basic Field Examples</h2>
+          <p class="pg-card__description">Core text and numeric inputs showing required detection, optional fields, manual required, and unit suffix.</p>
+        </header>
+        <div class="pg-assumptions-field-section pg-assumptions-field-section--two-col">
           <!-- Required Text Field -->
           <pg-assumptions-field
             title="Required Text Field"
@@ -80,7 +79,7 @@ import { TooltipModule } from 'primeng/tooltip';
             [field]="optionalTextField"
             [autoFill]="autofillState.keyResults"
             [formField]="getFormControl('optionalText', basicForm)"
-            [autoFillValue]="autofill.keyResults ?? null"
+            [autoFillValue]="autofill.keyResults"
             (fillIn)="onAutofillFillIn($event)"
             info="This field has no validators, so no red asterisk appears, but has autofill"
           >
@@ -117,11 +116,12 @@ import { TooltipModule } from 'primeng/tooltip';
           <pg-assumptions-field
             title="Field with Unit"
             name="fieldWithUnit"
+            [field]="fieldWithUnitTemplate"
             unit="kg"
             [formField]="getFormControl('fieldWithUnit', basicForm)"
             info="This field includes a unit display"
           >
-            <ng-template #field>
+            <ng-template #fieldWithUnitTemplate>
               <p-inputNumber
                 formControlName="fieldWithUnit"
                 placeholder="Enter weight"
@@ -135,18 +135,22 @@ import { TooltipModule } from 'primeng/tooltip';
 
       <!-- Different Field Types -->
       <div class="pg-card pg-card--padding-lg">
-        <h3 class="text-xl font-semibold mb-4">Different Field Types</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <header class="pg-card__header">
+          <h2 class="pg-card__title">Assumptions Field: Different Field Types</h2>
+          <p class="pg-card__description">Examples of date picker, number, textarea, select, and checkbox inputs with appropriate configuration.</p>
+        </header>
+        <div class="pg-assumptions-field-section pg-assumptions-field-section--two-col">
           <!-- Date Field -->
           <pg-assumptions-field
             title="Date Field"
             name="dateField"
+            [field]="dateFieldTemplate"
             [formField]="getFormControl('dateField', fieldTypesForm)"
             [errorsMessages]="{ required: 'Date is required' }"
             [errorsToValidate]="['required']"
             info="PrimeNG DatePicker with automatic required detection"
           >
-            <ng-template #field>
+            <ng-template #dateFieldTemplate>
               <p-datepicker
                 formControlName="dateField"
                 placeholder="Select date"
@@ -161,11 +165,12 @@ import { TooltipModule } from 'primeng/tooltip';
           <pg-assumptions-field
             title="Number Field"
             name="numberField"
+            [field]="numberFieldTemplate"
             unit="%"
             [formField]="getFormControl('numberField', fieldTypesForm)"
             info="PrimeNG InputNumber with unit display"
           >
-            <ng-template #field>
+            <ng-template #numberFieldTemplate>
               <p-inputNumber
                 formControlName="numberField"
                 placeholder="Enter percentage"
@@ -181,15 +186,16 @@ import { TooltipModule } from 'primeng/tooltip';
           <pg-assumptions-field
             title="Textarea Field"
             name="textareaField"
+            [field]="textareaFieldTemplate"
             [autoFill]="autofillState.studySynopsis"
             [formField]="getFormControl('textareaField', fieldTypesForm)"
-            [autoFillValue]="autofill.studySynopsis ?? null"
+            [autoFillValue]="autofill.studySynopsis"
             [errorsMessages]="{ required: 'Description is required' }"
             [errorsToValidate]="['required']"
             (fillIn)="onAutofillFillIn($event)"
             info="Multi-line text input with validation and autofill"
           >
-            <ng-template #field>
+            <ng-template #textareaFieldTemplate>
               <textarea
                 pTextarea
                 formControlName="textareaField"
@@ -204,10 +210,11 @@ import { TooltipModule } from 'primeng/tooltip';
           <pg-assumptions-field
             title="Select Field"
             name="selectField"
+            [field]="selectFieldTemplate"
             [formField]="getFormControl('selectField', fieldTypesForm)"
             info="Dropdown selection with options"
           >
-            <ng-template #field>
+            <ng-template #selectFieldTemplate>
               <p-select
                 formControlName="selectField"
                 [options]="selectOptions"
@@ -221,10 +228,11 @@ import { TooltipModule } from 'primeng/tooltip';
           <pg-assumptions-field
             title="Checkbox Field"
             name="checkboxField"
+            [field]="checkboxFieldTemplate"
             [formField]="getFormControl('checkboxField', fieldTypesForm)"
             info="Boolean input with checkbox"
           >
-            <ng-template #field>
+            <ng-template #checkboxFieldTemplate>
               <div class="flex items-center space-x-2">
                 <p-checkbox
                   formControlName="checkboxField"
@@ -239,17 +247,21 @@ import { TooltipModule } from 'primeng/tooltip';
 
       <!-- Field States -->
       <div class="pg-card pg-card--padding-lg">
-        <h3 class="text-xl font-semibold mb-4">Field States</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <header class="pg-card__header">
+          <h2 class="pg-card__title">Assumptions Field: Field States</h2>
+          <p class="pg-card__description">Loading, error, disabled, and readonly states to validate visual behavior and accessibility.</p>
+        </header>
+        <div class="pg-assumptions-field-section pg-assumptions-field-section--two-col">
           <!-- Loading State -->
           <pg-assumptions-field
             title="Loading State"
             name="loadingField"
+            [field]="loadingFieldTemplate"
             [loading]="true"
             [formField]="getFormControl('loadingField', statesForm)"
             info="Field in loading state with skeleton animation"
           >
-            <ng-template #field>
+            <ng-template #loadingFieldTemplate>
               <p-skeleton height="2.5rem" />
             </ng-template>
           </pg-assumptions-field>
@@ -258,12 +270,13 @@ import { TooltipModule } from 'primeng/tooltip';
           <pg-assumptions-field
             title="Error State"
             name="errorField"
+            [field]="errorFieldTemplate"
             [formField]="getFormControl('errorField', statesForm)"
             [errorsMessages]="{ required: 'This field is required', minlength: 'Minimum 3 characters required' }"
             [errorsToValidate]="['required', 'minlength']"
             info="Field with validation errors"
           >
-            <ng-template #field>
+            <ng-template #errorFieldTemplate>
               <input
                 pInputText
                 formControlName="errorField"
@@ -277,10 +290,11 @@ import { TooltipModule } from 'primeng/tooltip';
           <pg-assumptions-field
             title="Disabled State"
             name="disabledField"
+            [field]="disabledFieldTemplate"
             [formField]="getFormControl('disabledField', statesForm)"
             info="Field that is disabled and cannot be edited"
           >
-            <ng-template #field>
+            <ng-template #disabledFieldTemplate>
               <input
                 pInputText
                 formControlName="disabledField"
@@ -294,10 +308,11 @@ import { TooltipModule } from 'primeng/tooltip';
           <pg-assumptions-field
             title="Readonly State"
             name="readonlyField"
+            [field]="readonlyFieldTemplate"
             [formField]="getFormControl('readonlyField', statesForm)"
             info="Field that is readonly and cannot be edited"
           >
-            <ng-template #field>
+            <ng-template #readonlyFieldTemplate>
               <input
                 pInputText
                 formControlName="readonlyField"
@@ -311,19 +326,23 @@ import { TooltipModule } from 'primeng/tooltip';
 
       <!-- Autofill and Source Examples -->
       <div class="pg-card pg-card--padding-lg">
-        <h3 class="text-xl font-semibold mb-4">Autofill and Source Indicators</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <header class="pg-card__header">
+          <h2 class="pg-card__title">Assumptions Field: Autofill and Source Indicators</h2>
+          <p class="pg-card__description">Demonstrates autofill suggestion banner, data source indicator, and the combined case.</p>
+        </header>
+        <div class="pg-assumptions-field-section pg-assumptions-field-section--two-col">
           <!-- Field with Autofill Suggestion -->
           <pg-assumptions-field
             title="Field with Autofill"
             name="autofillField"
+            [field]="autofillFieldTemplate"
             [autoFill]="autofillState.autofillField"
             [formField]="getFormControl('autofillField', autofillForm)"
-            [autoFillValue]="autofill.autofillField ?? null"
+            [autoFillValue]="autofill.autofillField"
             (fillIn)="onAutofillFillIn($event)"
             info="Field with autofill suggestion from external source"
           >
-            <ng-template #field>
+            <ng-template #autofillFieldTemplate>
               <input
                 pInputText
                 formControlName="autofillField"
@@ -337,11 +356,12 @@ import { TooltipModule } from 'primeng/tooltip';
           <pg-assumptions-field
             title="Field with Source"
             name="sourceField"
+            [field]="sourceFieldTemplate"
             dataSource="CAPTARIO"
             [formField]="getFormControl('sourceField', autofillForm)"
             info="Field with data source indicator (purple dot)"
           >
-            <ng-template #field>
+            <ng-template #sourceFieldTemplate>
               <input
                 pInputText
                 formControlName="sourceField"
@@ -355,14 +375,15 @@ import { TooltipModule } from 'primeng/tooltip';
           <pg-assumptions-field
             title="Field with Both"
             name="bothField"
+            [field]="bothFieldTemplate"
             dataSource="CAPTARIO"
             [autoFill]="autofillState.bothField"
             [formField]="getFormControl('bothField', autofillForm)"
-            [autoFillValue]="autofill?.bothField ?? null"
+            [autoFillValue]="autofill.bothField"
             (fillIn)="onAutofillFillIn($event)"
             info="Field with both autofill and source indicator"
           >
-            <ng-template #field>
+            <ng-template #bothFieldTemplate>
               <input
                 pInputText
                 formControlName="bothField"
@@ -376,17 +397,21 @@ import { TooltipModule } from 'primeng/tooltip';
 
       <!-- Accessibility Features -->
       <div class="pg-card pg-card--padding-lg">
-        <h3 class="text-xl font-semibold mb-4">Accessibility Features</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <header class="pg-card__header">
+          <h2 class="pg-card__title">Assumptions Field: Accessibility Features</h2>
+          <p class="pg-card__description">Accessibility-focused configurations such as visually hidden labels and advice text.</p>
+        </header>
+        <div class="pg-assumptions-field-section pg-assumptions-field-section--two-col">
           <!-- Field with Hidden Label -->
           <pg-assumptions-field
             title="Hidden Label Field"
             name="hiddenLabelField"
+            [field]="hiddenLabelFieldTemplate"
             [labelHidden]="true"
             [formField]="getFormControl('hiddenLabelField', accessibilityForm)"
             info="Field with visually hidden label for screen readers"
           >
-            <ng-template #field>
+            <ng-template #hiddenLabelFieldTemplate>
               <input
                 pInputText
                 formControlName="hiddenLabelField"
@@ -400,11 +425,12 @@ import { TooltipModule } from 'primeng/tooltip';
           <pg-assumptions-field
             title="Field with Advice"
             name="adviceField"
+            [field]="adviceFieldTemplate"
             [formField]="getFormControl('adviceField', accessibilityForm)"
             advice="This is helpful advice text that appears below the field"
             info="Field with additional advice text for users"
           >
-            <ng-template #field>
+            <ng-template #adviceFieldTemplate>
               <input
                 pInputText
                 formControlName="adviceField"
@@ -416,31 +442,34 @@ import { TooltipModule } from 'primeng/tooltip';
         </div>
       </div>
 
-      <!-- Form Actions -->
-      <div class="flex justify-center space-x-4">
-        <button 
-          type="button" 
-          (click)="resetForms()"
-          class="px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors"
-        >
-          Reset All Forms
-        </button>
-        <button 
-          type="button" 
-          (click)="validateForms()"
-          class="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-        >
-          Validate All Forms
-        </button>
-      </div>
-
       <!-- Form Values Display -->
       <div class="pg-card pg-card--padding-lg">
-        <h3 class="text-xl font-semibold mb-4">Current Form Values</h3>
-        <pre class="bg-gray-100 p-4 rounded-lg text-sm overflow-auto">{{ getFormValues() }}</pre>
+        <header class="pg-card__header">
+          <h2 class="pg-card__title">Assumptions Field: Current Form Values</h2>
+          <p class="pg-card__description">Snapshot of all reactive form groups used in these examples.</p>
+        </header>
+        <div class="pg-card__content">
+          <div class="pg-assumptions-field-actions">
+            <p-button 
+              type="button"
+              label="Reset All Forms"
+              severity="secondary"
+              (onClick)="resetForms()">
+            </p-button>
+            <p-button 
+              type="button"
+              label="Validate All Forms"
+              severity="primary"
+              (onClick)="validateForms()">
+            </p-button>
+          </div>
+          <pre class="pg-assumptions-field-pre">{{ getFormValues() }}</pre>
+        </div>
       </div>
     </div>
   `
+  ,
+  styleUrls: ['./assumptions-field-example.component.scss']
 })
 export class AssumptionsFieldExampleComponent {
   private fb = inject(FormBuilder);

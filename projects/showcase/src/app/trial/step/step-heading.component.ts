@@ -2,7 +2,7 @@ import { Component, Input, TemplateRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
-import type { Trial } from '@trial/trial.types';
+import type { Trial } from '@trial/trial';
 
 /**
  * Step Heading Component

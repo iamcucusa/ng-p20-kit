@@ -28,8 +28,8 @@ export const routes: Routes = [
         ]
       },
       {
-        path: 'theme',
-        loadComponent: () => import('@theme-demo/theme-demo-container.component').then(m => m.ThemeDemoContainerComponent)
+        path: 'demo',
+        loadComponent: () => import('@demo/demo-container.component').then(m => m.DemoContainerComponent)
       }
     ]
   },

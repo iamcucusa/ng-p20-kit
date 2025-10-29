@@ -9,7 +9,7 @@ import type {
   TrialSteps, 
   StepState, 
   StepValidationResult 
-} from './trial-step.types';
+} from './trial-step';
 
 /**
  * Step identifiers for consistent referencing across the application

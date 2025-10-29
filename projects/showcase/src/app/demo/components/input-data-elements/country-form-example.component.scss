@@ -1,0 +1,79 @@
+@use '../../../../../../theme/src/lib/styles/breakpoints.scss' as bp;
+@use '../../../../../../theme/src/lib/styles/typography.scss' as typography;
+
+/* Country Form Examples Container */
+.pg-country-form-examples {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  background-color: transparent;
+}
+
+/* Country Form */
+.pg-country-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+/* Form Field */
+.pg-country-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+/* Form Label */
+.pg-country-form__label {
+  @include typography.text-base;
+  @include typography.font-medium;
+  color: var(--p-text-color);
+  margin: 0;
+}
+
+/* Form Error */
+.pg-country-form__error {
+  @include typography.text-sm;
+  color: var(--p-red-500);
+  margin-top: var(--spacing-1);
+}
+
+/* Form Actions */
+.pg-country-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+  margin-top: var(--spacing-2);
+}
+
+/* Submitted Data Section */
+.pg-country-form__submitted {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  margin-top: var(--spacing-6);
+  padding-top: var(--spacing-6);
+  border-top: 1px solid var(--p-surface-border);
+
+  h3 {
+    @include typography.text-lg;
+    @include typography.font-medium;
+    color: var(--p-text-color);
+    margin: 0;
+  }
+}
+
+.pg-country-form__submitted-content {
+  background-color: var(--p-surface-50);
+  border: 1px solid var(--p-surface-border);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-4);
+  
+  pre {
+    @include typography.text-sm;
+    color: var(--p-text-color);
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+}

@@ -6,7 +6,7 @@ import { RippleModule } from 'primeng/ripple';
 import { RouterModule } from '@angular/router';
 import { RouteService } from '@core/route.service';
 import { StatusDisplayComponent } from '@core/status/status-display.component';
-import type { Trial } from './trial.types';
+import type { Trial } from './trial';
 import { createDefaultTimeFramework } from './mock-data.utils';
 
 @Component({

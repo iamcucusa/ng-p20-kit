@@ -10,8 +10,8 @@ import { TrialStepFacadeService } from '@trial-step/trial-step-facade.service';
 import { TrialHeadingComponent } from './trial-heading.component';
 import { TrialDataService } from './trial-data.service';
 import { Observable } from 'rxjs';
-import type { TrialStep } from '@trial-step/trial-step.types';
-import type { Trial } from './trial.types';
+import type { TrialStep } from '@trial-step/trial-step';
+import type { Trial } from './trial';
 
 @Component({
   selector: 'kit-trial-container',

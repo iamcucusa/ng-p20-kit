@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import type { TrialStep, TrialStepId } from './trial-step.types';
+import type { TrialStep, TrialStepId } from './trial-step';
 import { TrialStepActions } from './trial-step.actions';
 import {
   selectActiveStep,

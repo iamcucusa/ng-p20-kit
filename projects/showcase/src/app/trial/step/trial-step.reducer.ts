@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { TrialStepActions } from './trial-step.actions';
-import type { TrialStep, TrialSteps } from './trial-step.types';
+import type { TrialStep, TrialSteps } from './trial-step';
 import { 
   stepIds, 
   stepStates, 

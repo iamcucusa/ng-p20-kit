@@ -1,8 +1,8 @@
 import { Component, Input, inject, TemplateRef, HostListener } from '@angular/core';
 import { StepHeadingComponent } from '../step';
 import { TrialStepFacadeService } from '@trial-step/trial-step-facade.service';
-import type { TrialStepId } from '@trial-step/trial-step.types';
-import type { Trial } from '@trial/trial.types';
+import type { TrialStepId } from '@trial-step/trial-step';
+import type { Trial } from '@trial/trial';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { TooltipModule } from 'primeng/tooltip';

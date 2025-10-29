@@ -10,7 +10,7 @@ import { SelectModule } from 'primeng/select';
 import { MessageModule } from 'primeng/message';
 import { RippleModule } from 'primeng/ripple';
 import { TooltipModule } from 'primeng/tooltip';
-import type { Trial } from '@trial/trial.types';
+import type { Trial } from '@trial/trial';
 import { CommentsComponent } from '@core/comments/comments.component';
 
 

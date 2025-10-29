@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RippleModule } from 'primeng/ripple';
-import type { TrialStep, TrialStepId } from './trial-step.types';
+import type { TrialStep, TrialStepId } from './trial-step';
 
 /**
  * Steps Navigation Component

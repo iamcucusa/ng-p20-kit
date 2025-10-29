@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { ResolveFn } from '@angular/router';
 import { TrialDataService } from '@trial/trial-data.service';
 import { routeParams } from '@core/route.constants';
-import type { Trial } from '@trial/trial.types';
+import type { Trial } from '@trial/trial';
 
 /**
  * Active Trial Resolver

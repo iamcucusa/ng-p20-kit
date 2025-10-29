@@ -62,14 +62,14 @@ import { RouteService } from './route.service';
           <li class="pg-navigation__item">
             <a
               pRipple
-              [routerLink]="['/theme']"
+              [routerLink]="['/demo']"
               tabindex="2"
               [routerLinkActive]="'pg-navigation__link--active'"
               [routerLinkActiveOptions]="{ exact: false }"
               class="pg-navigation__link"
             >
               <i class="pi pi-palette"></i>
-              <span>Theme</span>
+              <span>Demo</span>
             </a>
           </li>
           <li class="pg-navigation__item">

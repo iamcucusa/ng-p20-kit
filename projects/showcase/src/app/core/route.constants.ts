@@ -52,7 +52,7 @@ export const appRoutes = {
   
   /** Theme routes */
   theme: 'theme',
-  themeDemo: 'theme-demo',
+  demo: 'demo',
   
   /** Common route patterns */
   root: '',

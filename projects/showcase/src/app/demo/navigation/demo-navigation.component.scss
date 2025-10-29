@@ -1,0 +1,151 @@
+@use '../../../../../theme/src/lib/styles/breakpoints.scss' as bp;
+@use '../../../../../theme/src/lib/styles/typography.scss' as typography;
+
+/* Demo Navigation Container */
+.pg-demo-navigation-container {
+  padding: var(--spacing-2) 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.pg-demo-navigation-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+/* Category Section */
+.pg-demo-category-section {
+  .pg-demo-category-header {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-3);
+    @include typography.font-semibold;
+    color: var(--p-text-color);
+    background-color: var(--p-surface-50);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing-2);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      background-color: var(--p-surface-hover);
+      color: var(--p-primary-color);
+    }
+  }
+  
+  .pg-demo-category-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    
+    &.hidden {
+      max-height: 0;
+      opacity: 0;
+      transform: translateY(calc(var(--spacing-2) * -1));
+    }
+    
+    &:not(.hidden) {
+      max-height: 1000px; // Large enough to accommodate all items
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .pg-demo-category-item {
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      left: var(--spacing-4);
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background-color: var(--p-surface-border);
+    }
+    
+    .pg-demo-nav-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--spacing-3) var(--spacing-3) var(--spacing-3) var(--spacing-6);
+      text-decoration: none;
+      border-radius: var(--border-radius);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      color: var(--p-text-color);
+      @include typography.font-medium;
+      position: relative;
+      border-left: 3px solid transparent; /* Always have a border, but transparent by default */
+      cursor: pointer;
+      
+      &:hover:not(.disabled) {
+        background-color: var(--p-surface-hover);
+        color: var(--p-primary-color);
+        border-left-color: var(--p-primary-300); /* Subtle border on hover */
+      }
+      
+      &.active {
+        background-color: var(--p-primary-50);
+        color: var(--p-primary-color);
+        border-left-color: var(--p-primary-400); /* Softer border for active */
+        @include typography.font-semibold;
+      }
+      
+      &.disabled {
+        color: var(--p-text-color-secondary);
+        cursor: not-allowed;
+        
+        &:hover {
+          background-color: transparent;
+          color: var(--p-text-color-secondary);
+        }
+      }
+    }
+  }
+}
+
+/* Navigation Animation Classes */
+:host ::ng-deep .hidden {
+  display: none;
+}
+
+:host ::ng-deep .slidedown {
+  animation: slidedown 0.3s ease-out;
+}
+
+:host ::ng-deep .slideup {
+  animation: slideup 0.3s ease-out;
+}
+
+@keyframes slidedown {
+  from {
+    opacity: 0;
+    transform: translateY(calc(var(--spacing-2) * -1));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideup {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(calc(var(--spacing-2) * -1));
+  }
+}

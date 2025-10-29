@@ -1,0 +1,42 @@
+@use '../../../../../../theme/src/lib/styles/breakpoints.scss' as bp;
+@use '../../../../../../theme/src/lib/styles/typography.scss' as typography;
+
+/* Status Display Examples Container */
+.pg-status-display-examples {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  background-color: transparent;
+}
+
+/* Individual Status Display Example */
+.pg-status-display-example {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  
+  h3 {
+    @include typography.text-lg;
+    @include typography.font-medium;
+    color: var(--p-text-color);
+    margin: 0;
+  }
+
+  @include bp.tablet-up {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-4);
+  }
+}
+
+/* Status Display Items Container */
+.pg-status-display-example__items {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-4);
+  flex-wrap: wrap;
+  
+  @include bp.tablet-up {
+    flex-wrap: nowrap;
+  }
+}

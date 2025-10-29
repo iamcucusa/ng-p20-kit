@@ -1,0 +1,31 @@
+@use '../../../../../../theme/src/lib/styles/breakpoints.scss' as bp;
+@use '../../../../../../theme/src/lib/styles/typography.scss' as typography;
+
+/* Trial Heading Examples Container */
+.pg-trial-heading-examples {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  background-color: transparent;
+}
+
+/* Individual Trial Heading Example */
+.pg-trial-heading-example {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  
+  h3 {
+    @include typography.text-lg;
+    @include typography.font-medium;
+    color: var(--p-text-color);
+    margin: 0;
+  }
+}
+
+/* Nested examples (for multiple trial headings in one section) */
+.pg-trial-heading-example__nested {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}

@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { TooltipModule } from 'primeng/tooltip';
 import { StatusDisplayComponent } from '@core/status/status-display.component';
 import { RouteService } from '@core/route.service';
-import type { Trial } from './trial.types';
+import type { Trial } from './trial';
 import { formatStudyNumber } from './study-number.utils';
 
 /**

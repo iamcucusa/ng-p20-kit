@@ -1,0 +1,38 @@
+@use '../../../../../../theme/src/lib/styles/breakpoints.scss' as bp;
+@use '../../../../../../theme/src/lib/styles/typography.scss' as typography;
+
+.pg-assumptions-field-examples {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.pg-assumptions-field-section {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-6);
+
+  &--two-col {
+    @include bp.tablet-up {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}
+
+.pg-assumptions-field-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+  margin-bottom: var(--spacing-4);
+}
+
+.pg-assumptions-field-pre {
+  background: var(--p-surface-50);
+  border: 1px solid var(--p-surface-border);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-4);
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  @include typography.text-sm;
+}
