@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, ControlContainer, FormGroupDirective } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SkeletonModule } from 'primeng/skeleton';
 import { TooltipModule } from 'primeng/tooltip';
@@ -37,6 +37,7 @@ import { AssumptionsCaptarioSource } from '@core/source.settings';
   selector: 'pg-assumptions-field',
   standalone: true,
   imports: [CommonModule, SkeletonModule, TooltipModule],
+  viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }],
   template: `
     <div 
       class="pg-assumptions-field" 
@@ -214,8 +215,8 @@ export class AssumptionsFieldComponent {
    * 
    * @param {string | null | undefined} value - The suggestion value
    */
-  @Input() set autoFillValue(value: string | null | undefined) {
-    this.suggestion = value?.toString().trim().replace(/\s/g, '') as string;
+  @Input() set autoFillValue(value: unknown | null | undefined) {
+    this.suggestion = value == null ? null : value.toString().trim().replace(/\s/g, '');
   }
 
   /**

@@ -17,6 +17,15 @@
       grid-template-columns: 1fr 1fr;
     }
   }
+
+  &--three-col {
+    @include bp.tablet-up {
+      grid-template-columns: 1fr 1fr;
+    }
+    @include bp.desktop-up {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
 }
 
 .pg-assumptions-field-actions {

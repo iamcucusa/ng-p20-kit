@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CountrySelectComponent } from '@country/country-select.component';
 import { TrialCountry } from '@country/country.d';
 import { trialCountries } from '@country/country.settings';
 import { ButtonModule } from 'primeng/button';
+import { AssumptionsFieldComponent } from '@assumptions/sections/assumptions-field.component';
+import { TextareaModule } from 'primeng/textarea';
 
 @Component({
   selector: 'kit-country-form-example',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, CountrySelectComponent, ButtonModule],
+  imports: [CommonModule, ReactiveFormsModule, CountrySelectComponent, ButtonModule, AssumptionsFieldComponent, TextareaModule],
   template: `
     <div class="pg-card pg-card--padding-lg">
       <header class="pg-card__header">
@@ -21,39 +23,47 @@ import { ButtonModule } from 'primeng/button';
       
       <div class="pg-card__content pg-country-form-examples">
         <form [formGroup]="countryForm" (ngSubmit)="onSubmit()" class="pg-country-form">
-          <div class="pg-country-form__field">
-            <label for="country" class="pg-country-form__label">Country *</label>
-            <kit-country-select
-              id="country"
-              [selectedCountry]="selectedCountry"
-              [countries]="availableCountries"
-              [loading]="isLoading"
-              (countryChange)="onCountryChange($event)"
-              placeholder="Select your country"
-              [showClear]="true"
-              [filter]="true"
-              [required]="true"
-              [invalid]="(countryForm.get('country')?.invalid ?? false) && (countryForm.get('country')?.touched ?? false)"
-              tooltip="Choose your country from the list">
-            </kit-country-select>
-            
-            @if (countryForm.get('country')?.invalid && countryForm.get('country')?.touched) {
-              <div class="pg-country-form__error">
-                Country is required
-              </div>
-            }
-          </div>
-          
-          <div class="pg-country-form__field">
-            <label for="notes" class="pg-country-form__label">Notes</label>
-            <textarea
-              id="notes"
-              formControlName="notes"
-              placeholder="Additional notes about the country selection"
-              rows="3"
-              class="w-full p-2 border rounded">
-            </textarea>
-          </div>
+          <pg-assumptions-field
+            title="Country"
+            name="country"
+            [field]="countryField"
+            [formField]="countryForm.controls.country"
+            [errorsMessages]="{ required: 'Country is required' }"
+            [errorsToValidate]="['required']"
+            info="Choose your country from the list">
+            <ng-template #countryField>
+              <kit-country-select
+                id="country"
+                [selectedCountry]="selectedCountry"
+                [countries]="availableCountries"
+                [loading]="isLoading"
+                (countryChange)="onCountryChange($event)"
+                placeholder="Select your country"
+                [showClear]="true"
+                [filter]="true"
+                [required]="true"
+                [invalid]="(countryForm.get('country')?.invalid ?? false) && (countryForm.get('country')?.touched ?? false)"
+                tooltip="Choose your country from the list">
+              </kit-country-select>
+            </ng-template>
+          </pg-assumptions-field>
+
+          <pg-assumptions-field
+            title="Notes"
+            name="notes"
+            [field]="notesField"
+            [formField]="countryForm.controls.notes"
+            info="Optional additional information">
+            <ng-template #notesField>
+              <textarea
+                pTextarea
+                formControlName="notes"
+                rows="3"
+                placeholder="Additional notes about the country selection"
+                class="w-full"
+              ></textarea>
+            </ng-template>
+          </pg-assumptions-field>
           
           <div class="pg-country-form__actions">
             <p-button 
@@ -91,7 +101,10 @@ import { ButtonModule } from 'primeng/button';
   styleUrls: ['./country-form-example.component.scss']
 })
 export class CountryFormExampleComponent {
-  countryForm: FormGroup;
+  countryForm: FormGroup<{
+    country: FormControl<TrialCountry | null>;
+    notes: FormControl<string | null>;
+  }>;
   selectedCountry: TrialCountry | null = null;
   submittedData: any = null;
   availableCountries: TrialCountry[] = trialCountries;
@@ -99,8 +112,8 @@ export class CountryFormExampleComponent {
 
   constructor(private fb: FormBuilder) {
     this.countryForm = this.fb.group({
-      country: [null, Validators.required],
-      notes: ['']
+      country: this.fb.control<TrialCountry | null>(null, { validators: [Validators.required] }),
+      notes: this.fb.control<string | null>('')
     });
   }
 
