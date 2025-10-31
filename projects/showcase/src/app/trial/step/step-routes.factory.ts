@@ -25,14 +25,14 @@ export function createStepRoutes(): Routes {
       data: {
         step: stepIdsFromSettings.one
       },
+      resolve: {
+        activeTrial: activeTrialResolver
+      },
       loadComponent: () => import('@trial-step-one/step-one-container.component').then(m => m.StepOneContainerComponent),
       children: [
-        { 
-          path: '', 
-          loadComponent: () => import('@trial-step-one/assumptions/sections/assumptions-section-container.component').then(m => m.AssumptionsSectionContainerComponent),
-          resolve: {
-            activeTrial: activeTrialResolver,
-          },
+        {
+          path: '',
+          loadComponent: () => import('@trial-step-one/assumptions/sections/assumptions-section-container.component').then(m => m.AssumptionsSectionContainerComponent)
         },
         { path: stepOneOverviewPath, loadComponent: () => import('@trial-step-one/assumptions/sections/step-one-overview.section').then(m => m.StepOneOverviewSection) },
         { path: `:scenarioId/${scenarioPathSegment}`, loadComponent: () => import('@trial-step-one/assumptions/sections/step-one-scenario.section').then(m => m.StepOneScenarioSection) }

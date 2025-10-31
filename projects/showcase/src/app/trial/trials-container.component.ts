@@ -61,6 +61,10 @@ export class TrialsContainerComponent {
           }
         }
       ],
+      finalATScenario: null,
+      finalATObservations: null,
+      finalisedAt: null,
+      finalisedBy: null,
       planning: createDefaultTimeFramework()
     },
     {
@@ -104,6 +108,10 @@ export class TrialsContainerComponent {
           }
         }
       ],
+      finalATScenario: 1,
+      finalATObservations: 'Locked after review',
+      finalisedAt: '2024-02-15',
+      finalisedBy: 'Reviewer A',
       planning: createDefaultTimeFramework()
     },
     {
@@ -133,6 +141,10 @@ export class TrialsContainerComponent {
           }
         }
       ],
+      finalATScenario: null,
+      finalATObservations: null,
+      finalisedAt: null,
+      finalisedBy: null,
       planning: createDefaultTimeFramework()
     }
   ];

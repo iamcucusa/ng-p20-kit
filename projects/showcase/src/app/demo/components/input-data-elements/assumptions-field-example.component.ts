@@ -680,6 +680,7 @@ export class AssumptionsFieldExampleComponent {
     Object.values(this.statesForm.controls).forEach(control => control.markAsTouched());
     Object.values(this.autofillForm.controls).forEach(control => control.markAsTouched());
     Object.values(this.accessibilityForm.controls).forEach(control => control.markAsTouched());
+    Object.values(this.planningForm.controls).forEach(control => control.markAsTouched());
   }
 
   /**

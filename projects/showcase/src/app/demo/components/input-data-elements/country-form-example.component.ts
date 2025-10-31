@@ -27,7 +27,7 @@ import { TextareaModule } from 'primeng/textarea';
             title="Country"
             name="country"
             [field]="countryField"
-            [formField]="countryForm.controls.country"
+            [formField]="countryForm.controls['country']"
             [errorsMessages]="{ required: 'Country is required' }"
             [errorsToValidate]="['required']"
             info="Choose your country from the list">
@@ -52,7 +52,7 @@ import { TextareaModule } from 'primeng/textarea';
             title="Notes"
             name="notes"
             [field]="notesField"
-            [formField]="countryForm.controls.notes"
+            [formField]="countryForm.controls['notes']"
             info="Optional additional information">
             <ng-template #notesField>
               <textarea

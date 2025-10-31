@@ -92,7 +92,11 @@ export class TrialHeadingExampleComponent {
     description: 'A comprehensive study on cardiovascular health outcomes.',
     public: true,
     assumptionsScenarios: [],
-    planning: createDefaultTimeFramework()
+    planning: createDefaultTimeFramework(),
+    finalATScenario: null,
+    finalATObservations: null,
+    finalisedAt: null,
+    finalisedBy: null
   };
 
   finalTrial: Trial = {
@@ -107,7 +111,11 @@ export class TrialHeadingExampleComponent {
     description: 'Advanced oncology treatment efficacy study.',
     public: false,
     assumptionsScenarios: [],
-    planning: createDefaultTimeFramework()
+    planning: createDefaultTimeFramework(),
+    finalATScenario: 1,
+    finalATObservations: 'Locked after review',
+    finalisedAt: '2024-02-15',
+    finalisedBy: 'Reviewer A'
   };
 
   replicatingTrial: Trial = {
@@ -122,7 +130,11 @@ export class TrialHeadingExampleComponent {
     description: 'Early-stage neurological intervention study.',
     public: true,
     assumptionsScenarios: [],
-    planning: createDefaultTimeFramework()
+    planning: createDefaultTimeFramework(),
+    finalATScenario: null,
+    finalATObservations: null,
+    finalisedAt: null,
+    finalisedBy: null
   };
 
   trialWithLongStudyNumber: Trial = {
@@ -137,7 +149,11 @@ export class TrialHeadingExampleComponent {
     description: 'Test with long study number.',
     public: true,
     assumptionsScenarios: [],
-    planning: createDefaultTimeFramework()
+    planning: createDefaultTimeFramework(),
+    finalATScenario: null,
+    finalATObservations: null,
+    finalisedAt: null,
+    finalisedBy: null
   };
 
   trialWithShortStudyNumber: Trial = {
@@ -152,6 +168,10 @@ export class TrialHeadingExampleComponent {
     description: 'Test with short study number.',
     public: false,
     assumptionsScenarios: [],
-    planning: createDefaultTimeFramework()
+    planning: createDefaultTimeFramework(),
+    finalATScenario: 2,
+    finalATObservations: 'Approved',
+    finalisedAt: '2024-05-10',
+    finalisedBy: 'PM'
   };
 }

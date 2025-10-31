@@ -59,6 +59,10 @@ export class TrialDataService {
           }
         }
       ],
+      finalATScenario: null,
+      finalATObservations: null,
+      finalisedAt: null,
+      finalisedBy: null,
       planning: createDefaultTimeFramework()
     },
     'trial-002': {
@@ -102,6 +106,10 @@ export class TrialDataService {
           }
         }
       ],
+      finalATScenario: 1,
+      finalATObservations: 'Locked after review',
+      finalisedAt: '2024-02-15',
+      finalisedBy: 'Reviewer A',
       planning: createDefaultTimeFramework()
     },
     'trial-003': {
@@ -131,6 +139,10 @@ export class TrialDataService {
           }
         }
       ],
+      finalATScenario: null,
+      finalATObservations: null,
+      finalisedAt: null,
+      finalisedBy: null,
       planning: createDefaultTimeFramework()
     }
   };

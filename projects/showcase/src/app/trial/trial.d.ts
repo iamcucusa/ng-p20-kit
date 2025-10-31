@@ -24,10 +24,20 @@ export interface TrialData {
   description?: string;
 }
 
-export interface TrialWithAssumptions extends TrialData {
+
+export interface TrialFinal extends TrialData {
+  finalATScenario: number | null;
+  finalATObservations: string | null;
+  finalisedAt: string | null;
+  finalisedBy: string | null;
+}
+
+
+export interface TrialWithAssumptions extends TrialFinal {
   assumptionsScenarios: AssumptionsScenario[];
   planning: TimeFramework;
 }
+
 
 export interface Trial extends TrialWithAssumptions {
   phase: string;
