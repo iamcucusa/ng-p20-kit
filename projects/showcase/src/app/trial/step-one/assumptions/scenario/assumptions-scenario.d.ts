@@ -1,3 +1,5 @@
+import type { AssumptionsScenarioPage } from '@assumptions/navigation/navigation';
+
 type AssumptionsScenarioNames<Type> = {
   [Property in keyof Type]: string;
 };

@@ -10,15 +10,17 @@ import {
   NewScenarioSection, NewTrialSection, OperationalSection, ReferenceSection,
   ScenarioParametersSection,
   ScenariosOverviewSection, ScientificSection, TimeFrameworkSection, TrialAssumptionsPage,
+  TrialPage,
   TrialParameters,
   TrialSection
-} from '@assumptions/assumptions';
+} from '@assumptions/navigation/navigation';
 import {InjectionToken} from '@angular/core';
 import {SelectItem} from 'primeng/api';
 import {
   AssumptionsBaseNavigationItem, AssumptionsLevel, NewTrialNavigationItem,
   TrialAssumptionsNavigationItem
-} from '@assumptions/navigation/assumptions-navigation';
+} from '@assumptions/navigation/navigation';
+import type { AssumptionsKey } from '@assumptions/navigation/navigation';
 
 /** Overview section constant for scenarios navigation */
 export const overview: ScenariosOverviewSection = 'overview';
@@ -130,23 +132,6 @@ export const assumptionsEditableSectionsToken = new InjectionToken<TrialAssumpti
   'editable sections'
 );
 
-/**
- * Navigation related tokens (typed map for safe dot-access)
- */
-type AssumptionsKey =
-  | typeof trialSection
-  | typeof trialParameters
-  | typeof scenarioParameters
-  | typeof contacts
-  | typeof timeFramework
-  | typeof evidence
-  | typeof reference
-  | typeof complexity
-  | typeof scientific
-  | typeof operational
-  | typeof cohorts
-  | typeof impact;
-
 export const baseAssumptionsItems = {
 'trial-section': 'Trial',
   parameters: 'Parameters',
@@ -178,12 +163,12 @@ export const baseAssumptionsItemsToken = new InjectionToken<typeof baseAssumptio
   'Base Assumptions Items Sections'
 );
 
-const detailItem = {
-  slug: '', // Use empty string for default route
+const defaultTabSettings = {
+  slug: '' as TrialPage, // Use empty string for default route
   title: baseAssumptionsItems[trialSection as keyof typeof baseAssumptionsItems],
 };
 
-export const trialItems: TrialAssumptionsNavigationItem[] = [detailItem];
+export const trialItems: TrialAssumptionsNavigationItem[] = [defaultTabSettings];
 
 export const trialItemsToken = new InjectionToken<TrialAssumptionsNavigationItem[]>('Trial Items Sections');
 

@@ -24,7 +24,7 @@ import {
   cohortsSectionToken,
   impactSectionToken,
   assumptionsEditableSectionsToken
-} from '@assumptions/navigation/assumptions-navigation.settings';
+} from '@assumptions/navigation/navigation.settings';
 import type { 
   TrialAssumptionsPage, 
   AssumptionsScenarioPage,
@@ -40,7 +40,7 @@ import type {
   OperationalSection,
   CohortsSection,
   ImpactAssessmentSection
-} from '@assumptions/assumptions';
+} from '@assumptions/navigation/navigation';
 
 /**
  * Assumptions Tab Actions Component

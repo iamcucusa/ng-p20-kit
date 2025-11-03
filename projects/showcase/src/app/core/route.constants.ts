@@ -11,7 +11,7 @@
  */
 
 import { stepIds } from '@trial-step/step.settings';
-import { overview, scenarioParameters } from '@assumptions/navigation/assumptions-navigation.settings';
+import { overview, scenarioParameters } from '@assumptions/navigation/navigation.settings';
 
 /**
  * Route Parameter Constants
@@ -45,7 +45,7 @@ export const appRoutes = {
   stepThree: stepIds.three,
   stepFour: stepIds.four,
   
-  /** Assumptions navigation routes - imported from assumptions-navigation.settings.ts */
+  /** Assumptions navigation routes - imported from navigation.settings.ts */
   overview: overview,
   scenario: scenarioParameters,
   scenarioIdParam: routeParams.scenarioId,

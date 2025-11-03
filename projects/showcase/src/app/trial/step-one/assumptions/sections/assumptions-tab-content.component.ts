@@ -28,9 +28,9 @@ import {
   operationalSectionToken,
   cohortsSectionToken,
   impactSectionToken
-} from '@assumptions/navigation/assumptions-navigation.settings';
+} from '@assumptions/navigation/navigation.settings';
 import type { Trial } from '@trial/trial';
-import type { TrialAssumptionsPage } from '@assumptions/assumptions';
+import type { TrialAssumptionsPage } from '@assumptions/navigation/navigation';
 
 /**
  * Assumptions Tab Content Component

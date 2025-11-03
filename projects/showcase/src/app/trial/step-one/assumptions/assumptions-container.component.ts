@@ -10,8 +10,8 @@ import { TrialStepFacadeService } from '@trial-step/trial-step-facade.service';
 import type { TrialStepId } from '@trial-step/trial-step';
 import type { Trial } from '@trial/trial';
 import { AssumptionsNavigationComponent } from '@assumptions/navigation/assumptions-navigation.component';
-import { navProviders, overviewSectionToken, newScenarioSectionToken, trialItemsToken, baseAssumptionsNavItemsToken } from '@assumptions/navigation/assumptions-navigation.settings';
-import type { AssumptionsScenariosNavigationItem } from '@assumptions/navigation/assumptions-navigation';
+import { navProviders, overviewSectionToken, newScenarioSectionToken, trialItemsToken, baseAssumptionsNavItemsToken } from '@assumptions/navigation/navigation.settings';
+import type { AssumptionsScenariosNavigationItem } from '@assumptions/navigation/navigation';
 
 @Component({
   selector: 'kit-assumptions-container',
@@ -122,16 +122,16 @@ export class AssumptionsContainerComponent implements OnInit{
 
   scenarioItems: AssumptionsScenariosNavigationItem[] | null = [
     { slug: inject(overviewSectionToken), title: 'Overview', order: null },
-    { slug: 'scenario-1', title: 'Primary Scenario', order: 1 },
-    { slug: 'scenario-2', title: 'Alternative Scenario', order: 2 },
-    { slug: 'scenario-3', title: 'Conservative Approach', order: 3 },
-    { slug: 'scenario-4', title: 'Aggressive Protocol', order: 4 },
-    { slug: 'scenario-5', title: 'Baseline Study', order: 5 },
-    { slug: 'scenario-6', title: 'Extended Follow-up', order: 6 },
-    { slug: 'scenario-7', title: 'Pilot Study', order: 7 },
-    { slug: 'scenario-8', title: 'Validation Study', order: 8 },
-    { slug: 'scenario-9', title: 'Comparative Analysis', order: 9 },
-    { slug: 'scenario-10', title: 'Long-term Study', order: 10 }
+    { slug: 1, title: 'Primary Scenario', order: 1 },
+    { slug: 2, title: 'Alternative Scenario', order: 2 },
+    { slug: 3, title: 'Conservative Approach', order: 3 },
+    { slug: 4, title: 'Aggressive Protocol', order: 4 },
+    { slug: 5, title: 'Baseline Study', order: 5 },
+    { slug: 6, title: 'Extended Follow-up', order: 6 },
+    { slug: 7, title: 'Pilot Study', order: 7 },
+    { slug: 8, title: 'Validation Study', order: 8 },
+    { slug: 9, title: 'Comparative Analysis', order: 9 },
+    { slug: 10, title: 'Long-term Study', order: 10 }
   ];
 
   exportAssumptions(): void {

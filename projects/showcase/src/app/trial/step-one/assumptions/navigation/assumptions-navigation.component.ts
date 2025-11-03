@@ -8,9 +8,9 @@ import {
   AssumptionsNavigationItem,
   AssumptionsScenariosNavigationItem,
   TrialAssumptionsNavigationItem,
-} from '@assumptions/navigation/assumptions-navigation';
-import { NewScenarioSection, ScenariosOverviewSection } from '@assumptions/assumptions';
-import { newScenarioSectionToken, overviewSectionToken } from '@assumptions/navigation/assumptions-navigation.settings';
+} from '@assumptions/navigation/navigation';
+import { NewScenarioSection, ScenariosOverviewSection } from '@assumptions/navigation/navigation';
+import { newScenarioSectionToken, overviewSectionToken } from '@assumptions/navigation/navigation.settings';
 
 @Component({
   selector: 'kit-assumptions-navigation',

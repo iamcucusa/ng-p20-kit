@@ -3,6 +3,53 @@
  * @fileoverview Type definitions for assumptions navigation system including trial and scenario navigation items
  */
 
+/**
+ * Page related types and interfaces
+ */
+
+export type ScenarioParametersSection = 'scenario';
+export type TrialSection = 'trial-section';
+export type TrialParameters = 'parameters';
+export type ContactsSection = 'contacts';
+export type TimeFrameworkSection = 'planning';
+export type EvidenceSection = 'evidence';
+export type ReferenceSection = 'reference';
+export type ComplexitySection = 'complexity';
+export type ScientificSection = 'scientific';
+export type OperationalSection = 'operational';
+export type CohortsSection = 'cohorts';
+export type ImpactAssessmentSection = 'impact';
+
+export type TrialAssumptionsItem = 'trial-assumptions';
+export type NewTrialSection = 'new-trial';
+export type VersionSection = 'versions';
+export type ScenariosOverviewSection = 'overview';
+export type NewScenarioSection = 'new-scenario';
+
+export type TrialAssumptionsSection =
+  | ContactsSection
+  | TimeFrameworkSection
+  | EvidenceSection
+  | ReferenceSection
+  | ComplexitySection
+  | ScientificSection
+  | OperationalSection
+  | CohortsSection
+  | ImpactAssessmentSection
+  | TrialAssumptionsItem;
+
+export type TrialPage = NewTrialSection | TrialSection | VersionSection;
+
+export type TrialAssumptionsPage = TrialSection | TrialParameters | TrialAssumptionsSection;
+
+export type AssumptionsScenariosPage = NewScenarioSection | ScenariosOverviewSection;
+
+export type AssumptionsScenariosPageItem = {
+  [Property in keyof AssumptionsScenariosPage]: string;
+};
+
+export type AssumptionsScenarioPage = ScenarioParametersSection | TrialAssumptionsPage;
+
 /** Level of assumptions navigation (Trial or Scenario) */
 export type AssumptionsLevel = 'Trial' | 'Scenario';
 
@@ -36,8 +83,8 @@ export interface AssumptionsNavigationItem {
 
 /** Navigation item for trial assumptions sections */
 export interface TrialAssumptionsNavigationItem extends BaseNavigationItem {
-  /** Slug identifier for the trial page */
-  slug: TrialPage;
+  /** Slug identifier for the trial page , empty string for default route */
+  slug: TrialPage| ''; 
 }
 
 /** Navigation item for base assumptions sections */
@@ -65,3 +112,21 @@ export interface AssumptionsScenarioNavigationItem extends BaseNavigationItem {
   /** Optional nested scenario navigation items */
   sections?: AssumptionsScenarioNavigationItem[];
 }
+
+/**
+ * Navigation related tokens (typed map for safe dot-access)
+ * Union type of all assumption section constants
+ */
+export type AssumptionsKey =
+  | TrialSection
+  | TrialParameters
+  | ScenarioParametersSection
+  | ContactsSection
+  | TimeFrameworkSection
+  | EvidenceSection
+  | ReferenceSection
+  | ComplexitySection
+  | ScientificSection
+  | OperationalSection
+  | CohortsSection
+  | ImpactAssessmentSection;

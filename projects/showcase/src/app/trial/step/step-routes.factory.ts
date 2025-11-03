@@ -6,7 +6,7 @@
 import { Routes } from '@angular/router';
 import { stepIds } from './step-routing.tokens';
 import { stepIds as stepIdsFromSettings } from './step.settings';
-import { scenarioParameters as scenarioPathSegment, overview as stepOneOverviewPath } from '@assumptions/navigation/assumptions-navigation.settings';
+import { scenarioParameters as scenarioPathSegment, overview as stepOneOverviewPath } from '@assumptions/navigation/navigation.settings';
 import { activeTrialResolver } from '@core/resolvers/active-trial.resolver';
 
 /**
