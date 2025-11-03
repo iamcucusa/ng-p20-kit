@@ -23,8 +23,7 @@ export class TrialsContainerComponent {
     {
       id: 'trial-001',
       name: 'Cardiovascular Study Alpha',
-      studyNumber: 'CV-2024-001',
-      version: 1,
+      versionNumber: 1,
       status: 'Draft',
       phase: 'Phase II',
       participants: 150,
@@ -77,10 +76,9 @@ export class TrialsContainerComponent {
       }
     },
     {
-      id: 'trial-002', 
+      id: 'trial-002',
       name: 'Oncology Research Beta',
-      studyNumber: 'ONC-2024-002',
-      version: 3,
+      versionNumber: 3,
       status: 'Final',
       phase: 'Phase III',
       participants: 300,
@@ -137,8 +135,7 @@ export class TrialsContainerComponent {
     {
       id: 'trial-003',
       name: 'Neurological Study Gamma',
-      studyNumber: 'NEU-2024-003',
-      version: null,
+      versionNumber: null,
       status: 'Replicating',
       phase: 'Phase I',
       participants: 50,

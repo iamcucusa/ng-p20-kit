@@ -11,19 +11,19 @@ import { formatStudyNumber } from './study-number.utils';
 
 /**
  * Trial Heading Component
- * 
+ *
  * Displays trial information including study number and status.
  * Reuses the StatusDisplayComponent for consistent status presentation.
- * 
+ *
  * Features:
  * - Study number display with proper formatting
  * - Status display using reusable StatusDisplayComponent
  * - Type-safe trial data handling
  * - Consistent styling with design system
- * 
+ *
  * @example
  * ```html
- * <kit-trial-heading 
+ * <kit-trial-heading
  *   [trial]="activeTrial"
  *   [permissions]="userPermissions">
  * </kit-trial-heading>
@@ -39,13 +39,14 @@ import { formatStudyNumber } from './study-number.utils';
             <h1 class="pg-trial-heading__title" id="trial-title">
               <span class="sr-only">Trial Study Number: </span>{{ formattedStudyNumber }}
             </h1>
-            @if (trial.version) {
+            @if (trial.versionNumber) {
               <div class="pg-trial-heading__divider" aria-hidden="true"></div>
-              <span class="pg-trial-heading__version" aria-label="Version {{ trial.version }}">V{{ trial.version }}</span>
+              <span class="pg-trial-heading__version"
+                    aria-label="Version {{ trial.versionNumber }}">V{{ trial.versionNumber }}</span>
             }
             <div class="pg-trial-heading__divider" aria-hidden="true"></div>
             <div class="pg-trial-heading__status" role="status" aria-live="polite" aria-label="Trial Status">
-              <kit-status-display 
+              <kit-status-display
                 [status]="trial.status"
                 [permissions]="permissions">
               </kit-status-display>
@@ -112,9 +113,9 @@ import { formatStudyNumber } from './study-number.utils';
             </p-button>
           </div>
 
-          <p-button 
-            label="Back to Trials" 
-            icon="pi pi-arrow-left" 
+          <p-button
+            label="Back to Trials"
+            icon="pi pi-arrow-left"
             severity="secondary"
             pRipple
             [routerLink]="backToTrialsPath"
@@ -143,7 +144,7 @@ export class TrialHeadingComponent {
    * Gets the formatted study number
    */
   get formattedStudyNumber(): string {
-    return formatStudyNumber(this.trial.studyNumber || '');
+    return formatStudyNumber(this.trial.details?.studyNumber || '');
   }
 
   /**

@@ -6,7 +6,7 @@ import { createDefaultTimeFramework, createDefaultTrialParameters } from './mock
 
 /**
  * Trial Data Service
- * 
+ *
  * Provides trial data for the application.
  * In a real application, this would fetch data from an API.
  */
@@ -21,8 +21,7 @@ export class TrialDataService {
     'trial-001': {
       id: 'trial-001',
       name: 'Cardiovascular Study Alpha',
-      studyNumber: 'CV2024001',
-      version: 1,
+      versionNumber: 1,
       status: 'Draft',
       phase: 'Phase II',
       participants: 150,
@@ -77,8 +76,7 @@ export class TrialDataService {
     'trial-002': {
       id: 'trial-002',
       name: 'Oncology Research Beta',
-      studyNumber: 'ONC2024002',
-      version: 3,
+      versionNumber: 3,
       status: 'Final',
       phase: 'Phase III',
       participants: 300,
@@ -135,8 +133,7 @@ export class TrialDataService {
     'trial-003': {
       id: 'trial-003',
       name: 'Neurological Study Gamma',
-      studyNumber: 'NEU2024003',
-      version: null,
+      versionNumber: null,
       status: 'Replicating',
       phase: 'Phase I',
       participants: 50,

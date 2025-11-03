@@ -18,8 +18,7 @@ import {TimeFramework} from '@assumptions/sections/time-framework';
 export interface TrialData {
   id: string;
   name: string;
-  studyNumber: string | null;
-  version: number | null;
+  versionNumber: number | null;
   status: TrialStatus;
   startDate: Date;
   endDate?: Date;
@@ -47,3 +46,5 @@ export interface Trial extends TrialWithAssumptions {
   participants: number;
   public: boolean;
 }
+
+export type TrialVersionValidator = (trial: Trial | Partial<Trial> | null) => boolean;

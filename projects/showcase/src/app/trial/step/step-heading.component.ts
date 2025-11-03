@@ -59,8 +59,8 @@ export class StepHeadingComponent {
    * Gets the contextual title with trial information if enabled
    */
   getContextualTitle(): string {
-    if (this.showTrialContext && this.activeTrial?.studyNumber) {
-      return `${this.title} for Trial ${this.activeTrial.studyNumber.toUpperCase()}`;
+    if (this.showTrialContext && this.activeTrial?.details?.studyNumber) {
+      return `${this.title} for Trial ${this.activeTrial.details.studyNumber.toUpperCase()}`;
     }
     return this.title;
   }

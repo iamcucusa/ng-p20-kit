@@ -6,7 +6,7 @@ import { createDefaultTimeFramework, createDefaultTrialParameters } from '@trial
 
 /**
  * Trial Heading Example Component
- * 
+ *
  * Demonstrates how to use the TrialHeadingComponent with different trial data.
  * Shows various study number formats and status combinations.
  */
@@ -20,12 +20,12 @@ import { createDefaultTimeFramework, createDefaultTrialParameters } from '@trial
           Demonstrates the TrialHeadingComponent with different trial states, permissions, and study number formats.
         </p>
       </header>
-      
+
       <div class="pg-card__content pg-trial-heading-examples">
         <!-- Example 1: Draft Trial -->
         <div class="pg-trial-heading-example">
           <h3 class="text-lg font-medium">Draft Trial</h3>
-          <kit-trial-heading 
+          <kit-trial-heading
             [trial]="draftTrial"
             [permissions]="[]">
           </kit-trial-heading>
@@ -34,7 +34,7 @@ import { createDefaultTimeFramework, createDefaultTrialParameters } from '@trial
         <!-- Example 2: Final Trial with Permissions -->
         <div class="pg-trial-heading-example">
           <h3 class="text-lg font-medium">Final Trial (with permissions)</h3>
-          <kit-trial-heading 
+          <kit-trial-heading
             [trial]="finalTrial"
             [permissions]="['CREATE FINAL VERSION']">
           </kit-trial-heading>
@@ -43,7 +43,7 @@ import { createDefaultTimeFramework, createDefaultTrialParameters } from '@trial
         <!-- Example 3: Final Trial without Permissions -->
         <div class="pg-trial-heading-example">
           <h3 class="text-lg font-medium">Final Trial (without permissions)</h3>
-          <kit-trial-heading 
+          <kit-trial-heading
             [trial]="finalTrial"
             [permissions]="[]">
           </kit-trial-heading>
@@ -52,7 +52,7 @@ import { createDefaultTimeFramework, createDefaultTrialParameters } from '@trial
         <!-- Example 4: Replicating Trial -->
         <div class="pg-trial-heading-example">
           <h3 class="text-lg font-medium">Replicating Trial</h3>
-          <kit-trial-heading 
+          <kit-trial-heading
             [trial]="replicatingTrial"
             [permissions]="[]">
           </kit-trial-heading>
@@ -62,11 +62,11 @@ import { createDefaultTimeFramework, createDefaultTrialParameters } from '@trial
         <div class="pg-trial-heading-example">
           <h3 class="text-lg font-medium">Study Number Formatting</h3>
           <div class="pg-trial-heading-example__nested">
-            <kit-trial-heading 
+            <kit-trial-heading
               [trial]="trialWithLongStudyNumber"
               [permissions]="[]">
             </kit-trial-heading>
-            <kit-trial-heading 
+            <kit-trial-heading
               [trial]="trialWithShortStudyNumber"
               [permissions]="[]">
             </kit-trial-heading>
@@ -83,8 +83,7 @@ export class TrialHeadingExampleComponent {
   draftTrial: Trial = {
     id: 'trial-001',
     name: 'Cardiovascular Study Alpha',
-    studyNumber: 'CV2024001',
-    version: 1,
+    versionNumber: 1,
     status: 'Draft',
     phase: 'Phase II',
     participants: 150,
@@ -111,8 +110,7 @@ export class TrialHeadingExampleComponent {
   finalTrial: Trial = {
     id: 'trial-002',
     name: 'Oncology Research Beta',
-    studyNumber: 'ONC2024002',
-    version: 3,
+    versionNumber: 3,
     status: 'Final',
     phase: 'Phase III',
     participants: 300,
@@ -141,8 +139,7 @@ export class TrialHeadingExampleComponent {
   replicatingTrial: Trial = {
     id: 'trial-003',
     name: 'Neurological Study Gamma',
-    studyNumber: 'NEU2024003',
-    version: null,
+    versionNumber: null,
     status: 'Replicating',
     phase: 'Phase I',
     participants: 50,
@@ -169,8 +166,7 @@ export class TrialHeadingExampleComponent {
   trialWithLongStudyNumber: Trial = {
     id: 'trial-004',
     name: 'Long Study Number Test',
-    studyNumber: 'ABCD1234EFGH5678',
-    version: 2,
+    versionNumber: 2,
     status: 'Draft',
     phase: 'Phase I',
     participants: 25,
@@ -197,8 +193,7 @@ export class TrialHeadingExampleComponent {
   trialWithShortStudyNumber: Trial = {
     id: 'trial-005',
     name: 'Short Study Number Test',
-    studyNumber: 'AB12',
-    version: 1,
+    versionNumber: 1,
     status: 'Final',
     phase: 'Phase II',
     participants: 100,
