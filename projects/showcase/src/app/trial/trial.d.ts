@@ -1,3 +1,5 @@
+import {TrialParameters} from '@assumptions/sections/parameters';
+
 export type TrialStatus = 'Draft' | 'Final' | 'Replicating';
 
 /**
@@ -36,6 +38,7 @@ export interface TrialFinal extends TrialData {
 export interface TrialWithAssumptions extends TrialFinal {
   assumptionsScenarios: AssumptionsScenario[];
   planning: TimeFramework;
+  details: TrialParameters;
 }
 
 

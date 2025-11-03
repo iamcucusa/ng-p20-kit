@@ -1,4 +1,5 @@
 import { TimeFramework } from '@assumptions/sections/time-framework';
+import type { TrialParameters } from '@assumptions/sections/parameters';
 
 /**
  * Creates a default TimeFramework object for mock data
@@ -51,5 +52,29 @@ export function createDefaultTimeFramework(): TimeFramework {
     subjectsCompleted: null,
     screenFailure: null,
     dropOutRate: null,
+  };
+}
+
+/**
+ * Creates a default TrialParameters object for mock data
+ * All fields are set to null as they represent empty/initial state
+ */
+export function createDefaultTrialParameters(): TrialParameters {
+  return {
+    ctmsTrial: null,
+    studyNumber: null,
+    studyName: null,
+    milestone: null,
+    therapeuticArea: null,
+    others: null,
+    studyPhase: null,
+    hpcBiberach: null,
+    indication: null,
+    biCompound: null,
+    studyMoa: null,
+    versionTitle: null,
+    versionNumber: null,
+    versionDescription: null,
+    keyChanges: null,
   };
 }

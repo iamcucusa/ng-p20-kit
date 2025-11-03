@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { RouteService } from '@core/route.service';
 import { StatusDisplayComponent } from '@core/status/status-display.component';
 import type { Trial } from './trial';
-import { createDefaultTimeFramework } from './mock-data.utils';
+import { createDefaultTimeFramework, createDefaultTrialParameters } from './mock-data.utils';
 
 @Component({
   selector: 'kit-trials-container',
@@ -65,7 +65,16 @@ export class TrialsContainerComponent {
       finalATObservations: null,
       finalisedAt: null,
       finalisedBy: null,
-      planning: createDefaultTimeFramework()
+      planning: createDefaultTimeFramework(),
+      details: {
+        ...createDefaultTrialParameters(),
+        studyNumber: 'CV-2024-001',
+        studyName: 'Cardiovascular Study Alpha',
+        versionNumber: 1,
+        studyPhase: 'II',
+        therapeuticArea: 'CRM',
+        indication: 'Cardiovascular health outcomes in elderly patients'
+      }
     },
     {
       id: 'trial-002', 
@@ -112,7 +121,18 @@ export class TrialsContainerComponent {
       finalATObservations: 'Locked after review',
       finalisedAt: '2024-02-15',
       finalisedBy: 'Reviewer A',
-      planning: createDefaultTimeFramework()
+      planning: createDefaultTimeFramework(),
+      details: {
+        ...createDefaultTrialParameters(),
+        studyNumber: 'ONC-2024-002',
+        studyName: 'Oncology Research Beta',
+        versionNumber: 3,
+        studyPhase: 'III',
+        therapeuticArea: 'Oncology',
+        indication: 'Advanced oncology treatment efficacy',
+        versionDescription: 'Final version after extended review period',
+        keyChanges: 'Extended follow-up periods added'
+      }
     },
     {
       id: 'trial-003',
@@ -145,7 +165,16 @@ export class TrialsContainerComponent {
       finalATObservations: null,
       finalisedAt: null,
       finalisedBy: null,
-      planning: createDefaultTimeFramework()
+      planning: createDefaultTimeFramework(),
+      details: {
+        ...createDefaultTrialParameters(),
+        studyNumber: 'NEU-2024-003',
+        studyName: 'Neurological Study Gamma',
+        versionNumber: null,
+        studyPhase: 'I',
+        therapeuticArea: 'CNS',
+        indication: 'Early-stage neurological intervention focusing on cognitive outcomes'
+      }
     }
   ];
 

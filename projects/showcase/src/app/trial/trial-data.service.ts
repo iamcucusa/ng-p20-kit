@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import type { Trial } from './trial';
-import { createDefaultTimeFramework } from './mock-data.utils';
+import { createDefaultTimeFramework, createDefaultTrialParameters } from './mock-data.utils';
 
 /**
  * Trial Data Service
@@ -63,7 +63,16 @@ export class TrialDataService {
       finalATObservations: null,
       finalisedAt: null,
       finalisedBy: null,
-      planning: createDefaultTimeFramework()
+      planning: createDefaultTimeFramework(),
+      details: {
+        ...createDefaultTrialParameters(),
+        studyNumber: 'CV2024001',
+        studyName: 'Cardiovascular Study Alpha',
+        versionNumber: 1,
+        studyPhase: 'II',
+        therapeuticArea: 'CRM',
+        indication: 'Cardiovascular health outcomes in elderly patients'
+      }
     },
     'trial-002': {
       id: 'trial-002',
@@ -110,7 +119,18 @@ export class TrialDataService {
       finalATObservations: 'Locked after review',
       finalisedAt: '2024-02-15',
       finalisedBy: 'Reviewer A',
-      planning: createDefaultTimeFramework()
+      planning: createDefaultTimeFramework(),
+      details: {
+        ...createDefaultTrialParameters(),
+        studyNumber: 'ONC2024002',
+        studyName: 'Oncology Research Beta',
+        versionNumber: 3,
+        studyPhase: 'III',
+        therapeuticArea: 'Oncology',
+        indication: 'Advanced oncology treatment efficacy',
+        versionDescription: 'Final version after extended review period',
+        keyChanges: 'Extended follow-up periods added'
+      }
     },
     'trial-003': {
       id: 'trial-003',
@@ -143,7 +163,16 @@ export class TrialDataService {
       finalATObservations: null,
       finalisedAt: null,
       finalisedBy: null,
-      planning: createDefaultTimeFramework()
+      planning: createDefaultTimeFramework(),
+      details: {
+        ...createDefaultTrialParameters(),
+        studyNumber: 'NEU2024003',
+        studyName: 'Neurological Study Gamma',
+        versionNumber: null,
+        studyPhase: 'I',
+        therapeuticArea: 'CNS',
+        indication: 'Early-stage neurological intervention focusing on cognitive outcomes'
+      }
     }
   };
 

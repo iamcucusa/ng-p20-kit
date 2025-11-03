@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TrialHeadingComponent } from '@trial/trial-heading.component';
 import type { Trial } from '@trial/trial';
-import { createDefaultTimeFramework } from '@trial/mock-data.utils';
+import { createDefaultTimeFramework, createDefaultTrialParameters } from '@trial/mock-data.utils';
 
 /**
  * Trial Heading Example Component
@@ -96,7 +96,16 @@ export class TrialHeadingExampleComponent {
     finalATScenario: null,
     finalATObservations: null,
     finalisedAt: null,
-    finalisedBy: null
+    finalisedBy: null,
+    details: {
+      ...createDefaultTrialParameters(),
+      studyNumber: 'CV2024001',
+      studyName: 'Cardiovascular Study Alpha',
+      versionNumber: 1,
+      studyPhase: 'II',
+      therapeuticArea: 'CRM',
+      indication: 'A comprehensive study on cardiovascular health outcomes'
+    }
   };
 
   finalTrial: Trial = {
@@ -115,7 +124,18 @@ export class TrialHeadingExampleComponent {
     finalATScenario: 1,
     finalATObservations: 'Locked after review',
     finalisedAt: '2024-02-15',
-    finalisedBy: 'Reviewer A'
+    finalisedBy: 'Reviewer A',
+    details: {
+      ...createDefaultTrialParameters(),
+      studyNumber: 'ONC2024002',
+      studyName: 'Oncology Research Beta',
+      versionNumber: 3,
+      studyPhase: 'III',
+      therapeuticArea: 'Oncology',
+      indication: 'Advanced oncology treatment efficacy study',
+      versionDescription: 'Final version after review',
+      keyChanges: 'Locked after review'
+    }
   };
 
   replicatingTrial: Trial = {
@@ -134,7 +154,16 @@ export class TrialHeadingExampleComponent {
     finalATScenario: null,
     finalATObservations: null,
     finalisedAt: null,
-    finalisedBy: null
+    finalisedBy: null,
+    details: {
+      ...createDefaultTrialParameters(),
+      studyNumber: 'NEU2024003',
+      studyName: 'Neurological Study Gamma',
+      versionNumber: null,
+      studyPhase: 'I',
+      therapeuticArea: 'CNS',
+      indication: 'Early-stage neurological intervention study'
+    }
   };
 
   trialWithLongStudyNumber: Trial = {
@@ -153,7 +182,16 @@ export class TrialHeadingExampleComponent {
     finalATScenario: null,
     finalATObservations: null,
     finalisedAt: null,
-    finalisedBy: null
+    finalisedBy: null,
+    details: {
+      ...createDefaultTrialParameters(),
+      studyNumber: 'ABCD1234EFGH5678',
+      studyName: 'Long Study Number Test',
+      versionNumber: 2,
+      studyPhase: 'I',
+      therapeuticArea: 'Others',
+      indication: 'Test with long study number'
+    }
   };
 
   trialWithShortStudyNumber: Trial = {
@@ -172,6 +210,17 @@ export class TrialHeadingExampleComponent {
     finalATScenario: 2,
     finalATObservations: 'Approved',
     finalisedAt: '2024-05-10',
-    finalisedBy: 'PM'
+    finalisedBy: 'PM',
+    details: {
+      ...createDefaultTrialParameters(),
+      studyNumber: 'AB12',
+      studyName: 'Short Study Number Test',
+      versionNumber: 1,
+      studyPhase: 'II',
+      therapeuticArea: 'Others',
+      indication: 'Test with short study number',
+      versionDescription: 'Approved version',
+      keyChanges: 'Approved'
+    }
   };
 }
