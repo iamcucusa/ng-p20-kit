@@ -37,7 +37,7 @@ export interface TrialFinal extends TrialData {
 export interface TrialWithAssumptions extends TrialFinal {
   assumptionsScenarios: AssumptionsScenario[];
   planning: TimeFramework;
-  details: TrialParameters;
+  parameters: TrialParameters;
 }
 
 

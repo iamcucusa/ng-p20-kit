@@ -93,3 +93,37 @@
     margin: var(--spacing-4) 0; /* 24px - desktop */
   }
 }
+
+/* ========================================
+   TRIAL NUMBER UTILITY
+   ======================================== */
+
+/**
+ * Reusable trial number display utility
+ * Formats trial numbers with monospace font for better readability
+ * Matches the trial heading format (****-****)
+ * Simple and accessible styling
+ * 
+ * @example
+ * ```html
+ * <div class="pg-trial-number">{{ formattedStudyNumber }}</div>
+ * ```
+ */
+.pg-trial-number {
+  font-family: ui-monospace, 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  color: inherit;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  margin: 0;
+  
+  /**
+   * Empty state variant
+   * Uses default font and normal letter spacing for placeholder text
+   */
+  &.pg-empty-state {
+    color: var(--p-text-color-secondary);
+    font-style: italic;
+    font-family: inherit;
+    letter-spacing: normal;
+  }
+}

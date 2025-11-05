@@ -48,8 +48,8 @@ import { baseAssumptionsItemsToken, assumptionsTrialSectionsToken, trialLevelTok
         [activeTrial]="activeTrial"
         [level]="trialLevel"
         [isLoading]="isSaving"
-        [canEdit]="true"
-        [canView]="false"
+        [canEdit]="activeTrial?.status === 'Draft'"
+        [canView]="activeTrial?.status === 'Final'"
         (tabChange)="onTabChange($event)"
         (canSaveFormChange)="onCanSaveFormChange($event)">
       </kit-assumptions-tab-content>

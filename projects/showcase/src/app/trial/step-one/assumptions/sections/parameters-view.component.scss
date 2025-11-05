@@ -1,3 +1,4 @@
+@use '../../../../../styles/assumptions-layout.scss';
 @use '../../../../../../../theme/src/lib/styles/breakpoints.scss' as bp;
 @use '../../../../../../../theme/src/lib/styles/typography.scss';
 
@@ -5,80 +6,328 @@
    PARAMETERS VIEW COMPONENT STYLES
    ======================================== */
 
+/* Use shared assumptions layout styles */
 .pg-parameters-view-container {
-  padding: var(--spacing-4);
-  max-width: 100%;
+  @extend .pg-assumptions-container;
 }
 
-/* Header Section */
-.pg-parameters-view-header {
-  margin-bottom: var(--spacing-6);
-  
-  .pg-parameters-view-title {
-    @include typography.text-xl;
-    @include typography.font-semibold;
-    color: var(--text-primary);
-    margin: 0 0 var(--spacing-2) 0;
-  }
-  
-  .pg-parameters-view-description {
-    @include typography.text-base;
-    @include typography.font-normal;
-    color: var(--text-secondary);
-    margin: 0;
-  }
+.pg-parameters-view-main {
+  @extend .pg-assumptions-main;
+  @extend .pg-assumptions-form;
+  flex-direction: column;
 }
 
-/* Card Styling - Now using pg-card system directly */
+.pg-parameters-view-aside {
+  @extend .pg-assumptions-aside;
+}
 
-/* Info Grid Layout */
-.pg-info-grid {
+/**
+ * Parameters List Container
+ * Establishes vertical rhythm and spacing hierarchy
+ * Uses gap property for consistent spacing between all items
+ */
+.pg-parameters-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5);
+}
+
+/**
+ * Parameters List Item
+ * Base spacing for content sections
+ * Gap is handled by parent list container
+ */
+.pg-parameters-list-item {
+  padding: 0;
+  margin: 0;
+}
+
+/**
+ * Parameters List Item Divider
+ * Individual divider element for visual separation
+ * No margin needed - gap from parent list handles spacing
+ */
+.pg-parameters-list-item__divider {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/**
+ * Parameters List Item Content
+ * Internal spacing for label-value pairs
+ * Uses 8px (spacing-2) for tight coupling between label and value
+ */
+.pg-parameters-list-item__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+/**
+ * Parameters List Item Two Column
+ * Two-column grid layout for related fields
+ * Used for Trial Number + Title, BI Compound + MOA
+ * Trial number column is narrower (auto), others are equal (1fr 1fr)
+ * Consistent horizontal gap: var(--spacing-6) (24px) across all multi-column layouts
+ */
+.pg-parameters-list-item__two-column {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--spacing-4);
   
   @include bp.tablet-up {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-6);
   }
   
-  @include bp.desktop-up {
-    grid-template-columns: repeat(3, 1fr);
+  /**
+   * Trial Number Variant
+   * Special variant for Trial Number + Title
+   * Trial Number: 30% width, Title: 70% width
+   * Maintains same gap for consistency
+   */
+  &--trial-number {
+    @include bp.tablet-up {
+      grid-template-columns: 30% 70%;
+    }
+  }
+  
+  /**
+   * BI Compound Variant
+   * Special variant for BI Compound + MOA
+   * BI Compound: 30% width, MOA: 70% width
+   * Maintains same gap for consistency
+   */
+  &--bi-compound {
+    @include bp.tablet-up {
+      grid-template-columns: 30% 70%;
+    }
   }
 }
 
-/* Info Items */
-.pg-info-item {
+/**
+ * Parameters List Item Column
+ * Individual column within two-column layout
+ */
+.pg-parameters-list-item__column {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Parameters List Item Label */
+.pg-parameters-list-item__label {
+  @include typography.text-base;
+  @include typography.font-medium;
+  color: var(--p-text-color);
+  margin: 0;
+}
+
+/* Parameters List Item Value */
+.pg-parameters-list-item__value {
+  @include typography.text-base;
+  @include typography.font-normal;
+  color: var(--p-text-color-secondary);
+  margin: 0;
+  line-height: 1.5;
+  word-break: break-word;
+  
+  &--wide {
+    max-width: 40rem;
+  }
+  
+  &--milestone {
+    margin: 0;
+  }
+}
+
+/* Empty state styling - applied via directive */
+.pg-empty-state {
+  font-style: italic;
+  opacity: 0.7;
+  color: var(--p-text-color-secondary);
+}
+
+/**
+ * Parameters View Trial Number
+ * Applies specific size and weight for trial numbers in parameters view
+ * Inherits monospace font and letter spacing from .pg-trial-number utility
+ */
+.pg-trial-number {
+  @include typography.text-base;
+  @include typography.font-medium;
+  color: var(--p-text-color);
+}
+
+/* Parameters List Item CTMS Link */
+.pg-parameters-list-item__ctms-link {
+  font-size: 0.875rem;
+  color: var(--p-text-color-secondary);
+  
+  &:hover {
+    color: var(--blue-600);
+  }
+}
+
+/**
+ * Parameters List Item Milestone
+ * Special highlight box for milestone information
+ * Modern card design with prominent icon and elegant styling
+ * Enhanced visual treatment for important field
+ */
+.pg-parameters-list-item__milestone {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-4);
+  background: var(--blue-50);
+  border: 1px solid var(--blue-200);
+  border-radius: calc(var(--border-radius) * 1.5);
+  max-width: fit-content;
+  
+  @include bp.tablet-up {
+    padding: var(--spacing-4) var(--spacing-5);
+    gap: var(--spacing-4);
+  }
+}
+
+/**
+ * Milestone Icon Wrapper
+ * Creates a circular badge for the icon with modern styling
+ */
+.pg-parameters-list-item__milestone-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  background: var(--blue-500);
+  border-radius: 50%;
+  flex-shrink: 0;
+  
+  @include bp.tablet-up {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}
+
+.pg-parameters-list-item__milestone-icon {
+  font-size: 1.5rem;
+  color: var(--white);
+  margin: 0;
+  
+  @include bp.tablet-up {
+    font-size: 1.75rem;
+  }
+}
+
+.pg-parameters-list-item__milestone-content {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-2);
+  min-width: 0;
+}
+
+/**
+ * Parameters List Item Phase Milestone
+ * Two-column layout for Phase and Milestone side-by-side
+ * Phase: 30% width, Milestone: 70% width
+ * Consistent horizontal gap with other layouts
+ */
+.pg-parameters-list-item__phase-milestone {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-4);
   
-  &--full {
-    grid-column: 1 / -1;
+  @include bp.tablet-up {
+    grid-template-columns: 30% 70%;
+    gap: var(--spacing-6);
   }
 }
 
-/* Info Labels */
-.pg-info-label {
-  @include typography.text-sm;
-  @include typography.font-medium;
-  color: var(--p-text-color-secondary);
+/**
+ * Parameters List Item Milestone Container
+ * Allows milestone to take available space in phase-milestone layout
+ */
+.pg-parameters-list-item__milestone-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+/**
+ * Parameters List Item Grid
+ * Responsive grid layout for grouped fields
+ * Used for Therapeutic Area + HPC Biberach (30% + 70%)
+ * Consistent horizontal gap with other layouts
+ */
+.pg-parameters-list-item__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-4);
+  
+  @include bp.tablet-up {
+    grid-template-columns: 30% 70%;
+    gap: var(--spacing-6);
+  }
+}
+
+/**
+ * Grid Item
+ * Individual field within grid layout
+ * 8px (spacing-2) gap between label and value within each field
+ * Note: Grid columns are now defined directly in grid-template-columns
+ */
+.pg-parameters-list-item__grid-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+/**
+ * Parameters List Item Phase Tag
+ * Enhanced styling for study phase display with custom template
+ * Larger, more prominent phase representation
+ * Simple design without gradients or shadows
+ */
+.pg-parameters-list-item__phase-tag {
+  align-self: flex-start;
+  width: fit-content;
+  
+  ::ng-deep .p-tag {
+    padding: var(--spacing-3) var(--spacing-5);
+    border-radius: calc(var(--border-radius) * 1.5);
+    background: var(--blue-50);
+    border: 1px solid var(--blue-200);
+    box-shadow: none;
+  }
+}
+
+/**
+ * Phase Content
+ * Custom template content for phase tag
+ */
+.pg-parameters-list-item__phase-content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+/**
+ * Phase Text
+ * Larger text for better visibility
+ */
+.pg-parameters-list-item__phase-text {
+  @include typography.text-lg;
+  @include typography.font-semibold;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin: 0;
-}
-
-/* Info Values */
-.pg-info-value {
-  @include typography.text-base;
-  @include typography.font-normal;
-  color: var(--p-text-color);
-  margin: 0;
-  word-break: break-word;
-}
-
-/* Info Tags */
-.pg-info-tag {
-  align-self: flex-start;
+  color: var(--blue-600);
 }
 
 /* Empty State */

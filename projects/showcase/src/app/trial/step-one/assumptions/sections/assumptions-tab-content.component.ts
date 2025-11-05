@@ -31,6 +31,7 @@ import {
 } from '@assumptions/navigation/navigation.settings';
 import type { Trial } from '@trial/trial';
 import type { TrialAssumptionsPage } from '@assumptions/navigation/navigation';
+import { trialParametersFormProviders } from '@assumptions/sections/parameters.settings';
 
 /**
  * Assumptions Tab Content Component
@@ -47,6 +48,7 @@ import type { TrialAssumptionsPage } from '@assumptions/navigation/navigation';
   selector: 'kit-assumptions-tab-content',
   standalone: true,
   imports: [TabsModule, CommonModule, ParametersViewComponent, ParametersEditComponent, TimeFrameworkEditComponent],
+  providers: [trialParametersFormProviders],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <p-tabs [value]="activeTabIndex" (valueChange)="onTabChange($event)">

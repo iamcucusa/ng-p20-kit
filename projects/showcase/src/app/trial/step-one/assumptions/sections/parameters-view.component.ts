@@ -1,29 +1,13 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DividerModule } from 'primeng/divider';
 import { BadgeModule } from 'primeng/badge';
 import { TagModule } from 'primeng/tag';
-
-/**
- * Trial parameters interface for parameters view
- * Contains all trial parameter properties
- */
-interface TrialParameters {
-  name?: string;
-  description?: string;
-  studyType?: string;
-  phase?: string;
-  participants?: number;
-  duration?: number;
-  startDate?: Date | string;
-  endDate?: Date | string;
-  requiresIRB?: boolean;
-  requiresFDA?: boolean;
-  requiresEMA?: boolean;
-  regulatoryNotes?: string;
-  dataCollectionMethod?: string;
-  dataRetention?: number;
-}
+import { ButtonModule } from 'primeng/button';
+import type { Trial } from '@trial/trial';
+import { parametersControlsToken } from '@assumptions/sections/parameters.settings';
+import { DashIfEmptyPipe } from '@core/dash-if-empty.pipe';
+import { formatStudyNumber } from '@trial/study-number.utils';
 
 /**
  * Parameters View Component
@@ -48,296 +32,369 @@ interface TrialParameters {
     CommonModule,
     DividerModule,
     BadgeModule,
-    TagModule
+    TagModule,
+    ButtonModule,
+    DashIfEmptyPipe
   ],
   template: `
-    <div class="pg-parameters-view-container">
-      <!-- Header Section -->
-      <div class="pg-parameters-view-header">
-        <h4 class="pg-parameters-view-title">Trial Parameters</h4>
-        <p class="pg-parameters-view-description">View trial parameters and settings</p>
+    @if (!activeTrial) {
+      <div class="pg-parameters-view-empty">
+        <div class="pg-empty-icon">📋</div>
+        <h5 class="pg-empty-title">No Trial Data Available</h5>
+        <p class="pg-empty-description">
+          Trial parameters will be displayed here once a trial is selected.
+        </p>
       </div>
-
-      <!-- Basic Information Card -->
-      <div class="pg-card pg-card--padding-md">
-        <div class="pg-card__header">
-          <div class="pg-card__title">Basic Information</div>
-        </div>
-        <div class="pg-card__content">
-          <div class="pg-info-grid">
-            <div class="pg-info-item">
-              <label class="pg-info-label">Trial Name</label>
-              <span class="pg-info-value">{{ activeTrial?.name || 'Not specified' }}</span>
+    } @else {
+      <div class="pg-parameters-view-container">
+        <main class="pg-parameters-view-main">
+          <div class="pg-card pg-card--padding-md">
+            <div class="pg-card__header">
+              <div class="pg-card__title">Trial Parameters</div>
+              <p class="pg-card__description">Review your trial parameters.</p>
             </div>
-            
-            <div class="pg-info-item">
-              <label class="pg-info-label">Description</label>
-              <span class="pg-info-value">{{ activeTrial?.description || 'No description provided' }}</span>
+            <div class="pg-card__content">
+              <ul class="pg-parameters-list">
+            <!-- Trial Number and Title -->
+            <li class="pg-parameters-list-item">
+              <div class="pg-parameters-list-item__two-column pg-parameters-list-item__two-column--trial-number">
+                <!-- First Column: Trial Number -->
+                <div class="pg-parameters-list-item__column">
+                  <div class="pg-parameters-list-item__content">
+                    <div class="pg-parameters-list-item__label">{{ parametersControls.studyNumber.title }}</div>
+                    <div class="pg-trial-number" [class.pg-empty-state]="!activeTrial.parameters.studyNumber">
+                      {{ formattedStudyNumber }}
+                    </div>
+                    @if (activeTrial.parameters.ctmsTrial) {
+                      <p-button
+                        [label]="parametersControls.ctmsTrial.title"
+                        [text]="true"
+                        [icon]="'pi pi-angle-right'"
+                        iconPos="right"
+                        size="small"
+                        class="pg-parameters-list-item__ctms-link"
+                        (onClick)="onCtmsTrialClick()">
+                      </p-button>
+                    }
+                  </div>
+                </div>
+                
+                <!-- Second Column: Title -->
+                <div class="pg-parameters-list-item__column">
+                  <div class="pg-parameters-list-item__content">
+                    <div class="pg-parameters-list-item__label">{{ parametersControls.studyName.title }}</div>
+                    <div class="pg-parameters-list-item__value pg-parameters-list-item__value--wide" [class.pg-empty-state]="!activeTrial.parameters.studyName">
+                      {{ activeTrial.parameters.studyName | dashIfEmpty }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <!-- Phase and Milestone -->
+            <li class="pg-parameters-list-item">
+              <div class="pg-parameters-list-item__phase-milestone">
+                <!-- Phase Column -->
+                <div class="pg-parameters-list-item__column">
+                  <div class="pg-parameters-list-item__content">
+                    <div class="pg-parameters-list-item__label">{{ parametersControls.studyPhase.title }}</div>
+                    @if (activeTrial.parameters.studyPhase) {
+                      <p-tag class="pg-parameters-list-item__phase-tag">
+                        <div class="pg-parameters-list-item__phase-content">
+                          <span class="pg-parameters-list-item__phase-text">
+                            {{ activeTrial.parameters.studyPhase }}
+                          </span>
+                        </div>
+                      </p-tag>
+                    } @else {
+                      <span class="pg-parameters-list-item__value" [class.pg-empty-state]="!activeTrial.parameters.studyPhase">{{ activeTrial.parameters.studyPhase | dashIfEmpty }}</span>
+                    }
+                  </div>
+                </div>
+                
+                <!-- Milestone Column -->
+                <div class="pg-parameters-list-item__column">
+                  <div class="pg-parameters-list-item__milestone-container">
+                    <div class="pg-parameters-list-item__milestone">
+                      <div class="pg-parameters-list-item__milestone-icon-wrapper">
+                        <i class="pi pi-check-circle pg-parameters-list-item__milestone-icon"></i>
+                      </div>
+                      <div class="pg-parameters-list-item__milestone-content">
+                        <div class="pg-parameters-list-item__label">{{ parametersControls.milestone.title }}</div>
+                        <p class="pg-parameters-list-item__value pg-parameters-list-item__value--milestone" [class.pg-empty-state]="!activeTrial.parameters.milestone">
+                          {{ activeTrial.parameters.milestone | dashIfEmpty }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <!-- Divider -->
+            <li class="pg-parameters-list-item__divider">
+              <p-divider></p-divider>
+            </li>
+
+            <!-- Therapeutic Area and HPC Biberach -->
+            <li class="pg-parameters-list-item">
+              <div class="pg-parameters-list-item__grid">
+                <div class="pg-parameters-list-item__grid-item pg-parameters-list-item__grid-item--two-thirds">
+                  <div class="pg-parameters-list-item__label">{{ parametersControls.therapeuticArea.title }}</div>
+                  <p class="pg-parameters-list-item__value" [class.pg-empty-state]="activeTrial.parameters.therapeuticArea === 'Others' ? !activeTrial.parameters.others : !activeTrial.parameters.therapeuticArea">
+                    {{
+                      activeTrial.parameters.therapeuticArea === 'Others'
+                        ? (activeTrial.parameters.others | dashIfEmpty)
+                        : (activeTrial.parameters.therapeuticArea | dashIfEmpty)
+                    }}
+                  </p>
+                </div>
+                <div class="pg-parameters-list-item__grid-item pg-parameters-list-item__grid-item--one-third">
+                  <div class="pg-parameters-list-item__label">{{ parametersControls.hpcBiberach.title }}</div>
+                  <div class="pg-parameters-list-item__value">
+                    {{
+                      activeTrial.parameters.hpcBiberach === 'yes'
+                        ? 'Yes, conducted at HPC Biberach'
+                        : 'No, not conducted at HPC Biberach'
+                    }}
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <!-- Indication -->
+            <li class="pg-parameters-list-item">
+              <div class="pg-parameters-list-item__content">
+                <div class="pg-parameters-list-item__label">{{ parametersControls.indication.title }}</div>
+                <div class="pg-parameters-list-item__value pg-parameters-list-item__value--wide" [class.pg-empty-state]="!activeTrial.parameters.indication">
+                  {{ activeTrial.parameters.indication | dashIfEmpty }}
+                </div>
+              </div>
+            </li>
+
+            <!-- BI Compound and MOA -->
+            <li class="pg-parameters-list-item">
+              <div class="pg-parameters-list-item__two-column pg-parameters-list-item__two-column--bi-compound">
+                <!-- First Column: BI Compound -->
+                <div class="pg-parameters-list-item__column">
+                  <div class="pg-parameters-list-item__content">
+                    <div class="pg-parameters-list-item__label">{{ parametersControls.biCompound.title }}</div>
+                    <div class="pg-parameters-list-item__value" [class.pg-empty-state]="!activeTrial.parameters.biCompound">
+                      {{ activeTrial.parameters.biCompound | dashIfEmpty }}
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Second Column: MOA -->
+                <div class="pg-parameters-list-item__column">
+                  <div class="pg-parameters-list-item__content">
+                    <div class="pg-parameters-list-item__label">{{ parametersControls.studyMoa.title }}</div>
+                    <div class="pg-parameters-list-item__value" [class.pg-empty-state]="!activeTrial.parameters.studyMoa">
+                      {{ activeTrial.parameters.studyMoa | dashIfEmpty }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+              </ul>
             </div>
           </div>
-        </div>
-      </div>
 
-      <!-- Study Design Card -->
-      <div class="pg-card pg-card--padding-md">
-        <div class="pg-card__header">
-          <div class="pg-card__title">Study Design</div>
-        </div>
-        <div class="pg-card__content">
-        <div class="pg-info-grid">
-          <div class="pg-info-item">
-            <label class="pg-info-label">Study Type</label>
-            <p-tag 
-              [value]="getStudyTypeLabel(activeTrial?.studyType)"
-              [severity]="getStudyTypeSeverity(activeTrial?.studyType)"
-              class="pg-info-tag">
-            </p-tag>
-          </div>
-          
-          <div class="pg-info-item">
-            <label class="pg-info-label">Phase</label>
-            <p-tag 
-              [value]="getPhaseLabel(activeTrial?.phase)"
-              [severity]="getPhaseSeverity(activeTrial?.phase)"
-              class="pg-info-tag">
-            </p-tag>
-          </div>
-          
-          <div class="pg-info-item">
-            <label class="pg-info-label">Expected Participants</label>
-            <span class="pg-info-value">{{ activeTrial?.participants || 'Not specified' }}</span>
-          </div>
-          
-          <div class="pg-info-item">
-            <label class="pg-info-label">Duration</label>
-            <span class="pg-info-value">{{ getDurationText(activeTrial?.duration) }}</span>
-          </div>
-        </div>
-        </div>
-      </div>
-
-      <!-- Timeline Card -->
-      <div class="pg-card pg-card--padding-md">
-        <div class="pg-card__header">
-          <div class="pg-card__title">Timeline</div>
-        </div>
-        <div class="pg-card__content">
-        <div class="pg-info-grid">
-          <div class="pg-info-item">
-            <label class="pg-info-label">Planned Start Date</label>
-            <span class="pg-info-value">{{ getFormattedDate(activeTrial?.startDate) }}</span>
-          </div>
-          
-          <div class="pg-info-item">
-            <label class="pg-info-label">Planned End Date</label>
-            <span class="pg-info-value">{{ getFormattedDate(activeTrial?.endDate) }}</span>
-          </div>
-        </div>
-        </div>
-      </div>
-
-      <!-- Regulatory Requirements Card -->
-      <div class="pg-card pg-card--padding-md">
-        <div class="pg-card__header">
-          <div class="pg-card__title">Regulatory Requirements</div>
-        </div>
-        <div class="pg-card__content">
-        <div class="pg-info-grid">
-          <div class="pg-info-item">
-            <label class="pg-info-label">IRB Approval</label>
-            <p-badge 
-              [value]="activeTrial?.requiresIRB ? 'Required' : 'Not Required'"
-              [severity]="activeTrial?.requiresIRB ? 'success' : 'info'">
-            </p-badge>
-          </div>
-          
-          <div class="pg-info-item">
-            <label class="pg-info-label">FDA Approval</label>
-            <p-badge 
-              [value]="activeTrial?.requiresFDA ? 'Required' : 'Not Required'"
-              [severity]="activeTrial?.requiresFDA ? 'success' : 'info'">
-            </p-badge>
-          </div>
-          
-          <div class="pg-info-item">
-            <label class="pg-info-label">EMA Approval</label>
-            <p-badge 
-              [value]="activeTrial?.requiresEMA ? 'Required' : 'Not Required'"
-              [severity]="activeTrial?.requiresEMA ? 'success' : 'info'">
-            </p-badge>
-          </div>
-          
-          @if (activeTrial?.regulatoryNotes) {
-            <div class="pg-info-item pg-info-item--full">
-              <label class="pg-info-label">Regulatory Notes</label>
-              <span class="pg-info-value">{{ activeTrial?.regulatoryNotes }}</span>
+          <!-- Tailwind Utility-based Layout -->
+          <div class="pg-card pg-card--padding-md">
+            <div class="pg-card__header">
+              <div class="pg-card__title">Trial Parameters (Tailwind Utilities)</div>
+              <p class="pg-card__description">Review your trial parameters - Tailwind utility-based layout for comparison.</p>
             </div>
-          }
-        </div>
-        </div>
-      </div>
+            <div class="pg-card__content">
+              <div class="flex flex-col gap-4 w-full">
+                
+                <!-- Section 1: Trial Number and Title -->
+                <div class="grid grid-cols-1 md:grid-cols-[30%_70%] gap-4 md:gap-6">
+                  <!-- Trial Number -->
+                  <div class="flex flex-col gap-2">
+                    <label class="block font-medium text-base text-text-primary">
+                      {{ parametersControls.studyNumber.title }}
+                    </label>
+                    <div class="pg-trial-number" [class.pg-empty-state]="!activeTrial.parameters.studyNumber">
+                      {{ formattedStudyNumber }}
+                    </div>
+                    @if (activeTrial.parameters.ctmsTrial) {
+                      <p-button
+                        [label]="parametersControls.ctmsTrial.title"
+                        [text]="true"
+                        [icon]="'pi pi-angle-right'"
+                        iconPos="right"
+                        size="small"
+                        class="mt-2 text-sm text-secondary hover:text-blue-600"
+                        (onClick)="onCtmsTrialClick()">
+                      </p-button>
+                    }
+                  </div>
+                  
+                  <!-- Title -->
+                  <div class="flex flex-col gap-2">
+                    <label class="block font-medium text-base text-text-primary">
+                      {{ parametersControls.studyName.title }}
+                    </label>
+                    <div class="text-base text-secondary" [class.pg-empty-state]="!activeTrial.parameters.studyName">
+                      {{ activeTrial.parameters.studyName | dashIfEmpty }}
+                    </div>
+                  </div>
+                </div>
 
-      <!-- Data Collection Card -->
-      <div class="pg-card pg-card--padding-md">
-        <div class="pg-card__header">
-          <div class="pg-card__title">Data Collection</div>
-        </div>
-        <div class="pg-card__content">
-        <div class="pg-info-grid">
-          <div class="pg-info-item">
-            <label class="pg-info-label">Collection Method</label>
-            <span class="pg-info-value">{{ getDataCollectionMethodLabel(activeTrial?.dataCollectionMethod) }}</span>
-          </div>
-          
-          <div class="pg-info-item">
-            <label class="pg-info-label">Data Retention</label>
-            <span class="pg-info-value">{{ getDataRetentionText(activeTrial?.dataRetention) }}</span>
-          </div>
-        </div>
-        </div>
-      </div>
+                <!-- Section 2: Phase and Milestone -->
+                <div class="grid grid-cols-1 md:grid-cols-[30%_70%] gap-4 md:gap-6">
+                  <!-- Phase -->
+                  <div class="flex flex-col gap-2">
+                    <label class="block font-medium text-base text-text-primary">
+                      {{ parametersControls.studyPhase.title }}
+                    </label>
+                    @if (activeTrial.parameters.studyPhase) {
+                      <p-tag class="pg-parameters-list-item__phase-tag">
+                        <div class="pg-parameters-list-item__phase-content">
+                          <span class="pg-parameters-list-item__phase-text">
+                            {{ activeTrial.parameters.studyPhase }}
+                          </span>
+                        </div>
+                      </p-tag>
+                    } @else {
+                      <span class="text-base text-secondary" [class.pg-empty-state]="!activeTrial.parameters.studyPhase">
+                        {{ activeTrial.parameters.studyPhase | dashIfEmpty }}
+                      </span>
+                    }
+                  </div>
+                  
+                  <!-- Milestone -->
+                  <div class="flex flex-col gap-2">
+                    <div class="pg-parameters-list-item__milestone-container">
+                      <div class="pg-parameters-list-item__milestone">
+                        <div class="pg-parameters-list-item__milestone-icon-wrapper">
+                          <i class="pi pi-check-circle pg-parameters-list-item__milestone-icon"></i>
+                        </div>
+                        <div class="pg-parameters-list-item__milestone-content">
+                          <label class="block font-medium text-base text-text-primary">
+                            {{ parametersControls.milestone.title }}
+                          </label>
+                          <p class="text-base text-secondary m-0" [class.pg-empty-state]="!activeTrial.parameters.milestone">
+                            {{ activeTrial.parameters.milestone | dashIfEmpty }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-      <!-- Empty State -->
-      @if (!activeTrial) {
-        <div class="pg-parameters-view-empty">
-          <div class="pg-empty-icon">📋</div>
-          <h5 class="pg-empty-title">No Trial Data Available</h5>
-          <p class="pg-empty-description">
-            Trial parameters will be displayed here once a trial is selected.
-          </p>
-        </div>
-      }
-    </div>
+                <!-- Divider -->
+                <p-divider></p-divider>
+
+                <!-- Section 3: Therapeutic Area and HPC Biberach -->
+                <div class="grid grid-cols-1 md:grid-cols-[30%_70%] gap-4 md:gap-6">
+                  <!-- Therapeutic Area -->
+                  <div class="flex flex-col gap-2">
+                    <label class="block font-medium text-base text-text-primary">
+                      {{ parametersControls.therapeuticArea.title }}
+                    </label>
+                    <p class="text-base text-secondary m-0" [class.pg-empty-state]="activeTrial.parameters.therapeuticArea === 'Others' ? !activeTrial.parameters.others : !activeTrial.parameters.therapeuticArea">
+                      {{
+                        activeTrial.parameters.therapeuticArea === 'Others'
+                          ? (activeTrial.parameters.others | dashIfEmpty)
+                          : (activeTrial.parameters.therapeuticArea | dashIfEmpty)
+                      }}
+                    </p>
+                  </div>
+                  
+                  <!-- HPC Biberach -->
+                  <div class="flex flex-col gap-2">
+                    <label class="block font-medium text-base text-text-primary">
+                      {{ parametersControls.hpcBiberach.title }}
+                    </label>
+                    <div class="text-base text-secondary">
+                      {{
+                        activeTrial.parameters.hpcBiberach === 'yes'
+                          ? 'Yes, conducted at HPC Biberach'
+                          : 'No, not conducted at HPC Biberach'
+                      }}
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Divider -->
+                <p-divider></p-divider>
+
+                <!-- Section 4: Indication (Full Width) -->
+                <div class="flex flex-col gap-2">
+                  <label class="block font-medium text-base text-text-primary">
+                    {{ parametersControls.indication.title }}
+                  </label>
+                  <div class="text-base text-secondary" [class.pg-empty-state]="!activeTrial.parameters.indication">
+                    {{ activeTrial.parameters.indication | dashIfEmpty }}
+                  </div>
+                </div>
+
+                <!-- Section 5: BI Compound and MOA -->
+                <div class="grid grid-cols-1 md:grid-cols-[30%_70%] gap-4 md:gap-6">
+                  <!-- BI Compound -->
+                  <div class="flex flex-col gap-2">
+                    <label class="block font-medium text-base text-text-primary">
+                      {{ parametersControls.biCompound.title }}
+                    </label>
+                    <div class="text-base text-secondary" [class.pg-empty-state]="!activeTrial.parameters.biCompound">
+                      {{ activeTrial.parameters.biCompound | dashIfEmpty }}
+                    </div>
+                  </div>
+                  
+                  <!-- MOA -->
+                  <div class="flex flex-col gap-2">
+                    <label class="block font-medium text-base text-text-primary">
+                      {{ parametersControls.studyMoa.title }}
+                    </label>
+                    <div class="text-base text-secondary" [class.pg-empty-state]="!activeTrial.parameters.studyMoa">
+                      {{ activeTrial.parameters.studyMoa | dashIfEmpty }}
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <aside class="pg-parameters-view-aside">
+          <!-- Aside content can be added here in the future -->
+        </aside>
+      </div>
+    }
   `,
   styleUrls: ['./parameters-view.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ParametersViewComponent {
   /**
+   * Parameters controls token for field titles
+   */
+  parametersControls = inject(parametersControlsToken);
+
+  /**
    * Active trial data to display
    */
-  @Input() activeTrial?: TrialParameters;
+  @Input() activeTrial?: Trial | null;
 
   /**
-   * Gets the display label for study type
-   * @param studyType - The study type value
-   * @returns Formatted label for display
+   * Gets the formatted study number
    */
-  getStudyTypeLabel(studyType?: string): string {
-    const labels: Record<string, string> = {
-      'interventional': 'Interventional',
-      'observational': 'Observational',
-      'expanded_access': 'Expanded Access',
-      'other': 'Other'
-    };
-    return labels[studyType || ''] || 'Not specified';
-  }
-
-  /**
-   * Gets the severity color for study type tag
-   * @param studyType - The study type value
-   * @returns Severity level for PrimeNG tag
-   */
-  getStudyTypeSeverity(studyType?: string): 'success' | 'info' | 'warn' | 'danger' {
-    const severities: Record<string, 'success' | 'info' | 'warn' | 'danger'> = {
-      'interventional': 'success',
-      'observational': 'info',
-      'expanded_access': 'warn',
-      'other': 'danger'
-    };
-    return severities[studyType || ''] || 'info';
-  }
-
-  /**
-   * Gets the display label for phase
-   * @param phase - The phase value
-   * @returns Formatted label for display
-   */
-  getPhaseLabel(phase?: string): string {
-    const labels: Record<string, string> = {
-      'phase_1': 'Phase I',
-      'phase_2': 'Phase II',
-      'phase_3': 'Phase III',
-      'phase_4': 'Phase IV',
-      'not_applicable': 'Not Applicable'
-    };
-    return labels[phase || ''] || 'Not specified';
-  }
-
-  /**
-   * Gets the severity color for phase tag
-   * @param phase - The phase value
-   * @returns Severity level for PrimeNG tag
-   */
-  getPhaseSeverity(phase?: string): 'success' | 'info' | 'warn' | 'danger' {
-    const severities: Record<string, 'success' | 'info' | 'warn' | 'danger'> = {
-      'phase_1': 'info',
-      'phase_2': 'warn',
-      'phase_3': 'success',
-      'phase_4': 'info',
-      'not_applicable': 'danger'
-    };
-    return severities[phase || ''] || 'info';
-  }
-
-  /**
-   * Gets formatted duration text
-   * @param duration - Duration in months
-   * @returns Formatted duration string
-   */
-  getDurationText(duration?: number): string {
-    if (!duration) return 'Not specified';
-    if (duration === 1) return '1 month';
-    if (duration < 12) return `${duration} months`;
-    const years = Math.floor(duration / 12);
-    const months = duration % 12;
-    if (months === 0) return `${years} year${years > 1 ? 's' : ''}`;
-    return `${years} year${years > 1 ? 's' : ''} ${months} month${months > 1 ? 's' : ''}`;
-  }
-
-  /**
-   * Gets formatted date string
-   * @param date - Date to format
-   * @returns Formatted date string
-   */
-  getFormattedDate(date?: Date | string): string {
-    if (!date) return 'Not specified';
-    try {
-      const dateObj = typeof date === 'string' ? new Date(date) : date;
-      return dateObj.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      });
-    } catch {
-      return 'Invalid date';
+  get formattedStudyNumber(): string {
+    if (!this.activeTrial?.parameters?.studyNumber) {
+      return '—';
     }
+    return formatStudyNumber(this.activeTrial.parameters.studyNumber);
   }
 
   /**
-   * Gets the display label for data collection method
-   * @param method - The data collection method
-   * @returns Formatted label for display
+   * Handles CTMS trial link click
    */
-  getDataCollectionMethodLabel(method?: string): string {
-    const labels: Record<string, string> = {
-      'edc': 'Electronic Data Capture (EDC)',
-      'paper': 'Paper Forms',
-      'mobile': 'Mobile App',
-      'wearable': 'Wearable Devices',
-      'other': 'Other'
-    };
-    return labels[method || ''] || 'Not specified';
-  }
-
-  /**
-   * Gets formatted data retention text
-   * @param retention - Retention period in years
-   * @returns Formatted retention string
-   */
-  getDataRetentionText(retention?: number): string {
-    if (!retention) return 'Not specified';
-    if (retention === 1) return '1 year';
-    return `${retention} years`;
+  onCtmsTrialClick(): void {
+    // TODO: Implement CTMS trial navigation
+    console.log('CTMS Trial clicked');
   }
 }

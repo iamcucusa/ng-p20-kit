@@ -65,14 +65,15 @@ export class TrialsContainerComponent {
       finalisedAt: null,
       finalisedBy: null,
       planning: createDefaultTimeFramework(),
-      details: {
+      parameters: {
         ...createDefaultTrialParameters(),
         studyNumber: 'CV-2024-001',
         studyName: 'Cardiovascular Study Alpha',
         versionNumber: 1,
         studyPhase: 'II',
         therapeuticArea: 'CRM',
-        indication: 'Cardiovascular health outcomes in elderly patients'
+        indication: 'Cardiovascular health outcomes in elderly patients',
+        milestone: 'First Patient In'
       }
     },
     {
@@ -120,7 +121,7 @@ export class TrialsContainerComponent {
       finalisedAt: '2024-02-15',
       finalisedBy: 'Reviewer A',
       planning: createDefaultTimeFramework(),
-      details: {
+      parameters: {
         ...createDefaultTrialParameters(),
         studyNumber: 'ONC-2024-002',
         studyName: 'Oncology Research Beta',
@@ -128,6 +129,7 @@ export class TrialsContainerComponent {
         studyPhase: 'III',
         therapeuticArea: 'Oncology',
         indication: 'Advanced oncology treatment efficacy',
+        milestone: 'Last Patient Out',
         versionDescription: 'Final version after extended review period',
         keyChanges: 'Extended follow-up periods added'
       }
@@ -163,7 +165,7 @@ export class TrialsContainerComponent {
       finalisedAt: null,
       finalisedBy: null,
       planning: createDefaultTimeFramework(),
-      details: {
+      parameters: {
         ...createDefaultTrialParameters(),
         studyNumber: 'NEU-2024-003',
         studyName: 'Neurological Study Gamma',

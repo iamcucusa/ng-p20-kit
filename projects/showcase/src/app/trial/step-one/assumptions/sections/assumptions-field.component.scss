@@ -9,6 +9,7 @@
 
 @use 'sass:map';
 @use '../../../../../../../theme/src/lib/styles/breakpoints.scss' as bp;
+@use '../../../../../../../theme/src/lib/styles/typography.scss' as typography;
 
 .pg-assumptions-field {
   width: 100%;
@@ -51,6 +52,9 @@
   }
 
   &__label {
+    @include typography.text-base;
+    @include typography.font-medium;
+    color: var(--p-text-color);
     margin-bottom: var(--spacing-1);
     display: flex;
     align-items: center;

@@ -144,7 +144,7 @@ export class TrialHeadingComponent {
    * Gets the formatted study number
    */
   get formattedStudyNumber(): string {
-    return formatStudyNumber(this.trial.details?.studyNumber || '');
+    return formatStudyNumber(this.trial.parameters?.studyNumber || '');
   }
 
   /**

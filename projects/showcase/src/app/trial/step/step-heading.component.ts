@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import type { Trial } from '@trial/trial';
+import { formatStudyNumber } from '@trial/study-number.utils';
 
 /**
  * Step Heading Component
@@ -19,7 +20,11 @@ import type { Trial } from '@trial/trial';
         <div class="pg-step-heading__content">
           <div class="pg-step-heading__text">
             <h2 id="step-title" class="pg-step-heading__title">
-              {{ getContextualTitle() }}
+              @if (showTrialContext && activeTrial?.parameters?.studyNumber) {
+                {{ title }} for Trial <span class="pg-trial-number">{{ formattedStudyNumber }}</span>
+              } @else {
+                {{ title }}
+              }
             </h2>
             @if (description) {
               <p id="step-description" class="pg-step-heading__description">
@@ -56,12 +61,12 @@ export class StepHeadingComponent {
   @Input() showTrialContext: boolean = false;
   
   /**
-   * Gets the contextual title with trial information if enabled
+   * Gets the formatted study number
    */
-  getContextualTitle(): string {
-    if (this.showTrialContext && this.activeTrial?.details?.studyNumber) {
-      return `${this.title} for Trial ${this.activeTrial.details.studyNumber.toUpperCase()}`;
+  get formattedStudyNumber(): string {
+    if (!this.activeTrial?.parameters?.studyNumber) {
+      return '';
     }
-    return this.title;
+    return formatStudyNumber(this.activeTrial.parameters.studyNumber);
   }
 }

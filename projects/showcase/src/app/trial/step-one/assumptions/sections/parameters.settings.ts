@@ -216,7 +216,7 @@ export function trialNumberUnique(trials: Trial[], activeTrial: Trial | null): V
   return (control: AbstractControl): ValidationErrors | null => {
     if (control.value) {
       const matches = trials.filter((trial) => {
-        const match = trial.details.studyNumber?.trim().toLowerCase() === String(control.value.trim().toLowerCase());
+        const match = trial.parameters.studyNumber?.trim().toLowerCase() === String(control.value.trim().toLowerCase());
 
         /**
          * We validate the active trial number id is still unique

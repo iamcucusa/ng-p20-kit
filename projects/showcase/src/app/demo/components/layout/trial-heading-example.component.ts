@@ -96,7 +96,7 @@ export class TrialHeadingExampleComponent {
     finalATObservations: null,
     finalisedAt: null,
     finalisedBy: null,
-    details: {
+    parameters: {
       ...createDefaultTrialParameters(),
       studyNumber: 'CV2024001',
       studyName: 'Cardiovascular Study Alpha',
@@ -123,7 +123,7 @@ export class TrialHeadingExampleComponent {
     finalATObservations: 'Locked after review',
     finalisedAt: '2024-02-15',
     finalisedBy: 'Reviewer A',
-    details: {
+    parameters: {
       ...createDefaultTrialParameters(),
       studyNumber: 'ONC2024002',
       studyName: 'Oncology Research Beta',
@@ -152,7 +152,7 @@ export class TrialHeadingExampleComponent {
     finalATObservations: null,
     finalisedAt: null,
     finalisedBy: null,
-    details: {
+    parameters: {
       ...createDefaultTrialParameters(),
       studyNumber: 'NEU2024003',
       studyName: 'Neurological Study Gamma',
@@ -179,7 +179,7 @@ export class TrialHeadingExampleComponent {
     finalATObservations: null,
     finalisedAt: null,
     finalisedBy: null,
-    details: {
+    parameters: {
       ...createDefaultTrialParameters(),
       studyNumber: 'ABCD1234EFGH5678',
       studyName: 'Long Study Number Test',
@@ -206,7 +206,7 @@ export class TrialHeadingExampleComponent {
     finalATObservations: 'Approved',
     finalisedAt: '2024-05-10',
     finalisedBy: 'PM',
-    details: {
+    parameters: {
       ...createDefaultTrialParameters(),
       studyNumber: 'AB12',
       studyName: 'Short Study Number Test',
