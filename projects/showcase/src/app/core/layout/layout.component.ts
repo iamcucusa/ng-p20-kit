@@ -1,8 +1,8 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from '@core/header.component';
-import { FooterComponent } from '@core/footer.component';
+import { HeaderComponent } from '@core/layout/header.component';
+import { FooterComponent } from '@core/layout/footer.component';
 
 @Component({
   selector: 'kit-layout',

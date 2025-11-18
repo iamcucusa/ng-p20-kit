@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { LayoutComponent } from '@core/layout.component';
+import { LayoutComponent } from '@core/layout/layout.component';
 import { createStepRoutes } from '@trial-step/step-routes.factory';
 import { appRoutes } from '@core/route.constants';
 

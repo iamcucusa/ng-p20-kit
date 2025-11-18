@@ -1,4 +1,4 @@
-@use '../../../../theme/src/lib/styles/breakpoints.scss' as bp;
+@use '../../../../../theme/src/lib/styles/breakpoints' as bp;
 .pg-layout {
   display: flex;
   flex-direction: column;
@@ -55,11 +55,11 @@
   .pg-layout-content {
     padding: var(--spacing-6) var(--spacing-5) 0;
   }
-  
+
   .pg-layout-main-content {
     padding-bottom: var(--spacing-6);
   }
-  
+
   .pg-layout-footer {
     margin-left: calc(-1 * var(--spacing-5));
     margin-right: calc(-1 * var(--spacing-5));
@@ -70,11 +70,11 @@
   .pg-layout-content {
     padding: var(--spacing-5) var(--spacing-4) 0;
   }
-  
+
   .pg-layout-main-content {
     padding-bottom: var(--spacing-5);
   }
-  
+
   .pg-layout-footer {
     margin-left: calc(-1 * var(--spacing-4));
     margin-right: calc(-1 * var(--spacing-4));
@@ -85,11 +85,11 @@
   .pg-layout-content {
     padding: var(--spacing-4) var(--spacing-3) 0;
   }
-  
+
   .pg-layout-main-content {
     padding-bottom: var(--spacing-4);
   }
-  
+
   .pg-layout-footer {
     margin-left: calc(-1 * var(--spacing-3));
     margin-right: calc(-1 * var(--spacing-3));
@@ -101,11 +101,11 @@
   .pg-layout-footer {
     display: none;
   }
-  
+
   .pg-layout-main {
     background-color: transparent;
   }
-  
+
   .pg-layout-content {
     padding: 0;
     min-height: auto;

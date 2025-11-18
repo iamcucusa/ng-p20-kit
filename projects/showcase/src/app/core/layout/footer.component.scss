@@ -1,4 +1,4 @@
-@use '../../../../theme/src/lib/styles/breakpoints.scss' as bp;
+@use '../../../../../theme/src/lib/styles/breakpoints' as bp;
 @mixin footer-container {
   background-color: var(--p-surface-section);
   border-top: 1px solid var(--p-surface-border);

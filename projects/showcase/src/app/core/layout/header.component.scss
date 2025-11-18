@@ -1,4 +1,4 @@
-@use '../../../../theme/src/lib/styles/breakpoints.scss' as bp;
+@use '../../../../../theme/src/lib/styles/breakpoints' as bp;
 .pg-header-container {
   background-color: var(--p-indigo-500);
   box-shadow: 0 0.25rem 0.375rem -0.0625rem rgba(0, 0, 0, 0.1), 0 0.125rem 0.25rem -0.0625rem rgba(0, 0, 0, 0.06);
@@ -21,7 +21,7 @@
     background-color: var(--p-indigo-500);
     color: var(--p-white);
     margin-right: var(--spacing-4);
-    
+
     /* Remove margin when user info is hidden on smaller screens */
     @include bp.desktop-down {
       margin-right: 0;
@@ -104,7 +104,7 @@
     font-size: var(--font-size-lg);
     line-height: var(--line-height-loose);
     margin-right: var(--spacing-2);
-    
+
     /* Remove margin when text is hidden on smaller screens */
     @include bp.desktop-down {
       margin-right: 0;
@@ -115,7 +115,7 @@
     font-size: var(--font-size-lg);
     line-height: var(--line-height-loose);
     font-weight: var(--font-weight-medium);
-    
+
     /* Hide text on screens under 1200px (desktop-down) */
     @include bp.desktop-down {
       display: none;

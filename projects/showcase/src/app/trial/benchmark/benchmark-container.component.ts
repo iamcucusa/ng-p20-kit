@@ -6,12 +6,12 @@ import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 
 @Component({
-  selector: 'kit-step-two-container',
-  templateUrl: './step-two-container.component.html',
+  selector: 'kit-benchmark-container',
+  templateUrl: './benchmark-container.component.html',
   standalone: true,
   imports: [StepHeadingComponent, ButtonModule, RippleModule]
 })
-export class StepTwoContainerComponent {
+export class BenchmarkContainerComponent {
   private trialStepFacade = inject(TrialStepFacadeService);
 
   @Input()

@@ -43,7 +43,7 @@ export function createStepRoutes(): Routes {
       data: {
         step: stepIdsFromSettings.two
       },
-      loadComponent: () => import('@trial-step-two/step-two-container.component').then(m => m.StepTwoContainerComponent)
+      loadComponent: () => import('@benchmark/benchmark-container.component').then(m => m.BenchmarkContainerComponent)
     },
     {
       path: stepIds.three,

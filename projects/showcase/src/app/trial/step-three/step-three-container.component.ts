@@ -4,12 +4,13 @@ import { TrialStepFacadeService } from '@trial-step/trial-step-facade.service';
 import type { TrialStepId } from '@trial-step/trial-step';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
+import { BenchmarkDashboardComponent } from '@benchmark-dashboard/benchmark-dashboard.component';
 
 @Component({
   selector: 'kit-step-three-container',
   templateUrl: './step-three-container.component.html',
   standalone: true,
-  imports: [StepHeadingComponent, ButtonModule, RippleModule]
+  imports: [StepHeadingComponent, ButtonModule, RippleModule, BenchmarkDashboardComponent]
 })
 export class StepThreeContainerComponent {
   private trialStepFacade = inject(TrialStepFacadeService);

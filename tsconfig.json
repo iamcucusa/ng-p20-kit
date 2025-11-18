@@ -24,11 +24,13 @@
       "@trial/*": ["./projects/showcase/src/app/trial/*"],
       "@trial-step/*": ["./projects/showcase/src/app/trial/step/*"],
       "@trial-step-one/*": ["./projects/showcase/src/app/trial/step-one/*"],
-      "@trial-step-two/*": ["./projects/showcase/src/app/trial/step-two/*"],
+      "@benchmark/*": ["./projects/showcase/src/app/trial/benchmark/*"],
       "@trial-step-three/*": ["./projects/showcase/src/app/trial/step-three/*"],
       "@trial-step-four/*": ["./projects/showcase/src/app/trial/step-four/*"],
       "@assumptions/*": ["./projects/showcase/src/app/trial/step-one/assumptions/*"],
-      "@country/*": ["./projects/showcase/src/app/trial/country/*"]
+      "@country/*": ["./projects/showcase/src/app/trial/country/*"],
+      "@benchmark-dashboard/*": ["./projects/showcase/src/app/trial/benchmark-dashboard/*"],
+      "@filters/*": ["./projects/showcase/src/app/trial/filters/*"]
     }
   },
   "angularCompilerOptions": {

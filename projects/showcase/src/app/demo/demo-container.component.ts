@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DividerModule } from 'primeng/divider';
 import { BadgeModule } from 'primeng/badge';
 import { TabsModule } from 'primeng/tabs';
-import { PageHeadingComponent } from '@core/page-heading.component';
+import { PageHeadingComponent } from '@core/layout/page-heading.component';
 import { TypographyDemoExampleComponent } from '@demo/theme/typography-demo-example.component';
 import { SpacingTestExampleComponent } from '@demo/theme/spacing-test-example.component';
 import { TrialHeadingExampleComponent } from '@demo/components/layout/trial-heading-example.component';
@@ -50,7 +50,7 @@ import { DemoNavigationComponent } from '@demo/navigation/demo-navigation.compon
           </div>
         </ng-template>
       </kit-page-heading>
-      
+
       <section class="pg-demo-container__content" aria-labelledby="demo-page-title">
 
         <!-- Tab Navigation -->
@@ -59,7 +59,7 @@ import { DemoNavigationComponent } from '@demo/navigation/demo-navigation.compon
             <p-tab [value]="0">Components</p-tab>
             <p-tab [value]="1">Theme</p-tab>
           </p-tablist>
-          
+
           <!-- Components Tab -->
           <p-tabpanel [value]="0">
             <div class="pg-step-container pg-step-container--two-column">
@@ -74,11 +74,11 @@ import { DemoNavigationComponent } from '@demo/navigation/demo-navigation.compon
                   <div class="py-8">
                     <!-- Layout Section -->
                     <div id="layout" class="pg-demo-container__section">
-                      <kit-step-heading 
+                      <kit-step-heading
                         title="Layout Components"
                         description="Reusable layout components for consistent page structure">
                       </kit-step-heading>
-                      
+
                       <div class="pg-demo-container__section-items">
                       <!-- Trial Heading -->
                       <div id="trial-heading">
@@ -90,32 +90,32 @@ import { DemoNavigationComponent } from '@demo/navigation/demo-navigation.compon
                         <kit-status-display-example></kit-status-display-example>
                       </div>
                       </div>
-                    
+
                     </div>
 
                     <!-- Containers Section -->
                     <div id="containers" class="pg-demo-container__section">
-                      <kit-step-heading 
+                      <kit-step-heading
                         title="Container Components"
                         description="Card system and container components for content organization">
                       </kit-step-heading>
-                      
+
                       <div class="pg-demo-container__section-items">
                         <!-- Card System -->
                         <div id="card-system" class="pg-demo-container__section-item">
                           <kit-card-example></kit-card-example>
                         </div>
                       </div>
-                      
+
                     </div>
 
                     <!-- Input Data Elements Section -->
                     <div id="input-data-elements" class="pg-demo-container__section">
-                      <kit-step-heading 
+                      <kit-step-heading
                         title="Input Data Elements"
                         description="Form controls and input components for data collection">
                       </kit-step-heading>
-                      
+
                       <div class="pg-demo-container__section-items">
                       <div id="country-select">
                       <p-divider align="right">
@@ -183,7 +183,7 @@ import { DemoNavigationComponent } from '@demo/navigation/demo-navigation.compon
 })
 export class DemoContainerComponent {
   // Component for organizing demo examples
-  
+
   /** Active tab index - Components tab (0) is active by default */
   activeTabIndex = 0;
 }

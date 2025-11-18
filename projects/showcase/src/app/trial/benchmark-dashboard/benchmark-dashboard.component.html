@@ -1,0 +1,65 @@
+<div class="pg-benchmark-dashboard">
+  <div class="pg-benchmark-dashboard__content">
+    <div class="pg-card pg-card--padding-md">
+      <div class="pg-card__header">
+        <div class="pg-card__title">Benchmark Dashboard</div>
+        <p class="pg-card__description">
+          Explore comparative visualizations of selected benchmark and non-benchmark trials by country and data type.
+        </p>
+      </div>
+      <div class="pg-card__content">
+        <div class="flex px-2">
+          <div class="mr-4 flex flex-col p-0">
+            <p-accordion [multiple]="true" [value]="expandedPanels" class="-mb-1">
+              <p-accordion-panel [value]="0">
+                <p-accordion-header>Trials Comparison (2)</p-accordion-header>
+                <p-accordion-content>
+                  <div class="transition duration-300 ease-in-out">
+                    <pg-trials-comparisons-filter
+                      [trialsData]="{
+                        benchmarkTrials: benchmarkTrials,
+                        nonBenchmarkTrials: nonBenchmarkTrials
+                      }"
+                      (trialComparisonChange)="updateSelectedFilters($event)">
+                    </pg-trials-comparisons-filter>
+                  </div>
+                </p-accordion-content>
+              </p-accordion-panel>
+              <p-accordion-panel [value]="1">
+                <p-accordion-header>Countries (2)</p-accordion-header>
+                <p-accordion-content>
+                  <div class="transition duration-300 ease-in-out">
+                    <div class="flex flex-col justify-start items-start gap-2 mb-2">
+                      <div class="flex flex-col w-full">
+                        <pg-countries-filter
+                          [selectedCountriesTotal]="selectedCountries"
+                          [allCountriesTotal]="allCountries"
+                          [filter]="currentCountriesFilter"
+                          [disabled]="selectedCountries === 0"
+                          (filterEventEmitter)="changeCountriesSource($event)"
+                          [loading]="isLoading">
+                        </pg-countries-filter>
+                      </div>
+                      <p-divider class="w-full"></p-divider>
+                      <div class="w-full">
+                        <!-- TODO: Implement pg-country-filter component -->
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                          <p class="text-sm text-gray-600 m-0">
+                            <strong>Note:</strong> Country filter component will be implemented here.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </p-accordion-content>
+              </p-accordion-panel>
+            </p-accordion>
+          </div>
+          <div class="flex-1">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

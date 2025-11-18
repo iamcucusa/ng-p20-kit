@@ -1,5 +1,5 @@
-@use '../../../../theme/src/lib/styles/breakpoints.scss' as bp;
-@use '../../../../theme/src/lib/styles/typography.scss' as typography;
+@use '../../../../../theme/src/lib/styles/breakpoints' as bp;
+@use '../../../../../theme/src/lib/styles/typography' as typography;
 
 .pg-page-heading {
   display: flex;
@@ -39,7 +39,7 @@
     color: var(--p-text-color);
     margin: 0 0 var(--spacing-1) 0;
     line-height: var(--line-height-tight);
-    
+
     &:first-letter {
       text-transform: uppercase;
     }

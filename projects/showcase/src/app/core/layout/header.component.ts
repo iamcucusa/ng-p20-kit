@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { AvatarModule } from 'primeng/avatar';
 import { RippleModule } from 'primeng/ripple';
 import { BadgeModule } from 'primeng/badge';
-import { RouteService } from './route.service';
+import { RouteService } from '../route.service';
 
 @Component({
   selector: 'kit-header',

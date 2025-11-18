@@ -22,7 +22,7 @@ import { formatStudyNumber } from './study-number.utils';
  * - Consistent styling with design system
  *
  * @example
- * ```html
+ * ```HTML
  * <kit-trial-heading
  *   [trial]="activeTrial"
  *   [permissions]="userPermissions">
@@ -148,7 +148,7 @@ export class TrialHeadingComponent {
   }
 
   /**
-   * Gets the path to return to trials dashboard
+   * Gets the path to return to the trial dashboard
    */
   get backToTrialsPath(): string[] {
     return [this.routeService.getDashboardPath()];

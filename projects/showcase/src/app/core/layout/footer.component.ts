@@ -1,6 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
-import { TooltipModule } from 'primeng/tooltip';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {CommonModule, DatePipe} from '@angular/common';
+import {TooltipModule} from 'primeng/tooltip';
 
 @Component({
   selector: 'kit-footer',
@@ -46,9 +46,7 @@ export class FooterComponent implements OnInit {
   year: string | null = null;
   pipe = new DatePipe('en-US');
 
-  constructor() {}
-
-  ngOnInit() {
+  ngOnInit(): void {
     this.year = this.pipe.transform(this.today, 'y');
   }
 }
