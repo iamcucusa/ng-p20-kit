@@ -95,7 +95,8 @@ const SagaBluePreset = definePreset(Aura, {
       borderColor: sagaBlueColors.surface.border
     },
     tabview: {
-      panelBackground: 'transparent'
+      panelBackground: 'transparent',
+      panelPadding: 'var(--spacing-3) var(--spacing-2)'
     },
     scrollpanel: {
       barBackground: sagaBlueColors.primary[500],

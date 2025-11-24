@@ -12,7 +12,7 @@ import * as path from 'path';
  */
 function generateCSSVariablesFile() {
   const cssVariables = generateCSSVariables(sagaBlueColors);
-  
+
   let cssContent = `/**
  * Saga-Blue Theme CSS Variables
  * Auto-generated from centralized color system
@@ -28,30 +28,36 @@ function generateCSSVariablesFile() {
     cssContent += `    ${varName}: ${value};\n`;
   }
 
-  cssContent += `    
+  cssContent += `
     /* Focus ring */
     --focus-ring: 0 0 0 0.2rem ${sagaBlueColors.blue[200]};
-    
+
     /* Highlight colors */
     --highlight-bg: ${sagaBlueColors.blue[50]};
     --highlight-text-color: ${sagaBlueColors.text.primary};
-    
+
     /* Mask/overlay */
     --maskbg: rgba(0, 0, 0, 0.4);
-    
+
     /* Spacing */
     --content-padding: 1rem;
     --inline-spacing: 0.5rem;
-    
+
     /* Border radius */
     --border-radius: 3px;
-    
+
     /* Font family */
     --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    
+
     /* Color scheme */
     color-scheme: light;
   }
+}
+
+/* PrimeNG Tabs customization - CSS variables override (outside layer to load after PrimeNG styles) */
+:root, :host {
+  --p-tabs-tabpanel-background: transparent;
+  --p-tabs-tabpanel-padding: var(--spacing-3) var(--spacing-2);
 }
 
 /* Layer 2: Component styles */
@@ -60,51 +66,46 @@ function generateCSSVariablesFile() {
   .p-scrollpanel.custombar1 .p-scrollpanel-wrapper {
     border-right: 9px solid var(--surface-card);
   }
-  
+
   .p-scrollpanel.custombar1 .p-scrollpanel-bar {
     background-color: var(--primary-color);
     opacity: 1;
     transition: background-color 0.2s;
   }
-  
+
   .p-scrollpanel.custombar1 .p-scrollpanel-bar:hover {
     background-color: #007ad9;
   }
-  
+
   .p-scrollpanel.custombar2 .p-scrollpanel-wrapper {
     border-right: 9px solid var(--surface-card);
   }
-  
+
   .p-scrollpanel.custombar2 .p-scrollpanel-bar {
     background-color: ${sagaBlueColors.purple[500]};
     border-radius: 0;
     opacity: 1;
     transition: background-color 0.2s;
   }
-  
+
   /* Overlay styles */
   .p-component-overlay {
     background-color: ${sagaBlueColors.blue[50]}60;
   }
-  
-  /* TabView styles */
-  .p-tabview .p-tabview-panels {
-    background: transparent;
-  }
-  
+
   /* DataTable styles */
   .p-datatable .p-datatable-tbody > tr.pg-no-hover,
   .p-datatable .p-datatable-tbody > tr.pg-no-hover:hover {
     background: transparent !important;
     box-shadow: none !important;
   }
-  
+
   .p-datatable .p-datatable-tbody > tr.pg-no-hover > td {
     cursor: auto !important;
     border: 0;
     padding: 0;
   }
-  
+
   /* Button fluid styles */
   .p-fluid .p-button {
     /* width: auto; - commented out as per original */
@@ -118,7 +119,7 @@ function generateCSSVariablesFile() {
     content: "*";
     color: ${sagaBlueColors.red[600]};
   }
-  
+
   /* Visually hidden for accessibility */
   .visually-hidden {
     position: absolute !important;
@@ -131,7 +132,7 @@ function generateCSSVariablesFile() {
     white-space: nowrap !important;
     border: 0 !important;
   }
-  
+
   /* Plotly mode bar hiding */
   .modebar-container {
     display: none;
@@ -146,11 +147,11 @@ function generateCSSVariablesFile() {
     padding: 0;
     margin: 0;
   }
-  
+
   html {
     font-size: 1rem;
   }
-  
+
   body {
     font-family: var(--font-family);
     background-color: var(--surface-ground);
@@ -362,22 +363,22 @@ $semantic-breakpoints: (
 @mixin responsive-container {
   padding-left: var(--spacing-3);
   padding-right: var(--spacing-3);
-  
+
   @include mobile-up {
     padding-left: var(--spacing-4);
     padding-right: var(--spacing-4);
   }
-  
+
   @include tablet-up {
     padding-left: var(--spacing-5);
     padding-right: var(--spacing-5);
   }
-  
+
   @include desktop-up {
     padding-left: var(--spacing-6);
     padding-right: var(--spacing-6);
   }
-  
+
   @include wide-up {
     padding-left: var(--spacing-8);
     padding-right: var(--spacing-8);
@@ -387,11 +388,11 @@ $semantic-breakpoints: (
 // Responsive typography scaling
 @mixin responsive-typography($base-size, $scale-factor: 1.2) {
   font-size: $base-size;
-  
+
   @include mobile-up {
     font-size: calc(#{$base-size} * #{$scale-factor});
   }
-  
+
   @include desktop-up {
     font-size: calc(#{$base-size} * #{$scale-factor} * #{$scale-factor});
   }
@@ -402,17 +403,17 @@ $semantic-breakpoints: (
   display: grid;
   grid-template-columns: repeat($mobile, 1fr);
   gap: var(--spacing-4);
-  
+
   @include mobile-up {
     grid-template-columns: repeat($tablet, 1fr);
     gap: var(--spacing-5);
   }
-  
+
   @include desktop-up {
     grid-template-columns: repeat($desktop, 1fr);
     gap: var(--spacing-6);
   }
-  
+
   @include wide-up {
     grid-template-columns: repeat($wide, 1fr);
     gap: var(--spacing-8);
@@ -429,7 +430,7 @@ $semantic-breakpoints: (
  */
 function generateTailwindConfig() {
   const tailwindColors = generateTailwindColors(sagaBlueColors);
-  
+
   const config = `/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [

@@ -190,22 +190,22 @@ $semantic-breakpoints: (
 @mixin responsive-container {
   padding-left: var(--spacing-3);
   padding-right: var(--spacing-3);
-  
+
   @include mobile-up {
     padding-left: var(--spacing-4);
     padding-right: var(--spacing-4);
   }
-  
+
   @include tablet-up {
     padding-left: var(--spacing-5);
     padding-right: var(--spacing-5);
   }
-  
+
   @include desktop-up {
     padding-left: var(--spacing-6);
     padding-right: var(--spacing-6);
   }
-  
+
   @include wide-up {
     padding-left: var(--spacing-8);
     padding-right: var(--spacing-8);
@@ -215,11 +215,11 @@ $semantic-breakpoints: (
 // Responsive typography scaling
 @mixin responsive-typography($base-size, $scale-factor: 1.2) {
   font-size: $base-size;
-  
+
   @include mobile-up {
     font-size: calc(#{$base-size} * #{$scale-factor});
   }
-  
+
   @include desktop-up {
     font-size: calc(#{$base-size} * #{$scale-factor} * #{$scale-factor});
   }
@@ -230,17 +230,17 @@ $semantic-breakpoints: (
   display: grid;
   grid-template-columns: repeat($mobile, 1fr);
   gap: var(--spacing-4);
-  
+
   @include mobile-up {
     grid-template-columns: repeat($tablet, 1fr);
     gap: var(--spacing-5);
   }
-  
+
   @include desktop-up {
     grid-template-columns: repeat($desktop, 1fr);
     gap: var(--spacing-6);
   }
-  
+
   @include wide-up {
     grid-template-columns: repeat($wide, 1fr);
     gap: var(--spacing-8);

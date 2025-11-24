@@ -153,30 +153,36 @@
     --text-disabled: #adb5bd;
     --white: #ffffff;
     --black: #000000;
-    
+
     /* Focus ring */
     --focus-ring: 0 0 0 0.2rem #a0d2fa;
-    
+
     /* Highlight colors */
     --highlight-bg: #f4fafe;
     --highlight-text-color: #495057;
-    
+
     /* Mask/overlay */
     --maskbg: rgba(0, 0, 0, 0.4);
-    
+
     /* Spacing */
     --content-padding: 1rem;
     --inline-spacing: 0.5rem;
-    
+
     /* Border radius */
     --border-radius: 3px;
-    
+
     /* Font family */
     --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    
+
     /* Color scheme */
     color-scheme: light;
   }
+}
+
+/* PrimeNG Tabs customization - CSS variables override (outside layer to load after PrimeNG styles) */
+:root, :host {
+  --p-tabs-tabpanel-background: transparent;
+  --p-tabs-tabpanel-padding: var(--spacing-3) var(--spacing-2);
 }
 
 /* Layer 2: Component styles */
@@ -185,51 +191,46 @@
   .p-scrollpanel.custombar1 .p-scrollpanel-wrapper {
     border-right: 9px solid var(--surface-card);
   }
-  
+
   .p-scrollpanel.custombar1 .p-scrollpanel-bar {
     background-color: var(--primary-color);
     opacity: 1;
     transition: background-color 0.2s;
   }
-  
+
   .p-scrollpanel.custombar1 .p-scrollpanel-bar:hover {
     background-color: #007ad9;
   }
-  
+
   .p-scrollpanel.custombar2 .p-scrollpanel-wrapper {
     border-right: 9px solid var(--surface-card);
   }
-  
+
   .p-scrollpanel.custombar2 .p-scrollpanel-bar {
     background-color: #9c27b0;
     border-radius: 0;
     opacity: 1;
     transition: background-color 0.2s;
   }
-  
+
   /* Overlay styles */
   .p-component-overlay {
     background-color: #f4fafe60;
   }
-  
-  /* TabView styles */
-  .p-tabview .p-tabview-panels {
-    background: transparent;
-  }
-  
+
   /* DataTable styles */
   .p-datatable .p-datatable-tbody > tr.pg-no-hover,
   .p-datatable .p-datatable-tbody > tr.pg-no-hover:hover {
     background: transparent !important;
     box-shadow: none !important;
   }
-  
+
   .p-datatable .p-datatable-tbody > tr.pg-no-hover > td {
     cursor: auto !important;
     border: 0;
     padding: 0;
   }
-  
+
   /* Button fluid styles */
   .p-fluid .p-button {
     /* width: auto; - commented out as per original */
@@ -243,7 +244,7 @@
     content: "*";
     color: #d9362b;
   }
-  
+
   /* Visually hidden for accessibility */
   .visually-hidden {
     position: absolute !important;
@@ -256,7 +257,7 @@
     white-space: nowrap !important;
     border: 0 !important;
   }
-  
+
   /* Plotly mode bar hiding */
   .modebar-container {
     display: none;
@@ -271,11 +272,11 @@
     padding: 0;
     margin: 0;
   }
-  
+
   html {
     font-size: 1rem;
   }
-  
+
   body {
     font-family: var(--font-family);
     background-color: var(--surface-ground);
