@@ -19,7 +19,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { appRoutes, routeParams } from './route.constants';
+import { appRoutes } from './route.constants';
 
 /**
  * Route Builder Service

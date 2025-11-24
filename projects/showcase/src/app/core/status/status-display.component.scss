@@ -3,6 +3,8 @@
  * Provides custom styling for status displays using design tokens
  */
 
+@use 'styles/breakpoints.scss' as bp;
+
 :host {
   display: inline-block;
 }
@@ -53,8 +55,6 @@
 }
 
 // Responsive design
-@use 'styles/breakpoints.scss' as bp;
-
 @include bp.mobile-down {
   .status-display__container {
     flex-direction: column;

@@ -7,7 +7,7 @@ import {
   StudyNumberCTMSMask,
   StudyNumberMask,
   StudyPhase,
-  TherapeuticArea, TrialParametersExport,
+  TherapeuticArea,
 } from '@assumptions/sections/parameters';
 import { Trial } from '@trial/trial';
 import { AbstractControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
@@ -249,14 +249,14 @@ export const studyNumberProvides = [
   },
 ];
 export const validatorsNumericNumeric: ValidatorFn[] = [
-  (control: AbstractControl): { [key: string]: any } | null => {
+  (control: AbstractControl): ValidationErrors | null => {
     const value = control.value;
     const isNumericNumeric = /^\d+-\d+$/.test(value);
     return isNumericNumeric ? null : { notNumericNumeric: { value: control.value } };
   },
 ];
 export const validatorsNotNumericNumeric: ValidatorFn[] = [
-  (control: AbstractControl): { [key: string]: any } | null => {
+  (control: AbstractControl): ValidationErrors | null => {
     const value = control.value;
     const isNumericNumeric = /^\d+-\d+$/.test(value);
     return isNumericNumeric ? { numericNumeric: { value: control.value } } : null;
@@ -273,15 +273,15 @@ export function validatorsStudyNumber(trialList: Trial[], activeTrial: Trial | n
     : [...baseValidators, ...numericValidators];
 }
 
-export const titleMinLengthValue: 12 = 12;
+export const titleMinLengthValue = 12 as const;
 export const titleMinLengthToken = new InjectionToken<typeof titleMinLengthValue>('min length for titles');
-export const titleMaxLengthValue: 24 = 24;
+export const titleMaxLengthValue = 24 as const;
 export const titleMaxLengthToken = new InjectionToken<typeof titleMaxLengthValue>('max length for titles');
-export const descriptionMinLengthValue: 10 = 10;
+export const descriptionMinLengthValue = 10 as const;
 export const descriptionMinLengthToken = new InjectionToken<typeof descriptionMinLengthValue>(
   'min length for descriptions',
 );
-export const descriptionMaxLengthValue: 1500 = 1500;
+export const descriptionMaxLengthValue = 1500 as const;
 export const descriptionMaxLengthLengthToken = new InjectionToken<typeof descriptionMaxLengthValue>(
   'max length for descriptions',
 );

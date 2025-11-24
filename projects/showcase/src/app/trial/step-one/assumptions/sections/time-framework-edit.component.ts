@@ -15,7 +15,7 @@ import { AssumptionsFieldComponent } from './assumptions-field.component';
 import type { Trial } from '@trial/trial';
 import { CommentsComponent } from '@core/comments/comments.component';
 import {timeFrameworkControlsToken, timeFrameworkAutofillStateToken} from '@assumptions/sections/time-framework.settings';
-import {AssumptionsTimeFrameworkControls, TimeFrameworkAutofill, TimeFramework} from '@assumptions/sections/time-framework';
+import { AssumptionsTimeFrameworkControls, TimeFrameworkAutofill } from '@assumptions/sections/time-framework';
 import {
   DatePlaceholderFormat,
   datePlaceholderFormatToken,

@@ -10,7 +10,7 @@ import { TrialStepFacadeService } from '@trial-step/trial-step-facade.service';
 import type { TrialStepId } from '@trial-step/trial-step';
 import type { Trial } from '@trial/trial';
 import { AssumptionsNavigationComponent } from '@assumptions/navigation/assumptions-navigation.component';
-import { navProviders, overviewSectionToken, newScenarioSectionToken, trialItemsToken, baseAssumptionsNavItemsToken } from '@assumptions/navigation/navigation.settings';
+import { navProviders, overviewSectionToken, trialItemsToken, baseAssumptionsNavItemsToken } from '@assumptions/navigation/navigation.settings';
 import type { AssumptionsScenariosNavigationItem } from '@assumptions/navigation/navigation';
 
 @Component({

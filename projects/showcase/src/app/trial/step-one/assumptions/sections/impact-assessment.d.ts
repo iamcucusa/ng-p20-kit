@@ -219,7 +219,7 @@ export interface CountryBreakDownFieldReadConfig {
   subjectsSourceFormControl: FormControl<number> | null;
   sitesValueFormControl: FormControl<number> | null;
   subjectsValueFormControl: FormControl<number> | null;
-  rationaleFormControl: FormControl<any> | null;
+  rationaleFormControl: FormControl<string | null> | null;
 }
 
 export type ColDefTrialImpactAssessment = Record<keyof TrialImpactAssessment, undefined>;

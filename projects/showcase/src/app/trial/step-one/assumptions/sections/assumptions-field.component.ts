@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
-import { FormControl, FormGroup, ControlContainer, FormGroupDirective } from '@angular/forms';
+import { FormControl, FormGroup, ControlContainer, FormGroupDirective, AbstractControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SkeletonModule } from 'primeng/skeleton';
 import { TooltipModule } from 'primeng/tooltip';
@@ -264,7 +264,7 @@ export class AssumptionsFieldComponent {
     }
     
     // Check if the field has required validators
-    const validators = this.formField.validator({} as any);
+    const validators = this.formField.validator({} as AbstractControl);
     return validators !== null && validators['required'] !== undefined;
   }
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { FormsModule } from '@angular/forms';
@@ -6,6 +6,13 @@ import { BadgeModule } from 'primeng/badge';
 import { benchmarkDashboardTokens } from '@benchmark-dashboard/benchmark-dashboard.settings';
 import { benchmarkDataTypeTokens } from '@benchmark/benchmark.settings';
 import type { AllCountriesFilter, CountriesFilter, SelectedCountriesFilter } from '@filters/filters';
+
+type CountriesFilterOption = {
+  icon: string;
+  label: string;
+  value: CountriesFilter;
+  count: number;
+};
 import {
   allCountriesFilterToken,
   dataFiltersTokens,
@@ -47,18 +54,15 @@ export class CountriesFilterComponent {
   @Input() disabled = false;
   @Input() loading = false;
 
-  filterOptions: any[] = [];
+  readonly allCountriesFilter: AllCountriesFilter = inject(allCountriesFilterToken);
+  readonly selectedCountriesFilter: SelectedCountriesFilter = inject(selectedCountriesFilterToken);
 
-  constructor(
-    @Inject(allCountriesFilterToken) public readonly allCountriesFilter: AllCountriesFilter,
-    @Inject(selectedCountriesFilterToken) public readonly selectedCountriesFilter: SelectedCountriesFilter
-  ) {
-   
-    this.filterOptions = [
-      { icon: 'pi pi-globe', label: this.allCountriesFilter, value: this.allCountriesFilter, count: 0 },
-      { icon: 'pi pi-list-check', label: this.selectedCountriesFilter, value: this.selectedCountriesFilter, count: 0 },
-    ];
-    
+  filterOptions: CountriesFilterOption[] = [
+    { icon: 'pi pi-globe', label: this.allCountriesFilter, value: this.allCountriesFilter, count: 0 },
+    { icon: 'pi pi-list-check', label: this.selectedCountriesFilter, value: this.selectedCountriesFilter, count: 0 },
+  ];
+
+  constructor() {
     this.filter = this.allCountriesFilter;
   }
 

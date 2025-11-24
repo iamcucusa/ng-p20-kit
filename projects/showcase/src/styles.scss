@@ -16,114 +16,11 @@
 @use 'showcase/card.scss';
 
 /* ========================================
-   PRIMENG TABS GLOBAL CUSTOMIZATION
-   ======================================== */
-
-/**
- * Global customization for PrimeNG Tabs component
- * Makes all tab panels have transparent background
- * Using more specific selector to override PrimeNG defaults
- */
-.p-tabs .p-tabpanels {
-  background: transparent;
-  padding: var(--spacing-3) var(--spacing-2);
-}
-
-/* ========================================
-   REQUIRED FIELD INDICATOR
-   ======================================== */
-
-/**
- * Required field indicator - red asterisk
- * Used by PrimeNG components and custom form fields
- */
-.p-required:after {
-  content: "*";
-  color: var(--red-500);
-  margin-left: 2px;
-}
-
-/* ========================================
    FORM DIVIDER UTILITIES
    ======================================== */
-
-/**
- * Reusable form divider component
- * Creates a subtle horizontal line between form sections
- * Uses theme surface color and consistent spacing
- */
-.pg-form-divider {
-  background-color: var(--surface-border);
-  height: 2px;
-  width: 100%;
-  margin: var(--spacing-3) 0;
-  border: none;
-  display: block;
-}
-
-/**
- * Form divider variants
- */
-.pg-form-divider--thin {
-  height: 1px;
-  margin: var(--spacing-2) 0; /* 8px - less margin for subtle divider */
-}
-
-.pg-form-divider--thick {
-  height: 3px;
-  margin: var(--spacing-4) 0; /* 24px - more margin for prominent divider */
-}
-
-.pg-form-divider--spaced {
-  margin: var(--spacing-5) 0; /* 32px - extra spacing for major sections */
-}
-
-/**
- * Responsive form divider
- * Adjusts margin based on screen size
- */
-.pg-form-divider--responsive {
-  margin: var(--spacing-2) 0; /* 8px - mobile */
-  
-  @include bp.tablet-up {
-    margin: var(--spacing-3) 0; /* 16px - tablet */
-  }
-  
-  @include bp.desktop-up {
-    margin: var(--spacing-4) 0; /* 24px - desktop */
-  }
-}
+@use 'showcase/utilities/form-divider.scss';
 
 /* ========================================
    TRIAL NUMBER UTILITY
    ======================================== */
-
-/**
- * Reusable trial number display utility
- * Formats trial numbers with monospace font for better readability
- * Matches the trial heading format (****-****)
- * Simple and accessible styling
- * 
- * @example
- * ```html
- * <div class="pg-trial-number">{{ formattedStudyNumber }}</div>
- * ```
- */
-.pg-trial-number {
-  font-family: ui-monospace, 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
-  color: inherit;
-  letter-spacing: 0.05em;
-  white-space: nowrap;
-  margin: 0;
-  
-  /**
-   * Empty state variant
-   * Uses default font and normal letter spacing for placeholder text
-   */
-  &.pg-empty-state {
-    color: var(--p-text-color-secondary);
-    font-style: italic;
-    font-family: inherit;
-    letter-spacing: normal;
-  }
-}
+@use 'showcase/utilities/trial-number.scss';

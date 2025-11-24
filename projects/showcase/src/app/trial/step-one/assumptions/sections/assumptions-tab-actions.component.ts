@@ -3,7 +3,6 @@ import {
   Component,
   EventEmitter,
   inject,
-  Inject,
   Input,
   Output,
 } from '@angular/core';
@@ -25,21 +24,9 @@ import {
   impactSectionToken,
   assumptionsEditableSectionsToken
 } from '@assumptions/navigation/navigation.settings';
-import type { 
-  TrialAssumptionsPage, 
+import type {
+  TrialAssumptionsPage,
   AssumptionsScenarioPage,
-  ScenariosOverviewSection,
-  TrialSection,
-  TrialParameters,
-  ContactsSection,
-  TimeFrameworkSection,
-  EvidenceSection,
-  ReferenceSection,
-  ComplexitySection,
-  ScientificSection,
-  OperationalSection,
-  CohortsSection,
-  ImpactAssessmentSection
 } from '@assumptions/navigation/navigation';
 
 /**

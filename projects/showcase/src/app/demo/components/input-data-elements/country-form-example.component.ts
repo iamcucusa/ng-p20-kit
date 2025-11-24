@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CountrySelectComponent } from '@country/country-select.component';
@@ -8,6 +8,11 @@ import { ButtonModule } from 'primeng/button';
 import { DemoSectionHeadingComponent } from '@demo/components/shared/demo-section-heading.component';
 import { AssumptionsFieldComponent } from '@assumptions/sections/assumptions-field.component';
 import { TextareaModule } from 'primeng/textarea';
+
+type SubmittedCountryForm = {
+  country: TrialCountry | null;
+  notes: string | null;
+};
 
 @Component({
   selector: 'kit-country-form-example',
@@ -103,21 +108,19 @@ import { TextareaModule } from 'primeng/textarea';
   styleUrls: ['./country-form-example.component.scss']
 })
 export class CountryFormExampleComponent {
+  private readonly fb = inject(FormBuilder);
+
   countryForm: FormGroup<{
     country: FormControl<TrialCountry | null>;
     notes: FormControl<string | null>;
-  }>;
+  }> = this.fb.group({
+    country: this.fb.control<TrialCountry | null>(null, { validators: [Validators.required] }),
+    notes: this.fb.control<string | null>('')
+  });
   selectedCountry: TrialCountry | null = null;
-  submittedData: any = null;
+  submittedData: SubmittedCountryForm | null = null;
   availableCountries: TrialCountry[] = trialCountries;
   isLoading: boolean = false;
-
-  constructor(private fb: FormBuilder) {
-    this.countryForm = this.fb.group({
-      country: this.fb.control<TrialCountry | null>(null, { validators: [Validators.required] }),
-      notes: this.fb.control<string | null>('')
-    });
-  }
 
   onCountryChange(country: TrialCountry | null): void {
     this.selectedCountry = country;
@@ -128,7 +131,7 @@ export class CountryFormExampleComponent {
     if (this.countryForm.valid) {
       this.submittedData = {
         country: this.selectedCountry,
-        notes: this.countryForm.get('notes')?.value
+        notes: this.countryForm.controls.notes.value ?? null
       };
       console.log('Form submitted:', this.submittedData);
     }

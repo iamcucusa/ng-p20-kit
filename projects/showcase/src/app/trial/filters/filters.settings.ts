@@ -5,7 +5,6 @@ import {
 } from '@filters/filters';
 import { InjectionToken } from '@angular/core';
 import type { BenchmarkTrialsFilter, NonBenchmarkTrialsFilter } from '@benchmark/benchmark';
-import type { BenchmarkDashboardFilter } from '@benchmark-dashboard/benchmark-dashboard';
 
 export const allCountriesFilter: AllCountriesFilter = 'All Countries';
 export const selectedCountriesFilter: SelectedCountriesFilter = 'Selected Countries';
@@ -48,9 +47,14 @@ export const updateSelectedFilters = (
   selectedFilters: TrialsComparisonFilter[],
   filter: TrialsComparisonFilter
 ): TrialsComparisonFilter[] => {
-  selectedFilters.indexOf(filter) === -1
-    ? selectedFilters.push(filter)
-    : selectedFilters.splice(selectedFilters.indexOf(filter), 1);
+  const updatedFilters = [...selectedFilters];
+  const existingIndex = updatedFilters.indexOf(filter);
 
-  return selectedFilters;
+  if (existingIndex === -1) {
+    updatedFilters.push(filter);
+  } else {
+    updatedFilters.splice(existingIndex, 1);
+  }
+
+  return updatedFilters;
 };

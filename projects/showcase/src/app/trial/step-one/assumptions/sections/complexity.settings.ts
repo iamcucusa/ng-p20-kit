@@ -89,7 +89,7 @@ export const complexityLevelsSettings: OptionRequirements = {
   'Exceptionally Low': 'complexityExceptionallyLow',
   Average: 'complexityExceptionallyHigh',
 };
-export const complexityLevelsSettingsToken = new InjectionToken<any>('Complexity Settings');
+export const complexityLevelsSettingsToken = new InjectionToken<OptionRequirements>('Complexity Settings');
 export const complexityLevelsMapToken = new InjectionToken<ComplexityLevelsMap>('Complexity Levels Map');
 const safetyDifficulty: ComplexityLevels = {
   complexityLow: 'Establish: Clean safety profile.',

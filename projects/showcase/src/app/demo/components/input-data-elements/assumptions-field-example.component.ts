@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import {FormBuilder, FormGroup, FormControl, Validators, ReactiveFormsModule} from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, ReactiveFormsModule, ValidationErrors } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AssumptionsFieldComponent } from '@assumptions/sections/assumptions-field.component';
 import { DatePickerModule } from 'primeng/datepicker';
@@ -594,7 +594,7 @@ export class AssumptionsFieldExampleComponent {
   }> = this.fb.group({
     loadingField: this.fb.control<string | null>(''),
     errorField: this.fb.control<string | null>('', { validators: [Validators.required, Validators.minLength(3)] }),
-    disabledField: this.fb.control<string | null>({ value: 'Disabled value', disabled: true } as any),
+    disabledField: this.fb.control<string | null>({ value: 'Disabled value', disabled: true }),
     readonlyField: this.fb.control<string | null>('Readonly value')
   });
 
@@ -723,7 +723,7 @@ export class AssumptionsFieldExampleComponent {
 
     const hasError = !!(studyDate && keyDate && studyDate.getTime() > keyDate.getTime());
 
-    const currentErrors = studyCtrl.errors || {};
+    const currentErrors = (studyCtrl.errors ?? {}) as ValidationErrors;
 
     if (hasError) {
       if (!currentErrors['studySynopsisAfterTdoKickoff']) {
@@ -731,8 +731,9 @@ export class AssumptionsFieldExampleComponent {
       }
     } else {
       if (currentErrors['studySynopsisAfterTdoKickoff']) {
-        const { studySynopsisAfterTdoKickoff, ...rest } = currentErrors as any;
-        const nextErrors = Object.keys(rest).length ? rest : null;
+        const remainingErrors: ValidationErrors = { ...currentErrors };
+        delete remainingErrors['studySynopsisAfterTdoKickoff'];
+        const nextErrors = Object.keys(remainingErrors).length ? remainingErrors : null;
         studyCtrl.setErrors(nextErrors);
       }
     }

@@ -3,7 +3,6 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BadgeModule } from 'primeng/badge';
-import type { BenchmarkTrialsFilter, NonBenchmarkTrialsFilter } from '@benchmark/benchmark';
 import { benchmarkTrialsFilterToken, nonBenchmarkTrialsFilterToken } from '@benchmark/benchmark.settings';
 import type { TrialsComparisonFilter } from '@filters/filters';
 

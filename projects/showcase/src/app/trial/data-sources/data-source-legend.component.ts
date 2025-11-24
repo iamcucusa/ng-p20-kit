@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { DataSource, DataSourceMapping } from '@data-sources/data-source';
 import { allDataSourcesMappingToken, dataSourceTokens } from '@data-sources/data-source.settings';
@@ -38,5 +38,5 @@ import { TooltipModule } from 'primeng/tooltip';
 export class DataSourceLegendComponent {
   @Input() dataSource: DataSource = 'unknown';
 
-  constructor(@Inject(allDataSourcesMappingToken) public readonly dataSourceMapping: DataSourceMapping) {}
+  readonly dataSourceMapping: DataSourceMapping = inject(allDataSourcesMappingToken);
 }

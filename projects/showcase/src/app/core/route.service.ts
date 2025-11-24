@@ -21,7 +21,7 @@
 
 import { Injectable, inject, signal, computed } from '@angular/core';
 import { Router, NavigationEnd, NavigationError } from '@angular/router';
-import { Observable, of, throwError, catchError, map, filter, startWith, from, finalize } from 'rxjs';
+import { Observable, throwError, catchError, map, filter, startWith, from, finalize } from 'rxjs';
 import { appRoutes } from './route.constants';
 import { RouteBuilder } from './route-builder.service';
 

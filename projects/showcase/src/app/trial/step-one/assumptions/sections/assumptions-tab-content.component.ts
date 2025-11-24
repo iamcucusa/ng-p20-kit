@@ -1,15 +1,12 @@
-import { 
-  Component, 
-  inject, 
-  Output, 
-  EventEmitter, 
-  Input, 
+import {
+  Component,
+  inject,
+  Output,
+  EventEmitter,
+  Input,
   AfterViewInit,
   ChangeDetectionStrategy,
-  DestroyRef,
-  ViewChild
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { TabsModule } from 'primeng/tabs';
 import { ParametersViewComponent } from './parameters-view.component';
@@ -314,9 +311,6 @@ export class AssumptionsTabContentComponent implements AfterViewInit {
   public operational = inject(operationalSectionToken);
   public cohorts = inject(cohortsSectionToken);
   public impact = inject(impactSectionToken);
-
-  /** Destroy reference for cleanup */
-  private destroyRef = inject(DestroyRef);
 
   /** Active tab index (0-based) */
   activeTabIndex: number = 0;

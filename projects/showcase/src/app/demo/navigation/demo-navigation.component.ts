@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RippleModule } from 'primeng/ripple';
 
@@ -49,7 +49,7 @@ export interface DemoNavigationItem {
   styleUrls: ['./demo-navigation.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DemoNavigationComponent {
+export class DemoNavigationComponent implements OnInit, OnDestroy {
   activeItem: string | null = null;
 
   categories = [
@@ -67,6 +67,8 @@ export class DemoNavigationComponent {
     { id: 'assumptions-field', title: 'Assumptions Field', category: 'Input Data Elements' },
     { id: 'data-sources', title: 'Data Sources', category: 'Misc' }
   ];
+
+  private readonly onScrollHandler = () => this.updateActiveItem();
 
   /**
    * Toggle category section visibility
@@ -135,18 +137,11 @@ export class DemoNavigationComponent {
    * Initialize scroll listener for active item tracking
    */
   ngOnInit(): void {
-    // Set up scroll listener to update active item
-    window.addEventListener('scroll', () => {
-      this.updateActiveItem();
-    });
-
-    // Set initial active item
+    window.addEventListener('scroll', this.onScrollHandler);
     this.updateActiveItem();
   }
 
   ngOnDestroy(): void {
-    window.removeEventListener('scroll', () => {
-      this.updateActiveItem();
-    });
+    window.removeEventListener('scroll', this.onScrollHandler);
   }
 }

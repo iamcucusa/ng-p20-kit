@@ -4,7 +4,6 @@ import { RouterNavigationAction, ROUTER_NAVIGATION } from '@ngrx/router-store';
 import { map, filter, switchMap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { TrialStepActions } from './trial-step.actions';
-import { appRoutes } from '@core/route.constants';
 import { RouteService } from '@core/route.service';
 import { RouteBuilder } from '@core/route-builder.service';
 import { ActivatedRoute } from '@angular/router';
