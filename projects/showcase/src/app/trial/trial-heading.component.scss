@@ -3,8 +3,8 @@
  * Matches PageHeadingComponent typography and structure
  */
 
-@use '../../../../theme/src/lib/styles/breakpoints.scss' as bp;
-@use '../../../../theme/src/lib/styles/typography.scss' as typography;
+@use 'styles/breakpoints.scss' as bp;
+@use 'styles/typography.scss' as typography;
 
 .pg-trial-heading {
   display: flex;

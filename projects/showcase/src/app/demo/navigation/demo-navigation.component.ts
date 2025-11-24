@@ -55,15 +55,17 @@ export class DemoNavigationComponent {
   categories = [
     { name: 'Layout', expanded: true },
     { name: 'Containers', expanded: true },
-    { name: 'Input Data Elements', expanded: true }
+    { name: 'Input Data Elements', expanded: true },
+    { name: 'Misc', expanded: true }
   ];
 
   navigationItems: DemoNavigationItem[] = [
     { id: 'trial-heading', title: 'Trial Heading', category: 'Layout' },
-    { id: 'status-display', title: 'Status Display', category: 'Layout' },
+    { id: 'status-display', title: 'Status Display', category: 'Misc' },
     { id: 'card-system', title: 'Card System', category: 'Containers' },
     { id: 'country-select', title: 'Country Select', category: 'Input Data Elements' },
-    { id: 'assumptions-field', title: 'Assumptions Field', category: 'Input Data Elements' }
+    { id: 'assumptions-field', title: 'Assumptions Field', category: 'Input Data Elements' },
+    { id: 'data-sources', title: 'Data Sources', category: 'Misc' }
   ];
 
   /**

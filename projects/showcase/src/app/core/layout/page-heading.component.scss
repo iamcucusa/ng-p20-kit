@@ -1,5 +1,5 @@
-@use '../../../../../theme/src/lib/styles/breakpoints' as bp;
-@use '../../../../../theme/src/lib/styles/typography' as typography;
+@use 'styles/breakpoints' as bp;
+@use 'styles/typography' as typography;
 
 .pg-page-heading {
   display: flex;

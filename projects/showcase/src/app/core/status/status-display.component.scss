@@ -53,7 +53,7 @@
 }
 
 // Responsive design
-@use '../../../../theme/src/lib/styles/breakpoints.scss' as bp;
+@use 'styles/breakpoints.scss' as bp;
 
 @include bp.mobile-down {
   .status-display__container {

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
+import { DemoSectionHeadingComponent } from '@demo/components/shared/demo-section-heading.component';
 import { CountrySelectComponent } from '@country/country-select.component';
 import { TrialCountry } from '@country/country.d';
 import { trialCountries } from '@country/country.settings';
@@ -9,8 +10,9 @@ import { trialCountries } from '@country/country.settings';
 @Component({
   selector: 'kit-country-select-example',
   standalone: true,
-  imports: [CommonModule, FormsModule, CountrySelectComponent, ButtonModule],
+  imports: [CommonModule, FormsModule, CountrySelectComponent, ButtonModule, DemoSectionHeadingComponent],
   template: `
+    <kit-demo-section-heading label="COUNTRY SELECT"></kit-demo-section-heading>
     <div class="pg-card pg-card--padding-lg">
       <header class="pg-card__header">
         <h2 class="pg-card__title">Country Select Examples</h2>

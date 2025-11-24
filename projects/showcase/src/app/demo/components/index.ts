@@ -15,3 +15,9 @@ export * from './containers';
 
 // Input Data Elements
 export * from './input-data-elements';
+
+// Data Sources Components
+export * from './datasources';
+
+// Shared Components
+export * from './shared/demo-section-heading.component';

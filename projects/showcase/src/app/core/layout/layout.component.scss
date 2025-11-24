@@ -1,4 +1,4 @@
-@use '../../../../../theme/src/lib/styles/breakpoints' as bp;
+@use 'styles/breakpoints' as bp;
 .pg-layout {
   display: flex;
   flex-direction: column;

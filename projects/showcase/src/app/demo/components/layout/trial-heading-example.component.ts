@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TrialHeadingComponent } from '@trial/trial-heading.component';
 import type { Trial } from '@trial/trial';
 import { createDefaultTimeFramework, createDefaultTrialParameters } from '@trial/mock-data.utils';
+import { DemoSectionHeadingComponent } from '@demo/components/shared/demo-section-heading.component';
 
 /**
  * Trial Heading Example Component
@@ -13,6 +14,7 @@ import { createDefaultTimeFramework, createDefaultTrialParameters } from '@trial
 @Component({
   selector: 'kit-trial-heading-example',
   template: `
+    <kit-demo-section-heading label="TRIAL HEADING"></kit-demo-section-heading>
     <div class="pg-card pg-card--padding-lg">
       <header class="pg-card__header">
         <h2 class="pg-card__title">Trial Heading Examples</h2>
@@ -76,7 +78,7 @@ import { createDefaultTimeFramework, createDefaultTrialParameters } from '@trial
     </div>
   `,
   standalone: true,
-  imports: [CommonModule, TrialHeadingComponent],
+  imports: [CommonModule, DemoSectionHeadingComponent, TrialHeadingComponent],
   styleUrls: ['./trial-heading-example.component.scss']
 })
 export class TrialHeadingExampleComponent {

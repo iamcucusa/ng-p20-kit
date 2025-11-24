@@ -17,12 +17,12 @@
   
   <section class="pg-trials-container__content" aria-labelledby="trials-page-title">
     <div class="pg-trials-container__grid" role="list" aria-label="Clinical trials list">
-      <article 
-        class="pg-card pg-card--padding-lg"
-        role="listitem"
-        *ngFor="let trial of sampleTrials; trackBy: trackByTrialId"
-        [attr.aria-labelledby]="'trial-title-' + trial.id"
-        [attr.aria-describedby]="'trial-description-' + trial.id">
+      @for (trial of sampleTrials; track trackByTrialId($index, trial)) {
+        <article 
+          class="pg-card pg-card--padding-lg"
+          role="listitem"
+          [attr.aria-labelledby]="'trial-title-' + trial.id"
+          [attr.aria-describedby]="'trial-description-' + trial.id">
         
         <header class="pg-card__header">
           <h2 class="pg-card__title" [id]="'trial-title-' + trial.id">
@@ -74,7 +74,8 @@
             [attr.aria-label]="'Open trial: ' + trial.name">
           </p-button>
         </footer>
-      </article>
+        </article>
+      }
     </div>
   </section>
 </main>

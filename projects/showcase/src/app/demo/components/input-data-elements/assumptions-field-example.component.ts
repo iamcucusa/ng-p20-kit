@@ -11,6 +11,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { SkeletonModule } from 'primeng/skeleton';
 import { TooltipModule } from 'primeng/tooltip';
 import { ButtonModule } from 'primeng/button';
+import { DemoSectionHeadingComponent } from '@demo/components/shared/demo-section-heading.component';
 
 /**
  * Assumptions Field Component Example
@@ -42,10 +43,12 @@ import { ButtonModule } from 'primeng/button';
     SkeletonModule,
     TooltipModule,
     ButtonModule,
+    DemoSectionHeadingComponent,
     ReactiveFormsModule
   ],
   template: `
     <div class="pg-assumptions-field-examples">
+      <kit-demo-section-heading label="ASSUMPTIONS FIELD"></kit-demo-section-heading>
       <!-- Basic Examples -->
       <div class="pg-card pg-card--padding-lg">
         <header class="pg-card__header">

@@ -2,7 +2,7 @@
  * Assumptions Form Field Types and Interfaces
  */
 
-type AssumptionsFieldsNames<Type> = {
+export type AssumptionsFieldsNames<Type> = {
   [Property in keyof Type]: string;
 };
 

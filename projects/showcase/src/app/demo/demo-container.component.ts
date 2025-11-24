@@ -14,6 +14,7 @@ import { CountryFormExampleComponent } from '@demo/components/input-data-element
 import { AssumptionsFieldExampleComponent } from '@demo/components/input-data-elements/assumptions-field-example.component';
 import { StepHeadingComponent } from '@trial-step/step-heading.component';
 import { DemoNavigationComponent } from '@demo/navigation/demo-navigation.component';
+import { DatasourcesExampleComponent } from '@demo/components/datasources/datasources-example.component';
 
 @Component({
   selector: 'kit-demo-container',
@@ -33,7 +34,8 @@ import { DemoNavigationComponent } from '@demo/navigation/demo-navigation.compon
     CountryFormExampleComponent,
     AssumptionsFieldExampleComponent,
     StepHeadingComponent,
-    DemoNavigationComponent
+    DemoNavigationComponent,
+    DatasourcesExampleComponent
   ],
   template: `
     <main class="pg-demo-container" role="main" aria-labelledby="demo-page-title">
@@ -80,17 +82,11 @@ import { DemoNavigationComponent } from '@demo/navigation/demo-navigation.compon
                       </kit-step-heading>
 
                       <div class="pg-demo-container__section-items">
-                      <!-- Trial Heading -->
-                      <div id="trial-heading">
-                        <kit-trial-heading-example></kit-trial-heading-example>
+                        <!-- Trial Heading -->
+                        <div id="trial-heading" class="pg-demo-container__section-item">
+                          <kit-trial-heading-example></kit-trial-heading-example>
+                        </div>
                       </div>
-
-                      <!-- Status Display -->
-                      <div id="status-display">
-                        <kit-status-display-example></kit-status-display-example>
-                      </div>
-                      </div>
-
                     </div>
 
                     <!-- Containers Section -->
@@ -116,27 +112,33 @@ import { DemoNavigationComponent } from '@demo/navigation/demo-navigation.compon
                         description="Form controls and input components for data collection">
                       </kit-step-heading>
 
-                      <div class="pg-demo-container__section-items">
-                      <div id="country-select">
-                      <p-divider align="right">
-                        <div class="inline-flex items-center">
-                          <span class="font-semibold">COUNTRY SELECT</span>
+                      <div class="pg-demo-container__section-items space-y-6">
+                        <div id="country-select" class="pg-demo-container__section-item space-y-3">
+                          <kit-country-select-example></kit-country-select-example>
+                          <kit-country-form-example></kit-country-form-example>
                         </div>
-                      </p-divider>
-                      </div>
-                      <!-- Country Select -->
-                      <kit-country-select-example></kit-country-select-example>
-                      <kit-country-form-example></kit-country-form-example>
 
-                      <!-- Assumptions Field -->
-                      <div id="assumptions-field">
-                        <p-divider align="right">
-                          <div class="inline-flex items-center">
-                            <span class="font-semibold">ASSUMPTIONS FIELD</span>
-                          </div>
-                        </p-divider>
-                        <kit-assumptions-field-example></kit-assumptions-field-example>
+                        <div id="assumptions-field" class="pg-demo-container__section-item">
+                          <kit-assumptions-field-example></kit-assumptions-field-example>
+                        </div>
                       </div>
+                    </div>
+
+                    <!-- Misc Section -->
+                    <div id="misc" class="pg-demo-container__section">
+                      <kit-step-heading
+                        title="Miscellaneous Components"
+                        description="Additional helper components used across the application">
+                      </kit-step-heading>
+
+                      <div class="pg-demo-container__section-items space-y-6">
+                        <div id="status-display" class="pg-demo-container__section-item">
+                          <kit-status-display-example></kit-status-display-example>
+                        </div>
+
+                        <div id="data-sources" class="pg-demo-container__section-item">
+                          <kit-datasources-example></kit-datasources-example>
+                        </div>
                       </div>
                     </div>
                   </div>

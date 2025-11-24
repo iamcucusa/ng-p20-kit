@@ -22,7 +22,7 @@ import type { TrialStep, TrialStepId } from './trial-step';
   selector: 'kit-steps',
   template: `
     <div class="pg-steps">
-      <ng-container *ngFor="let step of steps; trackBy: trackByStepId">
+      @for (step of steps; track trackByStepId($index, step)) {
         <div
           pRipple
           class="pg-steps__item"
@@ -36,12 +36,14 @@ import type { TrialStep, TrialStepId } from './trial-step';
         >
           <div class="pg-steps__content">
             <div class="pg-steps__title">{{ step.title }}</div>
-            <div class="pg-steps__description" *ngIf="step.description">
-              {{ step.description }}
-            </div>
+            @if (step.description) {
+              <div class="pg-steps__description">
+                {{ step.description }}
+              </div>
+            }
           </div>
         </div>
-      </ng-container>
+      }
     </div>
   `,
   styleUrls: ['./steps.component.scss'],

@@ -32,7 +32,14 @@
             "styles": [
               "projects/showcase/src/styles.scss",
               "node_modules/primeicons/primeicons.css"
-            ]
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "projects/theme/src/lib",
+                "projects/showcase/src/styles",
+                "projects/showcase/src"
+              ]
+            }
           },
           "configurations": {
             "production": {
@@ -90,7 +97,14 @@
             ],
             "styles": [
               "projects/showcase/src/styles.scss"
-            ]
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "projects/theme/src/lib",
+                "projects/showcase/src/styles",
+                "projects/showcase/src"
+              ]
+            }
           }
         },
         "lint": {

@@ -5,14 +5,16 @@ import { CountrySelectComponent } from '@country/country-select.component';
 import { TrialCountry } from '@country/country.d';
 import { trialCountries } from '@country/country.settings';
 import { ButtonModule } from 'primeng/button';
+import { DemoSectionHeadingComponent } from '@demo/components/shared/demo-section-heading.component';
 import { AssumptionsFieldComponent } from '@assumptions/sections/assumptions-field.component';
 import { TextareaModule } from 'primeng/textarea';
 
 @Component({
   selector: 'kit-country-form-example',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, CountrySelectComponent, ButtonModule, AssumptionsFieldComponent, TextareaModule],
+  imports: [CommonModule, ReactiveFormsModule, CountrySelectComponent, ButtonModule, DemoSectionHeadingComponent, AssumptionsFieldComponent, TextareaModule],
   template: `
+    <kit-demo-section-heading label="COUNTRY FORM"></kit-demo-section-heading>
     <div class="pg-card pg-card--padding-lg">
       <header class="pg-card__header">
         <h2 class="pg-card__title">Country Form Example</h2>

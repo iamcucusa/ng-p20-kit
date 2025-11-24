@@ -3,8 +3,8 @@
  * Matches PageHeadingComponent design but uses h2 typography
  */
 
-@use '../../../../../theme/src/lib/styles/breakpoints.scss' as bp;
-@use '../../../../../theme/src/lib/styles/typography.scss' as typography;
+@use 'styles/breakpoints.scss' as bp;
+@use 'styles/typography.scss' as typography;
 
 .pg-step-heading {
   display: flex;

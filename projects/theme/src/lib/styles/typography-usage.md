@@ -57,7 +57,7 @@
 ## SCSS Usage
 
 ```scss
-@import '../../theme/src/lib/styles/typography.scss';
+@use 'styles/typography.scss';
 
 .heading {
   @include text-2xl;

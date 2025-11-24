@@ -14,9 +14,9 @@ import { DividerModule } from 'primeng/divider';
   imports: [CommonModule, ButtonModule, BadgeModule, DividerModule],
   template: `
     <div class="pg-card-examples">
-      <p-divider align="right">
+      <p-divider align="right" class="mb-6">
         <div class="inline-flex items-center">
-          <span class="font-semibold">CARD SYSTEM</span>
+          <span class="font-semibold text-sm uppercase text-text-secondary">CARD SYSTEM</span>
         </div>
       </p-divider>
       

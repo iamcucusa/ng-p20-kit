@@ -1,19 +1,19 @@
 @use 'tailwindcss';
-@use '../../theme/src/lib/styles/saga-blue-layers.css';
-@use '../../theme/src/lib/styles/tailwind-spacing.scss';
-@use '../../theme/src/lib/styles/typography.scss';
-@use '../../theme/src/lib/styles/breakpoints.scss' as bp;
-@use '../../theme/src/lib/styles/shadows.scss';
+@use 'styles/saga-blue-layers.css';
+@use 'styles/tailwind-spacing.scss';
+@use 'styles/typography.scss';
+@use 'styles/breakpoints.scss' as bp;
+@use 'styles/shadows.scss';
 
 /* ========================================
    STEP CONTAINER UTILITIES
    ======================================== */
-@use './styles/step-container.scss';
+@use 'showcase/step-container.scss';
 
 /* ========================================
    CARD COMPONENT SYSTEM
    ======================================== */
-@use './styles/card.scss';
+@use 'showcase/card.scss';
 
 /* ========================================
    PRIMENG TABS GLOBAL CUSTOMIZATION

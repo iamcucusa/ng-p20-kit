@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StatusDisplayComponent } from '@core/status/status-display.component';
+import { DemoSectionHeadingComponent } from '@demo/components/shared/demo-section-heading.component';
 
 /**
  * Status Display Example Component
@@ -11,6 +12,7 @@ import { StatusDisplayComponent } from '@core/status/status-display.component';
 @Component({
   selector: 'kit-status-display-example',
   template: `
+    <kit-demo-section-heading label="STATUS DISPLAY"></kit-demo-section-heading>
     <div class="pg-card pg-card--padding-lg">
       <header class="pg-card__header">
         <h2 class="pg-card__title">Status Display Examples</h2>
@@ -74,7 +76,7 @@ import { StatusDisplayComponent } from '@core/status/status-display.component';
     </div>
   `,
   standalone: true,
-  imports: [CommonModule, StatusDisplayComponent],
+  imports: [CommonModule, DemoSectionHeadingComponent, StatusDisplayComponent],
   styleUrls: ['./status-display-example.component.scss']
 })
 export class StatusDisplayExampleComponent {
